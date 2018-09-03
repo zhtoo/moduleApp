@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/main_bottom_tab_home"
+        android:icon="@drawable/main_bottom_tab_home"
+        android:title="首页" />
+
+    <item
+        android:id="@+id/main_bottom_tab_tools"
+        android:icon="@drawable/main_bottom_tab_tools"
+        android:title="工具" />
+
+    <item
+        android:id="@+id/main_bottom_tab_lib"
+        android:icon="@drawable/main_bottom_tab_lib"
+        android:title="库" />
+
+    <item
+        android:id="@+id/main_bottom_tab_view"
+        android:icon="@drawable/main_bottom_tab_view"
+        android:title="视图" />
+
+    <item
+        android:id="@+id/main_bottom_tab_personal"
+        android:icon="@drawable/main_bottom_tab_personal"
+        android:title="个人" />
+</menu>

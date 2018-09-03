@@ -1,0 +1,10 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.zht.moduleone" >
+    <application
+        android:theme="@style/AppTheme">
+
+        <activity android:name=".activity.ModuleOneMainActivity"/>
+
+    </application>
+
+</manifest>

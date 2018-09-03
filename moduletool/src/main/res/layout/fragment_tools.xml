@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Button
+
+        android:id="@+id/m_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="显示Toast"
+        android:gravity="center"/>
+
+    <Button
+
+        android:id="@+id/m_button_center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="显示Toast（居中）"
+        android:gravity="center"/>
+
+    <Button
+
+        android:id="@+id/m_button_top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="显示Toast（居上）"
+        android:gravity="center"/>
+
+
+    <Button
+
+        android:id="@+id/m_button_long"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="长显示Toast"
+        android:gravity="center"/>
+
+    <Button
+
+        android:id="@+id/m_button_center_long"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="长显示Toast（居中）"
+        android:gravity="center"/>
+
+    <Button
+
+        android:id="@+id/m_button_top_long"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="长显示Toast（居上）"
+        android:gravity="center"/>
+
+    <Button
+
+        android:id="@+id/m_button_top_icon"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Toast带图片"
+        android:gravity="center"/>
+
+    <Button
+
+        android:id="@+id/m_button_myself"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="自定义Toast"
+        android:gravity="center"/>
+
+</LinearLayout>

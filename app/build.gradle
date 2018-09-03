@@ -1,0 +1,60 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 26
+    defaultConfig {
+        applicationId "com.zht.modlueapp"
+        minSdkVersion 15
+        targetSdkVersion 26
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [ moduleName : project.getName() ]
+            }
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    buildscript {
+        repositories {
+            jcenter()
+        }
+    }
+    allprojects {
+        repositories {
+            jcenter()
+        }
+    }
+
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+
+    implementation project(':modulelib')
+    if (!isModuleMain.toBoolean()) {
+        implementation project(':modulemain')
+    }
+    if (!isModuleHome.toBoolean()) {
+        implementation project(':modulehome')
+    }
+    if (!isModuleTools.toBoolean()) {
+        implementation project(':moduletool')
+    }
+    if (!isModuleOne.toBoolean()) {
+        implementation project(':moduleone')
+    }
+    if (!isModuleTwo.toBoolean()) {
+        implementation project(':moduletwo')
+    }
+
+
+}
