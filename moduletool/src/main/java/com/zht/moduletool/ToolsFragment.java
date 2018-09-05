@@ -1,23 +1,27 @@
 package com.zht.moduletool;
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.view.ViewGroup;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.zht.modulelib.base.BaseFragment;
-import com.zht.modulelib.util.ToastUtil;
 
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-import butterknife.Unbinder;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by ZhangHaitao on 2018/9/3.
  */
 @Route(path = "/moduletool/toolsfragment")
-public class ToolsFragment extends BaseFragment implements View.OnClickListener {
+public class ToolsFragment extends BaseFragment implements ToolsAdapter.ItemClickListener {
+
+    private RecyclerView mRecyclerView;
+    private ToolsAdapter mAdapter;
+    private List<String> list;
+    private List<String> activitys;
 
     @Override
     protected int getLayoutId() {
@@ -27,43 +31,30 @@ public class ToolsFragment extends BaseFragment implements View.OnClickListener 
     @Override
     protected void initView(View view, Bundle savedInstanceState) {
         super.initView(view, savedInstanceState);
-
-        view.findViewById(R.id.m_button).setOnClickListener(this);
-        view.findViewById(R.id.m_button_center).setOnClickListener(this);
-        view.findViewById(R.id.m_button_top).setOnClickListener(this);
-        view.findViewById(R.id.m_button_long).setOnClickListener(this);
-        view.findViewById(R.id.m_button_center_long).setOnClickListener(this);
-        view.findViewById(R.id.m_button_top_long).setOnClickListener(this);
-        view.findViewById(R.id.m_button_top_icon).setOnClickListener(this);
-        view.findViewById(R.id.m_button_myself).setOnClickListener(this);
-
-    }
-
-    public void toastClick(View view) {
-        int id = view.getId();
-        if (id == R.id.m_button) {
-            ToastUtil.showToast("showToast");
-        } else if (id == R.id.m_button_center) {
-            ToastUtil.showToastCenter("showToastCenter");
-        } else if (id == R.id.m_button_top) {
-            ToastUtil.showToastTop("showToastTop");
-        } else if (id == R.id.m_button_long) {
-            ToastUtil.showLongToast("showLongToast");
-        } else if (id == R.id.m_button_center_long) {
-            ToastUtil.showLongToastCenter("showLongToastCenter");
-        } else if (id == R.id.m_button_top_long) {
-            ToastUtil.showLongToastTop("showLongToastTop");
-        }else
-        if (id == R.id.m_button_top_icon) {
-            ToastUtil.showImageToast("showImageToast", R.mipmap.ic_launcher);
-        }else
-        if (id == R.id.m_button_myself) {
-            ToastUtil.showCustomerToast("showCustomerToast");
-        }
+        mRecyclerView = view.findViewById(R.id.tool_main_rv);
+        mRecyclerView.setLayoutManager(
+                new GridLayoutManager(getContext(), 3));
+        mAdapter = new ToolsAdapter();
+        mRecyclerView.setAdapter(mAdapter);
+        mAdapter.setListener(this);
     }
 
     @Override
-    public void onClick(View view) {
-        toastClick( view);
+    protected void initData() {
+        list = new ArrayList<>();
+        activitys = new ArrayList<>();
+        list.add("ToastUtil");
+        activitys.add("/sample/ToastActivity");
+        list.add("StatusBar");
+        activitys.add("/sample/StatusBarActivity");
+        mAdapter.updata(list);
     }
+
+    @Override
+    public void onItemClick(int position) {
+        ARouter.getInstance()
+                .build(activitys.get(position))
+                .navigation();
+    }
+
 }

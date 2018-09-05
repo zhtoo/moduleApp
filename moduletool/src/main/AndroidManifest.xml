@@ -5,6 +5,8 @@
         android:theme="@style/AppTheme">
 
         <activity android:name=".MainActivity"/>
+        <activity android:name=".sample.ToastActivity" />
+        <activity android:name=".sample.StatusBarActivity" />
 
     </application>
 
