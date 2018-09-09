@@ -16,6 +16,8 @@ import com.zht.moduletool.R;
 public class StatusBarActivity extends BaseActivity implements View.OnClickListener {
 
     private boolean darkmode = false;
+    private boolean isVisibility = true;
+    private boolean isFullScreen = false;
 
     @Override
     protected int getLayoutId() {
@@ -25,9 +27,11 @@ public class StatusBarActivity extends BaseActivity implements View.OnClickListe
     @Override
     protected void initView(Bundle savedInstanceState) {
         findViewById(R.id.m_status_color).setOnClickListener(this);
-        findViewById(R.id.m_transparent_status_color).setOnClickListener(this);
-        findViewById(R.id.m_translucent_status_color).setOnClickListener(this);
         findViewById(R.id.m_status_text_color).setOnClickListener(this);
+        findViewById(R.id.m_status_visibility).setOnClickListener(this);
+        findViewById(R.id.m_full_screen).setOnClickListener(this);
+
+
     }
 
     @Override
@@ -36,14 +40,15 @@ public class StatusBarActivity extends BaseActivity implements View.OnClickListe
         if (id == R.id.m_status_color) {
             int color = (int) -(Math.random() * (16777216 - 1) + 1);
             StatusBar.setStatusBarColor(this, color);
-        } else if (id == R.id.m_transparent_status_color) {
-            StatusBar.setTransparentStatusBar(this);
-        } else if (id == R.id.m_translucent_status_color) {
-            StatusBar.setTranslucentStatusBar(this);
         } else if (id == R.id.m_status_text_color) {
             darkmode = !darkmode;
             StatusBar.setStatusBarLight(this, darkmode);
-            Log.e("StatusBarActivity", "" + darkmode);
+        } else if (id == R.id.m_status_visibility) {
+            isVisibility = !isVisibility;
+            StatusBar.setStatusBarVisibility(this, isVisibility);
+        }else if (id == R.id.m_full_screen) {
+            isFullScreen = !isFullScreen;
+            StatusBar.setFullScreen(this, isFullScreen);
         }
     }
 }
