@@ -1,7 +1,6 @@
 package com.zht.moduletool.sample;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
@@ -30,7 +29,6 @@ public class StatusBarActivity extends BaseActivity implements View.OnClickListe
         findViewById(R.id.m_status_text_color).setOnClickListener(this);
         findViewById(R.id.m_status_visibility).setOnClickListener(this);
         findViewById(R.id.m_full_screen).setOnClickListener(this);
-
 
     }
 

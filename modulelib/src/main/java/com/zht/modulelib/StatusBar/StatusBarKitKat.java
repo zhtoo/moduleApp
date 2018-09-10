@@ -5,7 +5,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
@@ -239,11 +238,11 @@ public class StatusBarKitKat {
 //        }
 //    }
 
-    /**
-     * 设置透明状态栏
-     *
-     * @param activity
-     */
+//    /**
+//     * 设置透明状态栏
+//     *
+//     * @param activity
+//     */
 //    static void translucentStatusBar(Activity activity) {
 //        Window window = activity.getWindow();
 //        //设置Window为透明
@@ -284,8 +283,5 @@ public class StatusBarKitKat {
 //        mDecorView.addView(mStatusBarView);
 //        return mStatusBarView;
 //    }
-
-
-
 
 }

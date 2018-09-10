@@ -1,4 +1,4 @@
-include ':app', ':modulehome',
+include ':app', ':modulehome', ':moduleview',
         ':modulelib',
         ':modulemain',
         ':moduleone',

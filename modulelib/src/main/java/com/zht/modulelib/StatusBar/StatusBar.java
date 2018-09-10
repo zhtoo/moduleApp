@@ -32,8 +32,6 @@ public class StatusBar {
      * 3、是否全屏
      * 4、设置字体颜色
      */
-
-
     public static void setStatusBar(Activity activity,int statusBarColor ,int type){
          if(type == NO_STATUS_BAR){
              setStatusBarVisibility(activity,false);
@@ -41,8 +39,6 @@ public class StatusBar {
          }
 
     }
-
-
 
     /**
      * 显示/隐藏状态栏
@@ -117,7 +113,7 @@ public class StatusBar {
     }
 
     /**
-     * MIUI的沉浸支持透明白色字体和透明黑色字体,MIUI6.0以上
+     * MIUI的修改状态栏字体颜色,MIUI6.0以上
      * https://dev.mi.com/console/doc/detail?pId=1159
      */
     static boolean MIUISetStatusBarLightMode(Activity activity, boolean darkmode) {
@@ -142,7 +138,7 @@ public class StatusBar {
     }
 
     /**
-     * 设置状态栏图标为深色和魅族特定的文字风格，Flyme4.0以上
+     * Flyme的修改状态栏字体颜色，Flyme4.0以上
      */
     static boolean FlymeSetStatusBarLightMode(Activity activity, boolean darkmode) {
         try {

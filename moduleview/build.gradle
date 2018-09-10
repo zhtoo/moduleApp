@@ -1,4 +1,8 @@
-apply plugin: 'com.android.library'
+if(!isModuleView.toBoolean()){
+    apply plugin: 'com.android.library'
+}else {
+    apply plugin: 'com.android.application'
+}
 
 android {
     compileSdkVersion 26
@@ -11,6 +15,7 @@ android {
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
+        //ARouter必须要配置的
         javaCompileOptions {
             annotationProcessorOptions {
                 arguments = [moduleName: project.getName()]
@@ -25,6 +30,21 @@ android {
         }
     }
 
+    sourceSets{
+        main{
+            if(isModuleView.toBoolean()){
+                manifest.srcFile("src/main/moduleManifest/AndroidManifest.xml")
+            }else{
+                manifest.srcFile("src/main/AndroidManifest.xml")
+            }
+            //集成开发模式下排除debug文件夹中的所有Java文件
+            java {
+                exclude 'debug/**'
+            }
+        }
+    }
+
+
     buildscript {
         repositories {
             jcenter()
@@ -37,29 +57,16 @@ android {
         }
     }
 
+
+
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-
-    testImplementation 'junit:junit:4.12'
-
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
-
-    api 'com.android.support:appcompat-v7:26+'
-
-    // 支持md库
-    api 'com.android.support:design:26+'
-
-    //ARouter
-    api 'com.alibaba:arouter-api:1.3.1'
-
-    //butterknife
-    api 'com.jakewharton:butterknife:8.5.1'
-
-    //ConstraintLayout的引用
-    api 'com.android.support.constraint:constraint-layout:1.1.2'
-    //仿照IOS的PickerView
-    api 'com.contrarywind:Android-PickerView:4.1.6'
-
+    //依赖库导入
+    implementation project(':modulelib')
+    //ARouter路由
+    annotationProcessor 'com.alibaba:arouter-compiler:1.1.4'
+    //PickerView
+    annotationProcessor 'com.contrarywind:Android-PickerView:4.1.6'
 }
