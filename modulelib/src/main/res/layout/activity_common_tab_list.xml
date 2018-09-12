@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#EEEEEE"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#FFF">
+
+        <TextView
+            android:id="@+id/common_back"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentLeft="true"
+            android:gravity="center"
+            android:text="返回" />
+
+        <TextView
+            android:id="@+id/common_title"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:text="标题" />
+    </RelativeLayout>
+
+    <android.support.design.widget.TabLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/common_tablayout"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@android:color/white"
+        android:paddingBottom="5dp"
+        android:paddingTop="10dp"
+        app:tabBackground="@android:color/white"
+        app:tabIndicatorColor="#E65959"
+        app:tabIndicatorHeight="1dp" />
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/common_viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fadeScrollbars="false"
+        android:fadingEdge="none"
+        android:fadingEdgeLength="0dp"
+        android:overScrollMode="never"
+        android:requiresFadingEdge="none"
+        android:scrollbarFadeDuration="0" />
+
+</LinearLayout>
