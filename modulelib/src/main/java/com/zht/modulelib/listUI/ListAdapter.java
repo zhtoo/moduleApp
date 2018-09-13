@@ -14,6 +14,8 @@ import java.util.List;
 
 /**
  * Created by ZhangHaitao on 2018/9/11.
+ * List的适配器，因为刷新空件不能满足自己的刷新要求，
+ * 所以基于RecyclerView的Adapter来写一个支持刷新的Adapter
  */
 
 public abstract class ListAdapter<T> extends RecyclerView.Adapter {
