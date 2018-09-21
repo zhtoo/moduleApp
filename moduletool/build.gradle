@@ -8,11 +8,11 @@ if (isModuleTools.toBoolean()) {//
 
 
 android {
-    compileSdkVersion 26
+    compileSdkVersion 27
 
     defaultConfig {
         minSdkVersion 15
-        targetSdkVersion 26
+        targetSdkVersion 27
         versionCode 1
         versionName "1.0"
 
@@ -54,6 +54,7 @@ android {
 
     buildscript {
         repositories {
+            google()
             jcenter()
             mavenCentral()
         }
@@ -61,6 +62,7 @@ android {
     allprojects {
         repositories {
             jcenter()
+            google()
         }
     }
 
@@ -76,4 +78,6 @@ dependencies {
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
     //ConstraintLayout的引用
     annotationProcessor 'com.android.support.constraint:constraint-layout:1.1.2'
+
+    annotationProcessor 'com.github.bumptech.glide:glide:4.7.1'
 }

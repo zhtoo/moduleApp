@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+
+        android:id="@+id/bitmap_cache_iv"
+        android:layout_width="0dp"
+        android:layout_height="250dp"
+        android:background="#FF6596EE"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/bitmap_cache_iv1"/>
+
+    <ImageView
+        android:id="@+id/bitmap_cache_iv1"
+        android:layout_width="0dp"
+        android:layout_height="250dp"
+        android:background="#FF8896EE"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintLeft_toRightOf="@id/bitmap_cache_iv"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+
+        android:id="@+id/bitmap_cache_iv2"
+        android:layout_width="0dp"
+        android:layout_height="300dp"
+        android:background="#FF6511EE"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintRight_toLeftOf="@+id/bitmap_cache_iv3"
+        app:layout_constraintTop_toBottomOf="@id/bitmap_cache_iv" />
+
+    <ImageView
+
+        android:id="@+id/bitmap_cache_iv3"
+        android:layout_width="0dp"
+        android:layout_height="300dp"
+        android:background="#FF6511"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/bitmap_cache_iv2"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/bitmap_cache_iv" />
+
+
+</android.support.constraint.ConstraintLayout>

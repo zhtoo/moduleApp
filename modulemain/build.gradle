@@ -8,11 +8,11 @@ if(isModuleMain.toBoolean()){
 
 
 android {
-    compileSdkVersion 26
+    compileSdkVersion 27
 
     defaultConfig {
         minSdkVersion 15
-        targetSdkVersion 26
+        targetSdkVersion 27
         versionCode 1
         versionName "1.0"
 
@@ -68,7 +68,7 @@ dependencies {
     implementation project(':modulelib')
 
     // 支持md库
-    annotationProcessor 'com.android.support:design:26+'
+    annotationProcessor 'com.android.support:design:27.1.1'
 
     //ARouter
     annotationProcessor 'com.alibaba:arouter-compiler:1.1.4'

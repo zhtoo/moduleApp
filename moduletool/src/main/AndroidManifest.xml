@@ -7,6 +7,7 @@
         <activity android:name=".MainActivity"/>
         <activity android:name=".sample.ToastActivity" />
         <activity android:name=".sample.StatusBarActivity" />
+        <activity android:name=".sample.BitmapCacheActivity" />
 
     </application>
 
