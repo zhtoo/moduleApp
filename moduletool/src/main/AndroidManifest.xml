@@ -1,6 +1,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.zht.moduletool" >
 
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:theme="@style/AppTheme">
 
@@ -8,6 +11,8 @@
         <activity android:name=".sample.ToastActivity" />
         <activity android:name=".sample.StatusBarActivity" />
         <activity android:name=".sample.BitmapCacheActivity" />
+        <activity android:name=".sample.VideoActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"/>
 
     </application>
 

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape>
+            <size
+                android:width="16dp"
+                android:height="16dp" />
+
+        </shape>
+        <solid android:color="@android:color/transparent" />
+    </item>
+    <item android:drawable="@drawable/zb_video_seekbar" />
+</layer-list>
