@@ -1,6 +1,5 @@
 package com.zht.moduletool.sample;
 
-
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.media.MediaPlayer;
@@ -28,7 +27,6 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.bumptech.glide.Glide;
 import com.zht.moduletool.R;
 
-
 /**
  * Created by ZhangHaitao on 2018/9/27.
  */
@@ -49,7 +47,6 @@ public class VideoActivity extends AppCompatActivity {
     private LinearLayout videoError;
     private ImageView videoPlay;
 
-    private Runnable progressRun;
     private long timeDuration;
     private long currentDuration;
     private String timeDurationAtr;
@@ -59,55 +56,58 @@ public class VideoActivity extends AppCompatActivity {
 
     private ImageView loading;
 
-
     private static int pay_video = 666;
     private static int hide_menu = 888;
-    private static int ebd_video = 999;
+    private static int end_video = 999;
 
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             int what = msg.what;
             if (what == pay_video) {
-                // 进度条控制
-                currentDuration = videoView.getCurrentPosition();// 精确到秒数
-                int percent = (int) ((float) currentDuration * videoProgress.getMax() / (float) timeDuration);
-
-                videoProgress.setProgress(percent);
-
-                Log.e(TAG, "progress:" + videoProgress.getProgress()
-                        + "        Max:" + videoProgress.getMax());
-
-                if (videoView.isPlaying()) {
-                    sendEmptyMessageDelayed(pay_video, 50);
-                } else {
-                    // 显示工具条
-                    showMenu(true);
-                    // 设置成重新启动
-                    videoPlay.setImageResource(R.drawable.zb_video_play);
-                }
-
-                if (percent >= videoProgress.getMax()) {
-                    bgView.setVisibility(View.VISIBLE);
-
-                }
-
-                // 时间显示
-                String currentDurationStr = getVideoTimeStr(currentDuration);
-                SpannableStringBuilder style = new SpannableStringBuilder(currentDurationStr + "/" + timeDurationAtr);
-                style.setSpan(new ForegroundColorSpan(Color.WHITE), 0, currentDurationStr.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-                style.setSpan(new ForegroundColorSpan(Color.parseColor("#444444")), currentDurationStr.length() + 1, style.length(), Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
-                videoTime.setText(style);
-
-
+                changeSeekBar();
             } else if (what == hide_menu) {
                 showMenu(false);
-            } else if (what == ebd_video) {
+            } else if (what == end_video) {
 
             }
         }
     };
     private ImageView videoScreenOrientation;
+
+    private void changeSeekBar() {
+        // 进度条控制
+        currentDuration = videoView.getCurrentPosition();// 精确到秒数
+        int percent = (int) ((float) currentDuration * videoProgress.getMax() / (float) timeDuration);
+        videoProgress.setProgress(percent);
+        // 设置视频的缓冲进度
+        int bufferPercentage = videoView.getBufferPercentage();
+        videoProgress.setSecondaryProgress(bufferPercentage * videoProgress.getMax() / 100);
+
+        Log.e(TAG, "progress:" + videoProgress.getProgress()
+                + "        Max:" + videoProgress.getMax());
+
+        if (videoView.isPlaying()) {
+            handler.sendEmptyMessageDelayed(pay_video, 50);
+        } else {
+            // 显示工具条
+            showMenu(true);
+            // 设置成重新启动
+            videoPlay.setImageResource(R.drawable.zb_video_play);
+        }
+
+        if (percent >= videoProgress.getMax()) {
+            bgView.setVisibility(View.VISIBLE);
+
+        }
+
+        // 时间显示
+        String currentDurationStr = getVideoTimeStr(currentDuration);
+        SpannableStringBuilder style = new SpannableStringBuilder(currentDurationStr + "/" + timeDurationAtr);
+        style.setSpan(new ForegroundColorSpan(Color.WHITE), 0, currentDurationStr.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        style.setSpan(new ForegroundColorSpan(Color.parseColor("#444444")), currentDurationStr.length() + 1, style.length(), Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
+        videoTime.setText(style);
+    }
 
 
     @Override
@@ -147,7 +147,7 @@ public class VideoActivity extends AppCompatActivity {
 
 
         String url =
-        "http://www.zhanght.com:8080/0.mp4";
+                "http://www.zhanght.com:8080/0.mp4";
 
         videoProgress.setEnabled(false);
         videoTitle.setText("测试");// 标题
@@ -210,7 +210,7 @@ public class VideoActivity extends AppCompatActivity {
             public void onCompletion(MediaPlayer mp) {
                 pauseRecordTime();
                 videoView.seekTo(0);
-                handler.sendEmptyMessageDelayed(ebd_video, 1000);
+                handler.sendEmptyMessageDelayed(end_video, 1000);
             }
         });
 
@@ -289,6 +289,25 @@ public class VideoActivity extends AppCompatActivity {
     }
 
     /**
+     * 当返回按钮按下的时候，如果是横屏状态则切换为竖屏
+     */
+    @Override
+    public void onBackPressed() {
+        int requestedOrientation = getRequestedOrientation();
+        //竖屏
+        if (requestedOrientation == ActivityInfo.SCREEN_ORIENTATION_PORTRAIT) {
+            super.onBackPressed();
+        } else {//横屏
+            videoScreenOrientation.setImageResource(R.drawable.zb_video_horizontal);
+            //设置竖屏
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+            //隐藏菜单栏
+            handler.sendEmptyMessageDelayed(hide_menu, 1500);
+        }
+
+    }
+
+    /**
      * 移除等待页面
      */
     private void removeLoading() {
@@ -348,22 +367,20 @@ public class VideoActivity extends AppCompatActivity {
      * onCreate -> onStart -> onResume -> onPause -> onStop -> onDestroy
      * onStart -> Activity开始被用户所见
      * onResume->Activity可以响应用户交互
-     * <p>
-     * <p>
      * 从ActivityA跳转到ActivityB时AB的生命周期：
      * 1、ActivityA的创建:onCreate ->  onStart -> onResume。
      * 2、从ActivityA跳转到B Activity，假设B全部遮挡住了A
      * 将依次执行A:onPause -> B:onCreate -> B:onStart -> B:onResume -> A:onStop
      * 3、此时如果点击Back键，
      * 将依次执行B:onPause -> A:onRestart -> A:onStart -> A:onResume -> B:onStop -> B:onDestroy。
-     *
+     * <p>
      * 4a、此时如果按下Back键，系统返回到桌面，
      * 并依次执行A:onPause -> A:onStop -> A:onDestroy。
-     *
+     * <p>
      * 4b、此时如果按下Home键（非长按），
      * 系统返回到桌面，并依次执行A:onPause -> A:onStop。
      * Back键和Home键主要区别在于是否会执行onDestroy。
-     *
+     * <p>
      * 此时如果长按Home键，不同手机可能弹出不同内容，
      * Activity生命周期未发生变化（由小米2s测的，不知道其他手机是否会对Activity生命周期有影响）。
      */
@@ -372,15 +389,11 @@ public class VideoActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        if(videoView.isPlaying()){
+        if (videoView.isPlaying()) {
             videoView.pause();
             pauseRecordTime();
         }
     }
-
-
-
-
 
     /**
      * 开始计时
@@ -394,9 +407,15 @@ public class VideoActivity extends AppCompatActivity {
      * 暂停计时
      */
     private void pauseRecordTime() {
-        if (mStartPlayTime > 0) {
+        //如果视频长度为0，则不记录时长
+        if (timeDuration == 0) {
+            return;
+        }
+        if (mStartPlayTime > 0 && mPlayTime < timeDuration) {
             mPlayTime += (System.currentTimeMillis() - mStartPlayTime);
             mStartPlayTime = -1;
+        } else if (mPlayTime >= timeDuration) {
+            mPlayTime = timeDuration;
         }
         Log.e(TAG, "结束计时  mPlayTime:" + mPlayTime / 1000 + "s");
     }
@@ -444,7 +463,6 @@ public class VideoActivity extends AppCompatActivity {
         }
         return true;
     }
-
 
     public static String getVideoTimeStr(long time) {
         String timeStr = "";
