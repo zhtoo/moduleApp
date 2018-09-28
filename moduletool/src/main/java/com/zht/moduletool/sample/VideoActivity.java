@@ -30,6 +30,39 @@ import com.zht.moduletool.R;
 /**
  * Created by ZhangHaitao on 2018/9/27.
  */
+/**
+ * 关于seekTo的时间不正确的问题？
+ * 原因：
+ * 1、seekTo是一个异步的方法。在seekTo还没有完成的时候就执行了start方法
+ * 2、源视频有问题。seekTo跳转的位置是离参数所带的position最近的视频关键帧。
+ * 解决方案：
+ * 原因一：
+ * // 在设置 VideoView 的 OnPrepared 监听，拿到 MediaPlayer 对象，然后设置MediaPlayer的OnSeekComplete监听
+ * 代码如下：
+ * videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+ *      @Override
+ *      public void onPrepared(MediaPlayer mp) {
+ *          //设置 MediaPlayer 的 OnSeekComplete 监听
+ *          mp.setOnSeekCompleteListener(new MediaPlayer.OnSeekCompleteListener() {
+ *              @Override
+ *              public void onSeekComplete(MediaPlayer mp) {
+ *                  // seekTo 方法完成时的回调
+ *                  if(isPause){
+ *                      videoView.start();
+ *                      isPause = !isPause;
+ *                  }
+ *              }
+ *          });
+ *      }
+ * });
+ *
+ * 原因二：
+ * 给视频添加关键帧  http://ffmpeg.org/
+ * FFmpeg 相关命令行语句：
+ *  ffmpeg.exe -i "D:\in.mp4" -c:v libx264 -preset superfast -x264opts keyint=25 -acodec copy -f mp4 "D:\out.mp4"
+ *
+ * 将源文件（D:\in.mp4）转换为每隔25帧设置一个关键帧，保存到"D:\out.mp4"
+ */
 @Route(path = "/sample/VideoActivity")
 public class VideoActivity extends AppCompatActivity {
 
@@ -46,6 +79,8 @@ public class VideoActivity extends AppCompatActivity {
     private TextView videoErrorText;
     private LinearLayout videoError;
     private ImageView videoPlay;
+    private ImageView loading;
+    private ImageView videoScreenOrientation;
 
     private long timeDuration;
     private long currentDuration;
@@ -54,7 +89,7 @@ public class VideoActivity extends AppCompatActivity {
     private long mPlayTime = 0;
     private long mStartPlayTime = 0;
 
-    private ImageView loading;
+    private boolean isPause;
 
     private static int pay_video = 666;
     private static int hide_menu = 888;
@@ -73,11 +108,11 @@ public class VideoActivity extends AppCompatActivity {
             }
         }
     };
-    private ImageView videoScreenOrientation;
+
 
     private void changeSeekBar() {
         // 进度条控制
-        currentDuration = videoView.getCurrentPosition();// 精确到秒数
+        currentDuration = videoView.getCurrentPosition();
         int percent = (int) ((float) currentDuration * videoProgress.getMax() / (float) timeDuration);
         videoProgress.setProgress(percent);
         // 设置视频的缓冲进度
@@ -98,7 +133,6 @@ public class VideoActivity extends AppCompatActivity {
 
         if (percent >= videoProgress.getMax()) {
             bgView.setVisibility(View.VISIBLE);
-
         }
 
         // 时间显示
@@ -109,7 +143,6 @@ public class VideoActivity extends AppCompatActivity {
         videoTime.setText(style);
     }
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -117,6 +150,7 @@ public class VideoActivity extends AppCompatActivity {
         //隐藏状态栏
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
         //在这里需要判断是否是刘海屏
+
         /**
          * 也不知道是那个ZZ非得学iphone弄刘海屏
          */
@@ -145,9 +179,9 @@ public class VideoActivity extends AppCompatActivity {
                 .load(R.drawable.zb_video_loading)
                 .into(loading);
 
-
         String url =
-                "http://www.zhanght.com:8080/0.mp4";
+//                "http://www.zhanght.com:8080/0.mp4";
+                "http://10.0.2.2:8080/0.mp4";
 
         videoProgress.setEnabled(false);
         videoTitle.setText("测试");// 标题
@@ -162,6 +196,7 @@ public class VideoActivity extends AppCompatActivity {
 
             @Override
             public void onPrepared(MediaPlayer mp) {
+
                 // 移除加载中提示
                 removeLoading();
                 videoProgress.setEnabled(true);
@@ -176,7 +211,6 @@ public class VideoActivity extends AppCompatActivity {
                 //在视频开始播放的时候记录当前时间
                 startRecordTime();
                 handler.sendEmptyMessageDelayed(pay_video, 50);
-
             }
         });
 
@@ -342,11 +376,10 @@ public class VideoActivity extends AppCompatActivity {
             return;
         }
         videoView.start();
-        //刷新进度条
-        handler.sendEmptyMessageDelayed(pay_video, 50);
-        videoPlay.setImageResource(R.drawable.zb_video_pause);
         //开始记录播放时间
+        handler.sendEmptyMessageDelayed(pay_video, 50);
         startRecordTime();
+        videoPlay.setImageResource(R.drawable.zb_video_pause);
     }
 
     /**
@@ -354,6 +387,7 @@ public class VideoActivity extends AppCompatActivity {
      */
     private void pauseVideo() {
         if (videoView.isPlaying()) {
+            isPause = true;
             videoPlay.setImageResource(R.drawable.zb_video_play);
             videoView.pause();
             //停止刷新进度条
