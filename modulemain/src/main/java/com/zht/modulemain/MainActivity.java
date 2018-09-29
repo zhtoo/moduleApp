@@ -1,24 +1,18 @@
 package com.zht.modulemain;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.MenuItem;
-import android.view.View;
 
 import com.alibaba.android.arouter.launcher.ARouter;
-import com.zht.modulelib.base.BaseActivity;
+import com.zht.common.base.BaseActivity;
 import com.zht.modulemain.view.BottomNavigationViewHelper;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class MainActivity extends BaseActivity {
 
@@ -67,13 +61,13 @@ public class MainActivity extends BaseActivity {
                 .build("/moduletool/toolsfragment")
                 .navigation();
         libFragment = (Fragment) ARouter.getInstance()
-                .build("/moduletool/toolsfragment")
+                .build("/moduleLibrary/LibraryFragment")
                 .navigation();
         viewFragment = (Fragment) ARouter.getInstance()
-                .build("/moduletool/toolsfragment")
+                .build("/moduleview/ViewFragment")
                 .navigation();
         personalFragment = (Fragment) ARouter.getInstance()
-                .build("/moduletool/toolsfragment")
+                .build("/modulePersonal/PersonalFragment")
                 .navigation();
         listFragment.add(homeFragment);
         listFragment.add(toolsFragment);

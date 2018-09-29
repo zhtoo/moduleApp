@@ -6,7 +6,7 @@ import android.widget.TextView;
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
-import com.zht.modulelib.base.BaseActivity;
+import com.zht.common.base.BaseActivity;
 import com.zht.moduletwo.R;
 import com.zht.moduletwo.R2;
 

@@ -39,16 +39,30 @@ android {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
 
-    implementation project(':modulelib')
+    implementation project(':modulecommon')
     if (!isModuleMain.toBoolean()) {
         implementation project(':modulemain')
     }
+    //首页
     if (!isModuleHome.toBoolean()) {
         implementation project(':modulehome')
     }
+    //工具
     if (!isModuleTools.toBoolean()) {
         implementation project(':moduletool')
     }
+    if (!isModuleLibrary.toBoolean()) {
+        implementation project(':modulelibrary')
+    }
+    if (!isModuleView.toBoolean()) {
+        implementation project(':moduleview')
+    }
+    if (!isModulePersonal.toBoolean()) {
+        implementation project(':modulepersonal')
+    }
+
+
+    //test
     if (!isModuleOne.toBoolean()) {
         implementation project(':moduleone')
     }

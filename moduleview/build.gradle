@@ -64,7 +64,7 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     //依赖库导入
-    implementation project(':modulelib')
+    implementation project(':modulecommon')
     //ARouter路由
     annotationProcessor 'com.alibaba:arouter-compiler:1.1.4'
     //PickerView

@@ -7,8 +7,8 @@ import android.widget.EditText;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
-import com.zht.modulelib.OpenFileBySystem;
-import com.zht.modulelib.base.BaseFragment;
+import com.zht.common.OpenFileBySystem;
+import com.zht.common.base.BaseFragment;
 
 /**
  * Created by ZhangHaitao on 2018/9/3.

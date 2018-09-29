@@ -65,13 +65,14 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    implementation project(':modulelib')
+    implementation project(':modulecommon')
 
     // 支持md库
     annotationProcessor 'com.android.support:design:27.1.1'
 
     //ARouter
     annotationProcessor 'com.alibaba:arouter-compiler:1.1.4'
+
     //butterknife
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
 }

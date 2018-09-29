@@ -1,6 +1,6 @@
 package com.zht.moduletool;
 
-import com.zht.modulelib.base.BaseApplication;
+import com.zht.common.base.BaseApplication;
 
 /**
  * Created by ZhangHaitao on 2018/9/3.

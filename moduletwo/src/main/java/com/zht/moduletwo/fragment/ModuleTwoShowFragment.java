@@ -1,7 +1,7 @@
 package com.zht.moduletwo.fragment;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.zht.modulelib.base.BaseFragment;
+import com.zht.common.base.BaseFragment;
 import com.zht.moduletwo.R;
 
 

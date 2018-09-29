@@ -2,7 +2,7 @@ package com.zht.moduleone.activity;
 
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.zht.modulelib.base.BaseActivity;
+import com.zht.common.base.BaseActivity;
 import com.zht.moduleone.R;
 
 @Route(path = "/moduleone/main")

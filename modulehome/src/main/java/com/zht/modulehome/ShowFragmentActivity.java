@@ -6,7 +6,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 
 import com.alibaba.android.arouter.launcher.ARouter;
-import com.zht.modulelib.base.BaseActivity;
+import com.zht.common.base.BaseActivity;
 
 import butterknife.OnClick;
 

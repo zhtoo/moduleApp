@@ -4,8 +4,8 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.zht.modulelib.StatusBar.StatusBar;
-import com.zht.modulelib.base.BaseActivity;
+import com.zht.common.StatusBar.StatusBar;
+import com.zht.common.base.BaseActivity;
 import com.zht.moduletool.R;
 
 /**

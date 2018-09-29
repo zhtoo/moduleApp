@@ -5,8 +5,8 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.zht.modulelib.base.BaseActivity;
-import com.zht.modulelib.cache.BitmapUtils;
+import com.zht.common.base.BaseActivity;
+import com.zht.common.cache.BitmapUtils;
 import com.zht.moduletool.R;
 
 /**

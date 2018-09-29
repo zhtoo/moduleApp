@@ -14,7 +14,7 @@ import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import net.zdsoft.zerobook_android.R;
+import com.zht.moduleview.R;
 
 
 /**

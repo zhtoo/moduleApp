@@ -73,7 +73,7 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    implementation project(':modulelib')
+    implementation project(':modulecommon')
 
     // 支持md库
     annotationProcessor 'com.android.support:design:27.1.1'

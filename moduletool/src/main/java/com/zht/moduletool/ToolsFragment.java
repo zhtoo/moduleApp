@@ -7,7 +7,7 @@ import android.view.View;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
-import com.zht.modulelib.base.BaseFragment;
+import com.zht.common.base.BaseFragment;
 
 import java.util.ArrayList;
 import java.util.List;

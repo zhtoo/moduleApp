@@ -71,7 +71,7 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    implementation project(':modulelib')
+    implementation project(':modulecommon')
     //ARouter
     annotationProcessor 'com.alibaba:arouter-compiler:1.1.4'
     //butterknife

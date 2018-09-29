@@ -1,0 +1,72 @@
+if(!isModuleView.toBoolean()){
+    apply plugin: 'com.android.library'
+}else {
+    apply plugin: 'com.android.application'
+}
+
+android {
+    compileSdkVersion 27
+
+
+
+    defaultConfig {
+        minSdkVersion 15
+        targetSdkVersion 27
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        //ARouter必须要配置的
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [moduleName: project.getName()]
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    sourceSets{
+        main{
+            if(isModuleView.toBoolean()){
+                manifest.srcFile("src/main/moduleManifest/AndroidManifest.xml")
+            }else{
+                manifest.srcFile("src/main/AndroidManifest.xml")
+            }
+            //集成开发模式下排除debug文件夹中的所有Java文件
+            java {
+                exclude 'debug/**'
+            }
+        }
+    }
+
+
+    buildscript {
+        repositories {
+            jcenter()
+            mavenCentral()
+        }
+    }
+    allprojects {
+        repositories {
+            jcenter()
+        }
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    //依赖库导入
+    implementation project(':modulecommon')
+    //ARouter路由
+    annotationProcessor 'com.alibaba:arouter-compiler:1.1.4'
+
+
+}

@@ -1,7 +1,7 @@
 package com.zht.modlueapp;
 
 
-import com.zht.modulelib.base.BaseApplication;
+import com.zht.common.base.BaseApplication;
 
 public class AppApplication extends BaseApplication {
 /**
