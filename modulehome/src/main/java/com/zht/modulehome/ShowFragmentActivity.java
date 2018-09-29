@@ -30,6 +30,21 @@ public class ShowFragmentActivity extends BaseActivity {
         fragmentMmoduleTwoShow = (Fragment) ARouter.getInstance()
                 .build("/moduletwo/showfragment")
                 .navigation();
+
+        findViewById(R.id.tv_moduleone_fragment).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                fragmentTransaction.show(fragmentModuleOneShow).hide(fragmentMmoduleTwoShow).commit();
+            }
+        });
+        findViewById(R.id.tv_moduletwo_fragment).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                fragmentTransaction.show(fragmentMmoduleTwoShow).hide(fragmentModuleOneShow).commit();
+            }
+        });
     }
 
     @Override
@@ -39,16 +54,6 @@ public class ShowFragmentActivity extends BaseActivity {
         beginTransaction.add(R.id.fl_fragment,fragmentModuleOneShow);
         beginTransaction.add(R.id.fl_fragment,fragmentMmoduleTwoShow);
         beginTransaction.show(fragmentModuleOneShow).hide(fragmentMmoduleTwoShow).commit();
-    }
-
-    @OnClick({R2.id.tv_moduleone_fragment,R2.id.tv_moduletwo_fragment})
-    public void onClick(View view){
-        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        if(view.getId() == R.id.tv_moduleone_fragment){
-            fragmentTransaction.show(fragmentModuleOneShow).hide(fragmentMmoduleTwoShow).commit();
-        }else if(view.getId() == R.id.tv_moduletwo_fragment){
-            fragmentTransaction.show(fragmentMmoduleTwoShow).hide(fragmentModuleOneShow).commit();
-        }
     }
 
 }

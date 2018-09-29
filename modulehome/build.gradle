@@ -36,7 +36,7 @@ android {
 
     sourceSets {
         main {
-            if(isModuleMain.toBoolean()){
+            if(isModuleHome.toBoolean()){
                 manifest.srcFile 'src/main/moduleManifest/AndroidManifest.xml'
             }else{
                 manifest.srcFile 'src/main/AndroidManifest.xml'
