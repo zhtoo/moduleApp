@@ -17,7 +17,7 @@ public class SystemViewActivity extends BaseActivity {
 
     @Override
     protected int getLayoutId() {
-        return com.zht.common.R.layout.activity_system_view;
+        return R.layout.activity_system_view;
     }
 
     @Override

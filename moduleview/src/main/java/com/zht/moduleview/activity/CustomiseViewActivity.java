@@ -10,7 +10,7 @@ import com.zht.moduleview.R;
 /**
  * Created by ZhangHaitao on 2018/9/30.
  */
-@Route(path = "/moduleview/activity/SystemViewActivity")
+@Route(path = "/moduleview/activity/CustomiseViewActivity")
 public class CustomiseViewActivity extends BaseActivity {
 
     private View mRecycler;

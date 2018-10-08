@@ -69,4 +69,6 @@ dependencies {
     annotationProcessor 'com.alibaba:arouter-compiler:1.1.4'
     //PickerView
     annotationProcessor 'com.contrarywind:Android-PickerView:4.1.6'
+    //ConstraintLayout的引用
+    annotationProcessor 'com.android.support.constraint:constraint-layout:1.1.2'
 }

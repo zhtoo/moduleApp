@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.zht.common.base.BaseFragment;
 
 /**
@@ -35,9 +36,11 @@ public class ViewFragment extends BaseFragment implements View.OnClickListener {
     public void onClick(View v) {
         int id = v.getId();
         if(id == R.id.ll_system_view){
-
+            ARouter.getInstance().build("/moduleview/activity/SystemViewActivity")
+                    .navigation();
         }else if(id == R.id.ll_customize_view){
-
+            ARouter.getInstance().build("/moduleview/activity/CustomiseViewActivity")
+                    .navigation();
         }
     }
 }
