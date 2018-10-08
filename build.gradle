@@ -26,3 +26,17 @@ allprojects {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+
+ext {
+    // Sdk and tools
+    // Support library and architecture components support minSdk 15 and above.
+    minSdkVersion = 15
+    targetSdkVersion = 28
+    compileSdkVersion = 28
+    buildToolsVersion = '28.0.0'
+
+    // App dependencies
+    supportLibraryVersion = '28.0.0'
+
+}
+
