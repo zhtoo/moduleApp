@@ -51,8 +51,12 @@ public class ToolsFragment extends BaseFragment implements ToolsAdapter.ItemClic
         activitys.add("/sample/BitmapCacheActivity");
         list.add("VideoActivity");
         activitys.add("/sample/VideoActivity");
-        mAdapter.updata(list);
+        list.add("PermissionAcrivity");
+        activitys.add("/sample/PermissionAcrivity");
 
+
+
+        mAdapter.updata(list);
     }
 
     @Override

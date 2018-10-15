@@ -8,13 +8,13 @@
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/view_customise_rv"
-        android:background="#AFe6e6"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:background="#AFe6e6"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-       app:layout_constraintRight_toRightOf="parent"
         />
 
 </android.support.constraint.ConstraintLayout>

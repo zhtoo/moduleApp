@@ -8,6 +8,7 @@
         <activity android:name=".MainActivity" />
         <activity android:name=".activity.CustomiseViewActivity" />
         <activity android:name=".activity.SystemViewActivity" />
+        <activity android:name=".activity.system.EditTextActivity" />
     </application>
 
 
