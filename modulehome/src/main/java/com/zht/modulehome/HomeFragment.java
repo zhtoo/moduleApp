@@ -55,4 +55,6 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
             OpenFileBySystem.openFileByPath(getContext(),s);
         }
     }
+
+
 }
