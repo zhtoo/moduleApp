@@ -31,4 +31,17 @@
         android:gravity="center"
         android:text="更改状态栏字体颜色" />
 
+
+    <View android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="center"
+        android:layout_marginBottom="10dp"
+        android:hint="请输入测试内容"/>
+
 </LinearLayout>

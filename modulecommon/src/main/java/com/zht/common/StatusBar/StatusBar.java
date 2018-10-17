@@ -14,6 +14,7 @@ import java.lang.reflect.Method;
 /**
  * 作者：zhanghaitao on 2017/12/19 16:06
  * 邮箱：820159571@qq.com
+ *
  * @describe:状态栏工具类
  */
 public class StatusBar {
@@ -32,39 +33,41 @@ public class StatusBar {
      * 3、是否全屏
      * 4、设置字体颜色
      */
-    public static void setStatusBar(Activity activity,int statusBarColor ,int type){
-         if(type == NO_STATUS_BAR){
-             setStatusBarVisibility(activity,false);
-             return;
-         }
+    public static void setStatusBar(Activity activity, int statusBarColor, int type) {
+        if (type == NO_STATUS_BAR) {
+            setStatusBarVisibility(activity, false);
+            return;
+        }
 
     }
 
     /**
      * 显示/隐藏状态栏
+     *
      * @param activity
      * @param isVisibility
      */
-    public static void setStatusBarVisibility(Activity activity,boolean isVisibility){
-        if(isVisibility){
+    public static void setStatusBarVisibility(Activity activity, boolean isVisibility) {
+        if (isVisibility) {
             activity.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN); //显示状态栏
-        }else {
+        } else {
             activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN); //隐藏状态栏
         }
 
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP && Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {//5.0+
             //在4.4中状态栏是假的，因此需要自己手动移除
-            StatusBarKitKat.setStatusBarVisibility( activity,isVisibility);
+            StatusBarKitKat.setStatusBarVisibility(activity, isVisibility);
         }
 
     }
 
     /**
-     *  设置全屏
+     * 设置全屏
+     *
      * @param activity
      * @param isFullScreen
      */
-    public static void setFullScreen(Activity activity,boolean isFullScreen){
+    public static void setFullScreen(Activity activity, boolean isFullScreen) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {//5.0+
             StatusBarLollipop.setFullScreen(activity, isFullScreen);
         } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {//4.4
@@ -76,6 +79,7 @@ public class StatusBar {
 
     /**
      * 设置状态栏背景颜色
+     *
      * @param activity
      * @param statusColor
      */
@@ -92,6 +96,7 @@ public class StatusBar {
     /**
      * 设置状态栏字体颜色
      * 需要区别的是：在Android6.0以下，MIUI6.0+和Flyme4.0+ 支持修改状态栏字体颜色。
+     *
      * @param activity
      * @param darkmode
      */
@@ -103,10 +108,12 @@ public class StatusBar {
                     View.SYSTEM_UI_FLAG_VISIBLE;//恢复状态栏白色字体
             activity.getWindow().getDecorView()
                     .setSystemUiVisibility(visibility);
-        } else if (MIUISetStatusBarLightMode(activity, darkmode)
-                || FlymeSetStatusBarLightMode(activity, darkmode)) {
+        } else if (OSUtil.isMiui()) {
             //小米手机设置状态栏字体颜色 黑体/白色
+            MIUISetStatusBarLightMode(activity, darkmode);
+        } else if (OSUtil.isFlyme()) {
             //魅族手机设置状态栏字体颜色 黑体/白色
+            FlymeSetStatusBarLightMode(activity, darkmode);
         } else {
             Log.e("StatusBar", "状态栏字体颜色设置无效");
         }
@@ -134,6 +141,7 @@ public class StatusBar {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        Log.e("StatusBar", "小米手机状态栏字体颜色设置无效");
         return false;
     }
 
@@ -162,39 +170,8 @@ public class StatusBar {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        Log.e("StatusBar", "魅族手机状态栏字体颜色设置无效");
         return false;
     }
-
-
-//    /**
-//     * 设置全透明状态栏
-//     *
-//     * @param activity
-//     */
-//    public static void setTransparentStatusBar(Activity activity) {
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-//            StatusBarLollipop.translucentStatusBar(activity, true);
-//        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-//            StatusBarKitKat.translucentStatusBar(activity);
-//        } else {
-//            Log.e("StatusBar", "全透明状态栏颜色设置无效");
-//        }
-//    }
-
-
-//    /**
-//     * 设置半透明状态栏
-//     *
-//     * @param activity
-//     */
-//    public static void setTranslucentStatusBar(Activity activity) {
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-//            StatusBarLollipop.translucentStatusBar(activity, false);
-//        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-//            StatusBarKitKat.translucentStatusBar(activity);
-//        } else {
-//            Log.e("StatusBar", "半透明状态栏颜色设置无效");
-//        }
-//    }
 
 }
