@@ -35,7 +35,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:padding="10dp"
-        android:text="modulefragment" />
+        android:hint="modulefragment" />
 
     <Button
         android:id="@+id/bt_home_file_path"
@@ -44,6 +44,14 @@
         android:gravity="center"
         android:padding="10dp"
         android:text="调用系统软件查看文件" />
+
+    <Button
+        android:id="@+id/bt_home_get_file_path"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="选择文件并获取路径" />
 
 
 </LinearLayout>
