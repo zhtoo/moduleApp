@@ -43,16 +43,19 @@ public class ToolsFragment extends BaseFragment implements ToolsAdapter.ItemClic
     protected void initData() {
         list = new ArrayList<>();
         activitys = new ArrayList<>();
-        list.add("ToastUtil");
+        list.add("Toast");
         activitys.add("/sample/ToastActivity");
         list.add("StatusBar");
         activitys.add("/sample/StatusBarActivity");
-        list.add("BitmapCacheActivity");
+        list.add("BitmapCache");
         activitys.add("/sample/BitmapCacheActivity");
-        list.add("VideoActivity");
+        list.add("Video");
         activitys.add("/sample/VideoActivity");
-        list.add("PermissionAcrivity");
+        list.add("Permission");
         activitys.add("/sample/PermissionAcrivity");
+
+        list.add("Screen");
+        activitys.add("/sample/ScreenActivity");
 
 
 
