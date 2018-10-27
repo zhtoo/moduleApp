@@ -2,6 +2,7 @@ package com.zht.moduletool.sample;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.zht.common.StatusBar.StatusBar;
@@ -17,6 +18,7 @@ public class StatusBarActivity extends BaseActivity implements View.OnClickListe
     private boolean darkmode = false;
     private boolean isVisibility = true;
     private boolean isFullScreen = false;
+    private TextView mNotchText;
 
     @Override
     protected int getLayoutId() {
@@ -29,6 +31,9 @@ public class StatusBarActivity extends BaseActivity implements View.OnClickListe
         findViewById(R.id.m_status_text_color).setOnClickListener(this);
         findViewById(R.id.m_status_visibility).setOnClickListener(this);
         findViewById(R.id.m_full_screen).setOnClickListener(this);
+
+
+
 
     }
 

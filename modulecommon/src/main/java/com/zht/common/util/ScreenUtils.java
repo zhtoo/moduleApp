@@ -23,11 +23,16 @@ public class ScreenUtils {
      * 即使虚拟按键显示着，也会加上虚拟按键的高度
      */
 
+
+
     public static int getTotalScreenHeight(Activity activity) {
         DisplayMetrics displayMetrics = new DisplayMetrics();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
             activity.getWindowManager().getDefaultDisplay().getRealMetrics(displayMetrics);
         }
+
+
+
         return displayMetrics.heightPixels;
     }
 
