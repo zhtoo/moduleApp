@@ -1,8 +1,5 @@
 package com.zht.common.NotchScreen;
 
-import android.content.Context;
-import android.os.Build;
-import android.provider.Settings;
 import android.util.Log;
 
 import java.lang.reflect.InvocationTargetException;
@@ -14,20 +11,6 @@ import java.lang.reflect.Method;
 public class NotchInScreen {
 
 
-    public static boolean hasNotchInScreen(Context context) {
-        boolean hasNotch = false;
-        try {
-            ClassLoader cl = context.getClassLoader();
-            Class HwNotchSizeUtil = cl.loadClass("com.android.util.HwNotchSizeUtil");
-            Method get = HwNotchSizeUtil.getMethod("hasNotchInScreen");
-            hasNotch = (boolean) get.invoke(HwNotchSizeUtil);
-        } catch (Exception e) {
-            e.printStackTrace();
-            Log.e("test", "hasNotchInScreen Exception");
-        } finally {
-            return hasNotch;
-        }
-    }
 
     //是否是凹型屏
     public static final int HAS_Feature_SUPPORT = 0x00000020;

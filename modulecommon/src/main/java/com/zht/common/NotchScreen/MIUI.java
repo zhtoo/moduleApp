@@ -7,7 +7,8 @@ import android.provider.Settings;
 import java.lang.reflect.Method;
 
 /**
- * Created by ZhangHaitao on 2018/10/27
+ * Created by ZhangHaitao on 2018/10/27\
+ * 小米系统 MIUI Android O适配
  */
 public class MIUI {
 
@@ -83,7 +84,7 @@ public class MIUI {
      * @param context
      * @return
      */
-    public static boolean hideNotchScreen(Context context) {
+    public static boolean systemHideNotchScreen(Context context) {
         boolean isHide = false;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
             int force_black = Settings.Global.getInt(context.getContentResolver(), "force_black", 0);

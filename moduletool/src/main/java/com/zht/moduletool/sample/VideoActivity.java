@@ -1,6 +1,7 @@
 package com.zht.moduletool.sample;
 
 import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.os.Build;
@@ -19,6 +20,8 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.MediaController;
+import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.VideoView;
@@ -30,6 +33,7 @@ import com.zht.moduletool.R;
 /**
  * Created by ZhangHaitao on 2018/9/27.
  */
+
 /**
  * 关于seekTo的时间不正确的问题？
  * 原因：
@@ -40,27 +44,26 @@ import com.zht.moduletool.R;
  * // 在设置 VideoView 的 OnPrepared 监听，拿到 MediaPlayer 对象，然后设置MediaPlayer的OnSeekComplete监听
  * 代码如下：
  * videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
- *      @Override
- *      public void onPrepared(MediaPlayer mp) {
- *          //设置 MediaPlayer 的 OnSeekComplete 监听
- *          mp.setOnSeekCompleteListener(new MediaPlayer.OnSeekCompleteListener() {
- *              @Override
- *              public void onSeekComplete(MediaPlayer mp) {
- *                  // seekTo 方法完成时的回调
- *                  if(isPause){
- *                      videoView.start();
- *                      isPause = !isPause;
- *                  }
- *              }
- *          });
- *      }
- * });
  *
+ * @Override public void onPrepared(MediaPlayer mp) {
+ * //设置 MediaPlayer 的 OnSeekComplete 监听
+ * mp.setOnSeekCompleteListener(new MediaPlayer.OnSeekCompleteListener() {
+ * @Override public void onSeekComplete(MediaPlayer mp) {
+ * // seekTo 方法完成时的回调
+ * if(isPause){
+ * videoView.start();
+ * isPause = !isPause;
+ * }
+ * }
+ * });
+ * }
+ * });
+ * <p>
  * 原因二：
  * 给视频添加关键帧  http://ffmpeg.org/
  * FFmpeg 相关命令行语句：
- *  ffmpeg.exe -i "D:\in.mp4" -c:v libx264 -preset superfast -x264opts keyint=25 -acodec copy -f mp4 "D:\out.mp4"
- *
+ * ffmpeg.exe -i "D:\in.mp4" -c:v libx264 -preset superfast -x264opts keyint=25 -acodec copy -f mp4 "D:\out.mp4"
+ * <p>
  * 将源文件（D:\in.mp4）转换为每隔25帧设置一个关键帧，保存到"D:\out.mp4"
  */
 @Route(path = "/sample/VideoActivity")
@@ -149,8 +152,8 @@ public class VideoActivity extends AppCompatActivity {
         setContentView(R.layout.zb_common_video_watch);
         //隐藏状态栏
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        //在这里需要判断是否是刘海屏
 
+        //在这里需要判断是否是刘海屏
         /**
          * 也不知道是那个ZZ非得学iphone弄刘海屏
          */
@@ -179,16 +182,21 @@ public class VideoActivity extends AppCompatActivity {
                 .load(R.drawable.zb_video_loading)
                 .into(loading);
 
-        String url =
+        String url = "http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4";
 //                "http://www.zhanght.com:8080/0.mp4";
-                "http://10.0.2.2:8080/0.mp4";
+//                "http://10.0.2.2:8080/0.mp4";
 
         videoProgress.setEnabled(false);
         videoTitle.setText("测试");// 标题
         videoView.setVideoPath(url);// 视频路径
         videoView.start();
-    }
 
+
+        MediaController mediaController = new MediaController(this);
+        videoView.setMediaController(mediaController);
+        mediaController.setMediaPlayer(videoView);
+
+    }
 
     private void initEvent() {
         // 视频播放
@@ -202,14 +210,14 @@ public class VideoActivity extends AppCompatActivity {
                 videoProgress.setEnabled(true);
                 //隐藏菜单栏
                 handler.sendEmptyMessageDelayed(hide_menu, 1000);
-
+                //记录视频时长
                 timeDuration = videoView.getDuration();// 精确到半秒数;
-
+                //将long类型的时长转换为String
                 timeDurationAtr = getVideoTimeStr(timeDuration);
                 videoTime.setText("00:00/" + timeDuration);
-
                 //在视频开始播放的时候记录当前时间
                 startRecordTime();
+                //发送定时消息，更新进度条状态
                 handler.sendEmptyMessageDelayed(pay_video, 50);
             }
         });
@@ -310,10 +318,14 @@ public class VideoActivity extends AppCompatActivity {
                     videoScreenOrientation.setImageResource(R.drawable.zb_video_vertical);
                     //设置横屏
                     setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+                    //隐藏状态栏
+                    getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
                 } else {//横屏
                     videoScreenOrientation.setImageResource(R.drawable.zb_video_horizontal);
                     //设置竖屏
                     setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+                    //显示状态栏
+                    getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
                 }
                 //隐藏菜单栏
                 handler.sendEmptyMessageDelayed(hide_menu, 1500);
@@ -321,6 +333,31 @@ public class VideoActivity extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+//            Toast.makeText(getApplicationContext(), "横屏", Toast.LENGTH_SHORT).show();
+            RelativeLayout.LayoutParams layoutParams =
+                    (RelativeLayout.LayoutParams) videoView.getLayoutParams();
+            layoutParams.width = RelativeLayout.LayoutParams.WRAP_CONTENT;
+            layoutParams.height = RelativeLayout.LayoutParams.MATCH_PARENT;
+            videoView.setLayoutParams(layoutParams);
+            //隐藏状态栏
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        } else {
+//            Toast.makeText(getApplicationContext(), "竖屏", Toast.LENGTH_SHORT).show();
+            RelativeLayout.LayoutParams layoutParams =
+                    (RelativeLayout.LayoutParams) videoView.getLayoutParams();
+            layoutParams.width = RelativeLayout.LayoutParams.MATCH_PARENT;
+            layoutParams.height = RelativeLayout.LayoutParams.WRAP_CONTENT;
+            videoView.setLayoutParams(layoutParams);
+            //显示状态栏
+            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        }
+    }
+
 
     /**
      * 当返回按钮按下的时候，如果是横屏状态则切换为竖屏
@@ -335,6 +372,8 @@ public class VideoActivity extends AppCompatActivity {
             videoScreenOrientation.setImageResource(R.drawable.zb_video_horizontal);
             //设置竖屏
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+            //显示状态栏
+            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
             //隐藏菜单栏
             handler.sendEmptyMessageDelayed(hide_menu, 1500);
         }

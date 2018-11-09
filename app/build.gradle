@@ -1,18 +1,21 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 27
+    compileSdkVersion 28
+
     defaultConfig {
-        applicationId "com.zht.modlueapp"
-        minSdkVersion 15
-        targetSdkVersion 27
-        versionCode 1
-        versionName "1.0"
+        applicationId project.properties['applicationId']
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode project.properties['versionCode'].toInteger()
+        versionName project.properties['versionName']
+
+
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
         javaCompileOptions {
             annotationProcessorOptions {
-                arguments = [ moduleName : project.getName() ]
+                arguments = [moduleName: project.getName()]
             }
         }
     }
@@ -60,7 +63,6 @@ dependencies {
     if (!isModulePersonal.toBoolean()) {
         implementation project(':modulepersonal')
     }
-
 
     //test
     if (!isModuleOne.toBoolean()) {

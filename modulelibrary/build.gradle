@@ -5,15 +5,13 @@ if(!isModuleView.toBoolean()){
 }
 
 android {
-    compileSdkVersion 27
-
-
+    compileSdkVersion 28
 
     defaultConfig {
-        minSdkVersion 15
-        targetSdkVersion 27
-        versionCode 1
-        versionName "1.0"
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode project.properties['versionCode'].toInteger()
+        versionName project.properties['versionName']
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 

@@ -27,10 +27,10 @@ public class BottomNavigationViewHelper {
             for (int i = 0; i < menuView.getChildCount(); i++) {
                 BottomNavigationItemView item = (BottomNavigationItemView) menuView.getChildAt(i);
                 //no inspection Restricted Api
-                item.setShiftingMode(false);
+//                item.setShiftingMode(false);
                 // set once again checked value, so view will be updated
                 //no inspection Restricted Api
-                item.setChecked(item.getItemData().isChecked());
+//                item.setChecked(item.getItemData().isChecked());
             }
         } catch (NoSuchFieldException e) {
             Log.e("BNVHelper", "Unable to get shift mode field", e);

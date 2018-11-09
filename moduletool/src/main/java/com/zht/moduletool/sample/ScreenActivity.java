@@ -5,6 +5,7 @@ import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.zht.common.NotchScreen.MIUI;
+import com.zht.common.NotchScreen.Pie;
 import com.zht.common.base.BaseActivity;
 import com.zht.common.util.ScreenUtils;
 import com.zht.moduletool.R;
@@ -29,6 +30,7 @@ public class ScreenActivity extends BaseActivity {
         mText = findViewById(R.id.screen_text);
 
 
+
         String mScreenMessage =
                 "总屏幕高度(包括虚拟键):" + ScreenUtils.getTotalScreenHeight(this) + "\n" +
                         "总屏幕宽度:" + ScreenUtils.getScreenWidth(this) + "\n" +
@@ -45,7 +47,9 @@ public class ScreenActivity extends BaseActivity {
                         "是否是刘海屏:" + MIUI.hasNotchInScreen(this) + "\n" +
                         "获取凹型屏的高度:" + MIUI.getNotchScreenHeight(this) + "\n" +
                         "获取凹型屏的宽度:" + MIUI.getNotchScreenWidth(this) + "\n" +
-                        "「隐藏屏幕刘海」是否开启了:" + MIUI.hideNotchScreen(this) + "\n" +
+                        "「隐藏屏幕刘海」是否开启了:" + MIUI.systemHideNotchScreen(this) + "\n\n" +
+
+                        "pie:" + Pie.hasNotchInScreen(this) + "\n" +
 
                         "";
         mText.setText(mScreenMessage);

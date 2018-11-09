@@ -16,7 +16,7 @@
         <activity android:name=".sample.StatusBarActivity" />
         <activity android:name=".sample.BitmapCacheActivity" />
         <activity android:name=".sample.VideoActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"/>
+            android:configChanges="orientation|keyboardHidden|screenSize|layoutDirection"/>
         <activity android:name=".sample.PermissionAcrivity" />
         <activity android:name=".sample.ScreenActivity" />
 
