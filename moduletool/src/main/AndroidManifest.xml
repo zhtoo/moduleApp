@@ -19,6 +19,8 @@
             android:configChanges="orientation|keyboardHidden|screenSize|layoutDirection"/>
         <activity android:name=".sample.PermissionAcrivity" />
         <activity android:name=".sample.ScreenActivity" />
+        <activity android:name=".sample.InteractiveVideoActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize|layoutDirection"/>
 
     </application>
 

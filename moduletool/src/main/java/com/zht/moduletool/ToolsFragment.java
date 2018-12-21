@@ -58,6 +58,9 @@ public class ToolsFragment extends BaseFragment implements ToolsAdapter.ItemClic
         activitys.add("/sample/ScreenActivity");
 
 
+        list.add("交互视频播放");
+        activitys.add("/sample/InteractiveVideoActivity");
+
 
         mAdapter.updata(list);
     }
