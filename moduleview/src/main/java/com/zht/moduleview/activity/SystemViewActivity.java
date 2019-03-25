@@ -63,6 +63,10 @@ public class SystemViewActivity extends BaseActivity {
         activitys = new ArrayList<>();
         list.add("EditText");
         activitys.add("/moduleview/activity/EditTextActivity");
+        list.add("Calendar");
+        activitys.add("/moduleview/activity/SCalendarActivity");
+        list.add("ViewPagerActivity");
+        activitys.add("/moduleview/activity/ViewPagerActivity");
 
         adapter.updata(list);
     }
@@ -83,7 +87,7 @@ public class SystemViewActivity extends BaseActivity {
             ViewGroup.LayoutParams layoutParams
                     = new LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.MATCH_PARENT,
-                    (int) dip2px(parent.getContext(), 30));
+                    (int) dip2px(parent.getContext(), 50));
             TextView mText = new TextView(parent.getContext());
             mText.setTextColor(0xFF555555);
             mText.setGravity(Gravity.CENTER);

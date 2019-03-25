@@ -76,7 +76,7 @@ dependencies {
     implementation project(':modulecommon')
 
     // 支持md库
-    annotationProcessor 'com.android.support:design:27.1.1'
+    annotationProcessor 'com.android.support:design:28.0.0'
 
     //ARouter
     annotationProcessor 'com.alibaba:arouter-compiler:1.1.4'

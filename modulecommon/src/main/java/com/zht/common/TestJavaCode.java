@@ -1,11 +1,75 @@
 package com.zht.common;
 
+import java.text.DecimalFormat;
+
 public class TestJavaCode {
 
     public static void main(String[] args) {
-        String remind = "昵称%02d不能超过%02d个字！";
-        String format = String.format(remind, 300,100);
-        System.out.println(format);
+
+//        try {
+//            URL url = new URL("https://github.com/appium/appium-desktop/releases/download/v1.11.0/appium-desktop-setup-1.11.0.exe");
+//            HttpURLConnection connection =
+//                    (HttpURLConnection) url.openConnection();
+//            connection.setConnectTimeout(5 * 1000);
+//            connection.setDoOutput(true);
+//            connection.setDoInput(true);
+//            connection.setUseCaches(false);
+//            connection.setRequestMethod("GET");
+//            connection.setRequestProperty("Content-Type", "application/octet-stream");
+//            connection.setRequestProperty("Connection", "Keep-Alive");// 维持长连接
+//            connection.setRequestProperty("Charset", "UTF-8");
+//            connection.connect();
+//            InputStream inputStream = connection.getInputStream();
+//            byte[] data = new byte[1024];
+//            File file = new File("C:/Users/user/Desktop" + "/appium-desktop-setup-1.11.0.exe");
+//            FileOutputStream fileOut = new FileOutputStream(file);
+//            int length = 0;
+//            int totalLength = 0;
+//            int progress = 0;
+//            int available =connection.getContentLength();
+//            while ((length = inputStream.read(data)) != -1) {
+//                fileOut.write(data);
+//                totalLength += length;
+//                int Cprogress = (totalLength * 100 / available);
+//                if (progress != Cprogress && Cprogress > 0) {
+//                    System.out.println("进度：" + progress);
+//                    progress = Cprogress;
+//                }
+//            }
+//            inputStream.close();
+//            fileOut.close();
+//            connection.disconnect();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+
+
+
+        int year = 5;
+        double r = 0.03;
+        int money = 22000;
+        double totalMoney = 140000;
+        for (int i = 0; i < year * 12; i++) {
+            System.out.print("第" + "\t" + (i / 12 + 1) + "年：");
+            System.out.print("\t" + (i % 12 + 1) + "个月：");
+            int interest = (int) (100 * totalMoney * r * 30 / 365 );
+            double interestD = interest / 100D;
+            System.out.print("\t利息：" + interestD);
+            totalMoney += (money + interestD - 6000);
+            DecimalFormat fnum = new DecimalFormat("##0.00");
+            String dd = fnum.format(((int) totalMoney*100 / 10000)/100D);
+            System.out.print("\t 剩余总额：" + dd + "W\n");
+        }
+       /* for (int i = 0; i < year; i++) {
+            System.out.print("第");
+            System.out.print("\t" + (i % 12 + 1) + "年：");
+            int interest = (int) (100 * totalMoney * r);
+            double interestD = interest / 100D;
+            System.out.print("\t利息：" + interestD);
+            totalMoney += (money * 12 + interestD - 6000 * 12);
+            System.out.print("\t 剩余总额：" + ((int) totalMoney / 10000) + "W\n");
+        }*/
+
     }
 
 
@@ -381,7 +445,6 @@ public class TestJavaCode {
 //        System.out.println(format);
 //
 //    }
-
 
 
     //排序

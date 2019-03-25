@@ -3,12 +3,14 @@ package com.zht.moduletool.sample;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.view.MotionEventCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -105,12 +107,26 @@ public class InteractiveVideoActivity extends AppCompatActivity {
         }
     };
 
+
+    private String[] listUrl = {
+            "http://file.dev.zerobook.com/upload/vod_video/2019/01/11/92/1547185893799_video.mp4",
+            "http://file.dev.zerobook.com/upload/vod_video/2019/01/11/92/1547185581694_video.mp4",
+            "http://file.dev.zerobook.com/upload/vod_video/2019/01/11/92/1547185778082_video.mp4",
+//            "http://hc.yinyuetai.com/uploads/videos/common/A7350166C4E3932730BD0B8AECFEEB9E.mp4",
+//            "http://hc.yinyuetai.com/uploads/videos/common/F5F30167BFEEB0BE3F98772C53D4F530.mp4",
+//            "http://221.228.226.5/15/t/s/h/v/tshvhsxwkbjlipfohhamjkraxuknsc/sh.yinyuetai.com/88DC015DB03C829C2126EEBBB5A887CB.mp4",
+//            "http://hc.yinyuetai.com/uploads/videos/common/E51C0167C1D12CDF3376EA523803047F.mp4",
+//            "http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4"
+            //"http://www.zhanght.com:8080/0.mp4";
+            //"http://10.0.2.2:8080/0.mp4";
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.zb_common_interactive_video_watch);
         //隐藏状态栏
-     //   getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        //   getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         Runtime runtime = Runtime.getRuntime();
         long l = runtime.maxMemory();//"最大可用内存
@@ -129,15 +145,12 @@ public class InteractiveVideoActivity extends AppCompatActivity {
                 .load(R.drawable.zb_video_loading)
                 .into(loading);
 
-        String url =
-//                "http://hc.yinyuetai.com/uploads/videos/common/A7350166C4E3932730BD0B8AECFEEB9E.mp4";
-        "http://hc.yinyuetai.com/uploads/videos/common/F5F30167BFEEB0BE3F98772C53D4F530.mp4";
-        //"http://221.228.226.5/15/t/s/h/v/tshvhsxwkbjlipfohhamjkraxuknsc/sh.yinyuetai.com/88DC015DB03C829C2126EEBBB5A887CB.mp4";
-//        "http://hc.yinyuetai.com/uploads/videos/common/E51C0167C1D12CDF3376EA523803047F.mp4";
-        //"http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4";
-        //"http://www.zhanght.com:8080/0.mp4";
-        //"http://10.0.2.2:8080/0.mp4";
 
+        double random = Math.random();
+        Log.e(TAG, "random: " + random);
+        int position = (int) (random * listUrl.length);
+        Log.e(TAG, "position: " + position);
+        String url = listUrl[position];
 
         LinearLayout.LayoutParams lp =
                 (LinearLayout.LayoutParams) videoContent.getLayoutParams();
@@ -185,6 +198,21 @@ public class InteractiveVideoActivity extends AppCompatActivity {
         videoPlay = (ImageView) findViewById(R.id.video_play);
         videoScreenOrientation = (ImageView) findViewById(R.id.video_screen_orientation);
         loading = findViewById(R.id.loading_view_image);
+
+        findViewById(R.id.text_remind).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               // videoView.stopPlayback();
+                double random = Math.random();
+                Log.e(TAG, "random: " + random);
+                int position = (int) (random * listUrl.length);
+                Log.e(TAG, "position: " + position);
+                String url = listUrl[position];
+                //将MP4格式的视频路径修改为m3u8
+                videoView.setVideoURI(Uri.parse(url));// 视频路径
+                videoView.start();
+            }
+        });
     }
 
     @Override
@@ -512,9 +540,9 @@ public class InteractiveVideoActivity extends AppCompatActivity {
             case MotionEvent.ACTION_UP: {
                 if (inRangeOfView(videoTop, ev) || inRangeOfView(videoBottom, ev)) {
                     break;
-                }else if(inRangeOfView(videoContent, ev)){
+                } else if (inRangeOfView(videoContent, ev)) {
                     showMenu(videoTop.getVisibility() == View.INVISIBLE);
-                }else if(videoTop.getVisibility() == View.VISIBLE){
+                } else if (videoTop.getVisibility() == View.VISIBLE) {
                     showMenu(videoTop.getVisibility() == View.INVISIBLE);
                 }
                 break;

@@ -10,6 +10,9 @@
         <activity android:name=".activity.SystemViewActivity" />
         <activity android:name=".activity.system.EditTextActivity" />
         <activity android:name=".activity.customise.CalendarActivity" />
+        <activity android:name=".activity.system.ProgressActivity" />
+        <activity android:name=".activity.system.SCalendarActivity" />
+        <activity android:name=".activity.system.ViewPagerActivity" />
     </application>
 
 
