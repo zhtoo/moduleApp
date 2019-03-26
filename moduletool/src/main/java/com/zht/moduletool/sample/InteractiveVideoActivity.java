@@ -1,9 +1,10 @@
 package com.zht.moduletool.sample;
 
+import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -83,7 +84,7 @@ public class InteractiveVideoActivity extends AppCompatActivity {
     private ImageView videoScreenOrientation;
     private TextView videoTotalTime;
     private FrameLayout internalContainer;
-    private RelativeLayout videoContent;
+    private FrameLayout videoContent;
 
     private long timeDuration;
     private long currentDuration;
@@ -109,6 +110,7 @@ public class InteractiveVideoActivity extends AppCompatActivity {
 
 
     private String[] listUrl = {
+
             "http://file.dev.zerobook.com/upload/vod_video/2019/01/11/92/1547185893799_video.mp4",
             "http://file.dev.zerobook.com/upload/vod_video/2019/01/11/92/1547185581694_video.mp4",
             "http://file.dev.zerobook.com/upload/vod_video/2019/01/11/92/1547185778082_video.mp4",
@@ -120,6 +122,9 @@ public class InteractiveVideoActivity extends AppCompatActivity {
             //"http://www.zhanght.com:8080/0.mp4";
             //"http://10.0.2.2:8080/0.mp4";
     };
+    private View mBrightness;
+    private View mVolume;
+    private View mProgressController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -150,7 +155,8 @@ public class InteractiveVideoActivity extends AppCompatActivity {
         Log.e(TAG, "random: " + random);
         int position = (int) (random * listUrl.length);
         Log.e(TAG, "position: " + position);
-        String url = listUrl[position];
+//        String url = listUrl[position];
+        String url = "http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4";
 
         LinearLayout.LayoutParams lp =
                 (LinearLayout.LayoutParams) videoContent.getLayoutParams();
@@ -189,7 +195,7 @@ public class InteractiveVideoActivity extends AppCompatActivity {
         loadingView = (LinearLayout) findViewById(R.id.loading_view);
         videoTime = (TextView) findViewById(R.id.video_time);
 
-        videoContent = (RelativeLayout) findViewById(R.id.video_content);
+        videoContent = (FrameLayout) findViewById(R.id.video_content);
         internalContainer = (FrameLayout) findViewById(R.id.internal_container);
         videoTotalTime = (TextView) findViewById(R.id.video_total_time);
         videoTitle = (TextView) findViewById(R.id.video_title);
@@ -199,20 +205,24 @@ public class InteractiveVideoActivity extends AppCompatActivity {
         videoScreenOrientation = (ImageView) findViewById(R.id.video_screen_orientation);
         loading = findViewById(R.id.loading_view_image);
 
-        findViewById(R.id.text_remind).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-               // videoView.stopPlayback();
-                double random = Math.random();
-                Log.e(TAG, "random: " + random);
-                int position = (int) (random * listUrl.length);
-                Log.e(TAG, "position: " + position);
-                String url = listUrl[position];
-                //将MP4格式的视频路径修改为m3u8
-                videoView.setVideoURI(Uri.parse(url));// 视频路径
-                videoView.start();
-            }
-        });
+        mBrightness = findViewById(R.id.video_Lightness);
+        mVolume = findViewById(R.id.video_Volume);
+        mProgressController = findViewById(R.id.video_progress_controller);
+
+//        findViewById(R.id.text_remind).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                // videoView.stopPlayback();
+//                double random = Math.random();
+//                Log.e(TAG, "random: " + random);
+//                int position = (int) (random * listUrl.length);
+//                Log.e(TAG, "position: " + position);
+//                String url = listUrl[position];
+//                //将MP4格式的视频路径修改为m3u8
+//                videoView.setVideoURI(Uri.parse(url));// 视频路径
+//                videoView.start();
+//            }
+//        });
     }
 
     @Override
@@ -295,7 +305,6 @@ public class InteractiveVideoActivity extends AppCompatActivity {
             // 开始拖动
             @Override
             public void onStartTrackingTouch(SeekBar arg0) {
-
                 if (videoView.isPlaying()) {
                     //停止刷新进度条
                     handler.removeMessages(pay_video);
@@ -527,14 +536,43 @@ public class InteractiveVideoActivity extends AppCompatActivity {
         finish();
     }
 
+    float startX = 0;
+    float startY = 0;
+
+    boolean changVolume;
+    boolean changBrightness;
+    boolean changProgress;
+
     @Override
     public boolean onTouchEvent(MotionEvent ev) {
         final int action = ev.getAction();
+
         switch (action & MotionEventCompat.ACTION_MASK) {
             case MotionEvent.ACTION_DOWN: {
+                startX = ev.getX();
+                startY = ev.getY();
+
+                changVolume = inRangeOfView(mVolume, ev);
+                changBrightness = inRangeOfView(mBrightness, ev);
+                changProgress = inRangeOfView(mProgressController, ev);
+
                 break;
             }
             case MotionEvent.ACTION_MOVE: {
+                float moveX = ev.getX();
+                float moveY = ev.getY();
+                float dX = moveX - startX;
+                float dY = moveY - startY;
+
+                if (changVolume && Math.abs(dX) < Math.abs(dY)) {
+                    changVolume(-dY, mVolume.getHeight());
+                } else if (changBrightness && Math.abs(dX) < Math.abs(dY)) {
+                    changBrightness(-dY, mBrightness.getHeight());
+                } else if (changProgress && Math.abs(dX) > Math.abs(dY)) {
+
+                }
+//                startX = moveX;
+//                startY = moveY;
                 break;
             }
             case MotionEvent.ACTION_UP: {
@@ -545,6 +583,8 @@ public class InteractiveVideoActivity extends AppCompatActivity {
                 } else if (videoTop.getVisibility() == View.VISIBLE) {
                     showMenu(videoTop.getVisibility() == View.INVISIBLE);
                 }
+                currentVolume = -1;
+                currentBrightness = -1F;
                 break;
             }
         }
@@ -579,6 +619,49 @@ public class InteractiveVideoActivity extends AppCompatActivity {
         } else {
             return String.format("%02d:%02d", minutes, seconds);
         }
+    }
+
+    private int currentVolume = -1;
+
+    public void changVolume(float yDilta, int heightPixels) {
+        AudioManager audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+        //当前音量
+        if (currentVolume == -1) {
+            currentVolume = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
+        }
+        //获取最大音量
+        int streamMaxVolume = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
+        //计算音量的改变量
+        float changeVolume = (yDilta / heightPixels) * streamMaxVolume;
+        //改变后的音量
+        int changeStreamVolume = (int) (currentVolume + changeVolume);
+        if (changeStreamVolume <= 0) {
+            changeStreamVolume = 0;
+        } else if (changeStreamVolume > streamMaxVolume) {
+            changeStreamVolume = streamMaxVolume;
+        }
+        //将改变后的音量设置给系统
+        audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, changeStreamVolume, AudioManager.FLAG_SHOW_UI);
+    }
+
+    private float currentBrightness = -1F;
+
+    public void changBrightness(float yDilta, int heightPixels) {
+        //Android系统的亮度值是0~255,但是screenBrightness是一个0.0~1.0之间的float类型的参数
+        float brightness = yDilta / heightPixels;
+        WindowManager.LayoutParams lp = getWindow().getAttributes();
+        //获取界面当前的亮度
+        if (currentBrightness == -1) {
+            currentBrightness = lp.screenBrightness;
+        }
+        float changeBrightness = currentBrightness + brightness;
+        if (changeBrightness <= 0) {
+            changeBrightness= 0;
+        } else if (changeBrightness > 1F) {
+            changeBrightness = 1F;
+        }
+        lp.screenBrightness = changeBrightness;
+        getWindow().setAttributes(lp);
     }
 
 

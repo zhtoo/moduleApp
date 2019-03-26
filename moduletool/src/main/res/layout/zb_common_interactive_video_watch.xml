@@ -1,9 +1,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <RelativeLayout
+    <FrameLayout
         android:id="@+id/video_content"
         android:layout_width="match_parent"
         android:layout_height="200dp"
@@ -14,13 +15,15 @@
             android:id="@+id/video_view"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_centerInParent="true" />
+            android:layout_centerInParent="true"
+            android:layout_gravity="center" />
 
         <!-- 背景页面，防止透明 -->
         <View
             android:id="@+id/bg_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_gravity="center"
             android:background="@android:color/black" />
 
         <!-- 加载等待页面 -->
@@ -29,6 +32,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
+            android:layout_gravity="center"
             android:gravity="center"
             android:orientation="vertical">
 
@@ -52,6 +56,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
+            android:layout_gravity="center"
             android:gravity="center"
             android:orientation="vertical"
             android:visibility="invisible">
@@ -70,11 +75,39 @@
                 android:textSize="15sp" />
         </LinearLayout>
 
+        <!-- 重播 -->
+        <LinearLayout
+            android:id="@+id/video_replay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="gone"
+            tools:visibility="gone">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/zb_video_replay" />
+
+            <TextView
+                android:id="@+id/video_replay_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="重播"
+                android:textColor="#C2C2C2"
+                android:textSize="15sp" />
+        </LinearLayout>
+
         <!-- 播放器-头部 -->
         <LinearLayout
             android:id="@+id/video_top"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
+            android:layout_gravity="top"
             android:background="#7f000000"
             android:gravity="center_vertical"
             android:orientation="horizontal">
@@ -105,8 +138,9 @@
         <LinearLayout
             android:id="@+id/video_bottom"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:layout_alignParentBottom="true"
+            android:layout_gravity="bottom"
             android:background="#7f000000"
             android:gravity="center_vertical"
             android:orientation="horizontal">
@@ -118,7 +152,6 @@
                 android:layout_marginLeft="10dp"
                 android:padding="10dp"
                 android:src="@drawable/zb_video_pause" />
-
 
             <TextView
                 android:id="@+id/video_time"
@@ -163,25 +196,45 @@
 
         </LinearLayout>
 
-    </RelativeLayout>
 
+        <!--音量/亮度控制区域-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="center"
+            android:background="#00000000"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <View
+                android:id="@+id/video_Lightness"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+            <View
+                android:id="@+id/video_Volume"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/video_progress_controller"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="40dp"
+            android:layout_marginBottom="40dp" />
+
+    </FrameLayout>
 
     <FrameLayout
         android:id="@+id/internal_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:background="#70E9F2"/>
-
-    <TextView
-        android:id="@+id/text_remind"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:paddingLeft="15dp"
-        android:gravity="center_vertical"
-        android:text="分享一下上课感受吧"
-
-        />
-
+        android:background="#70E9F2" />
 
 </LinearLayout>
