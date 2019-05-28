@@ -10,8 +10,6 @@ import java.lang.reflect.Method;
  */
 public class NotchInScreen {
 
-
-
     //是否是凹型屏
     public static final int HAS_Feature_SUPPORT = 0x00000020;
     //是否有圆角
@@ -35,9 +33,7 @@ public class NotchInScreen {
         } finally {
             return hasNotch;
         }
-
     }
-
 
     public static String get(String key) {
         String value = "";
@@ -62,8 +58,5 @@ public class NotchInScreen {
         }
         return value;
     }
-
-
-
 
 }

@@ -125,6 +125,9 @@ public class InteractiveVideoActivity extends AppCompatActivity {
     private View mBrightness;
     private View mVolume;
     private View mProgressController;
+    private ImageView mReplay;
+    private TextView mReplayText;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -205,6 +208,8 @@ public class InteractiveVideoActivity extends AppCompatActivity {
         videoScreenOrientation = (ImageView) findViewById(R.id.video_screen_orientation);
         loading = findViewById(R.id.loading_view_image);
 
+        mReplay = findViewById(R.id.replay_icon);
+        mReplayText = findViewById(R.id.video_replay_text);
         mBrightness = findViewById(R.id.video_Lightness);
         mVolume = findViewById(R.id.video_Volume);
         mProgressController = findViewById(R.id.video_progress_controller);

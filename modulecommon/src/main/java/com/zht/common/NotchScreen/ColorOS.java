@@ -21,7 +21,6 @@ public class ColorOS {
         return context.getPackageManager().hasSystemFeature("com.oppo.feature.screen.heteromorphism");
     }
 
-
     /**
      * 具体返回格式是 [378,0:702,80]   什么意思？？？
      * 凹型屏的刘海部分看作是一个矩形。[378,0:702,80] 就代表它的左上角和右下角的坐标。值得注意的是
@@ -47,6 +46,5 @@ public class ColorOS {
             return mNotchSize;
         }
     }
-
 
 }

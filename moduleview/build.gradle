@@ -1,6 +1,6 @@
-if(!isModuleView.toBoolean()){
+if (!isModuleView.toBoolean()) {
     apply plugin: 'com.android.library'
-}else {
+} else {
     apply plugin: 'com.android.application'
 }
 
@@ -30,11 +30,11 @@ android {
         }
     }
 
-    sourceSets{
-        main{
-            if(isModuleView.toBoolean()){
+    sourceSets {
+        main {
+            if (isModuleView.toBoolean()) {
                 manifest.srcFile("src/main/moduleManifest/AndroidManifest.xml")
-            }else{
+            } else {
                 manifest.srcFile("src/main/AndroidManifest.xml")
             }
             //集成开发模式下排除debug文件夹中的所有Java文件
@@ -58,11 +58,10 @@ android {
     }
 
 
-
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     //依赖库导入
     implementation project(':modulecommon')
     //ARouter路由
@@ -71,4 +70,8 @@ dependencies {
     annotationProcessor 'com.contrarywind:Android-PickerView:4.1.6'
     //ConstraintLayout的引用
     annotationProcessor 'com.android.support.constraint:constraint-layout:1.1.2'
+    implementation files('libs/pinyin4j-2.5.0.jar')
+    //图片查阅框架
+//    implementation 'com.github.chrisbanes:PhotoView:2.0.0'
+    implementation 'com.github.chrisbanes:PhotoView:2.0.0'
 }

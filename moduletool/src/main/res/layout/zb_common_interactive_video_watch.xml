@@ -28,6 +28,7 @@
 
         <!-- 加载等待页面 -->
         <LinearLayout
+            android:visibility="gone"
             android:id="@+id/loading_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -85,19 +86,20 @@
             android:gravity="center"
             android:orientation="vertical"
             android:visibility="gone"
-            tools:visibility="gone">
+            tools:visibility="visible">
 
             <ImageView
+                android:id="@+id/replay_icon"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:src="@drawable/zb_video_replay" />
+                android:src="@drawable/icon_volume" />
 
             <TextView
                 android:id="@+id/video_replay_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:text="重播"
+                android:text="30%"
                 android:textColor="#C2C2C2"
                 android:textSize="15sp" />
         </LinearLayout>

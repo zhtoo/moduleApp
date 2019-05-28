@@ -30,15 +30,12 @@ public class MIUI {
             paramTypes[0] = String.class;
             paramTypes[1] = int.class;
             Method getInt = SystemProperties.getMethod("getInt", paramTypes);
-
 //            Method repay2 = SystemProperties.getMethod("getInt", String.class,int.class);//得到方法对象,有参的方法需要指定参数类型
 //            repay2.invoke(SystemProperties,"ro.miui.notch",0);//执行还钱方法，有参传参
-
             Object[] params = new Object[2];
             params[0] = new String("ro.miui.notch");
             params[1] = new Integer(0);
             int notch = (Integer) getInt.invoke(SystemProperties, params);
-
             hasNotch = (notch == 1);
         } catch (Exception e) {
             e.printStackTrace();
@@ -77,7 +74,6 @@ public class MIUI {
         return result;
     }
 
-
     /**
      * 「隐藏屏幕刘海」是否开启了
      *
@@ -92,6 +88,5 @@ public class MIUI {
         }
         return isHide;
     }
-
 
 }

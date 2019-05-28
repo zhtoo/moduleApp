@@ -13,7 +13,6 @@ public class FuntouchOS {
     //是否有圆角
     public static final int HAS_FILLET = 0x00000008;
 
-
     /**
      * 是否有刘海屏
      *

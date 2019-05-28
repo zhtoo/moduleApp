@@ -2,11 +2,9 @@ package com.zht.moduletool.sample;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.bumptech.glide.Glide;
 import com.zht.common.StatusBar.StatusBar;
 import com.zht.common.StatusBar.StatusBarBuilder;
 import com.zht.common.base.BaseActivity;
@@ -36,7 +34,10 @@ public class StatusBarActivity extends BaseActivity implements View.OnClickListe
         findViewById(R.id.m_full_screen).setOnClickListener(this);
          StatusBarBuilder.with(this).build();
 
-        Glide.with(this).asGif().into(new ImageView(this));
+//        Glide.with(this)
+//                .asGif()
+//                .l
+//                .into(new ImageView(this));
 
     }
 

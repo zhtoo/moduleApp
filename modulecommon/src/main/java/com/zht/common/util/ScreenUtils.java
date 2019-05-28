@@ -22,17 +22,11 @@ public class ScreenUtils {
      * 返回包括虚拟键在内的总的屏幕高度
      * 即使虚拟按键显示着，也会加上虚拟按键的高度
      */
-
-
-
     public static int getTotalScreenHeight(Activity activity) {
         DisplayMetrics displayMetrics = new DisplayMetrics();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
             activity.getWindowManager().getDefaultDisplay().getRealMetrics(displayMetrics);
         }
-
-
-
         return displayMetrics.heightPixels;
     }
 
@@ -114,14 +108,14 @@ public class ScreenUtils {
         Point point = new Point();
         activity.getWindowManager().getDefaultDisplay().getSize(point);
         Log.e("TAG", "the screen size is " + point.toString());
-        //获取正确尺寸 （此方法要求最低api为17，即安卓4.2，4.2之前获取请参看以下获取屏幕尺寸的方法）
+        //获取正确尺寸 （此方法要求最低api为17，
+        // 即安卓4.2，4.2之前获取请参看以下获取屏幕尺寸的方法）
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
             activity.getWindowManager().getDefaultDisplay().getRealSize(point);
             Log.e("TAG", "the screen real size is " + point.toString());
         }
         return point;
     }
-
 
     /**
      * 获取屏幕宽高尺寸，单位英寸
@@ -151,11 +145,8 @@ public class ScreenUtils {
                 realWidth = metrics.widthPixels;
                 realHeight = metrics.heightPixels;
             }
-
             point.x = (float) formatDouble((realWidth / metrics.xdpi),1);
             point.y = (float) formatDouble((realHeight / metrics.ydpi),1);
-
-
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -182,6 +173,5 @@ public class ScreenUtils {
         BigDecimal bd = new BigDecimal(d);
         return bd.setScale(newScale, BigDecimal.ROUND_HALF_UP).doubleValue();
     }
-
 
 }

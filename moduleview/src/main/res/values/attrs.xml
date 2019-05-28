@@ -36,4 +36,14 @@
         </attr>
     </declare-styleable>
 
+    <declare-styleable name="HotTagView">
+        <attr name="backgroundColor" format="color"/>
+        <attr name="textColor" format="color"/>
+        <attr name="textSize" format="dimension"/>
+        <attr name="circleRadius" format="dimension"/>
+        <attr name="maxWidth" format="dimension"/>
+        <attr name="text" format="string"/>
+    </declare-styleable>
+
+
 </resources>

@@ -61,6 +61,12 @@ public class CustomiseViewActivity extends BaseActivity {
         activitys = new ArrayList<>();
         list.add("日历");
         activitys.add("/moduleview/activity/CalendarActivity");
+        list.add("验证码输入框");
+        activitys.add("/moduleview/activity/VerifyCodeEditActivity");
+        list.add("索引");
+        activitys.add("/moduleview/activity/QuickIndexActivity");
+        list.add("上下滑动改变View高度");
+        activitys.add("/moduleview/activity/DragActivity");
 
         adapter.updata(list);
     }

@@ -1,61 +1,31 @@
 package com.zht.common;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.text.DecimalFormat;
 
 public class TestJavaCode {
 
     public static void main(String[] args) {
 
-//        try {
-//            URL url = new URL("https://github.com/appium/appium-desktop/releases/download/v1.11.0/appium-desktop-setup-1.11.0.exe");
-//            HttpURLConnection connection =
-//                    (HttpURLConnection) url.openConnection();
-//            connection.setConnectTimeout(5 * 1000);
-//            connection.setDoOutput(true);
-//            connection.setDoInput(true);
-//            connection.setUseCaches(false);
-//            connection.setRequestMethod("GET");
-//            connection.setRequestProperty("Content-Type", "application/octet-stream");
-//            connection.setRequestProperty("Connection", "Keep-Alive");// 维持长连接
-//            connection.setRequestProperty("Charset", "UTF-8");
-//            connection.connect();
-//            InputStream inputStream = connection.getInputStream();
-//            byte[] data = new byte[1024];
-//            File file = new File("C:/Users/user/Desktop" + "/appium-desktop-setup-1.11.0.exe");
-//            FileOutputStream fileOut = new FileOutputStream(file);
-//            int length = 0;
-//            int totalLength = 0;
-//            int progress = 0;
-//            int available =connection.getContentLength();
-//            while ((length = inputStream.read(data)) != -1) {
-//                fileOut.write(data);
-//                totalLength += length;
-//                int Cprogress = (totalLength * 100 / available);
-//                if (progress != Cprogress && Cprogress > 0) {
-//                    System.out.println("进度：" + progress);
-//                    progress = Cprogress;
-//                }
-//            }
-//            inputStream.close();
-//            fileOut.close();
-//            connection.disconnect();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
+//        dowloadFile();
 
 
 
-        int year = 5;
-        double r = 0.03;
+//        int year = 5;
+        double r = 0.033;
         int money = 22000;
-        double totalMoney = 140000;
-        for (int i = 0; i < year * 12; i++) {
+        double totalMoney = 170000;
+        for (int i = 0; i < 8; i++) {
             System.out.print("第" + "\t" + (i / 12 + 1) + "年：");
             System.out.print("\t" + (i % 12 + 1) + "个月：");
             int interest = (int) (100 * totalMoney * r * 30 / 365 );
             double interestD = interest / 100D;
             System.out.print("\t利息：" + interestD);
-            totalMoney += (money + interestD - 6000);
+            totalMoney += (money /*+ interestD*/ - 6000);
             DecimalFormat fnum = new DecimalFormat("##0.00");
             String dd = fnum.format(((int) totalMoney*100 / 10000)/100D);
             System.out.print("\t 剩余总额：" + dd + "W\n");
@@ -70,6 +40,51 @@ public class TestJavaCode {
             System.out.print("\t 剩余总额：" + ((int) totalMoney / 10000) + "W\n");
         }*/
 
+    }
+
+    private static void dowloadFile() {
+        try {
+            URL url = new URL("https://codeload.github.com/zhtoo/zhangLib/zip/master");
+            HttpURLConnection connection =
+                    (HttpURLConnection) url.openConnection();
+            connection.setConnectTimeout(5 * 1000);
+            connection.setDoOutput(true);
+            connection.setDoInput(true);
+            connection.setUseCaches(false);
+            connection.setRequestMethod("GET");
+            connection.setRequestProperty("Content-Type", "application/octet-stream");
+            connection.setRequestProperty("Connection", "Keep-Alive");// 维持长连接
+            connection.setRequestProperty("Charset", "UTF-8");
+            connection.connect();
+            InputStream inputStream = connection.getInputStream();
+            byte[] data = new byte[1024];
+            File file = new File("C:/Users/user/Desktop" + "/zhangLib.zip");
+            FileOutputStream fileOut = new FileOutputStream(file);
+            int length = 0;
+            int totalLength = 0;
+            int progress = 0;
+            int available =connection.getContentLength();
+            while ((length = inputStream.read(data)) != -1) {
+                fileOut.write(data);
+                totalLength += length;
+                System.out.println(totalLength);
+            }
+            inputStream.close();
+            fileOut.close();
+            connection.disconnect();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static String get(long args) {
+
+
+        long G = args/(1024*1024*1024) ;
+        long M = args%(1024*1024*1024)/(1024*1024)  ;
+        long kb = args%(1024*1024*1024)%(1024*1024)/1024 ;
+
+        return G+"G"+M+"M"+ kb+"kb";
     }
 
 

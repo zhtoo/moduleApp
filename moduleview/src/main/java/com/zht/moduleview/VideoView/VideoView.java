@@ -44,18 +44,24 @@ public class VideoView extends SurfaceView {
 
         public static final int ALL_POINTER_IDS = -1; // all ones
 
-        // The touched child view.
+        // 触摸的子View
         public View child;
 
-        // The combined bit mask of pointer ids for all pointers captured by the target.
+        // 指针捕获的指针ID的组合位掩码，用于捕获的所有指针。
         public int pointerIdBits;
 
-        // The next target in the target list.
+        // TouchTarget列表中的下一个TouchTarget。
         public TouchTarget next;
 
         private TouchTarget() {
         }
 
+        /**
+         * 获取一个TouchTarget
+         * @param child
+         * @param pointerIdBits
+         * @return
+         */
         public static TouchTarget obtain(@NonNull View child, int pointerIdBits) {
             if (child == null) {
                 throw new IllegalArgumentException("child must be non-null");
@@ -77,6 +83,9 @@ public class VideoView extends SurfaceView {
             return target;
         }
 
+        /**
+         * 回收
+         */
         public void recycle() {
             if (child == null) {
                 throw new IllegalStateException("already recycled once");
@@ -93,6 +102,27 @@ public class VideoView extends SurfaceView {
                 child = null;
             }
         }
+    }
+    /**
+     *  这里需要结合obtain进行分析。
+     *  TouchTarget.obtain后
+     *  创建target，此时sRecycleBin为空
+     *
+     *
+     */
+
+
+    /**
+     * 将指定子项的触摸目标添加到列表（mFirstTouchTarget）的开头。确定目标子项尚不存在。
+     */
+    private TouchTarget addTouchTarget(@NonNull View child, int pointerIdBits) {
+        //创建TouchTarget
+        final TouchTarget target = TouchTarget.obtain(child, pointerIdBits);
+        //将ViewGroup的mFirstTouchTarget设置为target的next中，
+        //然后将mFirstTouchTarget设置为target
+        target.next = mFirstTouchTarget;
+        mFirstTouchTarget = target;
+        return target;
     }
 
 
@@ -112,7 +142,7 @@ public class VideoView extends SurfaceView {
     }
 
     /**
-     * Cancels and clears all touch targets.
+     * 取消并清除所有TouchTarget。
      */
     private void cancelAndClearTouchTargets(MotionEvent event) {
         if (mFirstTouchTarget != null) {
@@ -138,8 +168,7 @@ public class VideoView extends SurfaceView {
     }
 
     /**
-     * Gets the touch target for specified child view.
-     * Returns null if not found.
+     * 获取指定子视图的TouchTarget。
      */
     private TouchTarget getTouchTarget(@NonNull View child) {
         for (TouchTarget target = mFirstTouchTarget; target != null; target = target.next) {
@@ -150,19 +179,9 @@ public class VideoView extends SurfaceView {
         return null;
     }
 
-    /**
-     * Adds a touch target for specified child to the beginning of the list.
-     * Assumes the target child is not already present.
-     */
-    private TouchTarget addTouchTarget(@NonNull View child, int pointerIdBits) {
-        final TouchTarget target = TouchTarget.obtain(child, pointerIdBits);
-        target.next = mFirstTouchTarget;
-        mFirstTouchTarget = target;
-        return target;
-    }
 
     /**
-     * Removes the pointer ids from consideration.
+     * 从consideration中删除指针ID。
      */
     private void removePointersFromTouchTargets(int pointerIdBits) {
         TouchTarget predecessor = null;
