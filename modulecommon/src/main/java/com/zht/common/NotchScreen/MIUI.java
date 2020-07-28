@@ -18,7 +18,7 @@ public class MIUI {
      * @param context
      * @return
      */
-    public static boolean hasNotchInScreen(Context context) {
+    public static boolean hasNotchScreen(Context context) {
         boolean hasNotch = false;
         try {
             ClassLoader cl = context.getClassLoader();
@@ -42,6 +42,13 @@ public class MIUI {
         } finally {
             return hasNotch;
         }
+    }
+
+    public static int[] getNotchSize(Context context) {
+        int[] mNotchSize = new int[]{0, 0};
+        mNotchSize[0] = getNotchScreenWidth(context);
+        mNotchSize[1] = getNotchScreenHeight(context);
+        return mNotchSize;
     }
 
     /**

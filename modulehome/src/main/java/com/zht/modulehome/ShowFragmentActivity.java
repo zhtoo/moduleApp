@@ -1,15 +1,14 @@
 package com.zht.modulehome;
 
+
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.view.View;
+
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.zht.common.base.BaseActivity;
-
-import butterknife.OnClick;
-
 
 public class ShowFragmentActivity extends BaseActivity {
 

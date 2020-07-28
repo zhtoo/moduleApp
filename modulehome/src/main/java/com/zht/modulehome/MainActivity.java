@@ -1,9 +1,11 @@
 package com.zht.modulehome;
 
+
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
+
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.zht.common.base.BaseActivity;
@@ -30,6 +32,7 @@ public class MainActivity extends BaseActivity {
                 .navigation();
         //获取到FragmentManager，在V4包中通过getSupportFragmentManager，
         //在系统中原生的Fragment是通过getFragmentManager获得的。
+
         fragmentManager = getSupportFragmentManager();
         //开启一个事务，通过调用beginTransaction方法开启。
         fragmentTransaction = fragmentManager.beginTransaction();
@@ -37,4 +40,6 @@ public class MainActivity extends BaseActivity {
         fragmentTransaction.add(R.id.m_container, homeFragment,"toolsFragment");
         fragmentTransaction.commit();
     }
+
+
 }

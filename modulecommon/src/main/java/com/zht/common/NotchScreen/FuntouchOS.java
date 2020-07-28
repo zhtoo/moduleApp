@@ -1,5 +1,8 @@
 package com.zht.common.NotchScreen;
 
+import android.content.Context;
+import android.util.TypedValue;
+
 import java.lang.reflect.Method;
 
 /**
@@ -18,12 +21,12 @@ public class FuntouchOS {
      *
      * @return
      */
-    public static boolean hasNotchInScreen() {
+    public static boolean hasNotchScreen() {
         return isFeatureSupport(HAS_Feature_SUPPORT);
     }
 
     /**
-     * 是否有刘海屏
+     * 是否有圆角
      *
      * @return
      */
@@ -48,6 +51,18 @@ public class FuntouchOS {
         } finally {
             return hasNotch;
         }
+    }
+
+
+    public static int[] getNotchSize(Context context) {
+        int[] mNotchSize = new int[]{0, 0};
+        mNotchSize[0] =(int) TypedValue
+                .applyDimension(TypedValue.COMPLEX_UNIT_DIP,100,
+                context.getResources().getDisplayMetrics());
+        mNotchSize[1] = (int) TypedValue
+                .applyDimension(TypedValue.COMPLEX_UNIT_DIP,27,
+                context.getResources().getDisplayMetrics());;
+        return mNotchSize;
     }
 
 }

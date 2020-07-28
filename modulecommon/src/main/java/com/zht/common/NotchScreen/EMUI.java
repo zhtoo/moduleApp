@@ -18,7 +18,7 @@ public class EMUI {
      * @param context
      * @return
      */
-    public static boolean hasNotchInScreen(Context context) {
+    public static boolean hasNotchScreen(Context context) {
         boolean hasNotch = false;
         try {
             ClassLoader cl = context.getClassLoader();

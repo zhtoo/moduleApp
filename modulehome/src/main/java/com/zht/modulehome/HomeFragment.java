@@ -1,11 +1,11 @@
 package com.zht.modulehome;
 
-import android.content.Context;
+import android.Manifest;
 import android.content.Intent;
-import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -14,9 +14,9 @@ import android.widget.Toast;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.zht.common.OpenFileBySystem;
+import com.zht.common.base.BaseActivity;
 import com.zht.common.base.BaseFragment;
-
-import java.net.URISyntaxException;
+import com.zht.common.listener.PermissionCallBack;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -27,6 +27,11 @@ import static android.app.Activity.RESULT_OK;
 public class HomeFragment extends BaseFragment implements View.OnClickListener {
 
     private EditText editText;
+
+    private static final int FILE_SELECT_CODE = 100;
+    private static final int REQUEST_READ_EXTERNAL_STORAGE = 101;
+
+    private static final String TAG = "ChooseFile";
 
     @Override
     protected int getLayoutId() {
@@ -71,11 +76,26 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
             String s = editText.getText().toString();
             OpenFileBySystem.openFileByPath(getContext(), s);
         } else if (view.getId() == R.id.bt_home_get_file_path) {
-            showFileChooser();
+            if (getActivity() != null && getActivity() instanceof BaseActivity) {
+                ((BaseActivity) getActivity()).requestPermissions(
+                        new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+                        REQUEST_READ_EXTERNAL_STORAGE,
+                        new PermissionCallBack() {
+                            @Override
+                            public void granted() {
+                                showFileChooser();
+                            }
+
+                            @Override
+                            public void denied() {
+                                Toast.makeText(getContext(), "无权限访问相应文件.", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+
+                );
+            }
         }
     }
-
-    public static final int FILE_SELECT_CODE = 100;
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -84,20 +104,17 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
                 if (resultCode == RESULT_OK) {
                     // Get the Uri of the selected file
                     Uri uri = data.getData();
-                    Log.d(TAG, "File Uri: " + uri.toString());
+                    Log.e(TAG, "File Uri: " + uri.toString());
                     // Get the path
-                    String path = null;
-                    try {
-                        path = getPath(getContext(), uri);
-                    } catch (URISyntaxException e) {
-                        e.printStackTrace();
+                    String path = UriUtils.getPath(getContext(), uri);
+                    // Show the path into EditText
+                    if (!TextUtils.isEmpty(path)) {
+                        Log.e(TAG, "File Path: " + path);
+                        editText.setText(path);
+                    } else {
+                        editText.setText("");
+                        Log.e(TAG, "File Path is null ");
                     }
-                    editText.setText(path);
-
-                    Log.d(TAG, "File Path: " + path);
-                    // Get the file instance
-                    // File file = new File(path);
-                    // Initiate the upload
                 }
                 break;
         }
@@ -115,28 +132,5 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
             Toast.makeText(getContext(), "Please install a File Manager.", Toast.LENGTH_SHORT).show();
         }
     }
-
-    private static final String TAG = "ChooseFile";
-
-
-    public static String getPath(Context context, Uri uri) throws URISyntaxException {
-        if ("content".equalsIgnoreCase(uri.getScheme())) {
-            String[] projection = {"_data"};
-            Cursor cursor = null;
-            try {
-                cursor = context.getContentResolver().query(uri, projection, null, null, null);
-                int column_index = cursor.getColumnIndexOrThrow("_data");
-                if (cursor.moveToFirst()) {
-                    return cursor.getString(column_index);
-                }
-            } catch (Exception e) {
-                // Eat it  Or Log it.
-            }
-        } else if ("file".equalsIgnoreCase(uri.getScheme())) {
-            return uri.getPath();
-        }
-        return null;
-    }
-
 
 }

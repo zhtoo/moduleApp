@@ -1,9 +1,10 @@
 package com.zht.moduleview.PagerIndicator;
 
 import android.content.Context;
-import android.support.v4.view.PagerAdapter;
 import android.util.AttributeSet;
 import android.view.View;
+
+import androidx.viewpager.widget.PagerAdapter;
 
 /**
  * @author KCrason

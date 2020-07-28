@@ -1,7 +1,8 @@
 package com.zht.common.StatusBar;
 
-import android.app.Activity;
-import android.support.annotation.ColorInt;
+import androidx.annotation.ColorInt;
+import androidx.appcompat.app.AppCompatActivity;
+
 
 /**
  * Created by ZhangHaitao on 2018/11/8.
@@ -12,7 +13,7 @@ public class StatusBarBuilder {
 
     private static StatusBarManager mStatusBarManager;
 
-    public static StatusBarManager with(Activity activity) {
+    public static StatusBarManager with(AppCompatActivity activity) {
         if (mStatusBarManager == null) {
             mStatusBarManager = new StatusBarManager();
         }

@@ -1,12 +1,13 @@
 package com.zht.common.StatusBar;
 
-import android.app.Activity;
 import android.os.Build;
-import android.support.annotation.ColorInt;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+
+import androidx.annotation.ColorInt;
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -33,7 +34,7 @@ public class StatusBar {
      * 3、是否全屏
      * 4、设置字体颜色
      */
-    public static void setStatusBar(Activity activity, int statusBarColor, int type) {
+    public static void setStatusBar(AppCompatActivity activity, int statusBarColor, int type) {
         if (type == NO_STATUS_BAR) {
             setStatusBarVisibility(activity, false);
             return;
@@ -47,7 +48,7 @@ public class StatusBar {
      * @param activity
      * @param isVisibility
      */
-    public static void setStatusBarVisibility(Activity activity, boolean isVisibility) {
+    public static void setStatusBarVisibility(AppCompatActivity activity, boolean isVisibility) {
         if (isVisibility) {
             activity.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN); //显示状态栏
         } else {
@@ -67,7 +68,7 @@ public class StatusBar {
      * @param activity
      * @param isFullScreen
      */
-    public static void setFullScreen(Activity activity, boolean isFullScreen) {
+    public static void setFullScreen(AppCompatActivity activity, boolean isFullScreen) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {//5.0+
             StatusBarLollipop.setFullScreen(activity, isFullScreen);
         } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {//4.4
@@ -83,7 +84,7 @@ public class StatusBar {
      * @param activity
      * @param statusColor
      */
-    public static void setStatusBarColor(Activity activity, @ColorInt int statusColor) {
+    public static void setStatusBarColor(AppCompatActivity activity, @ColorInt int statusColor) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {//5.0+
             StatusBarLollipop.setStatusBarColor(activity, statusColor);
         } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {//4.4
@@ -100,7 +101,7 @@ public class StatusBar {
      * @param activity
      * @param darkmode
      */
-    public static void setStatusBarLight(Activity activity, boolean darkmode) {
+    public static void setStatusBarLight(AppCompatActivity activity, boolean darkmode) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             //Android系统设6.0+ 态栏字体颜色 黑体/白色
             int visibility = darkmode ?
@@ -123,7 +124,7 @@ public class StatusBar {
      * MIUI的修改状态栏字体颜色,MIUI6.0以上
      * https://dev.mi.com/console/doc/detail?pId=1159
      */
-    static boolean MIUISetStatusBarLightMode(Activity activity, boolean darkmode) {
+    static boolean MIUISetStatusBarLightMode(AppCompatActivity activity, boolean darkmode) {
         try {
             Class<?> layoutParams = Class.forName("android.view.MiuiWindowManager$LayoutParams");
 
@@ -148,7 +149,7 @@ public class StatusBar {
     /**
      * Flyme的修改状态栏字体颜色，Flyme4.0以上
      */
-    static boolean FlymeSetStatusBarLightMode(Activity activity, boolean darkmode) {
+    static boolean FlymeSetStatusBarLightMode(AppCompatActivity activity, boolean darkmode) {
         try {
             WindowManager.LayoutParams lp = activity.getWindow().getAttributes();
             Field darkFlag = WindowManager.LayoutParams.class

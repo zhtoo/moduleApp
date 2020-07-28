@@ -1,7 +1,6 @@
 package com.zht.common.StatusBar;
 
 import android.annotation.TargetApi;
-import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
@@ -12,6 +11,8 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.zht.common.R;
 
@@ -33,7 +34,7 @@ public class StatusBarKitKat {
      * @param activity
      * @param isVisibility
      */
-    public static void setStatusBarVisibility(Activity activity, boolean isVisibility) {
+    public static void setStatusBarVisibility(AppCompatActivity activity, boolean isVisibility) {
         Window window = activity.getWindow();
         //设置Window为透明
         window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
@@ -73,7 +74,7 @@ public class StatusBarKitKat {
      * @param activity
      * @param isFullScreen
      */
-    public static void setFullScreen(Activity activity, boolean isFullScreen) {
+    public static void setFullScreen(AppCompatActivity activity, boolean isFullScreen) {
         Window window = activity.getWindow();
         //设置Window为透明
         window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
@@ -94,7 +95,7 @@ public class StatusBarKitKat {
      * @param activity
      * @param statusColor
      */
-    static void setStatusBarColor(Activity activity, int statusColor) {
+    static void setStatusBarColor(AppCompatActivity activity, int statusColor) {
         Window window = activity.getWindow();
         //设置Window为全透明
         window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);

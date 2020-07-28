@@ -2,12 +2,13 @@ package com.zht.moduleview.calendarview;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.support.design.widget.CoordinatorLayout;
-import android.support.v4.view.ViewCompat;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewConfiguration;
 import android.widget.Scroller;
+
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.core.view.ViewCompat;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.zht.moduleview.calendarview.model.CalendarDate;
 import com.zht.moduleview.calendarview.view.MonthPager;

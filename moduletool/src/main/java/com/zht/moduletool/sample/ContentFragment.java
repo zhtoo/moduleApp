@@ -1,6 +1,7 @@
 package com.zht.moduletool.sample;
 
-import android.support.v4.app.Fragment;
+
+import androidx.fragment.app.Fragment;
 
 /**
  * Created by ZhangHaitao on 2018/12/19

@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <com.github.chrisbanes.photoview.PhotoView
         android:id="@+id/image"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:scaleType="centerCrop"
         android:src="@drawable/icon_bg" />
@@ -25,7 +26,28 @@
             android:layout_gravity="bottom|center_horizontal"
             android:background="@drawable/drag_bg"
             android:scaleType="centerInside"
-            android:src="@drawable/drag_up" />
+            app:srcCompat="@drawable/drag_up" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="#FFFFFF"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="12dp"
+                android:text="判断题（5分）" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="1/6" />
+
+        </FrameLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -33,34 +55,22 @@
             android:background="#FFFFFF"
             android:orientation="vertical">
 
-            <RelativeLayout
+            <com.flyco.tablayout.SlidingTabLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/answer_sheet_tab"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:background="#FFFFFF"
-                android:orientation="horizontal">
+                android:layout_height="44dp"
+                app:tl_indicator_height="0dp"
+                app:tl_textBold="SELECT"
+                app:tl_textSelectColor="#FC4A5B"
+                app:tl_textUnselectColor="#444"
+                app:tl_textsize="16sp" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="12dp"
-                    android:text="判断题（5分）" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:text="1/6" />
-
-            </RelativeLayout>
-
-            <com.zht.moduleview.view.ColorFilterImageView
+            <androidx.viewpager.widget.ViewPager
+                android:background="#Fbb000"
+                android:id="@+id/answer_sheet_viewPager"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:scaleType="fitStart"
-                android:background="#FFF000"
-                android:src="@drawable/icon_bg_test" />
+                android:layout_height="wrap_content" />
+
 
         </LinearLayout>
 

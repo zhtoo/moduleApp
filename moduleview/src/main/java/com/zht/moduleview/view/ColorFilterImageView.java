@@ -9,10 +9,12 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
 
+import androidx.appcompat.widget.AppCompatImageView;
+
 /**
  * @Description:实现图像根据按下抬起动作变化颜色
  */
-public class ColorFilterImageView extends android.support.v7.widget.AppCompatImageView implements OnTouchListener {
+public class ColorFilterImageView extends AppCompatImageView implements OnTouchListener {
 
     public static final String TAG = "ColorFilterImageView";
 

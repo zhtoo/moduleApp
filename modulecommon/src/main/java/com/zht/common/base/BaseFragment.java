@@ -1,13 +1,12 @@
 package com.zht.common.base;
 
-import android.app.Activity;
-import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -15,14 +14,6 @@ import butterknife.Unbinder;
 
 public abstract class BaseFragment extends Fragment {
 
-    /**
-     * 上下文对象
-     */
-    protected Context mContext;
-    /**
-     * 所属activity
-     */
-    protected Activity mActivity;
     /**
      * ButterKnife
      */
@@ -41,8 +32,7 @@ public abstract class BaseFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         //注册butterknife
         mUnbinder = ButterKnife.bind(this,view);
-        mContext = getContext();
-        mActivity = (Activity) getContext();
+
         initView(view,savedInstanceState);
         initData();
     }

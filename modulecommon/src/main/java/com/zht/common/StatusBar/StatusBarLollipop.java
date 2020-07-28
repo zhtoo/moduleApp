@@ -1,13 +1,14 @@
 package com.zht.common.StatusBar;
 
 import android.annotation.TargetApi;
-import android.app.Activity;
 import android.os.Build;
-import android.support.v4.view.ViewCompat;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.ViewCompat;
 
 /**
  * @Date 2018/5/23 16:07
@@ -24,7 +25,7 @@ class StatusBarLollipop {
      * @param activity
      * @param isFullScreen
      */
-    public static void setFullScreen(Activity activity, boolean isFullScreen) {
+    public static void setFullScreen(AppCompatActivity activity, boolean isFullScreen) {
         Window window = activity.getWindow();
         if (isFullScreen) {//全屏
             //设置状态栏不可见
@@ -42,7 +43,7 @@ class StatusBarLollipop {
      * @param activity
      * @param statusColor
      */
-    public static void setStatusBarColor(Activity activity, int statusColor) {
+    public static void setStatusBarColor(AppCompatActivity activity, int statusColor) {
         Window window = activity.getWindow();
         //显示状态栏
         window.clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);

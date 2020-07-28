@@ -1,6 +1,6 @@
 package com.zht.common.StatusBar;
 
-import android.app.Activity;
+import androidx.appcompat.app.AppCompatActivity;
 
 /**
  * Created by ZhangHaitao on 2018/11/8.
@@ -18,7 +18,7 @@ public class StatusBarManager {
     //状态栏颜色
     private static int statusColor;
 
-    private static Activity mActivity;
+    private static AppCompatActivity mActivity;
 
 
     public static boolean isDontShowStatusBar() {
@@ -53,11 +53,11 @@ public class StatusBarManager {
         StatusBarManager.statusColor = statusColor;
     }
 
-    public static Activity getActivity() {
+    public static AppCompatActivity getActivity() {
         return mActivity;
     }
 
-    public static void setActivity(Activity mActivity) {
+    public static void setActivity(AppCompatActivity mActivity) {
         StatusBarManager.mActivity = mActivity;
     }
 

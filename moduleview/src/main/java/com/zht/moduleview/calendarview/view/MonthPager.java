@@ -1,11 +1,12 @@
 package com.zht.moduleview.calendarview.view;
 
 import android.content.Context;
-import android.support.design.widget.CoordinatorLayout;
-import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
+
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.viewpager.widget.ViewPager;
 
 import com.zht.moduleview.calendarview.behavior.MonthPagerBehavior;
 import com.zht.moduleview.calendarview.component.CalendarViewAdapter;

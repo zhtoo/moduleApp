@@ -1,8 +1,10 @@
 package com.zht.moduleview.activity.system;
 
-import android.support.annotation.NonNull;
-import android.support.v4.view.PagerAdapter;
+
 import android.view.View;
+
+import androidx.annotation.NonNull;
+import androidx.viewpager.widget.PagerAdapter;
 
 /**
  * Created by ZhangHaitao on 2019/3/7

@@ -1,8 +1,12 @@
 package com.zht.modulelibrary;
 
+
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.widget.FrameLayout;
+
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.zht.common.base.BaseActivity;
@@ -13,8 +17,8 @@ import com.zht.common.base.BaseActivity;
 public class MainActivity extends BaseActivity {
     private FrameLayout mContainer;
     private Fragment toolsFragment;
-    private android.support.v4.app.FragmentManager fragmentManager;
-    private android.support.v4.app.FragmentTransaction fragmentTransaction;
+    private FragmentManager fragmentManager;
+    private FragmentTransaction fragmentTransaction;
 
     @Override
     protected int getLayoutId() {

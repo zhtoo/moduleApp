@@ -5,18 +5,14 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.text.DecimalFormat;
 
 public class TestJavaCode {
 
     public static void main(String[] args) {
 
-//        dowloadFile();
 
-
-
-//        int year = 5;
-        double r = 0.033;
+       /* int year = 5;
+        double r = 0.030;
         int money = 22000;
         double totalMoney = 170000;
         for (int i = 0; i < 8; i++) {
@@ -25,11 +21,11 @@ public class TestJavaCode {
             int interest = (int) (100 * totalMoney * r * 30 / 365 );
             double interestD = interest / 100D;
             System.out.print("\t利息：" + interestD);
-            totalMoney += (money /*+ interestD*/ - 6000);
+            totalMoney += (money + interestD - 6000);
             DecimalFormat fnum = new DecimalFormat("##0.00");
             String dd = fnum.format(((int) totalMoney*100 / 10000)/100D);
             System.out.print("\t 剩余总额：" + dd + "W\n");
-        }
+        }*/
        /* for (int i = 0; i < year; i++) {
             System.out.print("第");
             System.out.print("\t" + (i % 12 + 1) + "年：");
@@ -63,7 +59,7 @@ public class TestJavaCode {
             int length = 0;
             int totalLength = 0;
             int progress = 0;
-            int available =connection.getContentLength();
+            int available = connection.getContentLength();
             while ((length = inputStream.read(data)) != -1) {
                 fileOut.write(data);
                 totalLength += length;
@@ -80,11 +76,11 @@ public class TestJavaCode {
     public static String get(long args) {
 
 
-        long G = args/(1024*1024*1024) ;
-        long M = args%(1024*1024*1024)/(1024*1024)  ;
-        long kb = args%(1024*1024*1024)%(1024*1024)/1024 ;
+        long G = args / (1024 * 1024 * 1024);
+        long M = args % (1024 * 1024 * 1024) / (1024 * 1024);
+        long kb = args % (1024 * 1024 * 1024) % (1024 * 1024) / 1024;
 
-        return G+"G"+M+"M"+ kb+"kb";
+        return G + "G" + M + "M" + kb + "kb";
     }
 
 

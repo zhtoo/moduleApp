@@ -1,4 +1,5 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/black">
@@ -54,7 +55,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/zb_video_errors" />
+            app:srcCompat="@drawable/zb_video_errors" />
 
         <TextView
             android:id="@+id/video_error_text"
@@ -79,7 +80,7 @@
             android:layout_height="40dp"
             android:onClick="back"
             android:padding="10dp"
-            android:src="@drawable/zb_video_back" />
+            app:srcCompat="@drawable/zb_video_back" />
 
         <TextView
             android:id="@+id/video_title"
@@ -113,7 +114,7 @@
             android:layout_marginLeft="10dp"
 
             android:padding="10dp"
-            android:src="@drawable/zb_video_pause" />
+            app:srcCompat="@drawable/zb_video_pause" />
 
         <SeekBar
             android:id="@+id/video_progress"
@@ -144,7 +145,7 @@
             android:layout_marginRight="15dp"
             android:scaleType="fitXY"
             android:padding="8dp"
-            android:src="@drawable/zb_video_horizontal" />
+            app:srcCompat="@drawable/zb_video_horizontal" />
 
     </LinearLayout>
 

@@ -1,8 +1,11 @@
 package com.zht.modulepersonal;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.widget.FrameLayout;
+
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.zht.common.base.BaseActivity;
@@ -14,8 +17,8 @@ public class MainActivity extends BaseActivity {
 
     private FrameLayout mContainer;
     private Fragment toolsFragment;
-    private android.support.v4.app.FragmentManager fragmentManager;
-    private android.support.v4.app.FragmentTransaction fragmentTransaction;
+    private FragmentManager fragmentManager;
+    private FragmentTransaction fragmentTransaction;
 
     @Override
     protected int getLayoutId() {
@@ -34,7 +37,7 @@ public class MainActivity extends BaseActivity {
         //开启一个事务，通过调用beginTransaction方法开启。
         fragmentTransaction = fragmentManager.beginTransaction();
         //向容器内加入Fragment，一般使用add或者replace方法实现，需要传入容器的id和Fragment的实例。
-        fragmentTransaction.add(R.id.m_container,toolsFragment,"toolsFragment");
+        fragmentTransaction.add(R.id.m_container, toolsFragment, "toolsFragment");
         fragmentTransaction.commit();
     }
 }

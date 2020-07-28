@@ -12,12 +12,12 @@ android {
         versionCode project.properties['versionCode'].toInteger()
         versionName project.properties['versionName']
 
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         //ARouter必须要配置的
         javaCompileOptions {
             annotationProcessorOptions {
-                arguments = [moduleName: project.getName()]
+                arguments = [AROUTER_MODULE_NAME: project.getName()]
             }
         }
 
@@ -58,6 +58,11 @@ android {
         }
     }
 
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
 }
 
 dependencies {
@@ -65,7 +70,7 @@ dependencies {
     //依赖库导入
     implementation project(':modulecommon')
     //ARouter路由
-    annotationProcessor 'com.alibaba:arouter-compiler:1.1.4'
+    annotationProcessor "com.alibaba:arouter-compiler:$rootProject.ext.arouterCompiler"
 
 
 }

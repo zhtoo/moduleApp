@@ -2,13 +2,14 @@ package com.zht.moduleview.VerifyCode;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.widget.EditText;
+
+import androidx.appcompat.widget.AppCompatEditText;
 
 /**
  * Created by ZhangHaitao on 2019/4/3
  */
 
-public class VerifyCodeEditText extends EditText {
+public class VerifyCodeEditText extends AppCompatEditText {
     public VerifyCodeEditText(Context context) {
         super(context);
     }

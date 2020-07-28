@@ -1,12 +1,13 @@
 package com.zht.common.util;
 
 import android.content.Context;
-import android.support.annotation.DrawableRes;
 import android.view.Gravity;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.DrawableRes;
 
 import com.zht.common.R;
 import com.zht.common.base.BaseApplication;

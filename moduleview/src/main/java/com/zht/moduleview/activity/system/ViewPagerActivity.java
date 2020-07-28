@@ -1,7 +1,8 @@
 package com.zht.moduleview.activity.system;
 
 import android.os.Bundle;
-import android.support.v4.view.ViewPager;
+
+import androidx.viewpager.widget.ViewPager;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.zht.common.base.BaseActivity;

@@ -1,18 +1,20 @@
 package com.zht.modulemain;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.widget.BottomNavigationView;
-import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
 import android.view.MenuItem;
 
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.viewpager.widget.ViewPager;
+
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.zht.common.base.BaseActivity;
 import com.zht.modulemain.view.BottomNavigationViewHelper;
 
 import java.util.ArrayList;
 import java.util.List;
+
 
 public class MainActivity extends BaseActivity {
 

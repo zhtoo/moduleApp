@@ -1,9 +1,10 @@
 package com.zht.moduleview.calendarview.component;
 
 import android.content.Context;
-import android.support.v4.view.PagerAdapter;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.viewpager.widget.PagerAdapter;
 
 import com.zht.moduleview.calendarview.Utils;
 import com.zht.moduleview.calendarview.interf.IDayRenderer;

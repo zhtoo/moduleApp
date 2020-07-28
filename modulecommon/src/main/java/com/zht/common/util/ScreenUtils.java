@@ -1,6 +1,5 @@
 package com.zht.common.util;
 
-import android.app.Activity;
 import android.content.res.Resources;
 import android.graphics.Point;
 import android.graphics.PointF;
@@ -9,6 +8,8 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Display;
 import android.view.Window;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.lang.reflect.Method;
 import java.math.BigDecimal;
@@ -22,7 +23,7 @@ public class ScreenUtils {
      * 返回包括虚拟键在内的总的屏幕高度
      * 即使虚拟按键显示着，也会加上虚拟按键的高度
      */
-    public static int getTotalScreenHeight(Activity activity) {
+    public static int getTotalScreenHeight(AppCompatActivity activity) {
         DisplayMetrics displayMetrics = new DisplayMetrics();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
             activity.getWindowManager().getDefaultDisplay().getRealMetrics(displayMetrics);
@@ -33,7 +34,7 @@ public class ScreenUtils {
     /**
      * 返回屏幕的宽度
      */
-    public static int getScreenWidth(Activity activity) {
+    public static int getScreenWidth(AppCompatActivity activity) {
         DisplayMetrics displayMetrics = new DisplayMetrics();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
             activity.getWindowManager().getDefaultDisplay().getRealMetrics(displayMetrics);
@@ -45,7 +46,7 @@ public class ScreenUtils {
      * 返回屏幕可用高度
      * 当显示了虚拟按键时，会自动减去虚拟按键高度
      */
-    public static int getAvailableScreenHeight(Activity activity) {
+    public static int getAvailableScreenHeight(AppCompatActivity activity) {
         DisplayMetrics displayMetrics = new DisplayMetrics();
         activity.getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         return displayMetrics.heightPixels;
@@ -54,7 +55,7 @@ public class ScreenUtils {
     /**
      * 状态栏高度
      */
-    public static int getStatusBarHeight(Activity activity) {
+    public static int getStatusBarHeight(AppCompatActivity activity) {
         int resourceId = activity.getResources().getIdentifier("status_bar_height", "dimen", "android");
         return activity.getResources().getDimensionPixelSize(resourceId);
     }
@@ -62,7 +63,7 @@ public class ScreenUtils {
     /**
      * 获取固定状态栏高度
      */
-    public static int getStatusBarHeight1(Activity activity) {
+    public static int getStatusBarHeight1(AppCompatActivity activity) {
         Resources resources = Resources.getSystem();
         int resourceId = resources.getIdentifier("status_bar_height", "dimen", "android");
         return resources.getDimensionPixelSize(resourceId);
@@ -73,7 +74,7 @@ public class ScreenUtils {
      * 会根据当前是否有显示虚拟按键来返回相应的值
      * 即如果隐藏了虚拟按键，则返回零
      */
-    public static int getVirtualBarHeightIfRoom(Activity activity) {
+    public static int getVirtualBarHeightIfRoom(AppCompatActivity activity) {
         DisplayMetrics displayMetrics = new DisplayMetrics();
         activity.getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         int usableHeight = displayMetrics.heightPixels;
@@ -87,7 +88,7 @@ public class ScreenUtils {
     /**
      * 获取虚拟按键的高度，不论虚拟按键是否显示都会返回其固定高度
      */
-    public static int getVirtualBarHeight(Activity activity) {
+    public static int getVirtualBarHeight(AppCompatActivity activity) {
         int resourceId = activity.getResources().getIdentifier("navigation_bar_height", "dimen", "android");
         return activity.getResources().getDimensionPixelSize(resourceId);
     }
@@ -95,7 +96,7 @@ public class ScreenUtils {
     /**
      * 标题栏高度，如果隐藏了标题栏则返回零
      */
-    public static int getTitleHeight(Activity activity) {
+    public static int getTitleHeight(AppCompatActivity activity) {
         return activity.getWindow().findViewById(Window.ID_ANDROID_CONTENT).getTop();
     }
 
@@ -104,7 +105,7 @@ public class ScreenUtils {
      * @param activity
      * @return
      */
-    public static Point getDisplayInfomation(Activity activity) {
+    public static Point getDisplayInfomation(AppCompatActivity activity) {
         Point point = new Point();
         activity.getWindowManager().getDefaultDisplay().getSize(point);
         Log.e("TAG", "the screen size is " + point.toString());
@@ -123,7 +124,7 @@ public class ScreenUtils {
      * @param context
      * @return
      */
-    public static PointF getScreenXYInch(Activity context) {
+    public static PointF getScreenXYInch(AppCompatActivity context) {
         PointF point = new PointF();
         try {
             int realWidth = 0, realHeight = 0;
@@ -158,7 +159,7 @@ public class ScreenUtils {
      * @param context
      * @return
      */
-    public static double getScreenInch(Activity context) {
+    public static double getScreenInch(AppCompatActivity context) {
         PointF screenInch = getScreenXYInch(context);
         return formatDouble(
                 Math.sqrt(screenInch.x * screenInch.x + screenInch.y * screenInch.y),

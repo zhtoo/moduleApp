@@ -2,12 +2,13 @@ package com.zht.moduleview.VideoView;
 
 import android.content.Context;
 import android.os.SystemClock;
-import android.support.annotation.NonNull;
 import android.util.AttributeSet;
 import android.view.InputDevice;
 import android.view.MotionEvent;
 import android.view.SurfaceView;
 import android.view.View;
+
+import androidx.annotation.NonNull;
 
 /**
  * Created by ZhangHaitao on 2019/3/26

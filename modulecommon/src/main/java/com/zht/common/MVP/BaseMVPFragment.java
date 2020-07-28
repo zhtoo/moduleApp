@@ -1,6 +1,6 @@
 package com.zht.common.MVP;
 
-import android.app.Fragment;
+import androidx.fragment.app.Fragment;
 
 /**
  * Created by ZhangHaitao on 2018/10/8
