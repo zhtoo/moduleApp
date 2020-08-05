@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.zht.moduleview.view.RatioImageView
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/head_background"
+                    app:layout_dimensionRatio="75:38" />
+
+            </RelativeLayout>
+
+            <com.zht.moduleview.view.RoundImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:riv_dimensionRatio="7:2"
+                android:src="@drawable/test_banner001"/>
+
+            <com.zht.moduleview.view.RoundImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:riv_dimensionRatio="15:25"
+                android:src="@drawable/test_banner002"/>
+
+            <com.zht.moduleview.view.RoundImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:riv_dimensionRatio="15:25"
+                android:src="@drawable/test_banner003"/>
+
+
+        </LinearLayout>
+    </ScrollView>
+
+
+
+
+
+
+
+
+</LinearLayout>

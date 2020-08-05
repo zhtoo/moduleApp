@@ -17,6 +17,8 @@
         <activity android:name=".activity.customise.VerifyCodeEditActivity" />
         <activity android:name=".qucikindex.QuickIndexActivity" />
         <activity android:name=".activity.customise.DragActivity" />
+        <activity android:name=".activity.customise.ImageActivity" />
+        <activity android:name=".activity.system.CustomCardViewActivity" />
     </application>
 
 

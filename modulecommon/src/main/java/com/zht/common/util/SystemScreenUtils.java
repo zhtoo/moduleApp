@@ -17,34 +17,106 @@ import java.math.BigDecimal;
 /**
  * Created by ZhangHaitao on 2018/10/20
  * 获取屏幕尺寸相关数据
- *
+ * <p>
  * 知识点：
  * 1、activity.getResources()和Resources.getSystem()的区别，一般情况下两个方法获取的值是相同的。
- *  前者跟随应用变化，后者跟随系统变化。activity中的context被应用修改过后，前者获取的值可能会被干扰，后者则不会
+ * 前者跟随应用变化，后者跟随系统变化。activity中的context被应用修改过后，前者获取的值可能会被干扰，后者则不会
  */
-public class ScreenUtils {
+public class SystemScreenUtils {
+
+
     /**
-     * 返回包括虚拟键在内的总的屏幕高度
-     * 即使虚拟按键显示，也会加上虚拟按键的高度
+     * 获取状态栏高度
      */
-    public static int getTotalScreenHeight(AppCompatActivity activity) {
-        DisplayMetrics displayMetrics = new DisplayMetrics();
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-            activity.getWindowManager().getDefaultDisplay().getRealMetrics(displayMetrics);
-        }
-        return displayMetrics.heightPixels;
+    public static int getStatusBarHeight() {
+        Resources resources = Resources.getSystem();
+        int resourceId = resources.getIdentifier("status_bar_height", "dimen", "android");
+        return resources.getDimensionPixelSize(resourceId);
     }
 
     /**
-     * 返回屏幕的宽度
+     * 获取底部导航栏的高度
      */
-    public static int getScreenWidth(AppCompatActivity activity) {
-        DisplayMetrics displayMetrics = new DisplayMetrics();
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-            activity.getWindowManager().getDefaultDisplay().getRealMetrics(displayMetrics);
-        }
-        return displayMetrics.widthPixels;
+    public static int getNavigationBarHeight() {
+        Resources resources = Resources.getSystem();
+        int resourceId = resources.getIdentifier("navigation_bar_height", "dimen", "android");
+        return resources.getDimensionPixelSize(resourceId);
     }
+
+
+    /**
+     * 获取屏幕密度比值
+     */
+    public static float getDensity() {
+        Resources resources = Resources.getSystem();
+        DisplayMetrics displayMetrics = resources.getDisplayMetrics();
+        return displayMetrics.density;
+    }
+
+
+    /**
+     * 获取屏幕密度:每英寸的像素
+     */
+    public static int getDensityDpi() {
+        Resources resources = Resources.getSystem();
+        DisplayMetrics displayMetrics = resources.getDisplayMetrics();
+        return displayMetrics.densityDpi;
+    }
+
+
+    /**
+     * 获取文字缩放比,用于计算文字大小。xxxsp 对应的px为：  xxx * scaledDensity
+     */
+    public static float getSaledDensity() {
+        Resources resources = Resources.getSystem();
+        DisplayMetrics displayMetrics = resources.getDisplayMetrics();
+        return displayMetrics.scaledDensity;
+    }
+
+    /**
+     * 水平（x轴）方向的真实密度
+     * @return
+     */
+    public static float getXDpi() {
+        Resources resources = Resources.getSystem();
+        DisplayMetrics displayMetrics = resources.getDisplayMetrics();
+        return displayMetrics.xdpi;
+    }
+
+    /**
+     * 垂直（y轴）方向的真是密度
+     * @return
+     */
+    public static float getYDpi() {
+        Resources resources = Resources.getSystem();
+        DisplayMetrics displayMetrics = resources.getDisplayMetrics();
+        return displayMetrics.ydpi;
+    }
+
+    public static float getScreenInch() {
+        Resources resources = Resources.getSystem();
+        DisplayMetrics displayMetrics = resources.getDisplayMetrics();
+        float xInch = displayMetrics.widthPixels / displayMetrics.xdpi;
+        float yInch = displayMetrics.heightPixels / displayMetrics.ydpi;
+        return (float) formatDouble(
+                Math.sqrt(xInch * xInch + yInch * yInch),
+                1);
+    }
+
+    public static float getScreenXInch() {
+        Resources resources = Resources.getSystem();
+        DisplayMetrics displayMetrics = resources.getDisplayMetrics();
+        return (float) formatDouble((displayMetrics.widthPixels / displayMetrics.xdpi), 2);
+    }
+
+    public static float getScreenYInch() {
+        Resources resources = Resources.getSystem();
+        DisplayMetrics displayMetrics = resources.getDisplayMetrics();
+        return (float) formatDouble((displayMetrics.heightPixels / displayMetrics.ydpi), 2);
+    }
+
+
+
 
     /**
      * 返回屏幕可用高度
@@ -54,40 +126,6 @@ public class ScreenUtils {
         DisplayMetrics displayMetrics = new DisplayMetrics();
         activity.getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         return displayMetrics.heightPixels;
-    }
-
-    /**
-     * 状态栏高度
-     */
-    public static int getStatusBarHeight(AppCompatActivity activity) {
-        int resourceId = activity.getResources()
-                .getIdentifier("status_bar_height", "dimen", "android");
-        return activity.getResources().getDimensionPixelSize(resourceId);
-    }
-
-    /**
-     * 获取固定状态栏高度
-     */
-    public static int getStatusBarHeight1() {
-        Resources resources = Resources.getSystem();
-        int resourceId = resources.getIdentifier("status_bar_height", "dimen", "android");
-        return resources.getDimensionPixelSize(resourceId);
-    }
-
-    /**
-     * 获取虚拟按键的高度
-     * 会根据当前是否有显示虚拟按键来返回相应的值
-     * 即如果隐藏了虚拟按键，则返回零
-     */
-    public static int getVirtualBarHeightIfRoom(AppCompatActivity activity) {
-        DisplayMetrics displayMetrics = new DisplayMetrics();
-        activity.getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-        int usableHeight = displayMetrics.heightPixels;
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-            activity.getWindowManager().getDefaultDisplay().getRealMetrics(displayMetrics);
-        }
-        int realHeight = displayMetrics.heightPixels;
-        return realHeight - usableHeight;
     }
 
     /**
@@ -108,6 +146,7 @@ public class ScreenUtils {
 
     /**
      * 获取屏幕真实尺寸单位PX
+     *
      * @param activity
      * @return
      */
@@ -137,13 +176,13 @@ public class ScreenUtils {
             Display display = context.getWindowManager().getDefaultDisplay();
             DisplayMetrics metrics = new DisplayMetrics();
             display.getMetrics(metrics);
-            if (android.os.Build.VERSION.SDK_INT >= 17) {
+            if (Build.VERSION.SDK_INT >= 17) {
                 Point size = new Point();
                 display.getRealSize(size);
                 realWidth = size.x;
                 realHeight = size.y;
-            } else if (android.os.Build.VERSION.SDK_INT < 17
-                    && android.os.Build.VERSION.SDK_INT >= 14) {
+            } else if (Build.VERSION.SDK_INT < 17
+                    && Build.VERSION.SDK_INT >= 14) {
                 Method mGetRawH = Display.class.getMethod("getRawHeight");
                 Method mGetRawW = Display.class.getMethod("getRawWidth");
                 realWidth = (Integer) mGetRawW.invoke(display);
@@ -152,8 +191,8 @@ public class ScreenUtils {
                 realWidth = metrics.widthPixels;
                 realHeight = metrics.heightPixels;
             }
-            point.x = (float) formatDouble((realWidth / metrics.xdpi),1);
-            point.y = (float) formatDouble((realHeight / metrics.ydpi),1);
+            point.x = (float) formatDouble((realWidth / metrics.xdpi), 1);
+            point.y = (float) formatDouble((realHeight / metrics.ydpi), 1);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -162,6 +201,7 @@ public class ScreenUtils {
 
     /**
      * 获取屏幕尺寸，单位英寸
+     *
      * @param context
      * @return
      */

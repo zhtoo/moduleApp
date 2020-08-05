@@ -55,7 +55,7 @@ public class ToolsFragment extends BaseFragment implements ToolsAdapter.ItemClic
         list.add("Permission");
         activitys.add("/sample/PermissionAcrivity");
 
-        list.add("Screen");
+        list.add("屏幕信息");
         activitys.add("/sample/ScreenActivity");
 
 

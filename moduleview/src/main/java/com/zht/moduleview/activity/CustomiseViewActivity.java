@@ -68,6 +68,9 @@ public class CustomiseViewActivity extends BaseActivity {
         activitys.add("/moduleview/activity/QuickIndexActivity");
         list.add("上下滑动改变View高度");
         activitys.add("/moduleview/activity/DragActivity");
+        list.add("ImageActivity");
+        activitys.add("/moduleview/activity/ImageActivity");
+
 
         adapter.updata(list);
     }
@@ -101,9 +104,9 @@ public class CustomiseViewActivity extends BaseActivity {
         public void onBindViewHolder(@NonNull CustomiseViewHolder holder, final int position) {
             holder.textView.setText(mData.get(position));
 
-            int red = (int) (Math.random()*256);
-            int green = (int) (Math.random()*256);
-            int bule = (int) (Math.random()*256);
+            int red = (int) (Math.random()*200);
+            int green = (int) (Math.random()*200);
+            int bule = (int) (Math.random()*200);
 
             int color = Color.argb(255, red, green, bule);
 

@@ -11,7 +11,7 @@ android {
         versionName project.properties['versionName']
 
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.testCode.runner.AndroidJUnitRunner"
 
         javaCompileOptions {
             annotationProcessorOptions {
@@ -71,7 +71,7 @@ dependencies {
         implementation project(':modulepersonal')
     }
 
-    //test
+    //testCode
     if (!isModuleOne.toBoolean()) {
         implementation project(':moduleone')
     }

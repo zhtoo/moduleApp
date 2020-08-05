@@ -68,6 +68,8 @@ public class SystemViewActivity extends BaseActivity {
         activitys.add("/moduleview/activity/SCalendarActivity");
         list.add("ViewPagerActivity");
         activitys.add("/moduleview/activity/ViewPagerActivity");
+        list.add("自定义CustomCardViewActivity");
+        activitys.add("/moduleview/activity/CustomCardViewActivity");
 
         adapter.updata(list);
     }
@@ -101,9 +103,9 @@ public class SystemViewActivity extends BaseActivity {
         public void onBindViewHolder(@NonNull SystemViewHolder holder, final int position) {
             holder.textView.setText(mData.get(position));
 
-            int red = (int) (Math.random()*256);
-            int green = (int) (Math.random()*256);
-            int bule = (int) (Math.random()*256);
+            int red = (int) (Math.random()*200);
+            int green = (int) (Math.random()*200);
+            int bule = (int) (Math.random()*200);
 
             int color = Color.argb(255, red, green, bule);
 
