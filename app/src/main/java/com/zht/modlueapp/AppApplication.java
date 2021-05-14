@@ -1,6 +1,5 @@
 package com.zht.modlueapp;
 
-
 import com.zht.common.base.BaseApplication;
 
 public class AppApplication extends BaseApplication {

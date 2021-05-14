@@ -48,6 +48,10 @@ public enum SexType {
         }
     };
 
+    private static final String MAN_NAME = "男";
+    private static final String WOMAN_NAME = "女";
+    private static final String UNKONW_NAME = "未知";
+
     /**
      * 得到类型的整数值
      *
@@ -101,7 +105,5 @@ public enum SexType {
         return null;
     }
 
-    private static final String MAN_NAME = "男";
-    private static final String WOMAN_NAME = "女";
-    private static final String UNKONW_NAME = "未知";
+
 }

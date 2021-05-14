@@ -1,15 +1,23 @@
-apply plugin: 'com.android.application'
+plugins {
+    id 'com.android.application'
+}
 
 android {
-    compileSdkVersion 28
+
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+    buildToolsVersion rootProject.ext.android.buildToolsVersion
 
     defaultConfig {
-        applicationId project.properties['applicationId']
-        minSdkVersion rootProject.ext.minSdkVersion
-        targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode project.properties['versionCode'].toInteger()
-        versionName project.properties['versionName']
+        applicationId rootProject.ext.android.applicationId
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
+        versionCode rootProject.ext.android.versionCode
+        versionName rootProject.ext.android.versionName
+        multiDexEnabled true
 
+        ndk {
+            abiFilters "armeabi", "armeabi-v7a"
+        }
 
         testInstrumentationRunner "androidx.testCode.runner.AndroidJUnitRunner"
 
@@ -19,8 +27,8 @@ android {
             }
         }
 
-        multiDexEnabled true
     }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -28,20 +36,9 @@ android {
         }
     }
 
-    buildscript {
-        repositories {
-            jcenter()
-        }
-    }
-    allprojects {
-        repositories {
-            jcenter()
-        }
-    }
-
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility rootProject.ext.android.jdk
+        targetCompatibility rootProject.ext.android.jdk
     }
 
 }
@@ -50,6 +47,7 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
 
     implementation project(':modulecommon')
+//
     if (!isModuleMain.toBoolean()) {
         implementation project(':modulemain')
     }

@@ -77,11 +77,6 @@ class RoundRectDrawableWithShadow extends Drawable {
     RoundRectDrawableWithShadow(Resources resources, ColorStateList backgroundColor,
                                 int shadowStartColor, int shadowEndColor,
                                 float radius, float shadowSize, float maxShadowSize) {
-//        mShadowStartColor = resources.getColor(R.color.cardview_shadow_start_color);
-//        mShadowEndColor = resources.getColor(R.color.cardview_shadow_end_color);
-
-//        mShadowStartColor = 0x88FACCCC;
-//        mShadowEndColor = 0x03FACCCC;
         mShadowStartColor = shadowStartColor;
         mShadowEndColor = shadowEndColor;
 
@@ -385,6 +380,7 @@ class RoundRectDrawableWithShadow extends Drawable {
         return mBackground;
     }
 
+    //绘制圆角矩形的具体实现类
     interface RoundRectHelper {
         void drawRoundRect(Canvas canvas, RectF bounds, float cornerRadius, Paint paint);
     }

@@ -9,13 +9,14 @@ if(isModuleMain.toBoolean()){
 
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+    buildToolsVersion rootProject.ext.android.buildToolsVersion
 
     defaultConfig {
-        minSdkVersion rootProject.ext.minSdkVersion
-        targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode project.properties['versionCode'].toInteger()
-        versionName project.properties['versionName']
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
+        versionCode rootProject.ext.android.versionCode
+        versionName rootProject.ext.android.versionName
 
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -50,17 +51,6 @@ android {
         }
     }
 
-    buildscript {
-        repositories {
-            jcenter()
-            mavenCentral()
-        }
-    }
-    allprojects {
-        repositories {
-            jcenter()
-        }
-    }
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8

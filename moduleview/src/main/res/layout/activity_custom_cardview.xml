@@ -16,7 +16,7 @@
             android:layout_height="200dp"
             app:cardCornerRadius="6dp"
             app:cardElevation="5dp"
-            android:layout_margin="5dp"
+            android:layout_margin="10dp"
             app:shadowEndColor="#03e62f31"
             app:shadowStartColor="#33e62f31">
 

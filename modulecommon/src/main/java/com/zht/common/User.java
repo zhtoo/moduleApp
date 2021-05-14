@@ -7,8 +7,6 @@ import java.util.Date;
 /**
  * 用户表【t_user】
  *
- * @author oucl
- * @version $Revision: 1.0 $, $Date: 2014-6-26 上午10:58:11 $
  */
 public class User {
     private static final long serialVersionUID = 6222653660393452354L;

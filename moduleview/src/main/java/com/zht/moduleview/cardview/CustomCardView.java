@@ -6,6 +6,7 @@ import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -28,7 +29,10 @@ public class CustomCardView extends FrameLayout {
     /**
      * 初始化CardView的具体实现类。CardViewApi21Impl阴影的实现是通过调用View的Api方法，具体实现是 native boolean nSetElevation()
      * CardViewApi17Impl继承于CardViewBaseImpl，具体实现在CardViewBaseImpl中.
-     * 为了统一显示效果，CardView的具体实现类采用CardViewBaseImpl，遗弃CardViewApi21Impl和CardViewApi17Impl
+     * 为统一在不同API上的显示效果，这里摒弃CardView中 Api21及以上View中才支持的setElevation。
+     * 因为在API17以下 canvas.drawRoundRect 的执行效率不高，
+     * 所以在绘制圆角矩形（中间圆角）时对API17以下的版本采用CardView的实现方式。
+     * CardView的具体实现类采用CardViewBaseImpl。
      */
     static {
 //        if (Build.VERSION.SDK_INT >= 21) {
@@ -38,8 +42,12 @@ public class CustomCardView extends FrameLayout {
 //        } else {
 //            IMPL = new CardViewBaseImpl();
 //        }
-        IMPL = new CardViewBaseImpl();
 
+        if (Build.VERSION.SDK_INT >= 17) {
+            IMPL = new CardViewApi17Impl();
+        } else {
+            IMPL = new CardViewBaseImpl();
+        }
         IMPL.initStatic();
     }
 

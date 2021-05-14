@@ -3,13 +3,14 @@ apply plugin: 'com.android.library'
 apply plugin: 'com.jakewharton.butterknife'
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+    buildToolsVersion rootProject.ext.android.buildToolsVersion
 
     defaultConfig {
-        minSdkVersion rootProject.ext.minSdkVersion
-        targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode project.properties['versionCode'].toInteger()
-        versionName project.properties['versionName']
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
+        versionCode rootProject.ext.android.versionCode
+        versionName rootProject.ext.android.versionName
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
@@ -27,20 +28,6 @@ android {
         }
     }
 
-    buildscript {
-        repositories {
-            mavenCentral()
-            google()
-            jcenter()
-        }
-    }
-    allprojects {
-        repositories {
-            google()
-            jcenter()
-        }
-    }
-
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -54,7 +41,6 @@ dependencies {
     testImplementation 'junit:junit:4.12'
 
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
-
 
     api "androidx.appcompat:appcompat:$rootProject.ext.appcompat"
     api "com.google.android.material:material:$rootProject.ext.material"
