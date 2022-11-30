@@ -52,11 +52,17 @@ public class ScreenActivity extends BaseActivity {
         StatusBar.setFullScreen(this, true);
         StatusBar.setStatusBarColor(this, Color.TRANSPARENT);
 
-        FrameLayout container = findViewById(R.id.status_bar_container);
-        int statusBarHeight = SystemScreenUtils.getStatusBarHeight();
-        ViewGroup.LayoutParams layoutParams = container.getLayoutParams();
-        layoutParams.height = statusBarHeight;
-        container.setLayoutParams(layoutParams);
+        setViewHeight(findViewById(R.id.status_bar_container), SystemScreenUtils.getStatusBarHeight());
+        setViewHeight(findViewById(R.id.navigation_bar_container), SystemScreenUtils.getNavigationBarHeight());
+    }
+
+    public void setViewHeight(View view, int height) {
+        ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
+        if (layoutParams == null) {
+            layoutParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        }
+        layoutParams.height = height;
+        view.setLayoutParams(layoutParams);
     }
 
     /**
@@ -156,7 +162,7 @@ public class ScreenActivity extends BaseActivity {
                         String.format("状态栏高度：%d px", ScreenUtils.getStatusBarHeight(this)) + "\n" +
                         String.format("导航栏高度：%d px", ScreenUtils.getNavigationBarHeight(this)) + "\n" +
                         String.format("屏幕密度：%d  dp\n", ScreenUtils.getDensityDpi(this)) +
-                   //     String.format("密度：%.3f * %.3f dp\n", SystemScreenUtils.getXDpi(), SystemScreenUtils.getYDpi()) +
+                        //     String.format("密度：%.3f * %.3f dp\n", SystemScreenUtils.getXDpi(), SystemScreenUtils.getYDpi()) +
                         String.format("密度比值：%f \n", ScreenUtils.getDensity(this)) +
                         String.format("文字缩放比：%f \n", ScreenUtils.getScaledDensity(this)) +
                         "\n";

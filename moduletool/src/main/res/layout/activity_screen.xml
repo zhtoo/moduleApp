@@ -26,4 +26,15 @@
         android:layout_weight="1"
         android:scrollbars="none" />
 
+
+    <FrameLayout
+        android:id="@+id/navigation_bar_container"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:background="@android:color/holo_blue_dark">
+
+
+
+    </FrameLayout>
+
 </LinearLayout>
