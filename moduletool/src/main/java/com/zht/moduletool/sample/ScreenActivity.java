@@ -1,9 +1,12 @@
 package com.zht.moduletool.sample;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.graphics.Color;
 import android.graphics.Point;
+import android.graphics.PointF;
 import android.graphics.Rect;
 import android.os.Build;
 import android.os.Bundle;
@@ -11,6 +14,9 @@ import android.text.method.ScrollingMovementMethod;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.TypedValue;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -18,6 +24,7 @@ import androidx.annotation.Nullable;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.zht.common.NotchScreen.NotchScreen;
 import com.zht.common.NotchScreen.Pie;
+import com.zht.common.StatusBar.StatusBar;
 import com.zht.common.base.BaseActivity;
 import com.zht.common.util.ScreenUtils;
 import com.zht.common.util.SystemScreenUtils;
@@ -42,15 +49,22 @@ public class ScreenActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-    }
+        StatusBar.setFullScreen(this, true);
+        StatusBar.setStatusBarColor(this, Color.TRANSPARENT);
 
+        FrameLayout container = findViewById(R.id.status_bar_container);
+        int statusBarHeight = SystemScreenUtils.getStatusBarHeight();
+        ViewGroup.LayoutParams layoutParams = container.getLayoutParams();
+        layoutParams.height = statusBarHeight;
+        container.setLayoutParams(layoutParams);
+    }
 
     /**
      * 屏幕适配方案
      */
     @Override
     protected void attachBaseContext(Context newBase) {
-        if (android.os.Build.VERSION.SDK_INT >= 17) {
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
             final Resources res = newBase.getResources();
             final Configuration config = res.getConfiguration();
             //修改configuration的fontScale属性
@@ -95,7 +109,7 @@ public class ScreenActivity extends BaseActivity {
     @Override
     public Resources getResources() {
         Resources res = super.getResources();
-        if (Build.VERSION.SDK_INT < 17) {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN_MR1) {
             //获取Configuration对象
             Configuration configuration = res.getConfiguration();
             //修改configuration的fontScale属性
@@ -120,6 +134,8 @@ public class ScreenActivity extends BaseActivity {
         return res;
     }
 
+
+    @SuppressLint("DefaultLocale")
     @Override
     protected void initView(Bundle savedInstanceState) {
         super.initView(savedInstanceState);
@@ -127,23 +143,57 @@ public class ScreenActivity extends BaseActivity {
         mText = findViewById(R.id.screen_text);
         mText.setMovementMethod(ScrollingMovementMethod.getInstance());
 
+
+        PointF screenXYInch = ScreenUtils.getScreenXYInch(this);
+        Point screenDisplay = ScreenUtils.getDisplayInformation(this);
+
         String mScreenMessage =
-                "总屏幕高度(包括虚拟键):" + ScreenUtils.getTotalScreenHeight(this) + "\n" +
-                        "总屏幕宽度:" + ScreenUtils.getScreenWidth(this) + "\n" +
-                        "屏幕可用高度:" + ScreenUtils.getAvailableScreenHeight(this) + "\n" +
-                        "状态栏高度:" + ScreenUtils.getStatusBarHeight(this) + "\n" +
-                        "状态栏高度（R）:" + ScreenUtils.getStatusBarHeight1() + "\n" +
-                        "虚拟按键的高度(未显示为0):" + ScreenUtils.getVirtualBarHeightIfRoom(this) + "\n" +
-                        "虚拟按键的高度:" + ScreenUtils.getVirtualBarHeight(this) + "\n" +
-                        "标题栏高度(未显示为0):" + ScreenUtils.getTitleHeight(this) + "\n" +
-                        "获取屏幕宽高尺寸:" + ScreenUtils.getScreenXYInch(this).toString() + "\n" +
-                        "获取屏幕尺寸:" + ScreenUtils.getScreenInch(this) + "\n" +
-                        "获取屏幕真实尺寸单位PX:" + ScreenUtils.getDisplayInfomation(this).toString() + "\n"
-                        + "\n";
+                "ScreenUtils(activity.getResources()) ->" + "\n" +
+                        String.format("屏幕分辨率：%d * %d px", ScreenUtils.getTotalScreenWidth(this), ScreenUtils.getTotalScreenHeight(this)) + "\n" +
+                        String.format("屏幕可用分辨率：%d * %d px", ScreenUtils.getAvailableScreenWidth(this), ScreenUtils.getAvailableScreenHeight(this)) + "\n" +
+                        String.format("屏幕尺寸：%.1f * %.1f = %.1f 英寸", screenXYInch.x, screenXYInch.y, ScreenUtils.getScreenInch(this)) + "\n" +
+                        String.format("Display屏幕分辨率：%d * %d px", screenDisplay.x, screenDisplay.y) + "\n" +
+                        String.format("状态栏高度：%d px", ScreenUtils.getStatusBarHeight(this)) + "\n" +
+                        String.format("导航栏高度：%d px", ScreenUtils.getNavigationBarHeight(this)) + "\n" +
+                        String.format("屏幕密度：%d  dp\n", ScreenUtils.getDensityDpi(this)) +
+                   //     String.format("密度：%.3f * %.3f dp\n", SystemScreenUtils.getXDpi(), SystemScreenUtils.getYDpi()) +
+                        String.format("密度比值：%f \n", ScreenUtils.getDensity(this)) +
+                        String.format("文字缩放比：%f \n", ScreenUtils.getScaledDensity(this)) +
+                        "\n";
 
         StringBuffer sb = new StringBuffer();
         sb.append(mScreenMessage);
 
+
+        sb.append("SystemScreenUtils(Resources.getSystem()) ->\n");
+        sb.append(String.format("屏幕分辨率：%d * %d px\n",
+                SystemScreenUtils.getTotalScreenWidth(mText.getContext()), SystemScreenUtils.getTotalScreenHeight(mText.getContext())));
+        sb.append(String.format("屏幕可用分辨率：%d * %d px\n",
+                SystemScreenUtils.getScreenWidth(), SystemScreenUtils.getScreenHeight()));
+        sb.append(String.format("屏幕可用尺寸：%.1f * %.1f = %.1f 英寸 \n",
+                SystemScreenUtils.getScreenXInch(),
+                SystemScreenUtils.getScreenYInch(),
+                SystemScreenUtils.getScreenInch()));
+        sb.append(String.format("状态栏高度：%d px \n",
+                SystemScreenUtils.getStatusBarHeight()));
+        sb.append(String.format("底部导航栏高度：%d px \n",
+                SystemScreenUtils.getNavigationBarHeight()));
+
+
+        sb.append(String.format("屏幕密度：%d  dp\n",
+                SystemScreenUtils.getDensityDpi()));
+        sb.append(String.format("真实密度：%.3f * %.3f dp\n",
+                SystemScreenUtils.getXDpi(), SystemScreenUtils.getYDpi()));
+
+        sb.append(String.format("密度比值：%f \n",
+                SystemScreenUtils.getDensity()));
+        sb.append(String.format("文字缩放比：%f \n",
+                SystemScreenUtils.getScaledDensity()));
+
+
+        sb.append("\n");
+
+        sb.append("getResources() ->\n");
         sb.append(String.format("1dp = %f px \n", TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 1,
                 getResources().getDisplayMetrics())));
 
@@ -154,60 +204,28 @@ public class ScreenActivity extends BaseActivity {
                 getResources().getDisplayMetrics().densityDpi));
         sb.append(String.format("density = %f px \n",
                 getResources().getDisplayMetrics().density));
-        sb.append(String.format("scaledDensity = %f px \n",
+        sb.append(String.format("scaledDensity = %f  \n",
                 getResources().getDisplayMetrics().scaledDensity));
         sb.append(String.format("fontScale = %f   \n",
                 getResources().getConfiguration().fontScale));
 
 
-        Point display = ScreenUtils.getDisplayInfomation(this);
+        Point display = ScreenUtils.getDisplayInformation(this);
         double screenInch = ScreenUtils.getScreenInch(this);
 
         double densityDpi = Math.sqrt(display.x * display.x + display.y * display.y) / screenInch;
 
         sb.append(String.format("计算 densityDpi = %f px \n", densityDpi));
-        sb.append(String.format("计算 density = %f px \n", densityDpi/160));
-
-
-        sb.append("\n");
-        sb.append("Resources.getSystem()\n");
-        sb.append(String.format("状态栏高度：%d px \n",
-                SystemScreenUtils.getStatusBarHeight()));
-        sb.append(String.format("底部导航栏高度：%d px \n",
-                SystemScreenUtils.getNavigationBarHeight()));
-
-        sb.append(String.format("屏幕密度，每英寸的像素数：%d  dp\n",
-                SystemScreenUtils.getDensityDpi()));
-        sb.append(String.format("水平（x轴）方向的真实密度：%f  dp\n",
-                SystemScreenUtils.getXDpi()));
-        sb.append(String.format("垂直（y轴）方向的真是密度：%f  dp\n",
-                SystemScreenUtils.getYDpi()));
-        sb.append(String.format("密度比值：%f   \n",
-                SystemScreenUtils.getDensity()));
-        sb.append(String.format("文字缩放比：%f  (1sp = %f px) \n",
-                SystemScreenUtils.getSaledDensity(), SystemScreenUtils.getSaledDensity()));
-
-        sb.append(String.format("屏幕尺寸：%f英寸 = √￣[%f^2(横向英寸的平方) + %f^2(纵向英寸的平方)]\n",
-                SystemScreenUtils.getScreenInch(),
-                SystemScreenUtils.getScreenXInch(),
-                SystemScreenUtils.getScreenYInch()));
-
-        sb.append("\n");
-
-
-        sb.append("activity.getResources()\n");
+        sb.append(String.format("计算 density = %f px \n", densityDpi / 160));
 
         sb.append("\n");
         mText.setText(sb.toString());
-
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
             getWindow().getDecorView().post(new Runnable() {
                 @Override
                 public void run() {
                     String s = mText.getText().toString();
-
-
                     List<Rect> notchInScreenSize = Pie.getNotchScreenSize(ScreenActivity.this);
 
 //                    for (Rect rect : notchInScreenSize) {
@@ -228,6 +246,15 @@ public class ScreenActivity extends BaseActivity {
                         Rect rect = notchInScreenSize.get(0);
                         width = rect.right - rect.left;
                         height = rect.bottom - rect.top;
+
+                        View notchArea = findViewById(R.id.notch_area);
+                        FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams) notchArea.getLayoutParams();
+                        layoutParams.width = rect.width();
+                        layoutParams.height = rect.height();
+                        layoutParams.leftMargin = rect.left;
+                        layoutParams.topMargin = rect.top;
+                        notchArea.setLayoutParams(layoutParams);
+
                     }
                     s += "是否是Android Pie:true" + "\n" +
                             "系统:" + NotchScreen.getOS() + "\n" +
@@ -236,8 +263,18 @@ public class ScreenActivity extends BaseActivity {
                             "获取凹型屏的高度:" + height + "\n" +
                             "「隐藏屏幕刘海」是否开启了:" + NotchScreen.systemHideNotchScreen(ScreenActivity.this) + "\n"
                     ;
-                    mText.setText(s);
-                    Log.e(TAG, "getResult: " + System.currentTimeMillis());
+
+
+                    mText.setText(s +
+                            "厂商方案 ->" + "\n" +
+                            "是否是刘海屏:" + NotchScreen.hasNotchScreen(ScreenActivity.this) + "\n" +
+                            "获取凹型屏的宽度:" + NotchScreen.getNotchSize(ScreenActivity.this)[0] + "\n" +
+                            "获取凹型屏的高度:" + NotchScreen.getNotchSize(ScreenActivity.this)[1] + "\n" +
+                            "「隐藏屏幕刘海」是否开启了:" + NotchScreen.systemHideNotchScreen(ScreenActivity.this) + "\n"
+                    );
+//
+//                    mText.setText(s);
+
                 }
             });
         } else {
@@ -252,8 +289,6 @@ public class ScreenActivity extends BaseActivity {
             );
         }
 
-
-        Log.e(TAG, "initView: " + System.currentTimeMillis());
     }
 
     @Override
@@ -276,7 +311,7 @@ public class ScreenActivity extends BaseActivity {
 
     @Override
     public void beforeSetContentView(Bundle savedInstanceState) {
-//        Pie.openFullScreenModel(this);
+        //Pie.openFullScreenModel(this);
     }
 
 

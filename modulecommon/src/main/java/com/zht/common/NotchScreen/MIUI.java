@@ -7,8 +7,9 @@ import android.provider.Settings;
 import java.lang.reflect.Method;
 
 /**
- * Created by ZhangHaitao on 2018/10/27\
- * 小米系统 MIUI Android O适配
+ * Created by ZhangHaitao on 2018/10/27
+ * 小米系统 MIUI Android O 适配
+ *  https://dev.mi.com/console/doc/
  */
 public class MIUI {
 
@@ -31,7 +32,7 @@ public class MIUI {
             paramTypes[1] = int.class;
             Method getInt = SystemProperties.getMethod("getInt", paramTypes);
 //            Method repay2 = SystemProperties.getMethod("getInt", String.class,int.class);//得到方法对象,有参的方法需要指定参数类型
-//            repay2.invoke(SystemProperties,"ro.miui.notch",0);//执行还钱方法，有参传参
+//            repay2.invoke(SystemProperties,"ro.miui.notch",0);//执行方法，有参传参
             Object[] params = new Object[2];
             params[0] = new String("ro.miui.notch");
             params[1] = new Integer(0);

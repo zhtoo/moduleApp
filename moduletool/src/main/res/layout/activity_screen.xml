@@ -2,15 +2,28 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal">
+    android:orientation="vertical">
 
+    <FrameLayout
+        android:id="@+id/status_bar_container"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:background="@android:color/holo_blue_dark">
+
+        <View
+            android:id="@+id/notch_area"
+            android:layout_width="wrap_content"
+            android:layout_height="10dp"
+            android:background="@android:color/holo_red_dark" />
+
+    </FrameLayout>
 
     <TextView
         android:id="@+id/screen_text"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scrollbars="horizontal"
-        />
-
+        android:layout_height="0dp"
+        android:layout_margin="15dp"
+        android:layout_weight="1"
+        android:scrollbars="none" />
 
 </LinearLayout>

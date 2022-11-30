@@ -30,7 +30,7 @@ public class ColorOS {
      */
     public static int[] getNotchSize(Context context) {
         //屏幕顶部凹形区域不能显示内容，宽度为324px,  高度为80px。
-        int[] mNotchSize = new int[]{324, 80};
+        int[] mNotchSize = new int[]{0, 0};
         String mProperty = "";
         try {
             ClassLoader cl = context.getClassLoader();

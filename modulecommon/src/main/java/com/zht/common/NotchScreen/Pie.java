@@ -115,8 +115,6 @@ public class Pie {
         return notchScreenSizes;
     }
 
-
-
     public static void openFullScreenModel(AppCompatActivity activity) {
         WindowManager.LayoutParams lp = activity.getWindow().getAttributes();
         lp.layoutInDisplayCutoutMode = WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES;

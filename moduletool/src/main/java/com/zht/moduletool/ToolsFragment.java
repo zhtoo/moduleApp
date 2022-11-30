@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
@@ -33,8 +34,7 @@ public class ToolsFragment extends BaseFragment implements ToolsAdapter.ItemClic
     protected void initView(View view, Bundle savedInstanceState) {
         super.initView(view, savedInstanceState);
         mRecyclerView = view.findViewById(R.id.tool_main_rv);
-        mRecyclerView.setLayoutManager(
-                new GridLayoutManager(getContext(), 3));
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         mAdapter = new ToolsAdapter();
         mRecyclerView.setAdapter(mAdapter);
         mAdapter.setListener(this);

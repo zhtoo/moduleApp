@@ -1,6 +1,7 @@
 package com.zht.moduletool;
 
 
+import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,6 +33,7 @@ public class ToolsAdapter extends RecyclerView.Adapter<ToolsAdapter.ToolsViewHol
         return new ToolsViewHolder(view);
     }
 
+    @SuppressLint("RecyclerView")
     @Override
     public void onBindViewHolder(ToolsViewHolder holder, final int position) {
         holder.textView.setText(mData.get(position));

@@ -1,5 +1,6 @@
 package com.zht.common.util;
 
+import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Point;
 import android.graphics.PointF;
@@ -8,6 +9,7 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Display;
 import android.view.Window;
+import android.view.WindowManager;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -24,6 +26,47 @@ import java.math.BigDecimal;
  */
 public class SystemScreenUtils {
 
+    public static int getTotalScreenHeight(Context context) {
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        WindowManager windowManager = null;
+        Object systemService = context.getSystemService(Context.WINDOW_SERVICE);
+        if (systemService != null && systemService instanceof WindowManager) {
+            windowManager = (WindowManager)systemService;
+            Display defaultDisplay = windowManager.getDefaultDisplay();
+            defaultDisplay.getRealMetrics(displayMetrics);
+        }
+        return displayMetrics.heightPixels;
+    }
+
+    public static int getTotalScreenWidth(Context context) {
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        WindowManager windowManager = null;
+        Object systemService = context.getSystemService(Context.WINDOW_SERVICE);
+        if (systemService != null && systemService instanceof WindowManager) {
+            windowManager = (WindowManager)systemService;
+            Display defaultDisplay = windowManager.getDefaultDisplay();
+            defaultDisplay.getRealMetrics(displayMetrics);
+        }
+        return displayMetrics.widthPixels;
+    }
+
+    /**
+     * 返回屏幕可用高度
+     */
+    public static int getScreenHeight() {
+        Resources resources = Resources.getSystem();
+        DisplayMetrics displayMetrics = resources.getDisplayMetrics();
+        return displayMetrics.heightPixels;
+    }
+
+    /**
+     * 返回屏幕可用宽度
+     */
+    public static int getScreenWidth() {
+        Resources resources = Resources.getSystem();
+        DisplayMetrics displayMetrics = resources.getDisplayMetrics();
+        return displayMetrics.widthPixels;
+    }
 
     /**
      * 获取状态栏高度
@@ -67,7 +110,7 @@ public class SystemScreenUtils {
     /**
      * 获取文字缩放比,用于计算文字大小。xxxsp 对应的px为：  xxx * scaledDensity
      */
-    public static float getSaledDensity() {
+    public static float getScaledDensity() {
         Resources resources = Resources.getSystem();
         DisplayMetrics displayMetrics = resources.getDisplayMetrics();
         return displayMetrics.scaledDensity;
@@ -75,6 +118,7 @@ public class SystemScreenUtils {
 
     /**
      * 水平（x轴）方向的真实密度
+     *
      * @return
      */
     public static float getXDpi() {
@@ -85,6 +129,7 @@ public class SystemScreenUtils {
 
     /**
      * 垂直（y轴）方向的真是密度
+     *
      * @return
      */
     public static float getYDpi() {
@@ -114,8 +159,6 @@ public class SystemScreenUtils {
         DisplayMetrics displayMetrics = resources.getDisplayMetrics();
         return (float) formatDouble((displayMetrics.heightPixels / displayMetrics.ydpi), 2);
     }
-
-
 
 
     /**
