@@ -11,28 +11,10 @@
         android:background="@drawable/bg_edit_text1"
         android:hint="测试背景的"
         android:lines="1"
-
         android:paddingLeft="15dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-
-    <com.zht.moduleview.ZBhotTag.HotTagView
-        android:layout_width="wrap_content"
-        android:layout_height="15dp"
-        android:paddingLeft="4dp"
-        android:paddingRight="14dp"
-        app:backgroundColor="#FFB000"
-        app:circleRadius="1.5dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:maxWidth="200dp"
-        app:text="我是标签我是标签我weweqweqweqwasfsdgnbfgj fgsgfewasfasfafasfvfdgdgasfasfasfsa"
-        app:textColor="#FFFFFF"
-        app:textSize="10sp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

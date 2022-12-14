@@ -12,7 +12,7 @@ public abstract class BaseMVPActivity<T> extends AppCompatActivity {
 
     public T mPresenter;
 
-   public abstract void initPresenter();
+    public abstract void initPresenter();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

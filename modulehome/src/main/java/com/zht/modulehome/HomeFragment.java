@@ -17,6 +17,7 @@ import com.zht.common.OpenFileBySystem;
 import com.zht.common.base.BaseActivity;
 import com.zht.common.base.BaseFragment;
 import com.zht.common.listener.PermissionCallBack;
+import com.zht.common.util.UriUtils;
 
 import static android.app.Activity.RESULT_OK;
 

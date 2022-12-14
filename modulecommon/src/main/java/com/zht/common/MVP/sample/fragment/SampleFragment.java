@@ -21,7 +21,6 @@ public class SampleFragment extends BaseMVPFragment implements SampleContract.Vi
         return sampleFragment;
     }
 
-
     @Override
     public void setPresenter(SampleContract.Presenter presenter) {
         mPresenter = presenter;

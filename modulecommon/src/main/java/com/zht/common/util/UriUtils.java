@@ -1,4 +1,4 @@
-package com.zht.modulehome;
+package com.zht.common.util;
 
 import android.content.ContentResolver;
 import android.content.ContentUris;

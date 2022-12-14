@@ -4,10 +4,12 @@ import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Toast;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.zht.common.base.BaseActivity;
 import com.zht.moduleview.R;
+import com.zht.moduleview.VerifyCode.VerifyCodeEditText;
 
 /**
  * Created by ZhangHaitao on 2019/4/4
@@ -22,12 +24,19 @@ public class VerifyCodeEditActivity extends BaseActivity {
     @Override
     protected void initView(Bundle savedInstanceState) {
         super.initView(savedInstanceState);
-        View mVerify = findViewById(R.id.VerifyCodeEditText);
+        VerifyCodeEditText mVerify = findViewById(R.id.VerifyCodeEditText);
         mVerify.setFocusable(true);
         mVerify.setFocusableInTouchMode(true);
         mVerify.requestFocus();
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.showSoftInput(mVerify, 0);
+
+        mVerify.setCompleteListener(new VerifyCodeEditText.OnInputCompleteListener() {
+            @Override
+            public void onComplete(String text) {
+                Toast.makeText(mContext, text, Toast.LENGTH_SHORT).show();
+            }
+        });
 
     }
 }

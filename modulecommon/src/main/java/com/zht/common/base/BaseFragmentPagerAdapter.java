@@ -1,29 +1,32 @@
 package com.zht.common.base;
 
-
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentStatePagerAdapter;
+import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.fragment.app.FragmentTransaction;
 
 import java.util.List;
 
-public class BaseFragmentStatePagerAdapter extends FragmentStatePagerAdapter {
+/**
+ * @Date 2022/12/6 13:55
+ * @Author zhanghaitao
+ * @Description
+ */
+public class BaseFragmentPagerAdapter extends FragmentPagerAdapter {
 
-    private FragmentManager mFm;
+    private FragmentManager fragmentManager;
     private String[] mTitles;
     private List<Fragment> mFragments;
 
-    public BaseFragmentStatePagerAdapter(FragmentManager fm) {
+    public BaseFragmentPagerAdapter(@NonNull FragmentManager fm) {
         super(fm);
-        this.mFm = fm;
+        this.fragmentManager = fm;
     }
 
-    public BaseFragmentStatePagerAdapter(FragmentManager fm, String[] titles, List<Fragment> fragments) {
-        super(fm);
-        this.mFm = fm;
-        this.mTitles = titles;
-        this.mFragments = fragments;
+    public BaseFragmentPagerAdapter(@NonNull FragmentManager fm, int behavior) {
+        super(fm, behavior);
+        this.fragmentManager = fm;
     }
 
     @Override
@@ -36,19 +39,22 @@ public class BaseFragmentStatePagerAdapter extends FragmentStatePagerAdapter {
         return mTitles[position];
     }
 
+    @NonNull
     @Override
     public Fragment getItem(int position) {
-        return mFragments.get(position);
+        if (mFragments == null) {
+            return null;
+        }
+        if (position >= 0 && position < mFragments.size()) {
+            return mFragments.get(position);
+        }
+        return null;
     }
 
-    @Override
-    public int getItemPosition(Object object) {
-        return POSITION_NONE;
-    }
 
     public void setNewData(String[] titles, List<Fragment> fragments) {
-        if (this.mFragments != null && mFm != null) {
-            FragmentTransaction ft = mFm.beginTransaction();
+        if (this.mFragments != null && fragmentManager != null) {
+            FragmentTransaction ft = fragmentManager.beginTransaction();
             for (Fragment fragment : this.mFragments) {
                 ft.remove(fragment);
             }

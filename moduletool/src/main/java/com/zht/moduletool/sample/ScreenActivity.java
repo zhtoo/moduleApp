@@ -16,6 +16,7 @@ import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
@@ -52,9 +53,38 @@ public class ScreenActivity extends BaseActivity {
         StatusBar.setFullScreen(this, true);
         StatusBar.setStatusBarColor(this, Color.TRANSPARENT);
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            //设置导航栏透明
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+            getWindow().setNavigationBarColor(Color.parseColor("#55000000"));
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            //设置导航栏透明
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+
+        }
+
         setViewHeight(findViewById(R.id.status_bar_container), SystemScreenUtils.getStatusBarHeight());
         setViewHeight(findViewById(R.id.navigation_bar_container), SystemScreenUtils.getNavigationBarHeight());
     }
+
+    protected void setStatusBarTranslation() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            //需要设置这个 flag 才能调用 setStatusBarColor 来设置状态栏颜色
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            //取消设置透明状态栏,使 ContentView 内容不再覆盖状态栏
+            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            // 设置状态栏透明
+            getWindow().setStatusBarColor(Color.TRANSPARENT);
+            //设置导航栏透明
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            // 设置状态栏透明
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            //设置导航栏透明
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+        }
+    }
+
 
     public void setViewHeight(View view, int height) {
         ViewGroup.LayoutParams layoutParams = view.getLayoutParams();

@@ -22,7 +22,7 @@ public class AudioController {
         audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, changeStreamVolume, AudioManager.FLAG_SHOW_UI);
     }
 
-    public static void turnup(Context context, float yDilta, int heightPixels) {
+    public static void turnUp(Context context, float yDilta, int heightPixels) {
         AudioManager audioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
         //当前音量
         int currentVolume = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
