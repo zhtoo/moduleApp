@@ -5,6 +5,4 @@ include ':app',
         ':modulelibrary',
         ':modulecommon',
         ':modulemain',
-        ':moduleone',
-        ':moduletwo',
         ':moduletool'

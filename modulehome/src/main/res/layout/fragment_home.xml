@@ -3,39 +3,13 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
-    <TextView
-        android:id="@+id/tv_module_one"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:padding="10dp"
-        android:text="moduleone" />
-
-    <TextView
-        android:id="@+id/tv_module_two"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:padding="10dp"
-        android:text="moduletwo" />
-
-    <TextView
-        android:id="@+id/tv_module_fragment"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:padding="10dp"
-        android:text="modulefragment" />
-
-
     <EditText
         android:id="@+id/ed_home_file_path"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:padding="10dp"
-        android:hint="modulefragment" />
+        android:hint="请输入文件路径" />
 
     <Button
         android:id="@+id/bt_home_file_path"

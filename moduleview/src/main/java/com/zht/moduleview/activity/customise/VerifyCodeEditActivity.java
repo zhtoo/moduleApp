@@ -1,13 +1,16 @@
 package com.zht.moduleview.activity.customise;
 
 import android.content.Context;
+import android.inputmethodservice.Keyboard;
 import android.os.Bundle;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.zht.common.base.BaseActivity;
+import com.zht.moduleview.CustomKeyboard.CustomKeyboardManager;
 import com.zht.moduleview.R;
 import com.zht.moduleview.VerifyCode.VerifyCodeEditText;
 
@@ -38,5 +41,15 @@ public class VerifyCodeEditActivity extends BaseActivity {
             }
         });
 
+        edit = (EditText)findViewById(R.id.demo_edit);
+
+        customKeyboardManager = new CustomKeyboardManager(this);
+        customKeyboardManager.attachToEdit(edit,new Keyboard(this, R.xml.custom_number));
+
     }
+
+    private EditText edit;
+    private CustomKeyboardManager customKeyboardManager;
+
+
 }

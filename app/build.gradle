@@ -69,13 +69,4 @@ dependencies {
         implementation project(':modulepersonal')
     }
 
-    //testCode
-    if (!isModuleOne.toBoolean()) {
-        implementation project(':moduleone')
-    }
-    if (!isModuleTwo.toBoolean()) {
-        implementation project(':moduletwo')
-    }
-
-
 }

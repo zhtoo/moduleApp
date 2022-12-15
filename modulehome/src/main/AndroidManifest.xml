@@ -5,7 +5,6 @@
     <application android:theme="@style/AppTheme">
 
         <activity android:name=".MainActivity" />
-        <activity android:name=".ShowFragmentActivity" />
 
     </application>
 

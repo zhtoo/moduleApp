@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Keyboard xmlns:android="http://schemas.android.com/apk/res/android"
+    android:keyHeight="40dip"
+    android:keyWidth="8.33334444%p"
+    android:verticalGap="6dp">
+
+    <!--第1行-->
+    <Row>
+
+        <Key
+            android:codes="-8"
+            android:keyHeight="45dp"
+            android:keyLabel=""
+            android:keyWidth="20.000002%p" />
+
+        <Key
+            android:codes="-8"
+            android:keyHeight="45dp"
+            android:keyLabel="安全键盘"
+            android:keyWidth="60.000002%p" />
+
+        <Key
+            android:codes="-3"
+            android:keyEdgeFlags="right"
+            android:keyHeight="45dp"
+            android:keyLabel="完成"
+            android:keyWidth="20.000002%p" />
+    </Row>
+
+    <!--第2行-->
+    <Row>
+        <Key
+            android:codes="49"
+            android:keyEdgeFlags="left"
+            android:keyHeight="45dp"
+            android:keyLabel="1"
+            android:keyWidth="33.000002%p" />
+        <Key
+            android:codes="50"
+            android:keyHeight="45dp"
+            android:keyLabel="2"
+            android:keyWidth="33.000002%p" />
+        <Key
+            android:codes="51"
+            android:keyHeight="45dp"
+            android:keyLabel="3"
+            android:keyWidth="33.000002%p" />
+    </Row>
+
+    <!--第3行-->
+    <Row>
+        <Key
+            android:codes="52"
+            android:keyHeight="45dp"
+            android:keyLabel="4"
+            android:keyWidth="33.000002%p" />
+        <Key
+            android:codes="53"
+            android:keyHeight="45dp"
+            android:keyLabel="5"
+            android:keyWidth="33.000002%p" />
+        <Key
+            android:codes="54"
+            android:keyHeight="45dp"
+            android:keyLabel="6"
+            android:keyWidth="33.000002%p" />
+    </Row>
+
+    <!--第4行-->
+    <Row>
+        <Key
+            android:codes="55"
+            android:keyHeight="45dp"
+            android:keyLabel="7"
+            android:keyWidth="33.000002%p" />
+        <Key
+            android:codes="56"
+            android:keyHeight="45dp"
+            android:keyLabel="8"
+            android:keyWidth="33.000002%p" />
+        <Key
+            android:codes="57"
+            android:keyHeight="45dp"
+            android:keyLabel="9"
+            android:keyWidth="33.000002%p" />
+    </Row>
+
+    <!--第5行-->
+    <Row>
+
+        <Key
+            android:codes="46"
+            android:keyLabel="."
+            android:keyHeight="45dp"
+            android:keyWidth="33.000002%p" />
+
+        <Key
+            android:codes="48"
+            android:keyHeight="45dp"
+            android:keyLabel="0"
+            android:keyWidth="33.000002%p" />
+        <Key
+            android:codes="-5"
+            android:keyEdgeFlags="right"
+            android:keyHeight="45dp"
+            android:keyIcon="@drawable/delete"
+            android:keyWidth="33.000002%p" />
+    </Row>
+
+</Keyboard>

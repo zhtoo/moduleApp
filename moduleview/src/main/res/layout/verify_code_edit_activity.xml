@@ -12,6 +12,7 @@
         android:background="#EEEEEE" />
 
     <EditText
+        android:id="@+id/demo_edit"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginTop="20dp" />
