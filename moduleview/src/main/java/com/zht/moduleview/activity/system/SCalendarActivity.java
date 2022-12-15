@@ -5,6 +5,7 @@ import android.widget.CalendarView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.zht.common.base.BaseActivity;
+import com.zht.common.constant.ARoutePathConstants;
 import com.zht.moduleview.R;
 
 import java.util.Calendar;
@@ -12,7 +13,7 @@ import java.util.Calendar;
 /**
  * Created by ZhangHaitao on 2018/12/21
  */
-@Route(path = "/moduleview/activity/SCalendarActivity")
+@Route(path = ARoutePathConstants.View.SCALENDAR_ACTIVITY)
 public class SCalendarActivity extends BaseActivity {
 
 

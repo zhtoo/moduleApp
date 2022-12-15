@@ -1,4 +1,4 @@
-package com.zht.moduletool.sample;
+package com.zht.moduletool.activity;
 
 import android.os.Bundle;
 import android.view.View;
@@ -7,12 +7,13 @@ import android.widget.ImageView;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.zht.common.base.BaseActivity;
 import com.zht.common.cache.BitmapUtils;
+import com.zht.common.constant.ARoutePathConstants;
 import com.zht.moduletool.R;
 
 /**
  * Created by ZhangHaitao on 2018/9/5.
  */
-@Route(path = "/sample/BitmapCacheActivity")
+@Route(path = ARoutePathConstants.Tool.BITMAP_CACHE_ACTIVITY)
 public class BitmapCacheActivity extends BaseActivity implements View.OnClickListener {
 
 

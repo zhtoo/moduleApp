@@ -6,12 +6,13 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.zht.common.base.BaseActivity;
+import com.zht.common.constant.ARoutePathConstants;
 import com.zht.moduleview.R;
 
 /**
  * Created by ZhangHaitao on 2018/12/21
  */
-@Route(path = "/moduleview/activity/ViewPagerActivity")
+@Route(path = ARoutePathConstants.View.VIEWPAGER_ACTIVITY)
 public class ViewPagerActivity extends BaseActivity {
 
 

@@ -10,6 +10,7 @@ import androidx.viewpager.widget.ViewPager;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.zht.common.base.BaseActivity;
+import com.zht.common.constant.ARoutePathConstants;
 import com.zht.modulemain.view.BottomNavigationViewHelper;
 
 import java.util.ArrayList;
@@ -57,19 +58,19 @@ public class MainActivity extends BaseActivity {
         mViewpager = findViewById(R.id.main_viewpager);
 
         homeFragment = (Fragment) ARouter.getInstance()
-                .build("/modulehome/homefragment")
+                .build(ARoutePathConstants.Home.HOME_FRAGMENT)
                 .navigation();
         toolsFragment = (Fragment) ARouter.getInstance()
-                .build("/moduletool/toolsfragment")
+                .build(ARoutePathConstants.Tool.TOOLS_FRAGMENT)
                 .navigation();
         libFragment = (Fragment) ARouter.getInstance()
-                .build("/moduleLibrary/LibraryFragment")
+                .build(ARoutePathConstants.Library.LIBRARY_FRAGMENT)
                 .navigation();
         viewFragment = (Fragment) ARouter.getInstance()
-                .build("/moduleview/ViewFragment")
+                .build(ARoutePathConstants.View.VIEW_FRAGMENT)
                 .navigation();
         personalFragment = (Fragment) ARouter.getInstance()
-                .build("/modulePersonal/PersonalFragment")
+                .build(ARoutePathConstants.Personal.PERSONAL_FRAGMENT)
                 .navigation();
         listFragment.add(homeFragment);
         listFragment.add(toolsFragment);

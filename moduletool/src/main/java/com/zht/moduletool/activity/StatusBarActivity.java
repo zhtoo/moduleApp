@@ -1,4 +1,4 @@
-package com.zht.moduletool.sample;
+package com.zht.moduletool.activity;
 
 import android.os.Bundle;
 import android.view.View;
@@ -8,12 +8,13 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.zht.common.StatusBar.StatusBar;
 import com.zht.common.StatusBar.StatusBarBuilder;
 import com.zht.common.base.BaseActivity;
+import com.zht.common.constant.ARoutePathConstants;
 import com.zht.moduletool.R;
 
 /**
  * Created by ZhangHaitao on 2018/9/5.
  */
-@Route(path = "/sample/StatusBarActivity")
+@Route(path = ARoutePathConstants.Tool.STATUS_BAR_ACTIVITY)
 public class StatusBarActivity extends BaseActivity implements View.OnClickListener {
 
     private boolean darkmode = false;

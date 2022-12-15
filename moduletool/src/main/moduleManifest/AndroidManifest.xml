@@ -20,10 +20,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".sample.BitmapCacheActivity" />
-        <activity android:name=".sample.StatusBarActivity" />
-        <activity android:name=".sample.ToastActivity" />
-        <activity android:name=".sample.VideoActivity" />
+        <activity android:name=".activity.BitmapCacheActivity" />
+        <activity android:name=".activity.StatusBarActivity" />
+        <activity android:name=".activity.ToastActivity" />
+        <activity android:name=".activity.VideoActivity" />
 
     </application>
 

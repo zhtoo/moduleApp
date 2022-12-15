@@ -16,6 +16,7 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.zht.common.OpenFileBySystem;
 import com.zht.common.base.BaseActivity;
 import com.zht.common.base.BaseFragment;
+import com.zht.common.constant.ARoutePathConstants;
 import com.zht.common.listener.PermissionCallBack;
 import com.zht.common.util.UriUtils;
 
@@ -24,7 +25,7 @@ import static android.app.Activity.RESULT_OK;
 /**
  * Created by ZhangHaitao on 2018/9/3.
  */
-@Route(path = "/modulehome/homefragment")
+@Route(path = ARoutePathConstants.Home.HOME_FRAGMENT)
 public class HomeFragment extends BaseFragment implements View.OnClickListener {
 
     private EditText editText;

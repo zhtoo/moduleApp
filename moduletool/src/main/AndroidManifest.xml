@@ -13,14 +13,14 @@
         android:theme="@style/AppTheme">
 
         <activity android:name=".MainActivity"/>
-        <activity android:name=".sample.ToastActivity" />
-        <activity android:name=".sample.StatusBarActivity" />
-        <activity android:name=".sample.BitmapCacheActivity" />
-        <activity android:name=".sample.VideoActivity"
+        <activity android:name=".activity.ToastActivity" />
+        <activity android:name=".activity.StatusBarActivity" />
+        <activity android:name=".activity.BitmapCacheActivity" />
+        <activity android:name=".activity.VideoActivity"
             android:configChanges="orientation|keyboardHidden|screenSize|layoutDirection"/>
-        <activity android:name=".sample.PermissionAcrivity" />
-        <activity android:name=".sample.ScreenActivity" />
-        <activity android:name=".sample.InteractiveVideoActivity"
+        <activity android:name=".activity.PermissionRequestActivity" />
+        <activity android:name=".activity.ScreenActivity" />
+        <activity android:name=".activity.InteractiveVideoActivity"
             android:configChanges="orientation|keyboardHidden|screenSize|layoutDirection"/>
 
     </application>

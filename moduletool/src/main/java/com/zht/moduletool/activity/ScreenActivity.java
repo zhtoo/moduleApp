@@ -1,4 +1,4 @@
-package com.zht.moduletool.sample;
+package com.zht.moduletool.activity;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -27,6 +27,7 @@ import com.zht.common.NotchScreen.NotchScreen;
 import com.zht.common.NotchScreen.Pie;
 import com.zht.common.StatusBar.StatusBar;
 import com.zht.common.base.BaseActivity;
+import com.zht.common.constant.ARoutePathConstants;
 import com.zht.common.util.ScreenUtils;
 import com.zht.common.util.SystemScreenUtils;
 import com.zht.moduletool.R;
@@ -36,7 +37,7 @@ import java.util.List;
 /**
  * Created by ZhangHaitao on 2018/10/20
  */
-@Route(path = "/sample/ScreenActivity")
+@Route(path = ARoutePathConstants.Tool.SCREEN_ACTIVITY)
 public class ScreenActivity extends BaseActivity {
     private static final String TAG = "ScreenActivity";
 

@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.zht.common.base.BaseActivity;
+import com.zht.common.constant.ARoutePathConstants;
 import com.zht.moduleview.R;
 
 import java.util.ArrayList;
@@ -24,7 +25,7 @@ import java.util.List;
 /**
  * Created by ZhangHaitao on 2018/9/30.
  */
-@Route(path = "/moduleview/activity/CustomiseViewActivity")
+@Route(path = ARoutePathConstants.View.CUSTOMISE_VIEW_ACTIVITY)
 public class CustomiseViewActivity extends BaseActivity {
 
     private RecyclerView mRecycler;
@@ -61,15 +62,15 @@ public class CustomiseViewActivity extends BaseActivity {
         list = new ArrayList<>();
         activitys = new ArrayList<>();
         list.add("日历");
-        activitys.add("/moduleview/activity/CalendarActivity");
+        activitys.add(ARoutePathConstants.View.CALENDAR_ACTIVITY);
         list.add("验证码输入框");
-        activitys.add("/moduleview/activity/VerifyCodeEditActivity");
+        activitys.add(ARoutePathConstants.View.VERIFY_CODE_EDIT_ACTIVITY);
         list.add("索引");
-        activitys.add("/moduleview/activity/QuickIndexActivity");
+        activitys.add(ARoutePathConstants.View.QUICK_INDEX_ACTIVITY);
         list.add("上下滑动改变View高度");
-        activitys.add("/moduleview/activity/DragActivity");
+        activitys.add(ARoutePathConstants.View.DRAG_ACTIVITY);
         list.add("ImageActivity");
-        activitys.add("/moduleview/activity/ImageActivity");
+        activitys.add(ARoutePathConstants.View.IMAGE_ACTIVITY);
 
 
         adapter.updata(list);

@@ -11,6 +11,7 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.flyco.tablayout.SlidingTabLayout;
 import com.zht.common.base.BaseActivity;
 import com.zht.common.base.BaseFragmentStatePagerAdapter;
+import com.zht.common.constant.ARoutePathConstants;
 import com.zht.moduleview.R;
 
 import java.util.ArrayList;
@@ -19,7 +20,7 @@ import java.util.ArrayList;
  * Created by ZhangHaitao on 2019/5/27
  * TouchDrag
  */
-@Route(path = "/moduleview/activity/DragActivity")
+@Route(path = ARoutePathConstants.View.DRAG_ACTIVITY)
 public class DragActivity extends BaseActivity {
 
     private static final String TAG = "DragActivity";

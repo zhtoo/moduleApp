@@ -1,4 +1,4 @@
-package com.zht.moduletool.sample;
+package com.zht.moduletool.activity;
 
 import android.content.Context;
 import android.content.pm.ActivityInfo;
@@ -27,6 +27,7 @@ import androidx.core.view.MotionEventCompat;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.bumptech.glide.Glide;
+import com.zht.common.constant.ARoutePathConstants;
 import com.zht.moduletool.R;
 
 /**
@@ -65,7 +66,7 @@ import com.zht.moduletool.R;
  * <p>
  * 将源文件（D:\in.mp4）转换为每隔25帧设置一个关键帧，保存到"D:\out.mp4"
  */
-@Route(path = "/sample/InteractiveVideoActivity")
+@Route(path = ARoutePathConstants.Tool.INTERACTIVE_VIDEO_ACTIVITY)
 public class InteractiveVideoActivity extends AppCompatActivity {
 
     private final static String TAG = "VideoActivity";

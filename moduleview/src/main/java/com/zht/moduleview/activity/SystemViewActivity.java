@@ -1,5 +1,6 @@
 package com.zht.moduleview.activity;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -16,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.zht.common.base.BaseActivity;
+import com.zht.common.constant.ARoutePathConstants;
 import com.zht.moduleview.R;
 
 import java.util.ArrayList;
@@ -24,7 +26,7 @@ import java.util.List;
 /**
  * Created by ZhangHaitao on 2018/9/30.
  */
-@Route(path = "/moduleview/activity/SystemViewActivity")
+@Route(path = ARoutePathConstants.View.SYSTEM_VIEW_ACTIVITY)
 public class SystemViewActivity extends BaseActivity {
 
     private RecyclerView mRecycler;
@@ -63,13 +65,15 @@ public class SystemViewActivity extends BaseActivity {
         list = new ArrayList<>();
         activitys = new ArrayList<>();
         list.add("EditText");
-        activitys.add("/moduleview/activity/EditTextActivity");
+        activitys.add(ARoutePathConstants.View.EDITTEXT_ACTIVITY);
         list.add("Calendar");
-        activitys.add("/moduleview/activity/SCalendarActivity");
+        activitys.add(ARoutePathConstants.View.SCALENDAR_ACTIVITY);
         list.add("ViewPagerActivity");
-        activitys.add("/moduleview/activity/ViewPagerActivity");
+        activitys.add(ARoutePathConstants.View.VIEWPAGER_ACTIVITY);
         list.add("自定义CustomCardViewActivity");
-        activitys.add("/moduleview/activity/CustomCardViewActivity");
+        activitys.add(ARoutePathConstants.View.CUSTOM_CARD_VIEW_ACTIVITY);
+        list.add("ProgressView");
+        activitys.add(ARoutePathConstants.View.PROGRESS_ACTIVITY);
 
         adapter.updata(list);
     }
@@ -99,6 +103,7 @@ public class SystemViewActivity extends BaseActivity {
             return new SystemViewHolder(mText);
         }
 
+        @SuppressLint("RecyclerView")
         @Override
         public void onBindViewHolder(@NonNull SystemViewHolder holder, final int position) {
             holder.textView.setText(mData.get(position));

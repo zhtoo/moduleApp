@@ -7,12 +7,13 @@ import android.widget.LinearLayout;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.zht.common.base.BaseFragment;
+import com.zht.common.constant.ARoutePathConstants;
 
 /**
  * Created by ZhangHaitao on 2018/9/6.
  */
 
-@Route (path = "/moduleview/ViewFragment")
+@Route (path = ARoutePathConstants.View.VIEW_FRAGMENT)
 public class ViewFragment extends BaseFragment implements View.OnClickListener {
 
     private LinearLayout systemView;
@@ -36,10 +37,10 @@ public class ViewFragment extends BaseFragment implements View.OnClickListener {
     public void onClick(View v) {
         int id = v.getId();
         if(id == R.id.ll_system_view){
-            ARouter.getInstance().build("/moduleview/activity/SystemViewActivity")
+            ARouter.getInstance().build(ARoutePathConstants.View.SYSTEM_VIEW_ACTIVITY)
                     .navigation();
         }else if(id == R.id.ll_customize_view){
-            ARouter.getInstance().build("/moduleview/activity/CustomiseViewActivity")
+            ARouter.getInstance().build(ARoutePathConstants.View.CUSTOMISE_VIEW_ACTIVITY)
                     .navigation();
         }
     }

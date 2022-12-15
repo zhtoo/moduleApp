@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.zht.common.base.BaseFragment;
+import com.zht.common.constant.ARoutePathConstants;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +18,7 @@ import java.util.List;
 /**
  * Created by ZhangHaitao on 2018/9/3.
  */
-@Route(path = "/moduletool/toolsfragment")
+@Route(path = ARoutePathConstants.Tool.TOOLS_FRAGMENT)
 public class ToolsFragment extends BaseFragment implements ToolsAdapter.ItemClickListener {
 
     private RecyclerView mRecyclerView;
@@ -45,24 +46,19 @@ public class ToolsFragment extends BaseFragment implements ToolsAdapter.ItemClic
         list = new ArrayList<>();
         activitys = new ArrayList<>();
         list.add("Toast");
-        activitys.add("/sample/ToastActivity");
+        activitys.add(ARoutePathConstants.Tool.TOAST_ACTIVITY);
         list.add("StatusBar");
-        activitys.add("/sample/StatusBarActivity");
+        activitys.add(ARoutePathConstants.Tool.STATUS_BAR_ACTIVITY);
         list.add("BitmapCache");
-        activitys.add("/sample/BitmapCacheActivity");
+        activitys.add(ARoutePathConstants.Tool.BITMAP_CACHE_ACTIVITY);
         list.add("Video");
-        activitys.add("/sample/VideoActivity");
+        activitys.add(ARoutePathConstants.Tool.VIDEO_ACTIVITY);
         list.add("Permission");
-        activitys.add("/sample/PermissionAcrivity");
-
+        activitys.add(ARoutePathConstants.Tool.PERMISSION_REQUEST_ACTIVITY);
         list.add("屏幕信息");
-        activitys.add("/sample/ScreenActivity");
-
-
+        activitys.add(ARoutePathConstants.Tool.SCREEN_ACTIVITY);
         list.add("交互视频播放");
-        activitys.add("/sample/InteractiveVideoActivity");
-
-
+        activitys.add(ARoutePathConstants.Tool.INTERACTIVE_VIDEO_ACTIVITY);
         mAdapter.updata(list);
     }
 

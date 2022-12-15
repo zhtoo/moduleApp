@@ -19,6 +19,11 @@ android {
                 arguments = [AROUTER_MODULE_NAME: project.getName()]
             }
         }
+
+    }
+
+    buildFeatures {
+        viewBinding true
     }
 
     buildTypes {
@@ -68,6 +73,6 @@ dependencies {
 //    api 'com.google.android.exoplayer:exoplayer:2.9.3'
 //    api 'com.google.android.exoplayer:exoplayer-core:2.9.3'
 //    api 'com.google.android.exoplayer:exoplayer-dash:2.9.3'
-   // api 'com.google.android.exoplayer:exoplayer-ui:2.9.3'
+    // api 'com.google.android.exoplayer:exoplayer-ui:2.9.3'
 
 }

@@ -1,4 +1,4 @@
-package com.zht.moduletool.sample;
+package com.zht.moduletool.activity;
 
 import android.os.Bundle;
 import android.view.View;
@@ -8,14 +8,15 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.zht.common.constant.ARoutePathConstants;
 import com.zht.common.util.ToastUtil;
 import com.zht.moduletool.R;
 
 /**
  * Created by ZhangHaitao on 2018/10/15
  */
-@Route(path = "/sample/PermissionAcrivity")
-public class PermissionAcrivity extends AppCompatActivity implements View.OnClickListener {
+@Route(path = ARoutePathConstants.Tool.PERMISSION_REQUEST_ACTIVITY)
+public class PermissionRequestActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Button button;
 

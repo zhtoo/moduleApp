@@ -8,6 +8,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.zht.common.base.BaseActivity;
+import com.zht.common.constant.ARoutePathConstants;
 import com.zht.moduleview.R;
 import com.zht.moduleview.calendarview.CustomDayView;
 import com.zht.moduleview.calendarview.component.CalendarAttr;
@@ -23,7 +24,7 @@ import java.util.HashMap;
 /**
  * Created by ZhangHaitao on 2018/12/21
  */
-@Route(path = "/moduleview/activity/CalendarActivity")
+@Route(path = ARoutePathConstants.View.CALENDAR_ACTIVITY)
 public class CalendarActivity extends BaseActivity {
 
     private CalendarViewAdapter calendarAdapter;

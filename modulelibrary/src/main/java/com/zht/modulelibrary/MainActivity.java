@@ -10,6 +10,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.zht.common.base.BaseActivity;
+import com.zht.common.constant.ARoutePathConstants;
 
 /**
  * Created by ZhangHaitao on 2018/9/29.
@@ -29,7 +30,7 @@ public class MainActivity extends BaseActivity {
     protected void initView(Bundle savedInstanceState) {
         super.initView(savedInstanceState);
         toolsFragment = (Fragment) ARouter.getInstance()
-                .build("/moduleLibrary/LibraryFragment")
+                .build(ARoutePathConstants.Library.LIBRARY_FRAGMENT)
                 .navigation();
         //获取到FragmentManager，在V4包中通过getSupportFragmentManager，
         //在系统中原生的Fragment是通过getFragmentManager获得的。

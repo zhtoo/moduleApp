@@ -10,6 +10,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.zht.common.constant.ARoutePathConstants;
 import com.zht.moduleview.R;
 
 import java.util.ArrayList;
@@ -18,7 +19,7 @@ import java.util.Collections;
 /**
  * Created by ZhangHaitao on 2019/4/18
  */
-@Route(path = "/moduleview/activity/QuickIndexActivity")
+@Route(path = ARoutePathConstants.View.QUICK_INDEX_ACTIVITY)
 public class QuickIndexActivity  extends AppCompatActivity implements CustomAdapter.OnItemCilckListener {
     ListView listview;
     TextView tv_letter;

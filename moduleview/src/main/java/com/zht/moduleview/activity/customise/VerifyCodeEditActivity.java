@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.zht.common.base.BaseActivity;
+import com.zht.common.constant.ARoutePathConstants;
 import com.zht.moduleview.CustomKeyboard.CustomKeyboardManager;
 import com.zht.moduleview.R;
 import com.zht.moduleview.VerifyCode.VerifyCodeEditText;
@@ -17,7 +18,7 @@ import com.zht.moduleview.VerifyCode.VerifyCodeEditText;
 /**
  * Created by ZhangHaitao on 2019/4/4
  */
-@Route(path = "/moduleview/activity/VerifyCodeEditActivity")
+@Route(path = ARoutePathConstants.View.VERIFY_CODE_EDIT_ACTIVITY)
 public class VerifyCodeEditActivity extends BaseActivity {
     @Override
     protected int getLayoutId() {
