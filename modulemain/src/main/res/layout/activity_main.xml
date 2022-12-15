@@ -32,6 +32,8 @@
             android:layout_gravity="start"
             android:background="#FFFFFF"
             android:elevation="3dp"
+            app:itemBackground="@null"
+            app:labelVisibilityMode="labeled"
             app:itemIconTint="@color/selector_bottom_item_color"
             app:itemTextColor="@color/selector_bottom_item_color"
             app:menu="@menu/nain_navigation_items" />
