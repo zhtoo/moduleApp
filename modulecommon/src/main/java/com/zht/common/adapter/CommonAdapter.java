@@ -51,7 +51,7 @@ public class CommonAdapter extends RecyclerView.Adapter<CommonAdapter.CommonView
             holder.imageView.setVisibility(View.GONE);
         }
 
-        holder.textView.setOnClickListener(new View.OnClickListener() {
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ARouter.getInstance()
