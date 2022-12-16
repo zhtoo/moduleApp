@@ -55,7 +55,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:srcCompat="@drawable/zb_video_errors" />
+            app:srcCompat="@drawable/ic_video_errors" />
 
         <TextView
             android:id="@+id/video_error_text"
@@ -80,7 +80,7 @@
             android:layout_height="40dp"
             android:onClick="back"
             android:padding="10dp"
-            app:srcCompat="@drawable/zb_video_back" />
+            app:srcCompat="@drawable/ic_video_back" />
 
         <TextView
             android:id="@+id/video_title"
@@ -114,7 +114,7 @@
             android:layout_marginLeft="10dp"
 
             android:padding="10dp"
-            app:srcCompat="@drawable/zb_video_pause" />
+            app:srcCompat="@drawable/ic_video_pause" />
 
         <SeekBar
             android:id="@+id/video_progress"
@@ -124,8 +124,8 @@
             android:max="100000"
             android:maxHeight="3dp"
             android:minHeight="3dp"
-            android:progressDrawable="@drawable/zb_video_seekbar_back"
-            android:thumb="@drawable/zb_video_thumb_size"
+            android:progressDrawable="@drawable/ic_video_seekbar_back"
+            android:thumb="@drawable/ic_video_thumb_size"
             android:thumbOffset="0dp" />
 
         <TextView
@@ -145,7 +145,7 @@
             android:layout_marginRight="15dp"
             android:scaleType="fitXY"
             android:padding="8dp"
-            app:srcCompat="@drawable/zb_video_horizontal" />
+            app:srcCompat="@drawable/ic_video_horizontal" />
 
     </LinearLayout>
 

@@ -9,5 +9,5 @@
         </shape>
         <solid android:color="@android:color/transparent" />
     </item>
-    <item android:drawable="@drawable/zb_video_seekbar" />
+    <item android:drawable="@drawable/ic_video_seekbar" />
 </layer-list>

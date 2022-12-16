@@ -133,7 +133,7 @@ public class VideoActivity extends AppCompatActivity {
             // 显示工具条
             showMenu(true);
             // 设置成重新启动
-            videoPlay.setImageResource(R.drawable.zb_video_play);
+            videoPlay.setImageResource(R.drawable.ic_video_play);
         }
 
         if (percent >= videoProgress.getMax()) {
@@ -151,7 +151,7 @@ public class VideoActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.zb_common_video_watch);
+        setContentView(R.layout.activity_video_watch);
         //隐藏状态栏
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
@@ -182,7 +182,7 @@ public class VideoActivity extends AppCompatActivity {
 
         Glide.with(this)
                 .asGif()
-                .load(R.drawable.zb_video_loading)
+                .load(R.drawable.ic_video_loading)
                 .into(loading);
 
         String url = "http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4";
@@ -318,13 +318,13 @@ public class VideoActivity extends AppCompatActivity {
                 int requestedOrientation = getRequestedOrientation();
                 //竖屏
                 if (requestedOrientation == ActivityInfo.SCREEN_ORIENTATION_PORTRAIT) {
-                    videoScreenOrientation.setImageResource(R.drawable.zb_video_vertical);
+                    videoScreenOrientation.setImageResource(R.drawable.ic_video_vertical);
                     //设置横屏
                     setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
                     //隐藏状态栏
                     getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
                 } else {//横屏
-                    videoScreenOrientation.setImageResource(R.drawable.zb_video_horizontal);
+                    videoScreenOrientation.setImageResource(R.drawable.ic_video_horizontal);
                     //设置竖屏
                     setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
                     //显示状态栏
@@ -372,7 +372,7 @@ public class VideoActivity extends AppCompatActivity {
         if (requestedOrientation == ActivityInfo.SCREEN_ORIENTATION_PORTRAIT) {
             super.onBackPressed();
         } else {//横屏
-            videoScreenOrientation.setImageResource(R.drawable.zb_video_horizontal);
+            videoScreenOrientation.setImageResource(R.drawable.ic_video_horizontal);
             //设置竖屏
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
             //显示状态栏
@@ -421,7 +421,7 @@ public class VideoActivity extends AppCompatActivity {
         //开始记录播放时间
         handler.sendEmptyMessageDelayed(pay_video, 50);
         startRecordTime();
-        videoPlay.setImageResource(R.drawable.zb_video_pause);
+        videoPlay.setImageResource(R.drawable.ic_video_pause);
     }
 
     /**
@@ -430,7 +430,7 @@ public class VideoActivity extends AppCompatActivity {
     private void pauseVideo() {
         if (videoView.isPlaying()) {
             isPause = true;
-            videoPlay.setImageResource(R.drawable.zb_video_play);
+            videoPlay.setImageResource(R.drawable.ic_video_play);
             videoView.pause();
             //停止刷新进度条
             handler.removeMessages(pay_video);

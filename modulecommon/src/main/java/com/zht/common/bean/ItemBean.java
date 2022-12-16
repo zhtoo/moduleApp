@@ -1,19 +1,24 @@
-package com.zht.modulelibrary.bean;
+package com.zht.common.bean;
 
 import androidx.annotation.DrawableRes;
 
 /**
- * @Date 2022/12/15 17:21
+ * @Date 2022/12/16 09:35
  * @Author zhanghaitao
  * @Description
  */
-public class LibraryBean {
+public class ItemBean {
 
     private int icon;
     private String name;
     private String routerPath;
 
-    public LibraryBean(@DrawableRes int icon, String name, String routerPath) {
+    public ItemBean( String name, String routerPath) {
+        this.name = name;
+        this.routerPath = routerPath;
+    }
+
+    public ItemBean(@DrawableRes int icon, String name, String routerPath) {
         this.icon = icon;
         this.name = name;
         this.routerPath = routerPath;
@@ -42,4 +47,5 @@ public class LibraryBean {
     public void setRouterPath(String routerPath) {
         this.routerPath = routerPath;
     }
+
 }

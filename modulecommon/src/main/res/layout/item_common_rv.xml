@@ -17,13 +17,13 @@
         android:orientation="horizontal">
 
         <ImageView
-            android:id="@+id/library_icon"
+            android:id="@+id/item_icon"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_marginStart="15dp" />
 
         <TextView
-            android:id="@+id/library_name"
+            android:id="@+id/item_name"
             android:layout_width="match_parent"
             android:layout_marginStart="15dp"
             android:layout_height="match_parent"
