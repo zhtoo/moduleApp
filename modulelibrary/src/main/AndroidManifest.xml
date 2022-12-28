@@ -8,6 +8,8 @@
 
         <activity android:name=".MainActivity" />
         <activity android:name=".activity.JsoupActivity" />
+        <activity android:name=".activity.CartoonActivity" />
+        <activity android:name=".activity.CartoonWatchActivity" />
     </application>
 
 

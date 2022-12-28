@@ -33,6 +33,8 @@ public class ARoutePathConstants {
         String MODULE = "/moduleLibrary";
         String LIBRARY_FRAGMENT = MODULE + "/LibraryFragment";
         String JSOUP_ACTIVITY = MODULE + "/JsoupActivity";
+        String CARTOON_ACTIVITY = MODULE + "/CartoonActivity";
+        String CARTOON_WATCH_ACTIVITY = MODULE + "/CartoonWatchActivity";
     }
 
     public interface View {

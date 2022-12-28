@@ -5,6 +5,8 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.viewbinding.ViewBinding;
 
+import com.alibaba.android.arouter.launcher.ARouter;
+
 public abstract class BaseViewBindingActivity<T extends ViewBinding> extends PermissionActivity {
 
     public T binding;
@@ -23,6 +25,7 @@ public abstract class BaseViewBindingActivity<T extends ViewBinding> extends Per
         //加载布局
         binding = getViewBinding();
         setContentView(binding.getRoot());
+        ARouter.getInstance().inject(this);
         initView(savedInstanceState);
         initData();
     }

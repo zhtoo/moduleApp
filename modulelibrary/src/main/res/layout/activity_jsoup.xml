@@ -5,4 +5,36 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <EditText
+        android:id="@+id/jsoup_search_url"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:hint="请输入搜索Url"
+        android:lines="1"
+        android:paddingLeft="15dp" />
+
+    <EditText
+        android:id="@+id/jsoup_search_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:hint="请输入搜索名称"
+        android:lines="1"
+        android:paddingLeft="15dp" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_margin="10dp"
+        android:text="搜索"
+        android:onClick="clickSearch"/>
+
+    <TextView
+        android:id="@+id/jsoup_search_result"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="vertical"
+        android:fadeScrollbars="false"/>
+
 </LinearLayout>
