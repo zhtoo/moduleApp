@@ -1,3 +1,29 @@
 <resources>
     <string name="app_name">moduleTool</string>
+
+
+    <string name="demo_request_single_dangerous_permission">申请单个危险权限</string>
+    <string name="demo_request_multiple_dangerous_permission">申请多个危险权限</string>
+    <string name="demo_request_location_permission">申请定位权限</string>
+    <string name="demo_request_sensors_permission">申请传感器权限</string>
+    <string name="demo_request_activity_recognition_permission">申请身体活动权限</string>
+    <string name="demo_request_bluetooth_permission">申请蓝牙权限</string>
+    <string name="demo_request_wifi_permission">申请 WIFI 权限</string>
+    <string name="demo_request_media_location_permission">申请读取图片位置权限</string>
+    <string name="demo_request_media_read_permission">申请媒体文件读取权限</string>
+    <string name="demo_request_all_file_access_permission">申请所有文件管理权限</string>
+    <string name="demo_request_install_unknown_apps_permission">申请安装包权限</string>
+    <string name="demo_request_display_over_other_apps_permission">申请悬浮窗权限</string>
+    <string name="demo_request_modify_system_settings_permission">申请系统设置权限</string>
+    <string name="demo_request_allow_notifications_permission">申请通知权限</string>
+    <string name="demo_request_send_notifications_permission_api33">申请新版通知权限</string>
+    <string name="demo_request_allow_notifications_access_permission">申请通知栏监听权限</string>
+    <string name="demo_request_apps_with_usage_access_permission">申请使用统计权限</string>
+    <string name="demo_request_alarms_reminders_permission">申请闹钟提醒权限</string>
+    <string name="demo_request_do_not_disturb_access_permission">申请勿扰权限</string>
+    <string name="demo_request_ignore_battery_optimize_permission">申请忽略电池优化权限</string>
+    <string name="demo_request_picture_in_picture_permission">申请画中画权限</string>
+    <string name="demo_request_vpn_permission">申请 VPN 权限</string>
+    <string name="demo_start_app_details_activity">跳转到应用详情页</string>
+
 </resources>

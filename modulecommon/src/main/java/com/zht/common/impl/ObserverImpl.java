@@ -9,11 +9,11 @@ import io.reactivex.disposables.Disposable;
  * @Description
  */
 public abstract class ObserverImpl<T> implements Observer<T> {
+
     @Override
     public void onSubscribe(Disposable d) {
 
     }
-
 
     @Override
     public void onComplete() {

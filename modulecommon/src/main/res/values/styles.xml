@@ -8,4 +8,9 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+
+    <style name="AlertDialog.AppCompat.AAA" parent="@style/custom_dialog2">
+
+    </style>
+
 </resources>
