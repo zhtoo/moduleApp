@@ -25,6 +25,7 @@ public class ARoutePathConstants {
         String PERMISSION_REQUEST_ACTIVITY = MODULE + "/PermissionRequestActivity";
         String SCREEN_ACTIVITY = MODULE + "/ScreenActivity";
         String INTERACTIVE_VIDEO_ACTIVITY = MODULE + "/InteractiveVideoActivity";
+        String STORAGE_ACTIVITY = MODULE + "/StorageActivity";
 
     }
 

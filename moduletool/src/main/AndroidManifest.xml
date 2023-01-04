@@ -22,6 +22,7 @@
         <activity android:name=".activity.ScreenActivity" />
         <activity android:name=".activity.InteractiveVideoActivity"
             android:configChanges="orientation|keyboardHidden|screenSize|layoutDirection"/>
+        <activity android:name=".activity.StorageActivity"/>
 
     </application>
 

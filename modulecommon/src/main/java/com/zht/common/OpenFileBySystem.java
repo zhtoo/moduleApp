@@ -365,11 +365,8 @@ public class OpenFileBySystem {
         ACTION_CAMERA_BUTTON  打开照相机
          */
         intent.setAction(Intent.ACTION_VIEW);//查看
-//
 //        intent.setAction(Intent.ACTION_SEND);//分享
 //        intent.setAction(Intent.ACTION_SENDTO);//分享到
-
-//        intent.setAction(Intent.ACTION_SEND);
         //文件的类型
         String type = "";
         for (int i = 0; i < MATCH_ARRAY.length; i++) {
