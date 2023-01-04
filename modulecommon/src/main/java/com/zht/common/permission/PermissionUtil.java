@@ -53,7 +53,7 @@ public class PermissionUtil {
         builder.setCancelable(true);
         View view = LayoutInflater.from(context).inflate(R.layout.layout_custom_alert_dialog, null, false);
         view.<TextView>findViewById(R.id.alert_title).setText("权限未授予");
-        view.<TextView>findViewById(R.id.alert_content).setText("获取权限失败，请到应用中心授予该权限后，才能使用后功能");
+        view.<TextView>findViewById(R.id.alert_content).setText("获取权限失败，请到应用中心授予该权限后，才能使用该功能");
         view.<Button>findViewById(R.id.alert_cancel).setText("取消");
         view.<Button>findViewById(R.id.alert_submit).setText("前往应用中心");
 
