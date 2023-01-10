@@ -29,8 +29,8 @@ public class BottomNavigationViewHelper {
             int itemTextAppearanceActive = menuView.getItemTextAppearanceActive();
             for (int i = 0; i < menuView.getChildCount(); i++) {
                 BottomNavigationItemView child = (BottomNavigationItemView) menuView.getChildAt(i);
-                TextView smallLabel = child.findViewById(R.id.smallLabel);
-                TextView largeLabel = child.findViewById(R.id.largeLabel);
+                TextView smallLabel = child.findViewById(R.id.navigation_bar_item_small_label_view);
+                TextView largeLabel = child.findViewById(R.id.navigation_bar_item_large_label_view);
                 if (smallLabel != null && largeLabel != null) {
                     float min = Math.min(smallLabel.getTextSize(), largeLabel.getTextSize());
                     smallLabel.setTextSize(TypedValue.COMPLEX_UNIT_PX, min);

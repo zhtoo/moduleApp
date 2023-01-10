@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
+
 import androidx.core.content.FileProvider;
 
 import com.zht.common.util.ToastUtil;
@@ -351,42 +352,42 @@ public class OpenFileBySystem {
      *
      * @param context 上下文
      * @param path    文件路径
+     * @param action  操作类型：
+     *                ACTION_SENDTO   发送
+     *                ACTION_VIEW     查看
+     *                ACTION_PACKAGE_ADDED  安装apk
+     *                ACTION_CAMERA_BUTTON  打开照相机
      */
-    public static void openFileByPath(Context context, String path) {
+    public static void openFileByPath(Context context, String path, String action) {
         if (context == null || path == null)
             return;
-        Intent intent = new Intent();
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        //设置intent的Action属性
-        /*
-        ACTION_SENDTO   发送
-        ACTION_VIEW     查看
-        ACTION_PACKAGE_ADDED  安装apk
-        ACTION_CAMERA_BUTTON  打开照相机
-         */
-        intent.setAction(Intent.ACTION_VIEW);//查看
-//        intent.setAction(Intent.ACTION_SEND);//分享
-//        intent.setAction(Intent.ACTION_SENDTO);//分享到
-        //文件的类型
-        String type = "";
-        for (int i = 0; i < MATCH_ARRAY.length; i++) {
-            //判断文件的格式
-            if (path.toLowerCase().contains(MATCH_ARRAY[i][0].toLowerCase())) {
-                type = MATCH_ARRAY[i][1];
-                break;
-            }
-        }
+
         try {
+            Intent intent = new Intent();
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            //设置intent的Action属性
+            intent.setAction(action);
+            //文件的类型
+            String type = "";
+            for (int i = 0; i < MATCH_ARRAY.length; i++) {
+                //判断文件的格式
+                if (path.toLowerCase().contains(MATCH_ARRAY[i][0].toLowerCase())) {
+                    type = MATCH_ARRAY[i][1];
+                    break;
+                }
+            }
+            Uri fileUri;
             //判断是否是AndroidN以及更高的版本
             //设置intent的data和Type属性
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                Uri contentUri = FileProvider.getUriForFile(context, "com.zht.modlueapp.fileProvider", new File(path));
+                fileUri = FileProvider.getUriForFile(context, "com.zht.modlueapp.fileProvider", new File(path));
                 //临时赋予读写Uri的权限
                 intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-                intent.setDataAndType(contentUri, type);
             } else {
-                intent.setDataAndType(Uri.fromFile(new File(path)), type);
+                fileUri = Uri.fromFile(new File(path));
             }
+            intent.putExtra(Intent.EXTRA_STREAM, fileUri);
+            intent.setType(type);
             //跳转
             context.startActivity(intent);
         } catch (Exception e) { //当系统没有携带文件打开软件，提示
@@ -394,6 +395,5 @@ public class OpenFileBySystem {
             e.printStackTrace();
         }
     }
-
 
 }

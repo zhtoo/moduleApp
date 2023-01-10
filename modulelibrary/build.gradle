@@ -69,4 +69,7 @@ dependencies {
     // jsoup
     implementation("org.jsoup:jsoup:1.15.3")
 
+    // ZXing
+    api "com.google.zxing:core:3.5.1"
+
 }

@@ -44,6 +44,7 @@ public class PermissionActivity  extends AppCompatActivity {
     @Override
     public void onRequestPermissionsResult(int requestCode,
                                            String permissions[], int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode != REQUEST_CODE) {
             return;
         }

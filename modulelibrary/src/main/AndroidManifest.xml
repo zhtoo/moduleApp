@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools">
 
 
+
+
     <application
         android:theme="@style/AppTheme">
 
@@ -10,6 +12,7 @@
         <activity android:name=".activity.JsoupActivity" />
         <activity android:name=".activity.CartoonActivity" />
         <activity android:name=".activity.CartoonWatchActivity" />
+        <activity android:name=".activity.ZXingActivity" />
     </application>
 
 

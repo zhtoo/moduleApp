@@ -1,11 +1,16 @@
 package com.zht.common.base;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
 
 import androidx.annotation.Nullable;
 import androidx.viewbinding.ViewBinding;
 
 import com.alibaba.android.arouter.launcher.ARouter;
+
+import java.lang.reflect.Method;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 
 public abstract class BaseViewBindingActivity<T extends ViewBinding> extends PermissionActivity {
 
@@ -22,8 +27,24 @@ public abstract class BaseViewBindingActivity<T extends ViewBinding> extends Per
      */
     private void init(Bundle savedInstanceState) {
         beforeSetContentView(savedInstanceState);
-        //加载布局
-        binding = getViewBinding();
+
+        // 加载布局
+        try {
+            // 获取到第一个范型类的Class
+            Type actualTypeArgument = ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
+            Class<T> clazz = (Class<T>) actualTypeArgument;
+            Method method = clazz.getMethod("inflate", LayoutInflater.class);//获取inflate方法
+            method.setAccessible(true);//强制反射
+            binding = (T) method.invoke(null, getLayoutInflater());//调用inflate方法获取binding对象
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+//        if(binding == null){
+//         //   binding = getViewBinding();
+//        }
+
+        //ViewBinding
         setContentView(binding.getRoot());
         ARouter.getInstance().inject(this);
         initView(savedInstanceState);
@@ -40,7 +61,9 @@ public abstract class BaseViewBindingActivity<T extends ViewBinding> extends Per
      * @return
      */
 
-    abstract protected T getViewBinding();
+    protected T getViewBinding() {
+        return null;
+    }
 
     /**
      * 初始化view
@@ -63,7 +86,6 @@ public abstract class BaseViewBindingActivity<T extends ViewBinding> extends Per
         super.onDestroy();
         binding = null;
     }
-
 
 
 }

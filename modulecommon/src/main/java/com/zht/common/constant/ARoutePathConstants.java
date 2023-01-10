@@ -36,6 +36,9 @@ public class ARoutePathConstants {
         String JSOUP_ACTIVITY = MODULE + "/JsoupActivity";
         String CARTOON_ACTIVITY = MODULE + "/CartoonActivity";
         String CARTOON_WATCH_ACTIVITY = MODULE + "/CartoonWatchActivity";
+
+        //
+        String ZXing_ACTIVITY = MODULE + "/ZXingActivity";
     }
 
     public interface View {

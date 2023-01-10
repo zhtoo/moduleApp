@@ -6,3 +6,4 @@ include ':app',
         ':modulecommon',
         ':modulemain',
         ':moduletool'
+include ':kotlinLibrary'
