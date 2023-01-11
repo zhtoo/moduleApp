@@ -65,6 +65,12 @@ public class FileUtils {
         }
     }
 
+    /**
+     * 合并文件
+     * @param fpaths 需要合并的文件地址
+     * @param resultPath 输出文件地址
+     * @return
+     */
     public static boolean mergeFiles(String[] fpaths, String resultPath) {
         if (fpaths == null || fpaths.length < 1 || TextUtils.isEmpty(resultPath)) {
             return false;

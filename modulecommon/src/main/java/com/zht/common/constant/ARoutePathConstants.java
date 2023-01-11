@@ -39,6 +39,12 @@ public class ARoutePathConstants {
 
         //
         String ZXing_ACTIVITY = MODULE + "/ZXingActivity";
+
+        String CAMERAX_ACTIVITY = MODULE + "/CameraXActivity";
+
+        String CAMERAX_PREVIEW_ACTIVITY = MODULE + "/camera/CameraPreviewActivity";
+        String CAMERAX_PICTURE_ACTIVITY = MODULE + "/camera/CameraPictureActivity";
+        String CAMERAX_VIDEO_ACTIVITY = MODULE + "/camera/CameraVideoActivity";
     }
 
     public interface View {

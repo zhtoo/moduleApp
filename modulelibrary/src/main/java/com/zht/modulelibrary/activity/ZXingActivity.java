@@ -1,7 +1,6 @@
 package com.zht.modulelibrary.activity;
 
 import android.content.ContentValues;
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
@@ -9,7 +8,6 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.text.TextUtils;
-import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -24,27 +22,24 @@ import com.google.zxing.ReaderException;
 import com.google.zxing.Result;
 import com.google.zxing.common.HybridBinarizer;
 import com.zht.common.constant.ARoutePathConstants;
-import com.zht.common.util.Logger;
-import com.zht.kotlin.cameraX.CameraActivity;
+import com.zht.kotlin.cameraX.PreviewCameraActivity;
 import com.zht.modulelibrary.databinding.ActivityZxingBinding;
 import com.zht.modulelibrary.zxing.DecodeFormatManager;
-import com.zht.modulelibrary.zxing.ZXingHelper;
 
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.Collection;
 import java.util.EnumMap;
 import java.util.EnumSet;
-import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
  * @Date 2023/1/9 17:34
  * @Author zhanghaitao
- * @Description 自定义相机：
+ * @Description
  */
 @Route(path = ARoutePathConstants.Library.ZXing_ACTIVITY)
-public class ZXingActivity extends CameraActivity {
+public class ZXingActivity extends PreviewCameraActivity {
 
     private MultiFormatReader multiFormatReader;
     private Map<DecodeHintType, Object> hints;
@@ -70,17 +65,9 @@ public class ZXingActivity extends CameraActivity {
         hints.put(DecodeHintType.CHARACTER_SET, "utf-8");
         //  hints.put(DecodeHintType.NEED_RESULT_POINT_CALLBACK, resultPointCallback);
         multiFormatReader.setHints(hints);
-    }
 
-    public void clickPreview(View view) {
-        startCamera();
+        checkPermissionsAndStartCamera();
     }
-
-    public void clickTakePhoto(View view) {
-        takePhoto();
-    }
-
-    private boolean sava = false;
 
     @Override
     public void onCatchPreviewImage(Bitmap bitmap) {

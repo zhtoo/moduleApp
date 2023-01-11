@@ -4,24 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/preview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="clickPreview"
-        android:text="开启预览"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/take_photo"
-        app:layout_constraintStart_toStartOf="parent" />
 
-    <Button
-        android:id="@+id/take_photo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="clickTakePhoto"
-        android:text="拍照"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/preview" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

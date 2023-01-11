@@ -1,25 +1,14 @@
 package com.zht.kotlin.cameraX
 
 import android.Manifest
-import android.content.ContentValues
-import android.content.pm.PackageManager
 import android.graphics.*
 import android.os.Build
-import android.provider.MediaStore
 import android.util.Log
-import android.view.LayoutInflater
 import android.view.Surface
-import android.view.View
-import android.view.ViewGroup
-import android.widget.FrameLayout
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
-import androidx.camera.view.PreviewView
-import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.core.view.get
 import java.io.ByteArrayOutputStream
 
 /**
@@ -27,54 +16,46 @@ import java.io.ByteArrayOutputStream
  * @Author zhanghaitao
  * @Description
  */
-open class CameraActivity : AppCompatActivity() {
+open class PreviewCameraActivity : BaseCameraActivity() {
 
-    private val TAG = "CameraActivity"
-    private val FILENAME_FORMAT = "pictrue_%s.jpg"
+    private val TAG = "PreviewCamera"
 
-    private val REQUEST_CODE = 0
+    var isAnalyzingYuvImage: Boolean = false
 
-    lateinit var previewView: PreviewView
-    var imageCapture: ImageCapture? = null
-
-    var onTakeYuv: Boolean = false
-
-    fun startCamera() {
+    fun checkPermissionsAndStartCamera() {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.P) {
             requestPermissions(arrayOf(
-                Manifest.permission.CAMERA,
-                Manifest.permission.RECORD_AUDIO
+                Manifest.permission.CAMERA
             ))
         } else {
             requestPermissions(arrayOf(
                 Manifest.permission.CAMERA,
-                Manifest.permission.RECORD_AUDIO,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE
             ))
         }
     }
 
-    private fun startCamera(granted: Boolean) {
+    override fun onPermissionsGranted(granted: Boolean) {
         if (!granted) {
             Toast.makeText(this, "权限未开启，相机不可用", Toast.LENGTH_SHORT).show()
             return
         }
+        startCamera()
+    }
 
+    fun startCamera() {
         val cameraProviderFuture = ProcessCameraProvider.getInstance(this)
-
         cameraProviderFuture.addListener({
             // Used to bind the lifecycle of cameras to the lifecycle owner
             val cameraProvider: ProcessCameraProvider = cameraProviderFuture.get()
 
             // Preview 预览参数配置
             val preview = Preview.Builder()
+                .setTargetAspectRatio(AspectRatio.RATIO_16_9)
                 .build()
                 .also {
                     it.setSurfaceProvider(previewView.surfaceProvider)
                 }
-
-            imageCapture = ImageCapture.Builder()
-                .build()
 
             // 图片分析（实时获取预览数据）
             val imageAnalyzerBuilder = ImageAnalysis.Builder()
@@ -98,38 +79,14 @@ open class CameraActivity : AppCompatActivity() {
                 .also {
                     it.setAnalyzer(ContextCompat.getMainExecutor(this),
                         ImageAnalysis.Analyzer { imageProxy ->
-
-
-                            Log.e(TAG,
-                                String.format("Analyzer(%d,%d)",
-                                    imageProxy.width,
-                                    imageProxy.height))
-                            Log.e(TAG,
-                                String.format("Analyzer PreviewView(%d,%d)",
-                                    previewView.width,
-                                    previewView.height))
-                            try {
-                                for (i in 0 until previewView.childCount){
-                                    Log.e(TAG, "${previewView.get(i)}" )
-                                    Log.e(TAG,
-                                        String.format("Analyzer PreviewView[${i}](%d,%d)",
-                                            previewView.get(i).width,
-                                            previewView.get(i).height))
-                                }
-
-                            } catch (e: Exception) {
-                                e.printStackTrace()
-                            }
                             // 处理数据
-                            if (!onTakeYuv) {
-                                Log.e(TAG, "startAnalyzer")
+                            if (!isAnalyzingYuvImage) {
                                 startAnalyzer()
                                 createBitmapFromImageProxy(imageProxy)?.apply {
                                     onCatchPreviewImage(this)
                                 }
                                 stopAnalyzer()
                             }
-                            Log.e(TAG, "ImageProxy close")
                             imageProxy.close()
                         })
                 }
@@ -142,123 +99,19 @@ open class CameraActivity : AppCompatActivity() {
                 cameraProvider.unbindAll()
                 // 绑定生命周期和UseCase
                 cameraProvider.bindToLifecycle(this,
-                    cameraSelector, imageAnalyzer, preview, imageCapture)
+                    cameraSelector, imageAnalyzer, preview)
             } catch (exc: Exception) {
                 Log.e(TAG, "Use case binding failed", exc)
             }
         }, ContextCompat.getMainExecutor(this))
     }
 
-    override fun setContentView(layoutResID: Int) {
-        val view = LayoutInflater.from(this).inflate(layoutResID, null, false)
-        super.setContentView(inflateCamera(view, null))
-    }
-
-    override fun setContentView(view: View?) {
-        super.setContentView(inflateCamera(view, null))
-    }
-
-    override fun setContentView(view: View?, params: ViewGroup.LayoutParams?) {
-        super.setContentView(inflateCamera(view, params))
-    }
-
-    private fun inflateCamera(view: View?, params: ViewGroup.LayoutParams?): View {
-        previewView = PreviewView(this)
-        val container = FrameLayout(this)
-        val previewLayoutParams = FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT,
-            FrameLayout.LayoutParams.MATCH_PARENT)
-        container.addView(previewView, previewLayoutParams)
-        container.addView(view, params ?: previewLayoutParams)
-        previewView.scaleType = PreviewView.ScaleType.FIT_START
-        return container
-    }
-
-    private fun requestPermissions(permissions: Array<String?>) {
-        var permissionGranted = true
-        for (permission in permissions) {
-            if (ContextCompat.checkSelfPermission(this, permission!!)
-                == PackageManager.PERMISSION_DENIED
-            ) {
-                permissionGranted = false
-                break
-            }
-        }
-        if (permissionGranted) {
-            startCamera(true)
-        } else {
-            ActivityCompat.requestPermissions(this, permissions, REQUEST_CODE)
-        }
-    }
-
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray,
-    ) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestCode != REQUEST_CODE) {
-            return
-        }
-        if (grantResults == null || grantResults.isEmpty()) {
-            startCamera(false)
-            return
-        }
-        var permissionGranted = true
-        for (grantResult in grantResults) {
-            if (PackageManager.PERMISSION_DENIED == grantResult) {
-                permissionGranted = false
-                break
-            }
-        }
-        startCamera(permissionGranted)
-    }
-
-    fun takePhoto() {
-        // Get a stable reference of the modifiable image capture use case
-        val imageCapture = imageCapture ?: return
-
-        // Create time stamped name and MediaStore entry.
-        val name = String.format(FILENAME_FORMAT, System.currentTimeMillis())
-        val contentValues = ContentValues().apply {
-            put(MediaStore.MediaColumns.DISPLAY_NAME, name)
-            put(MediaStore.MediaColumns.MIME_TYPE, "image/jpeg")
-            if (Build.VERSION.SDK_INT > Build.VERSION_CODES.P) {
-                put(MediaStore.Images.Media.RELATIVE_PATH, "Pictures/CameraX-Image")
-            }
-        }
-
-        // Create output options object which contains file + metadata
-        val outputOptions = ImageCapture.OutputFileOptions
-            .Builder(contentResolver,
-                MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
-                contentValues)
-            .build()
-
-        // Set up image capture listener, which is triggered after photo has
-        // been taken
-        imageCapture.takePicture(
-            outputOptions,
-            ContextCompat.getMainExecutor(this),
-            object : ImageCapture.OnImageSavedCallback {
-                override fun onError(exc: ImageCaptureException) {
-                    Log.e(TAG, "Photo capture failed: ${exc.message}", exc)
-                }
-
-                override fun onImageSaved(output: ImageCapture.OutputFileResults) {
-                    val msg = "Photo capture succeeded: ${output.savedUri}"
-                    Toast.makeText(baseContext, msg, Toast.LENGTH_SHORT).show()
-                    Log.d(TAG, msg)
-                }
-            }
-        )
-    }
-
     private fun startAnalyzer() {
-        onTakeYuv = true
+        isAnalyzingYuvImage = true
     }
 
     private fun stopAnalyzer() {
-        onTakeYuv = false
+        isAnalyzingYuvImage = false
     }
 
     open fun onCatchPreviewImage(bitmap: Bitmap) {
