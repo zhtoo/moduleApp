@@ -5,6 +5,15 @@
     <application android:theme="@style/AppTheme">
 
         <activity android:name=".MainActivity" />
+        <activity android:name=".activity.CameraXActivity" />
+        <activity android:name=".activity.camerax.PreviewActivity" />
+        <activity android:name=".activity.camerax.TakePictureActivity" />
+        <activity android:name=".activity.camerax.TakeVideoActivity" />
+        <activity android:name=".activity.DataStoreActivity" />
+        <activity android:name=".activity.JetpackActivity" />
+        <activity android:name=".activity.ComposeActivity" />
+        <activity android:name=".activity.HiltActivity" />
+        <activity android:name=".activity.SecurityActivity" />
 
     </application>
 

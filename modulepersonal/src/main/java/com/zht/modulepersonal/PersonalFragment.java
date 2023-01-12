@@ -1,11 +1,19 @@
 package com.zht.modulepersonal;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -21,6 +29,12 @@ import com.zht.common.constant.ARoutePathConstants;
 import com.zht.common.listener.PermissionCallBack;
 import com.zht.common.util.Logger;
 import com.zht.common.util.UriUtils;
+
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 
 /**
  * Created by ZhangHaitao on 2018/9/29.
@@ -46,6 +60,7 @@ public class PersonalFragment extends BaseFragment implements View.OnClickListen
 
         view.findViewById(R.id.bt_home_file_path).setOnClickListener(this);
         view.findViewById(R.id.bt_home_get_file_path).setOnClickListener(this);
+        view.findViewById(R.id.bt_to_tran).setOnClickListener(this);
 
         editText = view.findViewById(R.id.ed_home_file_path);
         editText.setText(Environment.getExternalStorageDirectory().getPath());
@@ -57,16 +72,16 @@ public class PersonalFragment extends BaseFragment implements View.OnClickListen
     protected void initData() {
         //需要在onCreate或onAttach中初始化
         activityResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
-            if(result!=null && result.getData()!=null ){
+            if (result != null && result.getData() != null) {
                 Uri uri = result.getData().getData();
                 Logger.e("File Uri: " + uri.toString());
                 String path = UriUtils.getPath(getContext(), uri);
                 if (!TextUtils.isEmpty(path)) {
-                    Logger.e( "File Path: " + path);
+                    Logger.e("File Path: " + path);
                     editText.setText(path);
                 } else {
                     editText.setText("");
-                    Logger.e(  "File Path is null ");
+                    Logger.e("File Path is null ");
                 }
             }
 
@@ -97,7 +112,109 @@ public class PersonalFragment extends BaseFragment implements View.OnClickListen
                         }
                 );
             }
+        } else if (view.getId() == R.id.bt_to_tran) {
+
         }
+    }
+
+    public void testBitmap(int resId) {
+        Bitmap bitmap = getBitmap(getContext(), resId);
+        if (bitmap == null) {
+            return;
+        }
+        int width = bitmap.getWidth();
+        int height = bitmap.getHeight();
+        int[] pixelArr = new int[width * height];
+        bitmap.getPixels(pixelArr, 0, width, 0, 0, width, height);
+
+
+        for (int i = 0; i < width; i++) {
+            for (int j = 0; j < height; j++) {
+                int pixel = pixelArr[i * width + j];
+                if (pixel == Color.WHITE) {
+                    pixelArr[i * width + j] = Color.TRANSPARENT;
+                } else {
+                    break;
+                }
+            }
+        }
+
+        for (int i = (width - 1); i >= 0; i--) {
+            for (int j = (height - 1); j >= 0; j--) {
+                int pixel = pixelArr[i * width + j];
+                if (pixel == Color.WHITE) {
+                    pixelArr[i * width + j] = Color.TRANSPARENT;
+                } else {
+                    break;
+                }
+            }
+        }
+
+        Bitmap copy = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+        copy.setPixels(pixelArr, 0, width, 0, 0, width, height);
+        String exportFilePath = getContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES).getAbsolutePath() + "/dddd_" + ".png";
+        if (saveBitmap(copy, exportFilePath, Bitmap.CompressFormat.PNG, 100, true)) {
+            OpenFileBySystem.openFileByPath(getContext(), exportFilePath, Intent.ACTION_SEND);
+        } else {
+            Toast.makeText(getContext(), "保存失败", Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
+    private boolean saveBitmap(Bitmap bitmap,
+                               String savePath,
+                               Bitmap.CompressFormat format,
+                               int quality,
+                               boolean recycle) {
+        File file = new File(savePath);
+        if (file.exists()) {
+            if (!file.delete()) {
+                return false;
+            }
+        }
+        if (bitmap == null) {
+            Log.e("ImageUtils", "bitmap is empty.");
+            return false;
+        }
+        if (bitmap.isRecycled()) {
+            Log.e("ImageUtils", "bitmap is recycled.");
+            return false;
+        }
+
+        OutputStream os = null;
+        boolean ret = false;
+        try {
+            os = new BufferedOutputStream(new FileOutputStream(file));
+            ret = bitmap.compress(format, quality, os);
+            if (recycle && !bitmap.isRecycled()) bitmap.recycle();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (os != null) {
+                    os.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return ret;
+    }
+
+    private Bitmap getBitmap(Context context, int resId) {
+        Bitmap bitmap = null;
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
+            Drawable drawable = context.getDrawable(resId);
+            bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+            if (bitmap != null) {
+                Canvas canvas = new Canvas(bitmap);
+                drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
+                drawable.draw(canvas);
+            }
+        } else {
+            bitmap = BitmapFactory.decodeResource(context.getResources(), resId);
+        }
+        return bitmap;
     }
 
 //    @Override

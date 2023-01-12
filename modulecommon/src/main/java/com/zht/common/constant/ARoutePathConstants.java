@@ -20,6 +20,9 @@ public class ARoutePathConstants {
         String DATA_STORE_ACTIVITY = MODULE + "/DataStoreActivity";
 
         String JETPACK_ACTIVITY = MODULE + "/JetpackActivity";
+        String COMPOSE_ACTIVITY = MODULE + "/ComposeActivity";
+        String HILT_ACTIVITY = MODULE + "/HiltActivity";
+        String SECURITY_ACTIVITY = MODULE + "/SecurityActivity";
     }
 
     public interface Tool {

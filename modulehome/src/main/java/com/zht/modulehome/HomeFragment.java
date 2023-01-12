@@ -40,6 +40,9 @@ public class HomeFragment extends BaseViewBindingFragment<FragmentHomeBinding> {
         list.add(new ItemBean(R.mipmap.ic_jetpack_logo, "Jetpack", ARoutePathConstants.Home.JETPACK_ACTIVITY));
         list.add(new ItemBean(R.mipmap.ic_camerax_logo, "CameraX", ARoutePathConstants.Home.CAMERAX_ACTIVITY));
         list.add(new ItemBean(R.mipmap.ic_datastore_logo, "DataStore", ARoutePathConstants.Home.DATA_STORE_ACTIVITY));
+        list.add(new ItemBean(R.mipmap.ic_compose_logo, "Compose", ARoutePathConstants.Home.COMPOSE_ACTIVITY));
+        list.add(new ItemBean(R.mipmap.ic_hilt_logo, "Hilt", ARoutePathConstants.Home.HILT_ACTIVITY));
+        list.add(new ItemBean(R.mipmap.ic_security_logo, "Security", ARoutePathConstants.Home.COMPOSE_ACTIVITY));
 
         mAdapter.setNewData(list);
     }
