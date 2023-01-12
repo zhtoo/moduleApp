@@ -218,7 +218,7 @@ src/main/AndroidManifest.xml
 
 1、在module里面的资源id在switch，case无法使用。解决方案：使用if,else
 
-2、butterknife的使用问题
+2、butterknife的使用问题(仅给使用butterknife的建议，目前ButterKnife已停止维护，推荐使用官方的ViewBinding)
 
 在modulelib引用api'com.jakewharton:butterknife:8.5.1'，然后在各个module下面
 
