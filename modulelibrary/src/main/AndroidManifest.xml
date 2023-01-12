@@ -10,13 +10,14 @@
 
         <activity android:name=".MainActivity" />
         <activity android:name=".activity.JsoupActivity" />
-        <activity android:name=".activity.CartoonActivity" />
-        <activity android:name=".activity.CartoonWatchActivity" />
+        <activity android:name=".activity.cartoon.CartoonActivity" />
+        <activity android:name=".activity.cartoon.CartoonWatchActivity" />
         <activity android:name=".activity.ZXingActivity" />
         <activity android:name=".activity.CameraXActivity" />
         <activity android:name=".activity.camerax.PreviewActivity" />
         <activity android:name=".activity.camerax.TakePictureActivity" />
         <activity android:name=".activity.camerax.TakeVideoActivity" />
+        <activity android:name=".activity.DataStoreActivity" />
     </application>
 
 

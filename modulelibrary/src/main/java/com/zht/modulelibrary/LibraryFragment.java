@@ -48,6 +48,7 @@ public class LibraryFragment extends BaseViewBindingFragment<FragmentLibraryBind
         list.add(new ItemBean(R.mipmap.ic_jsoup_logo, "Jsoup", ARoutePathConstants.Library.JSOUP_ACTIVITY));
         list.add(new ItemBean(R.mipmap.ic_zxing_logo, "ZXing", ARoutePathConstants.Library.ZXing_ACTIVITY));
         list.add(new ItemBean(R.mipmap.ic_camerax_logo, "CameraX", ARoutePathConstants.Library.CAMERAX_ACTIVITY));
+        list.add(new ItemBean(R.mipmap.ic_datastore_logo, "DataStore", ARoutePathConstants.Library.DATA_STORE_ACTIVITY));
 
         mAdapter.setNewData(list);
     }

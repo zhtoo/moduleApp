@@ -13,6 +13,7 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.*
 import androidx.datastore.preferences.preferencesDataStore
 import androidx.datastore.preferences.preferencesDataStoreFile
+import com.zht.kotlin.BuildConfig
 
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.Flow
@@ -39,7 +40,7 @@ object DataStoreUtil {
 
     // 创建 Preferences DataStore
     val Context.logDataStore: DataStore<Preferences> by preferencesDataStore(name = LOG_FILE_NAME)// 用于记录用户操作行为
-    val Context.catchDataStore: DataStore<Preferences> by preferencesDataStore(name = CATCH_FILE_NAME)// 用于记录用户操作行为
+    val Context.catchDataStore: DataStore<Preferences> by preferencesDataStore(name = CATCH_FILE_NAME)// 用于记录app崩溃日志
     val Context.appDataStore: DataStore<Preferences> by preferencesDataStore(name = APP_FILE_NAME)// 用于存储用户数据
 
     // 缓存DataStore
@@ -55,10 +56,10 @@ object DataStoreUtil {
         appDataStore = context.appDataStore
         logPath = context.preferencesDataStoreFile(LOG_FILE_NAME).absolutePath
         catchPath = context.preferencesDataStoreFile(CATCH_FILE_NAME).absolutePath
-//        if (Bui) {
-//            Log.e(TAG, "DataStoreUtil init. log file path is $logPath")
-//            Log.e(TAG, "DataStoreUtil init. catch file path is $catchPath")
-//        }
+        if (BuildConfig.DEBUG) {
+            Log.e(TAG, "DataStoreUtil init. log file path is $logPath")
+            Log.e(TAG, "DataStoreUtil init. catch file path is $catchPath")
+        }
         log("开始记录日志")
         catch("开始记录崩溃日志")
     }
@@ -198,6 +199,9 @@ object DataStoreUtil {
         if (logDataStore == null) {
             return
         }
+        if (BuildConfig.DEBUG) {
+            Log.d(TAG, "$value")
+        }
         GlobalScope.launch {
             val key =
                 SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS", Locale.getDefault()).format(Date())
@@ -209,10 +213,10 @@ object DataStoreUtil {
                     is Boolean -> preferences[booleanPreferencesKey(key)] = value
                     is Float -> preferences[floatPreferencesKey(key)] = value
                     else -> {
-//                        if (BuildConfig.DEBUG) {
-//                            Log.e(TAG,
-//                                "DataStore can only save data of Int/Long/String/Boolean/Float！！！")
-//                        }
+                        if (BuildConfig.DEBUG) {
+                            Log.e(TAG,
+                                "DataStore can only save data of Int/Long/String/Boolean/Float！！！")
+                        }
                     }
                 }
             }
@@ -235,87 +239,8 @@ object DataStoreUtil {
         }
     }
 
-    fun exportLog(context: Context) {
-        try {
-            //val exportFilePath = "${context.cacheDir.absolutePath}/log/appLogger.txt"
-            val exportFilePath =
-                "${Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS)}/shangDongAppLogger.txt"
-//            val exportFilePath =
-//                "${context.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS)}/shangDongAppLogger.txt"
-            if (mergeFiles(arrayOf(logPath, catchPath), exportFilePath)) {
-                Log.e(TAG, "exportFilePath is ${exportFilePath}")
-                shareFile(context, exportFilePath)
-            } else {
-                Toast.makeText(context, "文件获取失败，请重试", Toast.LENGTH_SHORT).show()
-            }
-        } catch (e: Exception) {
-//            if (BuildConfig.DEBUG) {
-//                e.printStackTrace()
-//            }
-        }
-    }
-
-    private fun shareFile(context: Context, filePath: String) {
-        if (context == null || filePath == null) return
-        try {
-            val intent = Intent()
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-            intent.action = Intent.ACTION_SEND
-            val type = "text/plain"
-            val fileUri: Uri
-            //判断是否是AndroidN以及更高的版本
-            //设置intent的data和Type属性
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                val authority = context.getPackageName() + ".FileProvider"
-                Log.e(TAG, "authority is ${authority}")
-                fileUri = FileProvider.getUriForFile(context,
-                    authority,
-                    File(filePath))
-                //临时赋予读写Uri的权限
-                intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-            } else {
-                fileUri = Uri.fromFile(File(filePath))
-            }
-            context.grantUriPermission(
-                "com.tencent.mm",  //微信包名
-                fileUri, Intent.FLAG_GRANT_READ_URI_PERMISSION
-            )
-            intent.setDataAndType(fileUri, type)
-            context.startActivity(Intent.createChooser(intent, "分享文件"))
-        } catch (e: java.lang.Exception) { //当系统没有携带文件打开软件，提示
-            Toast.makeText(context, "无法打开该格式文件!", Toast.LENGTH_SHORT).show()
-            e.printStackTrace()
-        }
-    }
-
-    private fun mergeFiles(filePaths: Array<String?>?, resultPath: String?): Boolean {
-        if (filePaths == null || filePaths.isEmpty() || TextUtils.isEmpty(resultPath)) {
-            return false
-        }
-        val files = arrayOfNulls<File>(filePaths.size)
-        for (i in filePaths.indices) {
-            files[i] = File(filePaths[i])
-            if (TextUtils.isEmpty(filePaths[i]) || !files[i]!!.exists() || !files[i]!!.isFile) {
-                return false
-            }
-        }
-        val resultFile = File(resultPath)
-        try {
-            val resultFileChannel = FileOutputStream(resultFile, true).channel
-            for (i in filePaths.indices) {
-                val blk = FileInputStream(files[i]).channel
-                resultFileChannel.transferFrom(blk, resultFileChannel.size(), blk.size())
-                blk.close()
-            }
-            resultFileChannel.close()
-        } catch (e: FileNotFoundException) {
-            e.printStackTrace()
-            return false
-        } catch (e: IOException) {
-            e.printStackTrace()
-            return false
-        }
-        return true
+    fun exportLogPath(): Array<String> {
+        return arrayOf(logPath, catchPath)
     }
 
 }
