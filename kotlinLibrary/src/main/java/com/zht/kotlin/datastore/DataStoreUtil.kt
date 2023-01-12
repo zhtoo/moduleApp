@@ -29,6 +29,8 @@ import java.util.*
  * @Date   2023/1/3 15:51
  * @Author zhanghaitao
  * @Description Jetpack ---> DataStore  Preferences
+ *
+ * //https://developer.android.google.cn/courses/pathways/compose?hl=zh_cn
  */
 object DataStoreUtil {
 

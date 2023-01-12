@@ -13,11 +13,12 @@
         <activity android:name=".activity.cartoon.CartoonActivity" />
         <activity android:name=".activity.cartoon.CartoonWatchActivity" />
         <activity android:name=".activity.ZXingActivity" />
-        <activity android:name=".activity.CameraXActivity" />
-        <activity android:name=".activity.camerax.PreviewActivity" />
-        <activity android:name=".activity.camerax.TakePictureActivity" />
-        <activity android:name=".activity.camerax.TakeVideoActivity" />
-        <activity android:name=".activity.DataStoreActivity" />
+        <activity android:name="com.zht.modulehome.activity.CameraXActivity" />
+        <activity android:name="com.zht.modulehome.activity.camerax.PreviewActivity" />
+        <activity android:name="com.zht.modulehome.activity.camerax.TakePictureActivity" />
+        <activity android:name="com.zht.modulehome.activity.camerax.TakeVideoActivity" />
+        <activity android:name="com.zht.modulehome.activity.DataStoreActivity" />
+        <activity android:name="com.zht.modulehome.activity.JetpackActivity" />
     </application>
 
 

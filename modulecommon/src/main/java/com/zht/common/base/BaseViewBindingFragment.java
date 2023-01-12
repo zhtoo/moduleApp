@@ -10,6 +10,10 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.viewbinding.ViewBinding;
 
+import java.lang.reflect.Method;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
+
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
@@ -22,7 +26,18 @@ public abstract class BaseViewBindingFragment<T extends ViewBinding> extends Fra
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        binding = getViewBinding(inflater, container);
+        // 加载布局
+        try {
+            // 获取到第一个范型类的Class
+            Type actualTypeArgument = ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
+            Class<T> clazz = (Class<T>) actualTypeArgument;
+            Method method = clazz.getMethod("inflate", LayoutInflater.class);//获取inflate方法
+            method.setAccessible(true);//强制反射
+            binding = (T) method.invoke(null, getLayoutInflater());//调用inflate方法获取binding对象
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         return binding.getRoot();
     }
 
@@ -31,14 +46,6 @@ public abstract class BaseViewBindingFragment<T extends ViewBinding> extends Fra
         initView(view, savedInstanceState);
         initData();
     }
-
-    /**
-     * 获取当前ViewBinding,用于设置当前布局
-     * 交由子类实现
-     *
-     * @return
-     */
-    protected abstract T getViewBinding(LayoutInflater inflater, @Nullable ViewGroup container);
 
     /**
      * 初始化view

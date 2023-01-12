@@ -1,4 +1,4 @@
-package com.zht.modulelibrary.activity.camerax;
+package com.zht.modulehome.activity.camerax;
 
 import android.os.Bundle;
 import android.view.View;
@@ -8,14 +8,14 @@ import androidx.annotation.Nullable;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.zht.common.constant.ARoutePathConstants;
 import com.zht.kotlin.cameraX.PictureCameraActivity;
-import com.zht.modulelibrary.databinding.ActivityCameraXPictureBinding;
+import com.zht.modulehome.databinding.ActivityCameraXPictureBinding;
 
 /**
  * @Date 2023/1/11 14:23
  * @Author zhanghaitao
  * @Description
  */
-@Route(path = ARoutePathConstants.Library.CAMERAX_PICTURE_ACTIVITY)
+@Route(path = ARoutePathConstants.Home.CAMERAX_PICTURE_ACTIVITY)
 public class TakePictureActivity extends PictureCameraActivity {
 
     @Override

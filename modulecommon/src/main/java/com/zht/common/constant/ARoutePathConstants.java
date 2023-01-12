@@ -10,6 +10,16 @@ public class ARoutePathConstants {
     public interface Home {
         String MODULE = "/moduleHome";
         String HOME_FRAGMENT = MODULE + "/HomeFragment";
+
+        String CAMERAX_ACTIVITY = MODULE + "/CameraXActivity";
+
+        String CAMERAX_PREVIEW_ACTIVITY = MODULE + "/camera/CameraPreviewActivity";
+        String CAMERAX_PICTURE_ACTIVITY = MODULE + "/camera/CameraPictureActivity";
+        String CAMERAX_VIDEO_ACTIVITY = MODULE + "/camera/CameraVideoActivity";
+
+        String DATA_STORE_ACTIVITY = MODULE + "/DataStoreActivity";
+
+        String JETPACK_ACTIVITY = MODULE + "/JetpackActivity";
     }
 
     public interface Tool {
@@ -40,13 +50,7 @@ public class ARoutePathConstants {
         //
         String ZXing_ACTIVITY = MODULE + "/ZXingActivity";
 
-        String CAMERAX_ACTIVITY = MODULE + "/CameraXActivity";
 
-        String CAMERAX_PREVIEW_ACTIVITY = MODULE + "/camera/CameraPreviewActivity";
-        String CAMERAX_PICTURE_ACTIVITY = MODULE + "/camera/CameraPictureActivity";
-        String CAMERAX_VIDEO_ACTIVITY = MODULE + "/camera/CameraVideoActivity";
-
-        String DATA_STORE_ACTIVITY = MODULE + "/camera/DataStoreActivity";
     }
 
     public interface View {

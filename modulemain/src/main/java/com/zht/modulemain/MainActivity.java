@@ -9,6 +9,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 import com.zht.common.base.BaseActivity;
 import com.zht.common.constant.ARoutePathConstants;
 import com.zht.modulemain.view.BottomNavigationViewHelper;
@@ -16,14 +17,12 @@ import com.zht.modulemain.view.BottomNavigationViewHelper;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class MainActivity extends BaseActivity {
 
-
-    ViewPager mViewpager;
+    private ViewPager mViewpager;
     private MenuItem menuItem;
 
-    List<Fragment> listFragment = new ArrayList<>();
+    private List<Fragment> listFragment = new ArrayList<>();
 
     private BottomNavigationView bottomNavigationView;
     private Fragment toolsFragment;
@@ -40,18 +39,8 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void initView(Bundle savedInstanceState) {
         super.initView(savedInstanceState);
-
         initViewPager();
         initBottomNavigation();
-
-        //禁止ViewPager滑动
-//        viewPager.setOnTouchListener(new View.OnTouchListener() {
-//            @Override
-//            public boolean onTouch(View v, MotionEvent event) {
-//                return true;
-//            }
-//        });
-
     }
 
     private void initViewPager() {
@@ -82,24 +71,40 @@ public class MainActivity extends BaseActivity {
 
     }
 
-    @Override
-    protected void initData() {
-        super.initData();
-
-    }
-
-
     /**
      * 初始化BottomNavigation
-     * init BottomNavigation
      */
     private void initBottomNavigation() {
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.main_bottom_navigation);
-        //禁止滑动效果  disable BottomNavigationView shift mode
+        //禁止滑动效果
         BottomNavigationViewHelper.disableShiftMode(bottomNavigationView);
 
         //添加监听
-        bottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener(){
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                int itemId = item.getItemId();
+                if (itemId == R.id.main_bottom_tab_home) {
+                    mViewpager.setCurrentItem(0,false);
+                    return true;
+                } else if (itemId == R.id.main_bottom_tab_tools) {
+                    mViewpager.setCurrentItem(1,false);
+                    return true;
+                } else if (itemId == R.id.main_bottom_tab_lib) {
+                    mViewpager.setCurrentItem(2,false);
+                    return true;
+                } else if (itemId == R.id.main_bottom_tab_view) {
+                    mViewpager.setCurrentItem(3,false);
+                    return true;
+                } else if (itemId == R.id.main_bottom_tab_personal) {
+                    mViewpager.setCurrentItem(4,false);
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        });
+
         mViewpager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -123,31 +128,5 @@ public class MainActivity extends BaseActivity {
         });
 
     }
-
-    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-            = new BottomNavigationView.OnNavigationItemSelectedListener() {
-        @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            int itemId = item.getItemId();
-            if (itemId == R.id.main_bottom_tab_home) {
-                mViewpager.setCurrentItem(0);
-                return true;
-            } else if (itemId == R.id.main_bottom_tab_tools) {
-                mViewpager.setCurrentItem(1);
-                return true;
-            } else if (itemId == R.id.main_bottom_tab_lib) {
-                mViewpager.setCurrentItem(2);
-                return true;
-            } else if (itemId == R.id.main_bottom_tab_view) {
-                mViewpager.setCurrentItem(3);
-                return true;
-            } else if (itemId == R.id.main_bottom_tab_personal) {
-                mViewpager.setCurrentItem(4);
-                return true;
-            } else {
-                return false;
-            }
-        }
-    };
 
 }
