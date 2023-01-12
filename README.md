@@ -8,7 +8,7 @@
 
 ### 3、创建几个module（可根据自己的项目模块来搭建），选择Android Library即可。
 
-###4、每个module的build.gradle如下修改：
+### 4、每个module的build.gradle如下修改：
 
     if(isModule.toBoolean()){//这里的isModule即使自己的定义的开关，可换成自己的即可
     apply plugin: 'com.android.application'
@@ -16,7 +16,7 @@
     apply plugin: 'com.android.library'
 	}
 
-###5、 App项目App和各个module之间的关系说明：
+### 5、 App项目App和各个module之间的关系说明：
 
 #### App项目中的build.gradle：
 
