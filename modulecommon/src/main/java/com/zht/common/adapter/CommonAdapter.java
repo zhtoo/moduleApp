@@ -1,6 +1,8 @@
 package com.zht.common.adapter;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,9 +11,13 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.alibaba.android.arouter.facade.Postcard;
+import com.alibaba.android.arouter.facade.callback.NavigationCallback;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.zht.common.R;
 import com.zht.common.bean.ItemBean;
+import com.zht.common.constant.ARoutePathConstants;
+import com.zht.common.util.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,7 +62,28 @@ public class CommonAdapter extends RecyclerView.Adapter<CommonAdapter.CommonView
             public void onClick(View v) {
                 ARouter.getInstance()
                         .build(mData.get(position).getRouterPath())
-                        .navigation();
+                        .navigation(v.getContext(), new NavigationCallback() {
+
+                            @Override
+                            public void onFound(Postcard postcard) {
+                                Logger.e("onFound: ");
+                            }
+
+                            @Override
+                            public void onLost(Postcard postcard) {
+                                 setRouterError(postcard.getPath());
+                            }
+
+                            @Override
+                            public void onArrival(Postcard postcard) {
+                                Logger.e("onArrival: ");
+                            }
+
+                            @Override
+                            public void onInterrupt(Postcard postcard) {
+                                Logger.e("onInterrupt: ");
+                            }
+                        });
             }
         });
     }
@@ -78,5 +105,8 @@ public class CommonAdapter extends RecyclerView.Adapter<CommonAdapter.CommonView
         }
     }
 
+    public void setRouterError(String path){
+
+    }
 
 }

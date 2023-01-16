@@ -43,14 +43,20 @@ dependencies {
 
 
     //jetpack所支持的功能：https://developer.android.google.cn/jetpack/androidx/explorer
+
     // 相关文件参考： https://zhuanlan.zhihu.com/p/334350927
-    // datastore
+    /**
+     * datastore -> https://developer.android.google.cn/jetpack/androidx/releases/datastore?hl=zh_cn
+     */
+    //Preferences
     implementation "androidx.datastore:datastore-preferences:1.0.0"
+    //Proto
+    implementation "androidx.datastore:datastore:1.0.0"
     //协程
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4"
 
     /**
-     * lifecycle
+     * lifecycle -> https://developer.android.google.cn/jetpack/androidx/releases/lifecycle
      */
     def lifecycle_version = "2.5.1"
 
@@ -62,27 +68,21 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
     // Lifecycles only (without ViewModel or LiveData)
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version"
-
     // Saved state module for ViewModel
     implementation "androidx.lifecycle:lifecycle-viewmodel-savedstate:$lifecycle_version"
-
     // alternately - if using Java8, use the following instead of lifecycle-compiler
     implementation "androidx.lifecycle:lifecycle-common-java8:$lifecycle_version"
-
     // optional - helpers for implementing LifecycleOwner in a Service
     implementation "androidx.lifecycle:lifecycle-service:$lifecycle_version"
-
     // optional - ProcessLifecycleOwner provides a lifecycle for the whole application process
     implementation "androidx.lifecycle:lifecycle-process:$lifecycle_version"
-
     // optional - ReactiveStreams support for LiveData
     implementation "androidx.lifecycle:lifecycle-reactivestreams-ktx:$lifecycle_version"
-
     // Annotation processor
     kapt "androidx.lifecycle:lifecycle-compiler:2.5.0"
 
     /**
-     * activity
+     * activity -> https://developer.android.google.cn/jetpack/androidx/releases/activity
      */
     def activity_version = "1.6.1"
     // Java language implementation
@@ -91,7 +91,7 @@ dependencies {
     implementation("androidx.activity:activity-ktx:$activity_version")
 
     /**
-     * cameraX
+     * cameraX -> https://developer.android.google.cn/jetpack/androidx/releases/camera
      */
     def camerax_version = "1.2.0"
     implementation "androidx.camera:camera-core:${camerax_version}"
@@ -100,6 +100,18 @@ dependencies {
     implementation "androidx.camera:camera-video:${camerax_version}"
     implementation "androidx.camera:camera-view:${camerax_version}"
     implementation "androidx.camera:camera-extensions:${camerax_version}"
+
+    /**
+     * Compose -> https://developer.android.google.cn/jetpack/androidx/releases/compose
+     */
+//    def compose_version = "1.3.2"
+//    api "androidx.compose.animation:animation:${compose_version}" //在 Jetpack Compose 应用中构建动画，丰富用户体验。
+//    api "androidx.compose.compiler:compiler:${compose_version}"  //借助 Kotlin 编译器插件，转换 @Composable functions（可组合函数）并启用优化功能。
+//    api "androidx.compose.foundation:foundation:1.3.1" //使用现成可用的构建块编写 Jetpack Compose 应用，还可扩展 Foundation 以构建您自己的设计系统元素。
+//    api "androidx.compose.material:material:1.3.1"   //使用现成可用的 Material Design 组件构建 Jetpack Compose UI。这是更高层级的 Compose 入口点，旨在提供与 www.material.io 上描述的组件一致的组件。
+//    api "androidx.compose.material3:material3:1.0.1"  //使用 Material Design 3（新一代 Material Design）组件构建 Jetpack Compose UI。Material 3 中包括了更新后的主题和组件，以及动态配色等 Material You 个性化功能，旨在与新的 Android 12 视觉风格和系统界面相得益彰。
+//    api "androidx.compose.runtime:runtime:${compose_version}"   //Compose 编程模型和状态管理的基本构建块，以及 Compose 编译器插件的目标核心运行时。
+//    api "androidx.compose.composeui:ui:${compose_version}"    //与设备互动所需的 Compose UI 的基本组件，包括布局、绘图和输入。
 
 
 }

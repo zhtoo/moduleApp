@@ -11,6 +11,7 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.zht.common.base.BaseActivity;
 import com.zht.common.constant.ARoutePathConstants;
 
+
 /**
  * Created by ZhangHaitao on 2018/9/3.
  */
@@ -40,6 +41,8 @@ public class MainActivity extends BaseActivity {
         //向容器内加入Fragment，一般使用add或者replace方法实现，需要传入容器的id和Fragment的实例。
         fragmentTransaction.add(R.id.m_container, homeFragment,"toolsFragment");
         fragmentTransaction.commit();
+
+
     }
 
 
