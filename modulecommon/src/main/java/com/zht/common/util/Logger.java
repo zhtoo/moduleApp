@@ -1,7 +1,6 @@
 package com.zht.common.util;
 
 import android.util.Log;
-
 import com.zht.common.BuildConfig;
 
 /**
@@ -11,12 +10,15 @@ import com.zht.common.BuildConfig;
  */
 public class Logger {
 
+    private static final String TAG = "Logger";
+    private static final String headerFormat = "%s -> %s";
+
     public static void e(String msg) {
         if (msg == null || !BuildConfig.DEBUG) {
             return;
         }
-        String TAG = generateCallClassInfo();
-        Log.e(TAG, msg);
+        String headerMessage = generateCallClassInfo();
+        Log.e(TAG, String.format(headerFormat,headerMessage,msg));
     }
 
     public static void e(String tag, String msg) {
@@ -30,8 +32,8 @@ public class Logger {
         if (msg == null || !BuildConfig.DEBUG) {
             return;
         }
-        String TAG = generateCallClassInfo();
-        Log.d(TAG, msg);
+        String headerMessage = generateCallClassInfo();
+        Log.d(TAG, String.format(headerFormat,headerMessage,msg));
     }
 
     public static void d(String tag, String msg) {
@@ -45,8 +47,8 @@ public class Logger {
         if (msg == null) {
             return;
         }
-        String TAG = generateCallClassInfo();
-        Log.d(TAG, msg);
+        String headerMessage = generateCallClassInfo();
+        Log.i(TAG, String.format(headerFormat,headerMessage,msg));
     }
 
     public static void i(String tag, String msg) {
@@ -60,8 +62,8 @@ public class Logger {
         if (msg == null || !BuildConfig.DEBUG) {
             return;
         }
-        String TAG = generateCallClassInfo();
-        Log.w(TAG, msg);
+        String headerMessage = generateCallClassInfo();
+        Log.w(TAG, String.format(headerFormat,headerMessage,msg));
     }
 
     public static void w(String tag, String msg) {
@@ -89,39 +91,49 @@ public class Logger {
         return builder.toString();
     }
 
+    public static void logCallStack(String msg) {
+        if (msg == null || !BuildConfig.DEBUG) {
+            return;
+        }
+        generateCallStackContent();
+        e(TAG, msg);
+    }
+
+    // 设置追踪几层调用链，METHOD_COUNT小0时表示打印所有的调用链。调用链过长时会导致日志打印卡断，因此需要控制链的长度。
+    private static final int METHOD_COUNT = -1;
+    // 在两次原生调用之后从此类开始的最小堆栈跟踪索引。
+    private static final int MIN_STACK_OFFSET = 3;
+    private static final String LOG_SPLIT = "====================================================================================================";
+
     /**
      * 生成调用栈内容
      */
     private static void generateCallStackContent() {
         StackTraceElement[] trace = Thread.currentThread().getStackTrace();
-        String level = "";//缩进
         int stackOffset = getStackOffset(trace);
-        for (int i = METHOD_COUNT; i > 0; i--) {
+        int methodCount = METHOD_COUNT < 0? trace.length:METHOD_COUNT;
+        Log.e(TAG, LOG_SPLIT);
+        for (int i = methodCount; i > 0; i--) {
             int stackIndex = i + stackOffset;
             if (stackIndex >= trace.length) {
                 continue;
             }
             StringBuilder builder = new StringBuilder();
 
-            builder.append(level)
+            builder.append("->\t")
                     .append(getSimpleClassName(trace[stackIndex].getClassName()))
                     .append(".")
                     .append(trace[stackIndex].getMethodName())
-                    .append(" ")
-                    .append(" (")
+                    .append(" -> ")
+                    .append("(")
                     .append(trace[stackIndex].getFileName())
                     .append(":")
                     .append(trace[stackIndex].getLineNumber())
                     .append(")");
-            level += "\t\t";
-            Log.d("=", builder.toString());
+            Log.e(TAG, builder.toString());
         }
+        Log.e(TAG, LOG_SPLIT);
     }
-
-    // 设置追踪几层继承的类
-    private static final int METHOD_COUNT = 2;
-    // 在两次原生调用之后从此类开始的最小堆栈跟踪索引
-    private static final int MIN_STACK_OFFSET = 3;
 
     private static int getStackOffset(StackTraceElement[] trace) {
         for (int i = MIN_STACK_OFFSET; i < trace.length; i++) {
