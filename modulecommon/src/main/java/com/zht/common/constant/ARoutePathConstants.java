@@ -9,59 +9,58 @@ public class ARoutePathConstants {
 
     public interface Home {
         String MODULE = "/moduleHome";
+        String MODULE_PACKAGE_NAME = "com.zht.modulehome";
         String HOME_FRAGMENT = MODULE + "/HomeFragment";
 
-        String CAMERAX_ACTIVITY = MODULE + "/CameraXActivity";
+        String CAMERAX_ACTIVITY = MODULE + "/activity/CameraXActivity";
 
-        String CAMERAX_PREVIEW_ACTIVITY = MODULE + "/camera/CameraPreviewActivity";
-        String CAMERAX_PICTURE_ACTIVITY = MODULE + "/camera/CameraPictureActivity";
-        String CAMERAX_VIDEO_ACTIVITY = MODULE + "/camera/CameraVideoActivity";
+        String CAMERAX_PREVIEW_ACTIVITY = MODULE + "/activity/camera/CameraPreviewActivity";
+        String CAMERAX_PICTURE_ACTIVITY = MODULE + "/activity/camera/CameraPictureActivity";
+        String CAMERAX_VIDEO_ACTIVITY = MODULE + "/activity/camera/CameraVideoActivity";
 
-        String DATA_STORE_ACTIVITY = MODULE + "/DataStoreActivity";
+        String DATA_STORE_ACTIVITY = MODULE + "/activity/DataStoreActivity";
 
-        String JETPACK_ACTIVITY = MODULE + "/JetpackActivity";
-        String COMPOSE_ACTIVITY = MODULE + "/ComposeActivity";
-        String HILT_ACTIVITY = MODULE + "/HiltActivity";
-        String SECURITY_ACTIVITY = MODULE + "/SecurityActivity";
+        String JETPACK_ACTIVITY = MODULE + "/activity/JetpackActivity";
+        String COMPOSE_ACTIVITY = MODULE + "/activity/ComposeActivity";
+        String HILT_ACTIVITY = MODULE + "/activity/HiltActivity";
+        String SECURITY_ACTIVITY = MODULE + "/activity/SecurityActivity";
     }
 
     public interface Tool {
         String MODULE = "/moduleTool";
+        String MODULE_PACKAGE_NAME = "com.zht.moduletool";
 
         String TOOLS_FRAGMENT = MODULE + "/ToolsFragment";
 
-
-        String TOAST_ACTIVITY = MODULE + "/ToastActivity";
-        String STATUS_BAR_ACTIVITY = MODULE + "/StatusBarActivity";
-        String BITMAP_CACHE_ACTIVITY = MODULE + "/BitmapCacheActivity";
-        String VIDEO_ACTIVITY = MODULE + "/VideoActivity";
-        String PERMISSION_REQUEST_ACTIVITY = MODULE + "/PermissionRequestActivity";
-        String SCREEN_ACTIVITY = MODULE + "/ScreenActivity";
-        String INTERACTIVE_VIDEO_ACTIVITY = MODULE + "/InteractiveVideoActivity";
-        String STORAGE_ACTIVITY = MODULE + "/StorageActivity";
+        String TOAST_ACTIVITY = MODULE + "/activity/ToastActivity";
+        String STATUS_BAR_ACTIVITY = MODULE + "/activity/StatusBarActivity";
+        String BITMAP_CACHE_ACTIVITY = MODULE + "/activity/BitmapCacheActivity";
+        String VIDEO_ACTIVITY = MODULE + "/activity/VideoActivity";
+        String PERMISSION_REQUEST_ACTIVITY = MODULE + "/activity/PermissionRequestActivity";
+        String SCREEN_ACTIVITY = MODULE + "/activity/ScreenActivity";
+        String INTERACTIVE_VIDEO_ACTIVITY = MODULE + "/activity/InteractiveVideoActivity";
+        String STORAGE_ACTIVITY = MODULE + "/activity/StorageActivity";
 
     }
 
 
     public interface Library {
         String MODULE = "/moduleLibrary";
+        String MODULE_PACKAGE_NAME = "com.zht.modulelibrary";
         String LIBRARY_FRAGMENT = MODULE + "/LibraryFragment";
-        String JSOUP_ACTIVITY = MODULE + "/JsoupActivity";
-        String CARTOON_ACTIVITY = MODULE + "/CartoonActivity";
-        String CARTOON_WATCH_ACTIVITY = MODULE + "/CartoonWatchActivity";
-
-        //
-        String ZXing_ACTIVITY = MODULE + "/ZXingActivity";
-
-
+        String JSOUP_ACTIVITY = MODULE + "/activity/JsoupActivity";
+        String CARTOON_ACTIVITY = MODULE + "/activity/cartoon/CartoonActivity";
+        String CARTOON_WATCH_ACTIVITY = MODULE + "/activity/cartoon/CartoonWatchActivity";
+        String ZXing_ACTIVITY = MODULE + "/activity/ZXingActivity";
     }
 
     public interface View {
         String MODULE = "/moduleView";
+        String MODULE_PACKAGE_NAME = "com.zht.moduleview";
         String VIEW_FRAGMENT = MODULE + "/ViewFragment";
 
-        String CUSTOMISE_VIEW_ACTIVITY = MODULE + "/CustomiseViewActivity";
-        String SYSTEM_VIEW_ACTIVITY = MODULE + "/SystemViewActivity";
+        String CUSTOMISE_VIEW_ACTIVITY = MODULE + "/activity/CustomiseViewActivity";
+        String SYSTEM_VIEW_ACTIVITY = MODULE + "/activity/SystemViewActivity";
 
         String CALENDAR_ACTIVITY = MODULE + "/CalendarActivity";
         String DRAG_ACTIVITY = MODULE + "/DragActivity";
@@ -80,6 +79,7 @@ public class ARoutePathConstants {
 
     public interface Personal {
         String MODULE = "/modulePersonal";
+        String MODULE_PACKAGE_NAME = "com.zht.modulepersonal";
         String PERSONAL_FRAGMENT = MODULE + "/PersonalFragment";
 
 

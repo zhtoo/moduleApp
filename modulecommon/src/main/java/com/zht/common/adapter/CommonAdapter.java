@@ -1,20 +1,25 @@
 package com.zht.common.adapter;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.alibaba.android.arouter.facade.Postcard;
 import com.alibaba.android.arouter.facade.callback.NavigationCallback;
+import com.alibaba.android.arouter.facade.service.PretreatmentService;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.zht.common.R;
+import com.zht.common.arouter.PretreatmentUtil;
 import com.zht.common.bean.ItemBean;
 import com.zht.common.constant.ARoutePathConstants;
 import com.zht.common.util.Logger;
@@ -60,6 +65,13 @@ public class CommonAdapter extends RecyclerView.Adapter<CommonAdapter.CommonView
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                PretreatmentService navigation = ARouter.getInstance().navigation(PretreatmentService.class);
+
+                if(navigation == null){
+                    Toast.makeText(v.getContext(), "PretreatmentService is null", Toast.LENGTH_SHORT).show();
+                }
+
                 ARouter.getInstance()
                         .build(mData.get(position).getRouterPath())
                         .navigation(v.getContext(), new NavigationCallback() {
@@ -67,11 +79,14 @@ public class CommonAdapter extends RecyclerView.Adapter<CommonAdapter.CommonView
                             @Override
                             public void onFound(Postcard postcard) {
                                 Logger.e("onFound: ");
+                                PretreatmentUtil.getClazzByPath(postcard.getPath());
                             }
 
                             @Override
                             public void onLost(Postcard postcard) {
-                                 setRouterError(postcard.getPath());
+                                if(!TextUtils.isEmpty(postcard.getName())){
+                                    setRouterError(v.getContext(),postcard.getName());
+                                }
                             }
 
                             @Override
@@ -105,8 +120,13 @@ public class CommonAdapter extends RecyclerView.Adapter<CommonAdapter.CommonView
         }
     }
 
-    public void setRouterError(String path){
-
+    public void setRouterError(Context context , String clazzPath){
+        try {
+            Class clazz = Class.forName(clazzPath);
+            context.startActivity(new Intent(context, clazz));
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
 }

@@ -6,16 +6,27 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.platform.ComposeView
+import androidx.compose.ui.res.painterResource
 import androidx.fragment.app.Fragment
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.zht.common.constant.ARoutePathConstants
 
 import androidx.compose.ui.tooling.preview.Preview //使用预览功能
+import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.dp
+import com.zht.modulehome.R
 
-@Route(path = ARoutePathConstants.Home.COMPOSE_ACTIVITY)
 class ComposeFragment : Fragment() {
 
     override fun onCreateView(
@@ -29,14 +40,43 @@ class ComposeFragment : Fragment() {
     private fun createComposeView(context: Context): View {
         return ComposeView(context).apply {
             setContent {
-                MessageCard("Hello world!")
+                MessageCard("Android!")
             }
         }
     }
 
     @Composable
     fun MessageCard(name: String) {
-        Text(text = "Hello $name!")
+        Column(//最外层宽高设置设置无效，强制match_parent
+            modifier = Modifier
+                .background(Color(0xFF1296DB))//背景
+                .padding(15.dp)
+        ) {
+            Text("Column demo:")
+            Column(
+                modifier = Modifier
+                    .background(Color(0xFF333333))//背景
+                    .size(width = 200.dp, height = 100.dp)//设置控件大小
+                    .padding(15.dp)//设置内边距
+            ) {
+                Text("Item one")
+                Text("Item two")
+            }
+            Text("Row demo:")
+            Row {
+                Text("Item one")
+                Text("Item two")
+            }
+
+            Text("Box demo:")
+            Box {
+                Image(
+                    painter = painterResource(id = R.mipmap.ic_jetpack_logo),
+                    contentDescription = null
+                )
+                Text("Item two")
+            }
+        }
     }
 
     @Preview

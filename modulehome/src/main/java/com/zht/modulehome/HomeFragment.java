@@ -2,6 +2,8 @@ package com.zht.modulehome;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.view.TextureView;
 import android.view.View;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -31,12 +33,7 @@ public class HomeFragment extends BaseViewBindingFragment<FragmentHomeBinding> {
             return;
         }
         binding.homeRv.setLayoutManager(new LinearLayoutManager(getContext()));
-        mAdapter = new CommonAdapter(){
-            @Override
-            public void setRouterError(String path) {
-
-            }
-        };
+        mAdapter = new CommonAdapter();
 
         binding.homeRv.setAdapter(mAdapter);
     }
@@ -53,7 +50,6 @@ public class HomeFragment extends BaseViewBindingFragment<FragmentHomeBinding> {
 
         mAdapter.setNewData(list);
     }
-
 
 
 }

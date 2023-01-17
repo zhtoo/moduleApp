@@ -11,9 +11,9 @@
         <activity android:name=".activity.camerax.TakeVideoActivity" />
         <activity android:name=".activity.DataStoreActivity" />
         <activity android:name=".activity.JetpackActivity" />
-        <activity android:name=".activity.ComposeActivity" />
         <activity android:name=".activity.HiltActivity" />
         <activity android:name=".activity.SecurityActivity" />
+        <activity android:name=".activity.ComposeActivity" />
 
     </application>
 

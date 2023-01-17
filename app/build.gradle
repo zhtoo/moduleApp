@@ -23,7 +23,7 @@ android {
 
         javaCompileOptions {
             annotationProcessorOptions {
-                arguments = [moduleName: project.getName()]
+                arguments = [AROUTER_MODULE_NAME: project.getName()]
             }
         }
 
@@ -45,6 +45,8 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
+
+    annotationProcessor "com.alibaba:arouter-compiler:$rootProject.ext.arouterCompiler"
 
     implementation project(':modulecommon')
 //

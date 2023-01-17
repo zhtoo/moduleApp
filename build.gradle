@@ -2,7 +2,7 @@ apply from: 'constants.gradle'
 
 buildscript {
 
-    ext.kotlin_version = '1.6.10'
+    ext.kotlin_version = '1.7.20'
 
     repositories {
         google()
@@ -14,7 +14,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:4.2.1'
+        classpath "com.android.tools.build:gradle:7.3.1"
         classpath 'com.jakewharton:butterknife-gradle-plugin:10.2.1'
 
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
