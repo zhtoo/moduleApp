@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
+import android.text.TextUtils;
 
 import androidx.core.content.FileProvider;
 
@@ -359,9 +360,13 @@ public class OpenFileBySystem {
      *                ACTION_CAMERA_BUTTON  打开照相机
      */
     public static void openFileByPath(Context context, String path, String action) {
-        if (context == null || path == null)
-            return;
+        openFileByPath(context, path, action, null);
+    }
 
+    public static void openFileByPath(Context context, String path, String action, String authority) {
+        if (context == null || path == null) {
+            return;
+        }
         try {
             Intent intent = new Intent();
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -369,26 +374,28 @@ public class OpenFileBySystem {
             intent.setAction(action);
             //文件的类型
             String type = "";
-            for (int i = 0; i < MATCH_ARRAY.length; i++) {
+            for (String[] suffix : MATCH_ARRAY) {
                 //判断文件的格式
-                if (path.toLowerCase().contains(MATCH_ARRAY[i][0].toLowerCase())) {
-                    type = MATCH_ARRAY[i][1];
+                if (path.toLowerCase().contains(suffix[0].toLowerCase())) {
+                    type = suffix[1];
                     break;
                 }
             }
             Uri fileUri;
-            //判断是否是AndroidN以及更高的版本
+            //判断是否是Android N 以及更高的版本
             //设置intent的data和Type属性
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                fileUri = FileProvider.getUriForFile(context, "com.zht.modlueapp.fileProvider", new File(path));
+                if (TextUtils.isEmpty(authority)) {
+                    authority = context.getPackageName() + ".fileProvider";
+                }
+                fileUri = FileProvider.getUriForFile(context, authority, new File(path));
                 //临时赋予读写Uri的权限
                 intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
             } else {
                 fileUri = Uri.fromFile(new File(path));
             }
             intent.putExtra(Intent.EXTRA_STREAM, fileUri);
-            intent.setType(type);
-            //跳转
+            intent.setType(type);//设置文件类型
             context.startActivity(intent);
         } catch (Exception e) { //当系统没有携带文件打开软件，提示
             ToastUtil.showToast("无法打开该格式文件!");
