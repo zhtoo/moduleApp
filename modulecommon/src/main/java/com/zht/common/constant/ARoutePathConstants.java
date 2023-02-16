@@ -24,6 +24,7 @@ public class ARoutePathConstants {
         String COMPOSE_ACTIVITY = MODULE + "/activity/ComposeActivity";
         String HILT_ACTIVITY = MODULE + "/activity/HiltActivity";
         String SECURITY_ACTIVITY = MODULE + "/activity/SecurityActivity";
+        String BOTTOM_TAB_ACTIVITY = MODULE + "/activity/BottomTabActivity";
     }
 
     public interface Tool {
@@ -40,6 +41,7 @@ public class ARoutePathConstants {
         String SCREEN_ACTIVITY = MODULE + "/activity/ScreenActivity";
         String INTERACTIVE_VIDEO_ACTIVITY = MODULE + "/activity/InteractiveVideoActivity";
         String STORAGE_ACTIVITY = MODULE + "/activity/StorageActivity";
+        String TRIGONOMETRIC_FUNCTIONS_ACTIVITY = MODULE + "/activity/TrigonometricFunctionsActivity";
 
     }
 

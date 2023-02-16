@@ -47,6 +47,7 @@ public class HomeFragment extends BaseViewBindingFragment<FragmentHomeBinding> {
         list.add(new ItemBean(R.mipmap.ic_compose_logo, "Compose", ARoutePathConstants.Home.COMPOSE_ACTIVITY));
         list.add(new ItemBean(R.mipmap.ic_hilt_logo, "Hilt", ARoutePathConstants.Home.HILT_ACTIVITY));
         list.add(new ItemBean(R.mipmap.ic_security_logo, "Security", ARoutePathConstants.Home.SECURITY_ACTIVITY));
+        list.add(new ItemBean(R.mipmap.ic_bottom_tab_logo, "底部tab实现方案", ARoutePathConstants.Home.BOTTOM_TAB_ACTIVITY));
 
         mAdapter.setNewData(list);
     }

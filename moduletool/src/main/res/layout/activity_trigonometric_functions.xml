@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:minHeight="50dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="sin(" />
+
+        <EditText
+            android:id="@+id/et_sin"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="30"
+            android:background="@android:color/transparent"
+            android:inputType="number" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=")=" />
+
+        <TextView
+            android:id="@+id/tv_sin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="00000000" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:layout_height="wrap_content"
+        android:minHeight="50dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="cos(" />
+
+        <EditText
+            android:id="@+id/et_cos"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="60"
+            android:background="@android:color/transparent"
+            android:inputType="number" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=")=" />
+
+        <TextView
+            android:id="@+id/tv_cos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="00000000" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:layout_height="wrap_content"
+        android:minHeight="50dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="tan(" />
+
+        <EditText
+            android:id="@+id/et_tan"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="45"
+            android:background="@android:color/transparent"
+            android:inputType="number" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=")=" />
+
+        <TextView
+            android:id="@+id/tv_tan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="00000000" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:layout_height="wrap_content"
+        android:minHeight="50dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="aSin(" />
+
+        <EditText
+            android:id="@+id/et_a_sin"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="0.5"
+            android:background="@android:color/transparent"
+            android:inputType="number" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=")=" />
+
+        <TextView
+            android:id="@+id/tv_a_sin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="00000000" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:layout_height="wrap_content"
+        android:minHeight="50dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="aCos(" />
+
+        <EditText
+            android:id="@+id/et_a_cos"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="0.5"
+            android:background="@android:color/transparent"
+            android:inputType="number" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=")=" />
+
+        <TextView
+            android:id="@+id/tv_a_cos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="00000000" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:layout_height="wrap_content"
+        android:minHeight="50dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="aTan(" />
+
+        <EditText
+            android:id="@+id/et_a_tan"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="1"
+            android:background="@android:color/transparent"
+            android:inputType="number" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=")=" />
+
+        <TextView
+            android:id="@+id/tv_a_tan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="00000000" />
+
+    </LinearLayout>
+
+
+    <Button
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:onClick="clickComputer"
+        android:text="计算" />
+
+</LinearLayout>

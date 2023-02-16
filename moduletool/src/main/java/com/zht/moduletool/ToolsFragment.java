@@ -52,6 +52,7 @@ public class ToolsFragment extends BaseFragment {
         list.add(new ItemBean("屏幕信息", ARoutePathConstants.Tool.SCREEN_ACTIVITY));
         list.add(new ItemBean("交互视频播放", ARoutePathConstants.Tool.INTERACTIVE_VIDEO_ACTIVITY));
         list.add(new ItemBean("文件存储信息", ARoutePathConstants.Tool.STORAGE_ACTIVITY));
+        list.add(new ItemBean("三角函数", ARoutePathConstants.Tool.TRIGONOMETRIC_FUNCTIONS_ACTIVITY));
 
         mAdapter.setNewData(list);
     }
