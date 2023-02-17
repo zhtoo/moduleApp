@@ -34,8 +34,13 @@ public class BottomTabFragment extends Fragment {
         Log.e(TAG, tabName + " ---> " + "loadData:" + this.getClass().getSimpleName());
     }
 
+    public void setTabName(String name){
+        tabName = name;
+    }
+
     public static BottomTabFragment newInstance(String name) {
         BottomTabFragment fragment = new BottomTabFragment();
+        fragment.setTabName(name);
         Bundle bundle = new Bundle();
         bundle.putString(TAB_NAME, name);
         fragment.setArguments(bundle);
@@ -85,6 +90,7 @@ public class BottomTabFragment extends Fragment {
                 loadData();
             }
         } else {//第一次被加载到界面中
+            hasOnResume = true;
             loadData();
         }
     }
@@ -112,6 +118,12 @@ public class BottomTabFragment extends Fragment {
     }
 
     @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        Log.e(TAG, tabName + " ---> " + "onSaveInstanceState:" + this.getClass().getSimpleName());
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
     public void onStop() {
         Log.e(TAG, tabName + " ---> " + "onStop:" + this.getClass().getSimpleName());
         super.onStop();
@@ -134,12 +146,5 @@ public class BottomTabFragment extends Fragment {
         Log.e(TAG, tabName + " ---> " + "onDetach:" + this.getClass().getSimpleName());
         super.onDetach();
     }
-
-    @Override
-    public void onSaveInstanceState(@NonNull Bundle outState) {
-        Log.e(TAG, tabName + " ---> " + "onSaveInstanceState:" + this.getClass().getSimpleName());
-        super.onSaveInstanceState(outState);
-    }
-
 
 }
