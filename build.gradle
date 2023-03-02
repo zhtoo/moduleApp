@@ -30,6 +30,15 @@ allprojects {
         maven { url "https://jitpack.io" }
         maven { url 'https://maven.google.com' }
 
+        flatDir {
+            // 由于Library module中引用的aar，在多module的情况下，
+            // 其他的module编译会报错，所以需要在所有工程的repositories
+            // 下把Library module中的libs目录添加到依赖关系中
+            dirs 'libs'
+            dirs project(':modulelibrary').file('libs') //借助 project()函数的位置查找
+            //dirs '../baseapp/libs'  // 直接指明路径，注意前边的../, 要先回到根目录去查找别的module
+        }
+
     }
 }
 

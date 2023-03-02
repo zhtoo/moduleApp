@@ -69,7 +69,13 @@ public class BottomTabActivity extends AppCompatActivity {
         String tabName = ((TextView) view).getText().toString();
         switchFragment(tabName);
 
-        mViewpager.setCurrentItem(tabName.indexOf(tabName));
+        if(mViewpager!=null){
+            mViewpager.setCurrentItem(tabName.indexOf(tabName));
+        }
+
+        if(mViewpager2!=null){
+            mViewpager2.setCurrentItem(tabName.indexOf(tabName));
+        }
     }
 
     private void switchFragment(String fragmentName) {

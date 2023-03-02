@@ -1,6 +1,6 @@
-if(!isModuleView.toBoolean()){
+if (!isModuleView.toBoolean()) {
     apply plugin: 'com.android.library'
-}else {
+} else {
     apply plugin: 'com.android.application'
 }
 
@@ -36,11 +36,11 @@ android {
         }
     }
 
-    sourceSets{
-        main{
-            if(isModuleView.toBoolean()){
+    sourceSets {
+        main {
+            if (isModuleView.toBoolean()) {
                 manifest.srcFile("src/main/moduleManifest/AndroidManifest.xml")
-            }else{
+            } else {
                 manifest.srcFile("src/main/AndroidManifest.xml")
             }
             //集成开发模式下排除debug文件夹中的所有Java文件
@@ -71,5 +71,15 @@ dependencies {
 
     // ZXing
     api "com.google.zxing:core:3.5.1"
+
+    //心率检测库导入
+    implementation project(':MeasureHeartRate')
+
+//    implementation(name: 'MeasurementHeartRate-release', ext: 'aar')
+    def camerax_version = "1.2.0"
+    api "androidx.camera:camera-core:${camerax_version}"
+    api "androidx.camera:camera-camera2:${camerax_version}"
+    api "androidx.camera:camera-view:${camerax_version}"
+    api "androidx.camera:camera-lifecycle:${camerax_version}"
 
 }

@@ -13,6 +13,7 @@
         <activity android:name=".activity.cartoon.CartoonActivity" />
         <activity android:name=".activity.cartoon.CartoonWatchActivity" />
         <activity android:name=".activity.ZXingActivity" />
+        <activity android:name=".activity.HeartRateActivity" />
 
     </application>
 

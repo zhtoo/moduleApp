@@ -1,0 +1,55 @@
+apply plugin: 'com.android.library'
+
+android {
+
+    compileSdkVersion 33
+    buildToolsVersion "30.0.3"
+
+    defaultConfig {
+        minSdkVersion 21
+        targetSdkVersion 33
+        versionCode rootProject.ext.android.versionCode
+        versionName rootProject.ext.android.versionName
+    }
+
+    buildTypes {
+
+        debug {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    sourceSets {
+        main {
+            manifest.srcFile("src/main/AndroidManifest.xml")
+            //集成开发模式下排除debug文件夹中的所有Java文件
+            java {
+                exclude 'debug/**'
+            }
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+
+    api "androidx.appcompat:appcompat:$rootProject.ext.appcompat"
+
+    def camerax_version = "1.2.0"
+    api "androidx.camera:camera-core:${camerax_version}"
+    api "androidx.camera:camera-camera2:${camerax_version}"
+    api "androidx.camera:camera-view:${camerax_version}"
+    api "androidx.camera:camera-lifecycle:${camerax_version}"
+}
