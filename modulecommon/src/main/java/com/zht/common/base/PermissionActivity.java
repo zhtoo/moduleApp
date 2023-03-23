@@ -18,13 +18,11 @@ import com.zht.common.listener.PermissionCallBack;
 public class PermissionActivity  extends AppCompatActivity {
 
     private PermissionCallBack callBack;
-    private int REQUEST_CODE;
+    private int REQUEST_PERMISSION_CODE = 0x0001;
 
     public void requestPermissions(@NonNull final String[] permissions,
-                                   @IntRange(from = 0L) final int requestCode,
                                    @NonNull PermissionCallBack permissionCallBack) {
         callBack = permissionCallBack;
-        REQUEST_CODE = requestCode;
 
         boolean permissionGranted = true;
         for (String permission : permissions) {
@@ -37,7 +35,7 @@ public class PermissionActivity  extends AppCompatActivity {
         if (permissionGranted) {
             callBack.granted();
         } else {
-            ActivityCompat.requestPermissions(this, permissions, REQUEST_CODE);
+            ActivityCompat.requestPermissions(this, permissions, REQUEST_PERMISSION_CODE);
         }
     }
 
@@ -45,7 +43,7 @@ public class PermissionActivity  extends AppCompatActivity {
     public void onRequestPermissionsResult(int requestCode,
                                            String permissions[], int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode != REQUEST_CODE) {
+        if (requestCode != REQUEST_PERMISSION_CODE) {
             return;
         }
         if (grantResults == null || grantResults.length == 0) {

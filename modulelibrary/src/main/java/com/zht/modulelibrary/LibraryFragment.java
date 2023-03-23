@@ -43,6 +43,7 @@ public class LibraryFragment extends BaseViewBindingFragment<FragmentLibraryBind
         list.add(new ItemBean(R.mipmap.ic_jsoup_logo, "Jsoup", ARoutePathConstants.Library.JSOUP_ACTIVITY));
         list.add(new ItemBean(R.mipmap.ic_zxing_logo, "ZXing", ARoutePathConstants.Library.ZXing_ACTIVITY));
         list.add(new ItemBean(R.mipmap.ic_heart_rate, "心率测量", ARoutePathConstants.Library.HEART_RATE_ACTIVITY));
+        list.add(new ItemBean(R.mipmap.ic_wifi_logo, "wifi设置", ARoutePathConstants.Library.WIFI_ACTIVITY));
 
         mAdapter.setNewData(list);
     }

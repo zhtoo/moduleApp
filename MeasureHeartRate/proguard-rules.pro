@@ -62,3 +62,6 @@
 -keep class com.zht.measureheartrate.util.ImageProcessing{
     public <methods> ;
 }
+-keep class com.zht.measureheartrate.util.ListUtils{
+    public <methods> ;
+}

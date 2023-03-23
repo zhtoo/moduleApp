@@ -44,11 +44,6 @@ public class PersonalFragment extends BaseFragment implements View.OnClickListen
 
     private EditText editText;
 
-    private static final int FILE_SELECT_CODE = 100;
-    private static final int REQUEST_READ_EXTERNAL_STORAGE = 101;
-
-    private static final String TAG = "ChooseFile";
-
     @Override
     protected int getLayoutId() {
         return R.layout.fragment_personal;
@@ -98,7 +93,7 @@ public class PersonalFragment extends BaseFragment implements View.OnClickListen
             if (getActivity() != null && getActivity() instanceof BaseActivity) {
                 ((BaseActivity) getActivity()).requestPermissions(
                         new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
-                        REQUEST_READ_EXTERNAL_STORAGE,
+
                         new PermissionCallBack() {
                             @Override
                             public void granted() {

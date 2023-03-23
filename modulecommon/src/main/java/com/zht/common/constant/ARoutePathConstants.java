@@ -55,6 +55,7 @@ public class ARoutePathConstants {
         String CARTOON_WATCH_ACTIVITY = MODULE + "/activity/cartoon/CartoonWatchActivity";
         String ZXing_ACTIVITY = MODULE + "/activity/ZXingActivity";
         String HEART_RATE_ACTIVITY = MODULE + "/activity/HeartRateActivity";
+        String WIFI_ACTIVITY = MODULE + "/activity/WifiActivity";
     }
 
     public interface View {
