@@ -30,6 +30,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.fragment.app.Fragment
+import com.zht.kotlin.compose.smartRefresh
 import com.zht.modulehome.R
 
 /**
@@ -146,18 +147,26 @@ class ComposeFragment : Fragment() {
 //                .height(50.dp)
 //                .fillMaxWidth())
 //        }
-        val state = rememberPullRefreshState(uiState.value.refreshing, { onRefresh() })
-        Box(Modifier.pullRefresh(state)) {
-            LazyColumn (Modifier.fillMaxSize()){
+//        val state = rememberPullRefreshState(uiState.value.refreshing, { onRefresh() })
+//        Box(Modifier.pullRefresh(state)) {
+//            LazyColumn (Modifier.fillMaxSize()){
+//                items(demoItems.size) { index ->
+//                    DemoItem(demoItems[index])
+//                }
+//            }
+//            PullRefreshIndicator(
+//                uiState.value.refreshing,
+//                state,
+//                Modifier.align(Alignment.TopCenter)
+//            )
+//        }
+        onRefresh()
+        Box(modifier = Modifier.smartRefresh()) {
+            LazyColumn(Modifier.fillMaxSize()) {
                 items(demoItems.size) { index ->
                     DemoItem(demoItems[index])
                 }
             }
-            PullRefreshIndicator(
-                uiState.value.refreshing,
-                state,
-                Modifier.align(Alignment.TopCenter)
-            )
         }
 
     }
