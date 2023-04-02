@@ -103,6 +103,9 @@ dependencies {
 
     implementation 'androidx.activity:activity-compose:1.6.1'
     implementation "androidx.navigation:navigation-compose:2.5.3"
+    def accompanist_version = "0.28.0"
+    api "com.google.accompanist:accompanist-systemuicontroller:$accompanist_version"
+
 
 
 }

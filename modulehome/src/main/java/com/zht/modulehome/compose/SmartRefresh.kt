@@ -2,34 +2,33 @@ package com.zht.kotlin.compose
 
 import android.util.Log
 import androidx.compose.animation.core.animate
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.SideEffect
-import androidx.compose.runtime.State
-import androidx.compose.runtime.derivedStateOf
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.rememberUpdatedState
-import androidx.compose.runtime.setValue
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.material.LocalTextStyle
+import androidx.compose.material.Text
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.NestedScrollConnection
 import androidx.compose.ui.input.nestedscroll.NestedScrollSource
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.debugInspectorInfo
 import androidx.compose.ui.platform.inspectable
-import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.Velocity
-import androidx.compose.ui.unit.dp
-import com.zht.common.util.Logger
-import kotlin.math.abs
-import kotlin.math.pow
+import androidx.compose.ui.text.PlatformTextStyle
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.style.LineHeightStyle
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
+import kotlin.math.abs
+import kotlin.math.pow
 
 /**
  * @Date   2023/3/20 09:24
@@ -41,10 +40,42 @@ import kotlinx.coroutines.launch
  */
 private val TAG: String = "Refresh"
 
+@Composable
+fun SmartRefresh(
+    modifier: Modifier = Modifier,
+    contentAlignment: Alignment = Alignment.TopStart,
+    propagateMinConstraints: Boolean = false,
+    onRefresh: () -> Unit,
+    onLoadMore: () -> Unit,
+    content: @Composable BoxScope.() -> Unit,
+) {
+    val state = rememberSmartRefreshState(onRefresh, onLoadMore)
+    Box(
+        modifier = modifier.smartRefresh(state),
+        contentAlignment = contentAlignment,
+        propagateMinConstraints = propagateMinConstraints,
+        content = {
+            RefreshIndicator()
+            content
+            LoadMoreIndicator()
+        })
+}
+
+fun Modifier.smartRefresh(
+    state: SmartRefreshState,
+    enabled: Boolean = true,
+) = inspectable(inspectorInfo = debugInspectorInfo {
+    name = "smartRefresh"
+    properties["state"] = state
+    properties["enabled"] = enabled
+}) {
+    Modifier.smartRefresh(state::onPullDown, state::onPullUp, { state.onRelease() }, enabled)
+}
+
 /**
  * 定义一个Modifier的扩展函数，用于外层控件控制刷新/加载
  */
-private fun Modifier.smartRefresh(
+ fun Modifier.smartRefresh(
     onPullDown: (pullDelta: Float) -> Float,//下拉回调
     onPullUp: (pullDelta: Float) -> Float,//下拉回调
     onRelease: suspend (flingVelocity: Float) -> Unit,//手指抬起
@@ -87,25 +118,17 @@ private class RefreshNestedScrollConnection(
 ) : NestedScrollConnection {
 
     /**
-     * 滑动之前
+     * onPreScroll：滑动之前
      * available:可用的滚动偏移量
      */
-//    override fun onPreScroll(
-//        available: Offset,
-//        source: NestedScrollSource,
-//    ): Offset = when {
-//        !enabled -> {
-//            Offset.Zero
-//        }
-////        source == NestedScrollSource.Drag && available.y < 0 -> Offset(
-////            0f,
-////            onPullUp(available.y)
-////        ) // Pulling down
-//        else -> Offset.Zero
-//    }
+    override fun onPreScroll(available: Offset, source: NestedScrollSource): Offset {
+        return super.onPreScroll(available, source)
+    }
 
     /**
-     * 滑动之后
+     * onPostScroll：滑动之后
+     * consumed: 所有子类已经消费了的滑动距离
+     * available: 父类可以处理的滑动距离
      */
     override fun onPostScroll(
         consumed: Offset,
@@ -124,15 +147,6 @@ private class RefreshNestedScrollConnection(
         else -> Offset.Zero
     }
 
-    //    override suspend fun onPreFling(available: Velocity): Velocity {
-//        Log.e(TAG, "onPreFling(available = ${available})")
-//        return Velocity.Zero
-//    }
-//
-//    override suspend fun onPostFling(consumed: Velocity, available: Velocity): Velocity {
-//        Log.e(TAG, "onPostFling(consumed = ${consumed}, available: ${available})")
-//        return super.onPostFling(consumed, available)
-//    }
     override suspend fun onPreFling(available: Velocity): Velocity {
         onRelease(available.y)
         return Velocity.Zero
@@ -140,36 +154,97 @@ private class RefreshNestedScrollConnection(
 
 }
 
+@Composable
+fun rememberSmartRefreshState(
+    onRefresh: () -> Unit,
+    onLoadMore: () -> Unit,
+): SmartRefreshState {
+
+    val onRefreshState = rememberUpdatedState(onRefresh)
+    val onLoadMoreState = rememberUpdatedState(onLoadMore)
+
+    val state = remember {
+        SmartRefreshState(onRefreshState, onLoadMoreState)
+    }
+    return state
+}
+
 class SmartRefreshState internal constructor(
     private val onRefreshState: State<() -> Unit>,
     private val onLoadMoreState: State<() -> Unit>,
 ) {
 
+    private var _refreshing by mutableStateOf(false)
+    private var _loading by mutableStateOf(false)
 
+    private var distancePulled by mutableStateOf(0f)
+
+    /**
+     * 处理下拉刷新事件
+     */
     internal fun onPullDown(pullDelta: Float): Float {
-
-        return 0F
+        if (this._refreshing) return 0f
+        // 计算新的位移量
+        val newOffset = (distancePulled + pullDelta).coerceAtLeast(0f)
+        // 计算父类处理需要消费的偏移
+        val dragConsumed = newOffset - distancePulled
+        distancePulled = newOffset
+        return dragConsumed
     }
 
+    /**
+     * 处理上拉加载事件
+     */
     internal fun onPullUp(pullDelta: Float): Float {
-
-        return 0F
+        if (this._loading) return 0f
+        // 计算新的位移量
+        val newOffset = (distancePulled + pullDelta).coerceAtLeast(0f)
+        // 计算父类处理需要消费的偏移
+        val dragConsumed = newOffset - distancePulled
+        distancePulled = newOffset
+        return dragConsumed
     }
 
     internal fun onRelease() {
-
+        if (this._refreshing) {
+            onRefreshState.value()
+            distancePulled = 0f
+            return
+        }
+        if (this._loading) {
+            onLoadMoreState.value()
+            distancePulled = 0f
+            return
+        }
     }
 
 }
 
 @Composable
-fun RefreshIndicator(){
-
+fun RefreshIndicator() {
+    Text(text="this is header",
+        modifier= Modifier
+            .background(Color(0xFFFFFFFF))
+            .fillMaxWidth()
+            .height(50.dp),
+        textAlign = TextAlign.Center,
+        style= LocalTextStyle.current.merge(
+            TextStyle(
+                fontSize = 20.sp,
+                background = Color(0xFF00FF00),
+                textAlign = TextAlign.Center,
+                lineHeightStyle = LineHeightStyle(
+                    alignment = LineHeightStyle.Alignment.Center,
+                    trim = LineHeightStyle.Trim.Both
+                ),
+            )
+        ),
+    )
 }
 
 @Composable
-fun LoadMoreIndicator(){
-
+fun LoadMoreIndicator() {
+   // Text("this is footer")
 }
 
 
