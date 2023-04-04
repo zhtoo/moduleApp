@@ -5,6 +5,7 @@ import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Text
 import androidx.compose.material.pullrefresh.PullRefreshIndicator
@@ -13,6 +14,7 @@ import androidx.compose.material.pullrefresh.rememberPullRefreshState
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.tooling.preview.Preview
@@ -89,7 +91,9 @@ fun PullRefreshPage() {
         Canvas(modifier = Modifier
             .fillMaxWidth()
             .height(50.dp)
-            .background(Color(0xFFFF0000))) {
+            .background(Color(0xFFFF0000))
+            .clip(RoundedCornerShape(16.dp))
+        ) {
             Log.e(TAG, "size(${size.width},${size.height})" )
             drawCircle(Color.Blue, radius = 50.dp.toPx())
         }

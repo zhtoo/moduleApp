@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import com.zht.modulehome.compose.navigate.AppNavigation
 
@@ -15,8 +16,8 @@ import com.zht.modulehome.compose.navigate.AppNavigation
  */
 @Composable
 fun LibraryPage() {
+    var text by rememberSaveable { mutableStateOf("LibraryPage") }
     Column(){
-        var text by remember { mutableStateOf("LibraryPage") }
         Text(text, modifier = Modifier.clickable {
             text = "LibraryPage -> ok"
         })

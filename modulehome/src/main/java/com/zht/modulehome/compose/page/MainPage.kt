@@ -82,30 +82,15 @@ val items = listOf(
 
 @Composable
 fun MainPage() {
-//     拦截界面的返回事件
-//    val callback = remember {
-//        object : OnBackPressedCallback(true) {
-//            override fun handleOnBackPressed() {
-//                Log.e("aaa", "回退键被点击" )
-//            }
-//        }
-//    }
-//    val dispatcher = LocalOnBackPressedDispatcherOwner.current?.onBackPressedDispatcher
-//    DisposableEffect(dispatcher){
-//        dispatcher?.addCallback(callback)
-//        onDispose {
-//            callback.remove()
-//        }
-//    }
-
     val navController = rememberNavController()
     navController.addOnDestinationChangedListener { controller, destination, arguments ->
-        controller.backQueue.forEach {
-            Log.e(
-                "aaa",
-                "MainPage backQueue: route=${it.destination.route} id=${it.destination.id}"
-            )
-        }
+        Log.e("aaa", "============")
+//        controller.backQueue.forEach {
+//            Log.e(
+//                "aaa",
+//                "MainPage backQueue: route=${it.destination.route} id=${it.destination.id}"
+//            )
+//        }
     }
     Scaffold(
         bottomBar = { BottomNavigateBar(navController) }
@@ -153,24 +138,24 @@ fun BottomNavigateBar(navController: NavHostController) {
                 },
                 label = { Text(tab.tabName) },
                 onClick = {
-//                    if (selected) {
-//                        return@BottomNavigationItem
-//                    }
-                    // 推出BackStack最后一界面，保证BackStack中始终只用一个Item
-                    // PS：
-                   // navController.popBackStack()
-                    navController.navigate(tab.route) {
-                        // 原文翻译：弹出到图表的起始目的地，以避免在用户选择项目时在返回堆栈上建立大量目的地
-                        popUpTo(navController.graph.findStartDestination().id) {
-                            saveState = true
-                        }
-                       // popUpTo(0)
-                        // 原文翻译：重新选择同一项目时避免同一目的地的多个副本
-                        // 当重新选择Item时，避免创建新的'对象'
-                        launchSingleTop = true
-                        // 原文翻译：重新选择先前选择的项目时恢复状态
-                        restoreState = true
+                    if (selected) {
+                        return@BottomNavigationItem
                     }
+                    // 推出BackStack中最后一界面，保证BackStack中始终只用一个Item
+                    navController.popBackStack()
+                    // 导航到目标目的地
+                    navController.navigate(tab.route)
+//                    navController.navigate(tab.route) {
+//                        // 原文翻译：弹出到图表的起始目的地，以避免在用户选择项目时在返回堆栈上建立大量目的地
+//                        popUpTo(navController.graph.findStartDestination().id) {
+//                            saveState = true
+//                        }
+//                        // 原文翻译：重新选择同一项目时避免同一目的地的多个副本
+//                        // 当重新选择Item时，避免创建新的'对象'
+//                        launchSingleTop = true
+//                        // 原文翻译：重新选择先前选择的项目时恢复状态
+//                        restoreState = true
+//                    }
                 }
             )
         }
