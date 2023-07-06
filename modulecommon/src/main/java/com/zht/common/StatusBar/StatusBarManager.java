@@ -1,6 +1,9 @@
 package com.zht.common.StatusBar;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+
+import java.lang.ref.WeakReference;
 
 /**
  * Created by ZhangHaitao on 2018/11/8.
@@ -18,8 +21,7 @@ public class StatusBarManager {
     //状态栏颜色
     private static int statusColor;
 
-    private static AppCompatActivity mActivity;
-
+    private static WeakReference<AppCompatActivity> mActivity;
 
     public static boolean isDontShowStatusBar() {
         return dontShowStatusBar;
@@ -53,12 +55,15 @@ public class StatusBarManager {
         StatusBarManager.statusColor = statusColor;
     }
 
-    public static AppCompatActivity getActivity() {
-        return mActivity;
+    public static @Nullable AppCompatActivity getActivity() {
+        if (mActivity != null || mActivity.get() != null) {
+            return mActivity.get();
+        }
+        return null;
     }
 
     public static void setActivity(AppCompatActivity mActivity) {
-        StatusBarManager.mActivity = mActivity;
+        StatusBarManager.mActivity = new WeakReference<>(mActivity);
     }
 
     public void build() {

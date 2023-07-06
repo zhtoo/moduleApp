@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.text.TextUtils;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -79,10 +80,17 @@ public class ZXingActivity extends PreviewCameraActivity {
             try {
                 Result rawResult = multiFormatReader.decodeWithState(binaryBitmap);
                 if (rawResult != null) {
+                    Log.e("bbb",rawResult.getText());
                     Toast.makeText(this, rawResult.getText(), Toast.LENGTH_SHORT).show();
                 }
-            } catch (ReaderException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
+                try{
+                    Log.e("aaa",e.getClass().getSimpleName());
+                    Log.e("aaa",e.getMessage());
+                }catch (Exception ex){
+
+                }
             } finally {
                 multiFormatReader.reset();
             }

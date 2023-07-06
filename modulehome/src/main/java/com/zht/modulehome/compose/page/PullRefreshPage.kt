@@ -160,8 +160,6 @@ fun RefreshDemoList() {
 @Composable
 @ExperimentalMaterialApi
 fun DemoList() {
-
-
 //        Box(modifier = Modifier.smartRefresh()) {
 //            LazyColumn(Modifier.fillMaxSize()) {
 //                items(demoItems.size) { index ->

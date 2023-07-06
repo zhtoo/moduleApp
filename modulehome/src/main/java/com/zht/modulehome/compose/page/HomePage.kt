@@ -33,11 +33,9 @@ fun HomePage() {
 
     var text by rememberSaveable { mutableStateOf("HomePage") }
 
-    Column(
-        Modifier
-            .fillMaxSize()
-            .verticalScroll(rememberScrollState())
-    ) {
+
+    Column( Modifier
+        .fillMaxSize()) {
         Box(
             modifier = Modifier
                 .fillMaxWidth()
@@ -52,18 +50,29 @@ fun HomePage() {
             Text(text, textAlign = TextAlign.Center)
         }
 
+        Column(
+            Modifier
+                .fillMaxSize()
+                .verticalScroll(rememberScrollState())
+        ) {
+            CardItem("带动画导航") {
+                AppNavigation.navigate(Router.navigator)
+            }
+            CardItem("动画") {
+                AppNavigation.navigate(Router.animationHome)
+            }
+            for (i in 0 until 10) {
+                CardItem("demo${i}") {
 
-        CardItem("导航demo") {
-            AppNavigation.navigate(Router.navigator)
-        }
-
-        for (i in 0 until 10) {
-            CardItem("demo${i}") {
-
+                }
             }
         }
 
     }
+
+
+
+
 }
 
 

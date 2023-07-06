@@ -33,12 +33,7 @@ public class StatusBarActivity extends BaseActivity implements View.OnClickListe
         findViewById(R.id.m_status_text_color).setOnClickListener(this);
         findViewById(R.id.m_status_visibility).setOnClickListener(this);
         findViewById(R.id.m_full_screen).setOnClickListener(this);
-         StatusBarBuilder.with(this).build();
-
-//        Glide.with(this)
-//                .asGif()
-//                .l
-//                .into(new ImageView(this));
+        StatusBarBuilder.with(this).build();
 
     }
 

@@ -15,6 +15,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.zht.modulehome.compose.page.*
+import com.zht.modulehome.compose.page.animation.AnimationPage
 import com.zht.modulehome.compose.page.navigator.NavigatorPage
 
 /**
@@ -58,6 +59,7 @@ fun AppNavHost(
         composable("Main") { MainPage() }
         composable("ColumnPage") { ColumnPage() }
         composable("PullRefreshPage") { PullRefreshPage() }
+        composable(Router.animationHome) { AnimationPage() }
         homeGraph()
         navigatorGraph()
     }
@@ -83,10 +85,11 @@ fun NavGraphBuilder.navigatorGraph() {
     }
 }
 
-object Router{
+object Router {
     const val navigator = "navigator"
     const val navigatorStart = "navigatorStart"
     const val navigatorHome = "navigatorHome"
+    const val animationHome = "animationHome"
 }
 
 @SuppressLint("StaticFieldLeak")

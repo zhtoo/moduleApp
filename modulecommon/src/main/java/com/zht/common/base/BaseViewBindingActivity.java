@@ -83,8 +83,8 @@ public abstract class BaseViewBindingActivity<T extends ViewBinding> extends Per
 
     @Override
     protected void onDestroy() {
-        super.onDestroy();
         binding = null;
+        super.onDestroy();
     }
 
 

@@ -68,8 +68,8 @@ public abstract class BaseActivity extends PermissionActivity {
 
     @Override
     protected void onDestroy() {
-        super.onDestroy();
         mUnbinder.unbind();
+        super.onDestroy();
     }
 
 }
