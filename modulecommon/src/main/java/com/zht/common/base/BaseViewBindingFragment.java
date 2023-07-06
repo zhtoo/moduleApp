@@ -64,8 +64,13 @@ public abstract class BaseViewBindingFragment<T extends ViewBinding> extends Fra
     }
 
     @Override
-    public void onDestroy() {
+    public void onDestroyView() {
+        View root = binding.getRoot();
+        if(root instanceof ViewGroup){
+            ((ViewGroup) root).removeAllViews();
+        }
         binding = null;
-        super.onDestroy();
+        super.onDestroyView();
     }
+
 }

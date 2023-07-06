@@ -1,5 +1,6 @@
 package com.zht.measureheartrate;
 
+import android.app.Application;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.util.Size;
@@ -105,9 +106,17 @@ public class CameraXHelper {
         }
         mCameraProvider = null;
         mCamera = null;
-        heartRateProcessing = null;
+
         mImageAnalyzer = null;
         previewSize = null;
+    }
+
+    public void release() {
+        stopCamera();
+        if(heartRateProcessing !=null){
+            heartRateProcessing.release();
+        }
+        heartRateProcessing = null;
     }
 
     public void startAnalyzer(Context context) {

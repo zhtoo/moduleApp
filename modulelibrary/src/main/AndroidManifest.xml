@@ -22,6 +22,7 @@
         <activity android:name=".activity.ZXingActivity" />
         <activity android:name=".activity.HeartRateActivity" />
         <activity android:name=".activity.WifiActivity" />
+        <activity android:name=".activity.GifActivity" />
 
     </application>
 
