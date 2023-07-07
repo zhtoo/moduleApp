@@ -28,7 +28,7 @@ import com.zht.common.base.BaseFragment;
 import com.zht.common.constant.ARoutePathConstants;
 import com.zht.common.listener.PermissionCallBack;
 import com.zht.common.util.Logger;
-import com.zht.common.util.UriUtils;
+import com.zht.common.util.uri.UriUtils;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -69,8 +69,11 @@ public class PersonalFragment extends BaseFragment implements View.OnClickListen
         activityResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
             if (result != null && result.getData() != null) {
                 Uri uri = result.getData().getData();
+
+
+
                 Logger.e("File Uri: " + uri.toString());
-                String path = UriUtils.getPath(getContext(), uri);
+                String path = UriUtils.getAbsolutePath(getContext(), uri);
                 if (!TextUtils.isEmpty(path)) {
                     Logger.e("File Path: " + path);
                     editText.setText(path);
@@ -90,6 +93,14 @@ public class PersonalFragment extends BaseFragment implements View.OnClickListen
             String s = editText.getText().toString();
             OpenFileBySystem.openFileByPath(getContext(), s, Intent.ACTION_SEND);
         } else if (view.getId() == R.id.bt_home_get_file_path) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                showFileChooser();
+                return;
+            }
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+                showFileChooser();
+                return;
+            }
             if (getActivity() != null && getActivity() instanceof BaseActivity) {
                 ((BaseActivity) getActivity()).requestPermissions(
                         new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},

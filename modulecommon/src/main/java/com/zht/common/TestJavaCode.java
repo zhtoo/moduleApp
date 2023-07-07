@@ -38,7 +38,7 @@ public class TestJavaCode {
 
     }
 
-    private static void dowloadFile() {
+    private static void downloadFile() {
         try {
             URL url = new URL("https://codeload.github.com/zhtoo/zhangLib/zip/master");
             HttpURLConnection connection =
@@ -74,12 +74,9 @@ public class TestJavaCode {
     }
 
     public static String get(long args) {
-
-
         long G = args / (1024 * 1024 * 1024);
         long M = args % (1024 * 1024 * 1024) / (1024 * 1024);
         long kb = args % (1024 * 1024 * 1024) % (1024 * 1024) / 1024;
-
         return G + "G" + M + "M" + kb + "kb";
     }
 
