@@ -33,16 +33,15 @@ public class JsonFormat {
         for (int i = 0; i < json.length(); i++) {
             char mChar = json.charAt(i);
             //json对象开始
-            if(mChar=='{'){
+            if (mChar == '{') {
 
-            }else if(mChar=='['){
+            } else if (mChar == '[') {
 
-            }
-            else if(mChar=='\"'){
+            } else if (mChar == '\"') {
 
-            }else if(mChar==':'){
+            } else if (mChar == ':') {
 
-            }else if(mChar==','){
+            } else if (mChar == ',') {
 
             }
 
@@ -61,7 +60,7 @@ public class JsonFormat {
     /**
      * 解析json数组
      */
-    public void analyzeJsonArrsy(String json) {
+    public void analyzeJsonArray(String json) {
 
     }
 
@@ -69,7 +68,7 @@ public class JsonFormat {
      * 解析键值对
      * return json对象  json数组  json数据
      */
-    public void analyzeJsondata(String json) {
+    public void analyzeJsonData(String json) {
 
     }
 

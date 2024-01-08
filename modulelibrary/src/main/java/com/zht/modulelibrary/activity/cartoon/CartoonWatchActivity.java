@@ -52,11 +52,6 @@ public class CartoonWatchActivity extends BaseViewBindingActivity<ActivityCartoo
     CartoonWatchAdapter mAdapter;
 
     @Override
-    protected ActivityCartoonWatchBinding getViewBinding() {
-        return ActivityCartoonWatchBinding.inflate(getLayoutInflater());
-    }
-
-    @Override
     protected void initView(Bundle savedInstanceState) {
         if (binding == null) {
             return;

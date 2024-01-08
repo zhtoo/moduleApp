@@ -31,10 +31,6 @@ import java.util.ArrayList;
 @Route(path = ARoutePathConstants.Library.JSOUP_ACTIVITY)
 public class JsoupActivity extends BaseViewBindingActivity<ActivityJsoupBinding> {
 
-    @Override
-    protected ActivityJsoupBinding getViewBinding() {
-        return ActivityJsoupBinding.inflate(getLayoutInflater());
-    }
 
     @Override
     protected void initView(Bundle savedInstanceState) {

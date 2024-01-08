@@ -84,9 +84,6 @@ dependencies {
     implementation "androidx.appcompat:appcompat:$rootProject.ext.appcompat"
     //ARouter路由
     annotationProcessor "com.alibaba:arouter-compiler:$rootProject.ext.arouterCompiler"
-    //butterknife
-    annotationProcessor "com.jakewharton:butterknife-compiler:$rootProject.ext.butterknife"
-
 
 //    // When using a MDC theme
 //    implementation "com.google.android.material:compose-theme-adapter:1.1.16"

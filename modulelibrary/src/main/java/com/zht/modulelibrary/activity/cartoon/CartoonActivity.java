@@ -30,11 +30,6 @@ public class CartoonActivity extends BaseViewBindingActivity<ActivityCartoonBind
     CartoonAdapter mAdapter;
 
     @Override
-    protected ActivityCartoonBinding getViewBinding() {
-        return ActivityCartoonBinding.inflate(getLayoutInflater());
-    }
-
-    @Override
     protected void initView(Bundle savedInstanceState) {
         if (binding == null) {
             return;

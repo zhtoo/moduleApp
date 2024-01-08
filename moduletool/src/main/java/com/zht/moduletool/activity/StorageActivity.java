@@ -18,11 +18,6 @@ import com.zht.moduletool.databinding.ActivityStorageBinding;
 public class StorageActivity extends BaseViewBindingActivity<ActivityStorageBinding> {
 
     @Override
-    protected ActivityStorageBinding getViewBinding() {
-        return ActivityStorageBinding.inflate(getLayoutInflater());
-    }
-
-    @Override
     protected void initView(Bundle savedInstanceState) {
         //设置TextView可以滚动
         binding.storageText.setMovementMethod(ScrollingMovementMethod.getInstance());

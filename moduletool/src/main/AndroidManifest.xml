@@ -24,6 +24,7 @@
             android:configChanges="orientation|keyboardHidden|screenSize|layoutDirection"/>
         <activity android:name=".activity.StorageActivity"/>
         <activity android:name=".activity.TrigonometricFunctionsActivity" />
+        <activity android:name=".activity.ScreenEdgeActivity" />
 
     </application>
 

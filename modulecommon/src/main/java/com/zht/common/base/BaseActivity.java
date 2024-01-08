@@ -5,19 +5,12 @@ import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
-
 public abstract class BaseActivity extends PermissionActivity {
 
     /**
      * 上下文对象
      */
     protected Context mContext;
-    /**
-     * ButterKnife
-     */
-    private Unbinder mUnbinder;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -32,8 +25,6 @@ public abstract class BaseActivity extends PermissionActivity {
         beforeSetContentView(savedInstanceState);
         //加载布局
         setContentView(getLayoutId());
-        //注册butterknife
-        mUnbinder = ButterKnife.bind(this);
         mContext = this;
         initView(savedInstanceState);
         initData();
@@ -68,7 +59,6 @@ public abstract class BaseActivity extends PermissionActivity {
 
     @Override
     protected void onDestroy() {
-        mUnbinder.unbind();
         super.onDestroy();
     }
 

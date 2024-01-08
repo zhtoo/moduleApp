@@ -63,8 +63,6 @@ dependencies {
     implementation project(':modulecommon')
     //ARouter路由
     annotationProcessor "com.alibaba:arouter-compiler:$rootProject.ext.arouterCompiler"
-    //butterknife
-    annotationProcessor "com.jakewharton:butterknife-compiler:$rootProject.ext.butterknife"
 
     // jsoup
     implementation("org.jsoup:jsoup:1.15.3")

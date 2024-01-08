@@ -70,9 +70,6 @@ dependencies {
     //ARouter
     annotationProcessor "com.alibaba:arouter-compiler:$rootProject.ext.arouterCompiler"
 
-    //butterknife
-    implementation "com.jakewharton:butterknife:$rootProject.ext.butterknife"
-    annotationProcessor "com.jakewharton:butterknife-compiler:$rootProject.ext.butterknife"
 
 
 }

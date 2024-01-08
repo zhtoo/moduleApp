@@ -35,7 +35,7 @@ public class RemoveJsonNullObjectUtil {
         StringBuffer SB = new StringBuffer(json);
         //Map必须是可排序的，而且是降序排列。
         //因为从头开始删除会导致记录的Position发生改变。
-        TreeMap<Integer, Integer> postionMap = new TreeMap<>(new Comparator<Integer>() {
+        TreeMap<Integer, Integer> positionMap = new TreeMap<>(new Comparator<Integer>() {
             @Override
             public int compare(Integer o1, Integer o2) {
                 return o2 - o1;
@@ -64,9 +64,9 @@ public class RemoveJsonNullObjectUtil {
                         char nextChar = json.charAt(i + 1);
                         if (preChar == '\"') {
                             if (nextChar == ',') {
-                                postionMap.put(startPosition, i + 2);
+                                positionMap.put(startPosition, i + 2);
                             } else {
-                                postionMap.put(startPosition, i + 1);
+                                positionMap.put(startPosition, i + 1);
                                 couldDelete = false;
                             }
                         }
@@ -93,8 +93,8 @@ public class RemoveJsonNullObjectUtil {
             }
         }
         //循环删除SB中的空对象
-        for (Integer start : postionMap.keySet()) {
-            Integer end = postionMap.get(start);
+        for (Integer start : positionMap.keySet()) {
+            Integer end = positionMap.get(start);
             SB.delete(start, end);
         }
         return SB.toString();

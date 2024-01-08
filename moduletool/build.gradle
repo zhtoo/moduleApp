@@ -68,8 +68,6 @@ dependencies {
     implementation project(':modulecommon')
     //ARouter
     annotationProcessor "com.alibaba:arouter-compiler:$rootProject.ext.arouterCompiler"
-    //butterknife
-    annotationProcessor "com.jakewharton:butterknife-compiler:$rootProject.ext.butterknife"
     //ConstraintLayout的引用
     annotationProcessor 'androidx.constraintlayout:constraintlayout:1.1.3'
 

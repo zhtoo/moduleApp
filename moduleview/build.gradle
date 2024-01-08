@@ -58,8 +58,6 @@ dependencies {
     implementation project(':modulecommon')
     //ARouter路由
     annotationProcessor "com.alibaba:arouter-compiler:$rootProject.ext.arouterCompiler"
-    //butterknife
-    annotationProcessor "com.jakewharton:butterknife-compiler:$rootProject.ext.butterknife"
     //PickerView
     annotationProcessor 'com.contrarywind:Android-PickerView:4.1.6'
     //ConstraintLayout的引用

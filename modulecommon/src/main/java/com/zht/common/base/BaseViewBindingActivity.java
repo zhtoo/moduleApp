@@ -40,10 +40,6 @@ public abstract class BaseViewBindingActivity<T extends ViewBinding> extends Per
             e.printStackTrace();
         }
 
-//        if(binding == null){
-//         //   binding = getViewBinding();
-//        }
-
         //ViewBinding
         setContentView(binding.getRoot());
         ARouter.getInstance().inject(this);
@@ -52,17 +48,6 @@ public abstract class BaseViewBindingActivity<T extends ViewBinding> extends Per
     }
 
     public void beforeSetContentView(Bundle savedInstanceState) {
-    }
-
-    /**
-     * 获取当前layouty的布局ID,用于设置当前布局
-     * 交由子类实现
-     *
-     * @return
-     */
-
-    protected T getViewBinding() {
-        return null;
     }
 
     /**

@@ -8,16 +8,9 @@ import android.view.ViewGroup;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
-
 
 public abstract class BaseFragment extends Fragment {
 
-    /**
-     * ButterKnife
-     */
-    private Unbinder mUnbinder;
 
     @Nullable
     @Override
@@ -30,9 +23,6 @@ public abstract class BaseFragment extends Fragment {
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        //注册butterknife
-        mUnbinder = ButterKnife.bind(this,view);
-
         initView(view,savedInstanceState);
         initData();
     }
@@ -61,7 +51,6 @@ public abstract class BaseFragment extends Fragment {
 
     @Override
     public void onDestroyView() {
-        mUnbinder.unbind();
         super.onDestroyView();
     }
 
