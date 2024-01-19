@@ -1,6 +1,9 @@
 plugins {
     id 'com.android.application'
+    id 'kotlin-kapt'
+
 }
+apply plugin: 'kotlin-android'
 
 android {
 
@@ -46,7 +49,7 @@ android {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
 
-    annotationProcessor "com.alibaba:arouter-compiler:$rootProject.ext.arouterCompiler"
+    kapt "com.alibaba:arouter-compiler:$rootProject.ext.arouterCompiler"
 
     implementation project(':modulecommon')
 //

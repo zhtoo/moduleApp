@@ -1,29 +1,16 @@
-package com.zht.kotlin.compose
+package com.zht.modulehome.compose.widget
 
 import android.util.Log
 import androidx.compose.animation.core.animate
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.BoxScope
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.material.LocalTextStyle
-import androidx.compose.material.Text
 import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.NestedScrollConnection
 import androidx.compose.ui.input.nestedscroll.NestedScrollSource
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.debugInspectorInfo
 import androidx.compose.ui.platform.inspectable
-import androidx.compose.ui.text.PlatformTextStyle
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.style.LineHeightStyle
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
@@ -38,28 +25,35 @@ import kotlin.math.pow
  *  onLoadMore()
  *
  */
+
+
+
+/**
+ * -----------------
+ *
+ */
 private val TAG: String = "Refresh"
 
-@Composable
-fun SmartRefresh(
-    modifier: Modifier = Modifier,
-    contentAlignment: Alignment = Alignment.TopStart,
-    propagateMinConstraints: Boolean = false,
-    onRefresh: () -> Unit,
-    onLoadMore: () -> Unit,
-    content: @Composable BoxScope.() -> Unit,
-) {
-    val state = rememberSmartRefreshState(onRefresh, onLoadMore)
-    Box(
-        modifier = modifier.smartRefresh(state),
-        contentAlignment = contentAlignment,
-        propagateMinConstraints = propagateMinConstraints,
-        content = {
-            RefreshIndicator()
-            content
-            LoadMoreIndicator()
-        })
-}
+//@Composable
+//fun SmartRefresh(
+//    modifier: Modifier = Modifier,
+//    contentAlignment: Alignment = Alignment.TopStart,
+//    propagateMinConstraints: Boolean = false,
+//    onRefresh: () -> Unit,
+//    onLoadMore: () -> Unit,
+//    content: @Composable BoxScope.() -> Unit,
+//) {
+//    val state = rememberSmartRefreshState(onRefresh, onLoadMore)
+//    Box(
+//        modifier = modifier.smartRefresh(state),
+//        contentAlignment = contentAlignment,
+//        propagateMinConstraints = propagateMinConstraints,
+//        content = {
+//            RefreshIndicator()
+//            content
+//            LoadMoreIndicator()
+//        })
+//}
 
 fun Modifier.smartRefresh(
     state: SmartRefreshState,
@@ -110,6 +104,9 @@ fun Modifier.smartRefresh(
     )
 }
 
+/**
+ * 嵌套滑动控制器
+ */
 private class RefreshNestedScrollConnection(
     private val onPullDown: (pullDelta: Float) -> Float,
     private val onPullUp: (pullDelta: Float) -> Float,
@@ -218,33 +215,6 @@ class SmartRefreshState internal constructor(
         }
     }
 
-}
-
-@Composable
-fun RefreshIndicator() {
-    Text(text="this is header",
-        modifier= Modifier
-            .background(Color(0xFFFFFFFF))
-            .fillMaxWidth()
-            .height(50.dp),
-        textAlign = TextAlign.Center,
-        style= LocalTextStyle.current.merge(
-            TextStyle(
-                fontSize = 20.sp,
-                background = Color(0xFF00FF00),
-                textAlign = TextAlign.Center,
-                lineHeightStyle = LineHeightStyle(
-                    alignment = LineHeightStyle.Alignment.Center,
-                    trim = LineHeightStyle.Trim.Both
-                ),
-            )
-        ),
-    )
-}
-
-@Composable
-fun LoadMoreIndicator() {
-   // Text("this is footer")
 }
 
 

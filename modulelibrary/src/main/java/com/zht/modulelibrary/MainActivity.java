@@ -9,7 +9,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.alibaba.android.arouter.launcher.ARouter;
-import com.zht.common.base.BaseActivity;
+import com.zht.common.mvc.BaseActivity;
 import com.zht.common.constant.ARoutePathConstants;
 
 /**

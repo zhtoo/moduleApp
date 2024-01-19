@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.zht.common.adapter.CommonAdapter;
-import com.zht.common.base.BaseActivity;
+import com.zht.common.mvc.BaseActivity;
 import com.zht.common.bean.ItemBean;
 import com.zht.common.constant.ARoutePathConstants;
 import com.zht.moduleview.R;

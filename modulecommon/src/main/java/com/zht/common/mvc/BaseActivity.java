@@ -1,9 +1,11 @@
-package com.zht.common.base;
+package com.zht.common.mvc;
 
 import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
+
+import com.zht.common.base.PermissionActivity;
 
 public abstract class BaseActivity extends PermissionActivity {
 

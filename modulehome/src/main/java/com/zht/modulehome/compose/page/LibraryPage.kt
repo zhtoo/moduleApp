@@ -21,31 +21,31 @@ fun LibraryPage() {
         Text(text, modifier = Modifier.clickable {
             text = "LibraryPage -> ok"
         })
-        Button(onClick = { AppNavigation.navigate("Main") }) {
+        Button(onClick = { AppNavigation.getInstance().navigate("Main") }) {
             Text("跳转到Main界面")
         }
-        Button(onClick = { AppNavigation.navigate("ColumnPage") }) {
+        Button(onClick = { AppNavigation.getInstance().navigate("ColumnPage") }) {
             Text("跳转到Column界面")
         }
-        Button(onClick = { AppNavigation.navigate("PullRefreshPage") }) {
+        Button(onClick = { AppNavigation.getInstance().navigate("PullRefreshPage") }) {
             Text("跳转到PullRefresh界面")
         }
-        Button(onClick = { AppNavigation.navigate("login") }) {
+        Button(onClick = { AppNavigation.getInstance().navigate("login") }) {
             Text("跳转到login界面")
         }
-        Button(onClick = { AppNavigation.navigate("login_home") }) {
+        Button(onClick = { AppNavigation.getInstance().navigate("login_home") }) {
             Text("跳转到login_home界面")
         }
-        Button(onClick = { AppNavigation.navigate("password") }) {
+        Button(onClick = { AppNavigation.getInstance().navigate("password") }) {
             Text("跳转到password界面")
         }
-        Button(onClick = { AppNavigation.navigate("registration") }) {
+        Button(onClick = { AppNavigation.getInstance().navigate("registration") }) {
             Text("跳转到registration界面")
         }
-        Button(onClick = { AppNavigation.navigate("Unknown") }) {
+        Button(onClick = { AppNavigation.getInstance().navigate("Unknown") }) {
             Text("跳转到Unknown界面")
         }
-        Button(onClick = { AppNavigation.navigate("Unkaaanown") }) {
+        Button(onClick = { AppNavigation.getInstance().navigate("Unkaaanown") }) {
             Text("跳转到Unkaaanown界面")
         }
     }

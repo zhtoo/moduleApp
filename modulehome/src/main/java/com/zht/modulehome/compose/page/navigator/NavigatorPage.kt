@@ -8,19 +8,15 @@ import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.textInputServiceFactory
 import androidx.navigation.NavHostController
 import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.composable
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
-import com.zht.modulehome.compose.navigate.AppNavigation
-import com.zht.modulehome.compose.navigate.Router
-import com.zht.modulehome.compose.page.CardItem
-import com.zht.modulehome.compose.page.UnknownPage
+import com.zht.modulehome.compose.navigate.RouterPath
+import com.zht.modulehome.compose.widget.CardItem
 
 /**
  * @Date   2023/4/3 14:29
@@ -35,10 +31,10 @@ fun NavigatorPage() {
     AnimatedNavHost(
         modifier = Modifier.fillMaxSize(),
         navController = navController,
-        startDestination = Router.navigatorHome
+        startDestination = RouterPath.navigatorHome
     ) {
         composable(
-            Router.navigatorHome,
+            RouterPath.navigatorHome,
             enterTransition = { EnterTransition.None },
             exitTransition = { ExitTransition.None },
         ) { NavigatorHomePage(navController) }

@@ -1,34 +1,42 @@
-package com.zht.modulehome.compose.page
+package com.zht.modulehome.compose
 
-import android.util.Log
-import androidx.activity.OnBackPressedCallback
-import androidx.activity.OnBackPressedDispatcher
-import androidx.activity.compose.BackHandler
-import androidx.activity.compose.LocalOnBackPressedDispatcherOwner
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.*
-import androidx.compose.material.*
-import androidx.compose.runtime.*
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.material.BottomNavigation
+import androidx.compose.material.BottomNavigationItem
+import androidx.compose.material.Scaffold
+import androidx.compose.material.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavDestination.Companion.hierarchy
-import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.zht.common.R
+import com.zht.modulehome.compose.page.HomePage
+import com.zht.modulehome.compose.page.LibraryPage
+import com.zht.modulehome.compose.page.PersonalPage
+import com.zht.modulehome.compose.page.ToolsPage
+import com.zht.modulehome.compose.page.ViewPage
 
 /**
  * @Date   2023/3/31 17:59
  * @Author zhanghaitao
  * @Description
  *
- * http://www.manongjc.com/detail/27-mswuuczrkdypmri.html
+ * https://www.cnblogs.com/youfat/p/15647179.html
+ *
+ * 这里我们也使用了NavHost，但是需要和AppNavHost做一个区分。
+ * 首页使用的NavHost是控制底部tab切换page，AppNavHost是真个app生命周期内的界面跳转
  */
 sealed class BottomTabItem(
     val route: String,
@@ -84,7 +92,7 @@ val items = listOf(
 fun MainPage() {
     val navController = rememberNavController()
     navController.addOnDestinationChangedListener { controller, destination, arguments ->
-        Log.e("aaa", "============")
+//        Log.e("aaa", "============")
 //        controller.backQueue.forEach {
 //            Log.e(
 //                "aaa",
@@ -100,11 +108,11 @@ fun MainPage() {
             startDestination = BottomTabItem.Home.route,
             Modifier.padding(paddingValues)
         ) {
-            composable("Home") { HomePage() }
-            composable("Tools") { ToolsPage() }
-            composable("Lib") { LibraryPage() }
-            composable("View") { ViewPage() }
-            composable("Personal") { PersonalPage() }
+            composable(BottomTabItem.Home.route) { HomePage() }
+            composable(BottomTabItem.Tools.route) { ToolsPage() }
+            composable(BottomTabItem.Lib.route) { LibraryPage() }
+            composable(BottomTabItem.View.route) { ViewPage() }
+            composable(BottomTabItem.Personal.route) { PersonalPage() }
         }
     }
 }

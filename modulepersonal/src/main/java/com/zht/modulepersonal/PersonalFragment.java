@@ -23,8 +23,8 @@ import androidx.activity.result.contract.ActivityResultContracts;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.zht.common.OpenFileBySystem;
-import com.zht.common.base.BaseActivity;
-import com.zht.common.base.BaseFragment;
+import com.zht.common.mvc.BaseActivity;
+import com.zht.common.mvc.BaseFragment;
 import com.zht.common.constant.ARoutePathConstants;
 import com.zht.common.listener.PermissionCallBack;
 import com.zht.common.util.Logger;

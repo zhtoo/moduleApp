@@ -7,7 +7,7 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
-import com.zht.common.base.BaseFragment;
+import com.zht.common.mvc.BaseFragment;
 import com.zht.moduleview.R;
 
 /**

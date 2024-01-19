@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.widget.CalendarView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.zht.common.base.BaseActivity;
+import com.zht.common.mvc.BaseActivity;
 import com.zht.common.constant.ARoutePathConstants;
 import com.zht.moduleview.R;
 

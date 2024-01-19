@@ -3,13 +3,12 @@ package com.zht.moduleview.activity.customise;
 import android.content.Context;
 import android.inputmethodservice.Keyboard;
 import android.os.Bundle;
-import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.zht.common.base.BaseActivity;
+import com.zht.common.mvc.BaseActivity;
 import com.zht.common.constant.ARoutePathConstants;
 import com.zht.moduleview.CustomKeyboard.CustomKeyboardManager;
 import com.zht.moduleview.R;

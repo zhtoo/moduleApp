@@ -1,4 +1,4 @@
-package com.zht.common.base;
+package com.zht.common.mvc;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -28,7 +28,7 @@ public abstract class BaseFragment extends Fragment {
     }
 
     /**
-     * 获取当前layouty的布局ID,用于设置当前布局
+     * 获取当前layout的布局ID,用于设置当前布局
      * 交由子类实现
      * @return
      */

@@ -22,6 +22,7 @@ public class ARoutePathConstants {
 
         String JETPACK_ACTIVITY = MODULE + "/activity/JetpackActivity";
         String COMPOSE_ACTIVITY = MODULE + "/activity/ComposeActivity";
+        String COMPOSE_FRAGMENT = MODULE + "/ComposeFragment";
         String HILT_ACTIVITY = MODULE + "/activity/HiltActivity";
         String SECURITY_ACTIVITY = MODULE + "/activity/SecurityActivity";
         String BOTTOM_TAB_ACTIVITY = MODULE + "/activity/BottomTabActivity";

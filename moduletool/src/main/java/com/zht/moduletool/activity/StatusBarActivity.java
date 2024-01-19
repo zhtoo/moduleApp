@@ -7,7 +7,7 @@ import android.widget.TextView;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.zht.common.StatusBar.StatusBar;
 import com.zht.common.StatusBar.StatusBarBuilder;
-import com.zht.common.base.BaseActivity;
+import com.zht.common.mvc.BaseActivity;
 import com.zht.common.constant.ARoutePathConstants;
 import com.zht.moduletool.R;
 

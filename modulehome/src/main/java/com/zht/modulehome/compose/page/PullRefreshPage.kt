@@ -1,12 +1,13 @@
 package com.zht.modulehome.compose.page
 
 import android.util.Log
-import androidx.compose.foundation.Canvas
+import androidx.compose.animation.Crossfade
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.material.pullrefresh.PullRefreshIndicator
 import androidx.compose.material.pullrefresh.pullRefresh
@@ -14,14 +15,12 @@ import androidx.compose.material.pullrefresh.rememberPullRefreshState
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.zht.kotlin.compose.LoadMoreIndicator
-import com.zht.kotlin.compose.RefreshIndicator
-import com.zht.kotlin.compose.smartRefresh
+import com.zht.modulehome.compose.widget.smartRefresh
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -46,9 +45,263 @@ data class DataModel(
 fun PullRefreshPage() {
     Column(//最外层宽高设置设置无效，强制match_parent
         modifier = Modifier
-            .background(Color(0xFFFFFFFF))//背景
+            .background(Color(0xFFF3F3F3))//背景
             .padding(15.dp)
     ) {
+        Box(
+            modifier = Modifier
+                .weight(1F)
+                .fillMaxWidth()
+        ) {
+
+            RefreshDemoList()
+        }
+
+        Box(
+            modifier = Modifier
+                .height(50.dp)
+                .background(Color(0xFFF0F0F0))//背景
+                .fillMaxWidth()
+        )
+
+        Box(
+            modifier = Modifier
+                .weight(1F)
+                .fillMaxWidth()
+        ) {
+            TestRefreshDemoList()
+        }
+
+        Box(
+            modifier = Modifier
+                .height(50.dp)
+                .fillMaxWidth()
+        )
+    }
+}
+
+@Preview
+@Composable
+@ExperimentalMaterialApi
+fun PreviewMessageCard() {
+    PullRefreshPage()
+}
+
+@Composable
+@ExperimentalMaterialApi
+fun RefreshDemoList() {
+    var itemList by remember { mutableStateOf(mutableListOf<String>()) }
+    val refreshScope = rememberCoroutineScope()
+    var mRefreshing by remember { mutableStateOf(false) }
+    val state = rememberPullRefreshState(mRefreshing, {
+        refreshScope.launch {
+            mRefreshing = true
+            delay(500L)
+            val list = mutableListOf<String>()
+            for (i in 0 until 10) {
+                list.add("item:${i}")
+            }
+            itemList = list
+            mRefreshing = false
+        }
+    })
+    Box(
+        Modifier
+            .pullRefresh(state)
+    ) {
+        LazyColumn(
+            Modifier.fillMaxSize()
+        ) {
+            items(itemList.size) { index ->
+                DemoItem(itemList[index])
+            }
+        }
+        PullRefreshIndicator(
+            mRefreshing,
+            state,
+            Modifier.align(Alignment.TopCenter)
+        )
+    }
+}
+
+
+var offsetY: Float by mutableStateOf(0f)
+var refreshing: Boolean by mutableStateOf(false)
+var loading: Boolean by mutableStateOf(false)
+
+@Composable
+@ExperimentalMaterialApi
+fun TestRefreshDemoList() {
+
+
+    val list = mutableListOf<String>()
+    for (i in 0 until 10) {
+        list.add("test Item :${i}")
+    }
+    uiState.value.list = list
+
+    var distancePulled = 0f
+    var maxOffset = with(LocalDensity.current) {
+        50.dp.toPx()
+    }
+    Box(
+        Modifier
+            .background(Color.Green)
+            .fillMaxSize()
+            .graphicsLayer {
+                clip = true
+            }
+            .smartRefresh(
+                { pullRefreshDelta ->
+                    Log.e(TAG, "pullRefreshDelta: ${pullRefreshDelta}")
+                    if (refreshing) {
+                        0F
+                    } else {
+                        // 计算新的位移量
+                        val newOffset = (distancePulled + pullRefreshDelta).coerceAtLeast(0f)
+                        // 计算父类处理需要消费的偏移
+                        val dragConsumed = newOffset - distancePulled
+                        distancePulled = newOffset
+                        offsetY = distancePulled
+                        if (offsetY >= maxOffset) {
+                            refreshing = true
+                        }
+                        dragConsumed
+                    }
+                }, { pullLoadDelta ->
+                    Log.e(TAG, "pullLoadDelta: ${pullLoadDelta}")
+                    if (loading) {
+                        0F
+                    } else {
+                        // 计算新的位移量
+                        val newOffset = (distancePulled + pullLoadDelta).coerceAtMost(0f)
+                        // 计算父类处理需要消费的偏移
+                        val dragConsumed = newOffset - distancePulled
+                        distancePulled = newOffset
+                        offsetY = distancePulled
+                        if (offsetY <= -maxOffset) {
+                            loading = true
+                        }
+                        dragConsumed
+                    }
+                },
+                {
+                    delay(1000L)
+                    if (refreshing) {
+                        refreshing = false
+                    }
+                    if (loading) {
+                        loading = false
+                    }
+                    offsetY = 0f
+                    distancePulled = 0f
+                },
+                true
+            )
+    ) {
+        LazyColumn(
+            Modifier
+                .fillMaxSize()
+                .graphicsLayer {
+                    translationY = offsetY
+                }
+        ) {
+            items(uiState.value.list.size) { index ->
+                DemoItem(uiState.value.list[index])
+            }
+        }
+        RefreshIndicator(modifier = Modifier.align(Alignment.TopCenter))
+        LoadMoreIndicator(modifier = Modifier.align(Alignment.BottomCenter))
+    }
+
+
+}
+
+
+@Composable
+fun RefreshIndicator(
+    modifier: Modifier = Modifier,
+) {
+    Surface(
+        modifier = modifier
+            .fillMaxWidth()
+            .height(50.dp)
+            .graphicsLayer {
+                translationY = offsetY - size.height
+            },
+    ) {
+        Crossfade(
+            targetState = refreshing,
+            animationSpec = tween(durationMillis = 100), label = ""
+        ) { refresh ->
+
+            Box(
+                modifier = Modifier.fillMaxSize(),
+                contentAlignment = Alignment.Center
+            ) {
+                if (refresh) {
+                    Text(text = "刷新中...")
+                } else {
+                    Text(text = "下拉刷新")
+                }
+            }
+        }
+    }
+
+
+}
+
+@Composable
+fun LoadMoreIndicator(modifier: Modifier = Modifier) {
+    Surface(
+        modifier = modifier
+            .fillMaxWidth()
+            .height(50.dp)
+            .graphicsLayer {
+                translationY = offsetY + size.height
+            },
+    ) {
+        Crossfade(
+            targetState = loading,
+            animationSpec = tween(durationMillis = 100), label = ""
+        ) { load ->
+            Box(
+                modifier = Modifier.fillMaxSize(),
+                contentAlignment = Alignment.Center
+            ) {
+                if (load) {
+                    Text(text = "加载中...")
+                } else {
+                    Text(text = "上拉加载")
+                }
+            }
+        }
+    }
+}
+
+
+@OptIn(ExperimentalMaterialApi::class)
+private fun onRefresh(itemList: MutableList<String>) {
+    Log.e(TAG, "onRefresh: ")
+    for (i in 0 until 10) {
+        itemList.add("item:${i}")
+    }
+}
+
+@Composable
+fun DemoItem(demo: String) {
+    Column(
+        modifier = Modifier
+            .background(Color(0x66333333))//背景
+            .fillMaxWidth()
+            .height(50.dp)
+            .padding(15.dp)//设置内边距
+    ) {
+        Text(demo)
+    }
+}
+
+
 //            Text(name, fontSize = 22.sp)
 //            Text("Column demo:")
 //            TextField(
@@ -88,176 +341,28 @@ fun PullRefreshPage() {
 //            }
 //            Text("List demo:")
 
-        Canvas(modifier = Modifier
-            .fillMaxWidth()
-            .height(50.dp)
-            .background(Color(0xFFFF0000))
-            .clip(RoundedCornerShape(16.dp))
-        ) {
-            Log.e(TAG, "size(${size.width},${size.height})" )
-            drawCircle(Color.Blue, radius = 50.dp.toPx())
-        }
-
-        Box(
-            modifier = Modifier
-                .weight(1F)
-                .fillMaxWidth()
-        ) {
-            RefreshDemoList()
-        }
-        Box(
-            modifier = Modifier
-                .weight(1F)
-                .fillMaxWidth()
-        ) {
-            DemoList()
-        }
-    }
-}
-
-@Preview
-@Composable
-@ExperimentalMaterialApi
-fun PreviewMessageCard() {
-    PullRefreshPage()
-}
-
-@Composable
-@ExperimentalMaterialApi
-fun RefreshDemoList() {
-    var itemList by remember { mutableStateOf(mutableListOf<String>()) }
-    val refreshScope = rememberCoroutineScope()
-    var mRefreshing by remember { mutableStateOf(false) }
-    val state = rememberPullRefreshState(mRefreshing, {
-        refreshScope.launch {
-            mRefreshing = true
-            delay(500L)
-            val list = mutableListOf<String>()
-            for (i in 0 until 10) {
-                list.add("item:${i}")
-            }
-            itemList = list
-            mRefreshing = false
-        }
-    })
-    Box(
-        Modifier
-            .pullRefresh(state)
-    ) {
-        LazyColumn(Modifier.fillMaxSize()) {
-            items(itemList.size) { index ->
-                DemoItem(itemList[index])
-            }
-        }
-        PullRefreshIndicator(
-            mRefreshing,
-            state,
-            Modifier.align(Alignment.TopCenter)
-        )
-    }
-}
-
-@Composable
-@ExperimentalMaterialApi
-fun DemoList() {
-//        Box(modifier = Modifier.smartRefresh()) {
-//            LazyColumn(Modifier.fillMaxSize()) {
-//                items(demoItems.size) { index ->
-//                    DemoItem(demoItems[index])
-//                }
-//            }
+//        Canvas(
+//            modifier = Modifier
+//                .fillMaxWidth()
+//                .height(50.dp)
+//                .background(Color(0xFFFF00FF))
+//                .clip(RoundedCornerShape(16.dp))
+//        ) {
+////            Log.e(TAG, "size(${size.width},${size.height})" )
+////            drawCircle(Color.Blue, radius = 50.dp.toPx())
 //        }
 
-//        val aaastate = rememberScrollState()
-//        LaunchedEffect(Unit) { aaastate.animateScrollTo(100) }
-//
-    var offsetY by remember { mutableStateOf(0f) }
+//        CustomTextView(
+//            modifier = Modifier
+//                .fillMaxWidth()
+//                .height(50.dp)
+//                .background(Color(0xFFFF00FF))
+//                .clip(RoundedCornerShape(16.dp))
+//        )
 
-
-    val list = mutableListOf<String>()
-    for (i in 0 until 10) {
-        list.add("test Item :${i}")
-    }
-    uiState.value.list = list
-
-    var _refreshing = false
-    var _loading = false
-
-    var distancePulled = 0f
-
-    Box(
-        Modifier
-        .background(Color.Green)
-        .fillMaxSize()
-        .smartRefresh(
-            { pullDelta ->
-                if (_refreshing) {
-                    0F
-                } else {
-
-                    // 计算新的位移量
-                    val newOffset = (distancePulled + pullDelta).coerceAtLeast(0f)
-                    // 计算父类处理需要消费的偏移
-                    val dragConsumed = newOffset - distancePulled
-                    distancePulled = newOffset
-                    offsetY = distancePulled
-                    dragConsumed
-                }
-            }, { pullDelta ->
-                if (_loading) {
-                    0F
-                } else {
-                    // 计算新的位移量
-                    val newOffset = (distancePulled + pullDelta).coerceAtMost(0f)
-                    // 计算父类处理需要消费的偏移
-                    val dragConsumed = newOffset - distancePulled
-                    distancePulled = newOffset
-                    offsetY = distancePulled
-                    dragConsumed
-                }
-            }, {
-                offsetY = 0f
-                distancePulled = 0f
-            },
-            true
-        )
-    ) {
-
-        LazyColumn(
-            Modifier
-                .graphicsLayer {
-                    translationY = offsetY
-                }
-                .fillMaxSize()
-        ) {
-            items(uiState.value.list.size) { index ->
-                DemoItem(uiState.value.list[index])
-            }
-        }
-        RefreshIndicator()
-        LoadMoreIndicator()
-    }
-
-
-}
-
-@OptIn(ExperimentalMaterialApi::class)
-private fun onRefresh(itemList: MutableList<String>) {
-    Log.e(TAG, "onRefresh: ")
-    for (i in 0 until 10) {
-        itemList.add("item:${i}")
-    }
-}
-
-@Composable
-fun DemoItem(demo: String) {
-    Column(
-        modifier = Modifier
-            .background(Color(0x66333333))//背景
-            .fillMaxWidth()
-            .height(50.dp)
-            .padding(15.dp)//设置内边距
-    ) {
-        Text(demo)
-    }
-}
+//        Box(
+//            modifier = Modifier
+//                .height(50.dp)
+//                .fillMaxWidth()
+//                .background(Color(0xFFFF00FF))
+//        )

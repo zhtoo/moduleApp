@@ -6,7 +6,7 @@ import android.widget.LinearLayout;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
-import com.zht.common.base.BaseFragment;
+import com.zht.common.mvc.BaseFragment;
 import com.zht.common.constant.ARoutePathConstants;
 
 /**

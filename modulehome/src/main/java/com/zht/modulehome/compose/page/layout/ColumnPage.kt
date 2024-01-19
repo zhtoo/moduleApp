@@ -1,4 +1,4 @@
-package com.zht.modulehome.compose.page
+package com.zht.modulehome.compose.page.layout
 
 import android.util.Log
 import androidx.compose.foundation.clickable
@@ -19,9 +19,9 @@ import com.zht.modulehome.compose.navigate.AppNavigation
  */
 @Composable
 fun ColumnPage() {
-    AppNavigation.interceptBackPressed {
+    AppNavigation.getInstance().interceptBackPressed {
         Log.e("aaa", "回退键被点击")
-        AppNavigation.popBackStack()
+        AppNavigation.getInstance().popBackStack()
     }
     val systemUiController = rememberSystemUiController()
     systemUiController.setStatusBarColor(Color.White)
@@ -33,7 +33,7 @@ fun ColumnPage() {
         Text(text, modifier = Modifier.clickable {
             text = "ColumnPage -> ok"
         })
-        Button(onClick = { AppNavigation.navigate("ColumnPage") }) {
+        Button(onClick = { AppNavigation.getInstance().navigate("ColumnPage") }) {
             Text("跳转到Column界面")
         }
     }

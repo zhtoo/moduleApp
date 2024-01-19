@@ -1,8 +1,12 @@
 if (!isModuleView.toBoolean()) {
     apply plugin: 'com.android.library'
+
 } else {
     apply plugin: 'com.android.application'
 }
+
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion rootProject.ext.android.compileSdkVersion
@@ -62,7 +66,7 @@ dependencies {
     //依赖库导入
     implementation project(':modulecommon')
     //ARouter路由
-    annotationProcessor "com.alibaba:arouter-compiler:$rootProject.ext.arouterCompiler"
+    kapt "com.alibaba:arouter-compiler:$rootProject.ext.arouterCompiler"
 
     // jsoup
     implementation("org.jsoup:jsoup:1.15.3")

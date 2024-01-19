@@ -2,11 +2,8 @@ package com.zht.modulehome.compose.page
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.*
-import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Card
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -17,7 +14,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.zht.modulehome.compose.navigate.AppNavigation
-import com.zht.modulehome.compose.navigate.Router
+import com.zht.modulehome.compose.navigate.RouterPath
+import com.zht.modulehome.compose.widget.CardItem
 
 /**
  * @Date   2023/3/31 17:47
@@ -56,10 +54,10 @@ fun HomePage() {
                 .verticalScroll(rememberScrollState())
         ) {
             CardItem("带动画导航") {
-                AppNavigation.navigate(Router.navigator)
+                AppNavigation.getInstance().navigate(RouterPath.navigator)
             }
             CardItem("动画") {
-                AppNavigation.navigate(Router.animationHome)
+                AppNavigation.getInstance().navigate(RouterPath.animationHome)
             }
             for (i in 0 until 10) {
                 CardItem("demo${i}") {
@@ -76,41 +74,6 @@ fun HomePage() {
 }
 
 
-/**
-
-app:cardCornerRadius="10dp"
-app:cardElevation="10dp"
- */
-
-@Composable
-fun CardItem(name: String, onClick: () -> Unit = {}) {
-    Box(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(15.dp, 7.5.dp, 15.dp, 7.5.dp)
-            .height(60.dp),
-        contentAlignment = Alignment.Center
-    ) {
-        Card(
-            modifier = Modifier
-                .fillMaxSize()
-                .clickable(
-                    indication = null,
-                    interactionSource = remember { MutableInteractionSource() }) { onClick() },
-            shape = RoundedCornerShape(10.dp),
-            elevation = 5.dp
-        ) {
-            Box(
-                modifier = Modifier
-                    .padding(start = 15.dp)
-                    .fillMaxSize(),
-                contentAlignment = Alignment.CenterStart
-            ) {
-                Text(name, textAlign = TextAlign.Center)
-            }
-        }
-    }
-}
 
 
 @Composable

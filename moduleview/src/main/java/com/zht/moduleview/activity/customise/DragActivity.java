@@ -9,7 +9,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.flyco.tablayout.SlidingTabLayout;
-import com.zht.common.base.BaseActivity;
+import com.zht.common.mvc.BaseActivity;
 import com.zht.common.base.BaseFragmentStatePagerAdapter;
 import com.zht.common.constant.ARoutePathConstants;
 import com.zht.moduleview.R;

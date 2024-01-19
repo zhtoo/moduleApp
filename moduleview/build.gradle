@@ -4,6 +4,9 @@ if (!isModuleView.toBoolean()) {
     apply plugin: 'com.android.application'
 }
 
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+
 android {
     compileSdkVersion rootProject.ext.android.compileSdkVersion
     buildToolsVersion rootProject.ext.android.buildToolsVersion
@@ -57,11 +60,11 @@ dependencies {
     //依赖库导入
     implementation project(':modulecommon')
     //ARouter路由
-    annotationProcessor "com.alibaba:arouter-compiler:$rootProject.ext.arouterCompiler"
+    kapt "com.alibaba:arouter-compiler:$rootProject.ext.arouterCompiler"
     //PickerView
-    annotationProcessor 'com.contrarywind:Android-PickerView:4.1.6'
+    kapt 'com.contrarywind:Android-PickerView:4.1.6'
     //ConstraintLayout的引用
-    annotationProcessor 'androidx.constraintlayout:constraintlayout:1.1.3'
+    kapt 'androidx.constraintlayout:constraintlayout:1.1.3'
 
     implementation files('libs/pinyin4j-2.5.0.jar')
 

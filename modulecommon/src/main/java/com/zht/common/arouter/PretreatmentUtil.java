@@ -3,8 +3,10 @@ package com.zht.common.arouter;
 import android.content.Context;
 import android.content.Intent;
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.alibaba.android.arouter.facade.Postcard;
+import com.alibaba.android.arouter.facade.enums.RouteType;
 import com.zht.common.util.Logger;
 
 import java.lang.reflect.Field;
@@ -12,24 +14,36 @@ import java.lang.reflect.Field;
 /**
  * @Date 2023/1/17 12:17
  * @Author zhanghaitao
- * @Description
+ * @Description 这里是为了修复ARouter 不支持compose的跳转
  */
 public class PretreatmentUtil {
 
     public static boolean onPretreatment(Context context, Postcard postcard) {
         String path = postcard.getPath();
-        if (!TextUtils.isEmpty(path)) {
-            Class clazz = getClazzByPath(path);
-            if (clazz != null) {
-                try {
-                    context.startActivity(new Intent(context, clazz));
-                    return false;
-                } catch (Exception e) {
-                    e.printStackTrace();
-                } catch (Throwable t) {
-                    t.printStackTrace();
-                }
+        if (TextUtils.isEmpty(path)) {
+            return true;
+        }
+        Class clazz = getClazzByPath(path);
+        if (clazz == null) {
+            return true;
+        }
+
+        if("com.zht.modulehome.ComposeFragment".equals(clazz.getName())){
+            Log.e("aaa", clazz.getName());
+            Class<?> destination = postcard.getDestination();
+            if(destination == null ){
+                Log.e("aaa", "destination is null");
             }
+        }
+
+        if(postcard.getType() != RouteType.ACTIVITY){
+            return true;
+        }
+        try {
+//            context.startActivity(new Intent(context, clazz));
+//            return false;
+        } catch (Exception e) {
+//            e.printStackTrace();
         }
         return true;
     }
@@ -58,7 +72,7 @@ public class PretreatmentUtil {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+//            e.printStackTrace();
         }
         return activityClass;
     }

@@ -26,7 +26,7 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.zht.common.NotchScreen.NotchScreen;
 import com.zht.common.NotchScreen.Pie;
 import com.zht.common.StatusBar.StatusBar;
-import com.zht.common.base.BaseActivity;
+import com.zht.common.mvc.BaseActivity;
 import com.zht.common.constant.ARoutePathConstants;
 import com.zht.common.util.ScreenUtils;
 import com.zht.common.util.SystemScreenUtils;

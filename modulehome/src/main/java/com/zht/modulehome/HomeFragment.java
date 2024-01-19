@@ -36,6 +36,8 @@ public class HomeFragment extends BaseViewBindingFragment<FragmentHomeBinding> {
 
     @Override
     protected void initData() {
+
+        ComposeFragment fragment = new ComposeFragment();
         List<ItemBean> list = new ArrayList<>();
         list.add(new ItemBean(R.mipmap.ic_jetpack_logo, "Jetpack", ARoutePathConstants.Home.JETPACK_ACTIVITY));
         list.add(new ItemBean(R.mipmap.ic_camerax_logo, "CameraX", ARoutePathConstants.Home.CAMERAX_ACTIVITY));

@@ -1,6 +1,7 @@
 package com.zht.modulemain;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
@@ -10,7 +11,7 @@ import androidx.viewpager.widget.ViewPager;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
-import com.zht.common.base.BaseActivity;
+import com.zht.common.mvc.BaseActivity;
 import com.zht.common.constant.ARoutePathConstants;
 import com.zht.modulemain.view.BottomNavigationViewHelper;
 
@@ -47,11 +48,15 @@ public class MainActivity extends BaseActivity {
         mViewpager = findViewById(R.id.main_viewpager);
 
         homeFragment = (Fragment) ARouter.getInstance()
+//                .build(ARoutePathConstants.Home.COMPOSE_FRAGMENT)
                 .build(ARoutePathConstants.Home.HOME_FRAGMENT)
                 .navigation();
+
+
         toolsFragment = (Fragment) ARouter.getInstance()
                 .build(ARoutePathConstants.Tool.TOOLS_FRAGMENT)
                 .navigation();
+
         libFragment = (Fragment) ARouter.getInstance()
                 .build(ARoutePathConstants.Library.LIBRARY_FRAGMENT)
                 .navigation();
@@ -61,6 +66,15 @@ public class MainActivity extends BaseActivity {
         personalFragment = (Fragment) ARouter.getInstance()
                 .build(ARoutePathConstants.Personal.PERSONAL_FRAGMENT)
                 .navigation();
+
+
+        logFragment(homeFragment, "home");
+        logFragment(toolsFragment, "tools");
+        logFragment(libFragment, "lib");
+        logFragment(viewFragment, "view");
+        logFragment(personalFragment, "personal");
+
+
         listFragment.add(homeFragment);
         listFragment.add(toolsFragment);
         listFragment.add(libFragment);
@@ -69,6 +83,14 @@ public class MainActivity extends BaseActivity {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager(), listFragment);
         mViewpager.setAdapter(adapter);
 
+    }
+
+    private void logFragment(Fragment fragment, String name) {
+        if (fragment == null) {
+            Log.e("main", name + " is null");
+        } else {
+            Log.e("main", name + " is " + fragment.getClass().getName());
+        }
     }
 
     /**
@@ -80,24 +102,24 @@ public class MainActivity extends BaseActivity {
         BottomNavigationViewHelper.disableShiftMode(bottomNavigationView);
 
         //添加监听
-        bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener(){
+        bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 int itemId = item.getItemId();
                 if (itemId == R.id.main_bottom_tab_home) {
-                    mViewpager.setCurrentItem(0,false);
+                    mViewpager.setCurrentItem(0, false);
                     return true;
                 } else if (itemId == R.id.main_bottom_tab_tools) {
-                    mViewpager.setCurrentItem(1,false);
+                    mViewpager.setCurrentItem(1, false);
                     return true;
                 } else if (itemId == R.id.main_bottom_tab_lib) {
-                    mViewpager.setCurrentItem(2,false);
+                    mViewpager.setCurrentItem(2, false);
                     return true;
                 } else if (itemId == R.id.main_bottom_tab_view) {
-                    mViewpager.setCurrentItem(3,false);
+                    mViewpager.setCurrentItem(3, false);
                     return true;
                 } else if (itemId == R.id.main_bottom_tab_personal) {
-                    mViewpager.setCurrentItem(4,false);
+                    mViewpager.setCurrentItem(4, false);
                     return true;
                 } else {
                     return false;

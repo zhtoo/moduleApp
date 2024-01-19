@@ -2,10 +2,10 @@ if(isModuleMain.toBoolean()){
     apply plugin: 'com.android.application'
 }else{
     apply plugin: 'com.android.library'
-    //应用butterknife插件
-    apply plugin: 'com.jakewharton.butterknife'
-
 }
+
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
 
 
 android {
@@ -68,7 +68,7 @@ dependencies {
     implementation "androidx.drawerlayout:drawerlayout:$rootProject.ext.drawerlayout_version"
 
     //ARouter
-    annotationProcessor "com.alibaba:arouter-compiler:$rootProject.ext.arouterCompiler"
+    kapt "com.alibaba:arouter-compiler:$rootProject.ext.arouterCompiler"
 
 
 
