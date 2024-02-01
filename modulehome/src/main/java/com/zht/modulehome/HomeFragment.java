@@ -10,6 +10,7 @@ import com.zht.common.adapter.CommonAdapter;
 import com.zht.common.base.BaseViewBindingFragment;
 import com.zht.common.bean.ItemBean;
 import com.zht.common.constant.ARoutePathConstants;
+import com.zht.modulehome.compose.ComposeFragment;
 import com.zht.modulehome.databinding.FragmentHomeBinding;
 
 import java.util.ArrayList;

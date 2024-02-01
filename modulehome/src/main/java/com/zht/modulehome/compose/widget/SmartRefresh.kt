@@ -222,177 +222,177 @@ class SmartRefreshState internal constructor(
  * -------------------------------------------------------------------------------------------------
  */
 
-
-fun Modifier.pullRefresh(
-    state: PullRefreshState,//状态管理
-    enabled: Boolean = true,
-) = inspectable(inspectorInfo = debugInspectorInfo {
-    name = "pullRefresh"
-    properties["state"] = state
-    properties["enabled"] = enabled
-}) {
-    Modifier.pullRefresh(state::onPull, { state.onRelease() }, enabled)
-}
-
-fun Modifier.pullRefresh(
-    onPull: (pullDelta: Float) -> Float,//下拉回调
-    onRelease: suspend (flingVelocity: Float) -> Unit,//松手回调
-    enabled: Boolean = true,
-) = inspectable(inspectorInfo = debugInspectorInfo {
-    name = "pullRefresh"
-    properties["onPull"] = onPull
-    properties["onRelease"] = onRelease
-    properties["enabled"] = enabled
-}) {
-    Modifier.nestedScroll(PullRefreshNestedScrollConnection(onPull, onRelease, enabled))
-}
-
-private class PullRefreshNestedScrollConnection(
-    private val onPull: (pullDelta: Float) -> Float,
-    private val onRelease: suspend (flingVelocity: Float) -> Unit,
-    private val enabled: Boolean,
-) : NestedScrollConnection {
-
-    override fun onPreScroll(
-        available: Offset,
-        source: NestedScrollSource,
-    ): Offset = when {
-        !enabled -> Offset.Zero
-        source == NestedScrollSource.Drag && available.y < 0 -> Offset(
-            0f,
-            onPull(available.y)
-        ) // Swiping up
-        else -> Offset.Zero
-    }
-
-    override fun onPostScroll(
-        consumed: Offset,
-        available: Offset,
-        source: NestedScrollSource,
-    ): Offset = when {
-        !enabled -> Offset.Zero
-        source == NestedScrollSource.Drag && available.y > 0 -> Offset(
-            0f,
-            onPull(available.y)
-        ) // Pulling down
-        else -> Offset.Zero
-    }
-
-    override suspend fun onPreFling(available: Velocity): Velocity {
-        onRelease(available.y)
-        return Velocity.Zero
-    }
-}
-
-
-@Composable
-fun rememberPullRefreshState(
-    refreshing: Boolean,
-    onRefresh: () -> Unit,
-    refreshThreshold: Dp = PullRefreshDefaults.RefreshThreshold,
-    refreshingOffset: Dp = PullRefreshDefaults.RefreshingOffset,
-): PullRefreshState {
-    require(refreshThreshold > 0.dp) { "The refresh trigger must be greater than zero!" }
-
-    val scope = rememberCoroutineScope()
-    val onRefreshState = rememberUpdatedState(onRefresh)
-    val thresholdPx: Float
-    val refreshingOffsetPx: Float
-
-    with(LocalDensity.current) {
-        thresholdPx = refreshThreshold.toPx()
-        refreshingOffsetPx = refreshingOffset.toPx()
-    }
-
-    // refreshThreshold and refreshingOffset should not be changed after instantiation, so any
-    // changes to these values are ignored.
-    val state = remember(scope) {
-        PullRefreshState(scope, onRefreshState, refreshingOffsetPx, thresholdPx)
-    }
-
-    SideEffect {
-        state.setRefreshing(refreshing)
-    }
-
-    return state
-}
-
-
-class PullRefreshState internal constructor(
-    private val animationScope: CoroutineScope,
-    private val onRefreshState: State<() -> Unit>,
-    private val refreshingOffset: Float,
-    internal val threshold: Float,
-) {
-
-    val progress get() = adjustedDistancePulled / threshold
-
-    internal val refreshing get() = _refreshing
-    internal val position get() = _position
-
-    private val adjustedDistancePulled by derivedStateOf { distancePulled * DragMultiplier }
-
-    private var _refreshing by mutableStateOf(false)
-    private var _position by mutableStateOf(0f)
-    private var distancePulled by mutableStateOf(0f)
-
-    internal fun onPull(pullDelta: Float): Float {
-        if (this._refreshing) return 0f // Already refreshing, do nothing.
-
-        val newOffset = (distancePulled + pullDelta).coerceAtLeast(0f)
-        val dragConsumed = newOffset - distancePulled
-        distancePulled = newOffset
-        _position = calculateIndicatorPosition()
-        return dragConsumed
-    }
-
-    internal fun onRelease() {
-        if (!this._refreshing) {
-            if (adjustedDistancePulled > threshold) {
-                onRefreshState.value()
-            } else {
-                animateIndicatorTo(0f)
-            }
-        }
-        distancePulled = 0f
-    }
-
-    internal fun setRefreshing(refreshing: Boolean) {
-        if (this._refreshing != refreshing) {
-            this._refreshing = refreshing
-            this.distancePulled = 0f
-            animateIndicatorTo(if (refreshing) refreshingOffset else 0f)
-        }
-    }
-
-    private fun animateIndicatorTo(offset: Float) = animationScope.launch {
-        animate(initialValue = _position, targetValue = offset) { value, _ ->
-            _position = value
-        }
-    }
-
-    private fun calculateIndicatorPosition(): Float = when {
-        // If drag hasn't gone past the threshold, the position is the adjustedDistancePulled.
-        adjustedDistancePulled <= threshold -> adjustedDistancePulled
-        else -> {
-            // How far beyond the threshold pull has gone, as a percentage of the threshold.
-            val overshootPercent = abs(progress) - 1.0f
-            // Limit the overshoot to 200%. Linear between 0 and 200.
-            val linearTension = overshootPercent.coerceIn(0f, 2f)
-            // Non-linear tension. Increases with linearTension, but at a decreasing rate.
-            val tensionPercent = linearTension - linearTension.pow(2) / 4
-            // The additional offset beyond the threshold.
-            val extraOffset = threshold * tensionPercent
-            threshold + extraOffset
-        }
-    }
-}
-
-object PullRefreshDefaults {
-
-    val RefreshThreshold = 80.dp
-
-    val RefreshingOffset = 56.dp
-}
-
-private const val DragMultiplier = 0.5f
+//
+//fun Modifier.pullRefresh(
+//    state: PullRefreshState,//状态管理
+//    enabled: Boolean = true,
+//) = inspectable(inspectorInfo = debugInspectorInfo {
+//    name = "pullRefresh"
+//    properties["state"] = state
+//    properties["enabled"] = enabled
+//}) {
+//    Modifier.pullRefresh(state::onPull, { state.onRelease() }, enabled)
+//}
+//
+//fun Modifier.pullRefresh(
+//    onPull: (pullDelta: Float) -> Float,//下拉回调
+//    onRelease: suspend (flingVelocity: Float) -> Unit,//松手回调
+//    enabled: Boolean = true,
+//) = inspectable(inspectorInfo = debugInspectorInfo {
+//    name = "pullRefresh"
+//    properties["onPull"] = onPull
+//    properties["onRelease"] = onRelease
+//    properties["enabled"] = enabled
+//}) {
+//    Modifier.nestedScroll(PullRefreshNestedScrollConnection(onPull, onRelease, enabled))
+//}
+//
+//private class PullRefreshNestedScrollConnection(
+//    private val onPull: (pullDelta: Float) -> Float,
+//    private val onRelease: suspend (flingVelocity: Float) -> Unit,
+//    private val enabled: Boolean,
+//) : NestedScrollConnection {
+//
+//    override fun onPreScroll(
+//        available: Offset,
+//        source: NestedScrollSource,
+//    ): Offset = when {
+//        !enabled -> Offset.Zero
+//        source == NestedScrollSource.Drag && available.y < 0 -> Offset(
+//            0f,
+//            onPull(available.y)
+//        ) // Swiping up
+//        else -> Offset.Zero
+//    }
+//
+//    override fun onPostScroll(
+//        consumed: Offset,
+//        available: Offset,
+//        source: NestedScrollSource,
+//    ): Offset = when {
+//        !enabled -> Offset.Zero
+//        source == NestedScrollSource.Drag && available.y > 0 -> Offset(
+//            0f,
+//            onPull(available.y)
+//        ) // Pulling down
+//        else -> Offset.Zero
+//    }
+//
+//    override suspend fun onPreFling(available: Velocity): Velocity {
+//        onRelease(available.y)
+//        return Velocity.Zero
+//    }
+//}
+//
+//
+//@Composable
+//fun rememberPullRefreshState(
+//    refreshing: Boolean,
+//    onRefresh: () -> Unit,
+//    refreshThreshold: Dp = PullRefreshDefaults.RefreshThreshold,
+//    refreshingOffset: Dp = PullRefreshDefaults.RefreshingOffset,
+//): PullRefreshState {
+//    require(refreshThreshold > 0.dp) { "The refresh trigger must be greater than zero!" }
+//
+//    val scope = rememberCoroutineScope()
+//    val onRefreshState = rememberUpdatedState(onRefresh)
+//    val thresholdPx: Float
+//    val refreshingOffsetPx: Float
+//
+//    with(LocalDensity.current) {
+//        thresholdPx = refreshThreshold.toPx()
+//        refreshingOffsetPx = refreshingOffset.toPx()
+//    }
+//
+//    // refreshThreshold and refreshingOffset should not be changed after instantiation, so any
+//    // changes to these values are ignored.
+//    val state = remember(scope) {
+//        PullRefreshState(scope, onRefreshState, refreshingOffsetPx, thresholdPx)
+//    }
+//
+//    SideEffect {
+//        state.setRefreshing(refreshing)
+//    }
+//
+//    return state
+//}
+//
+//
+//class PullRefreshState internal constructor(
+//    private val animationScope: CoroutineScope,
+//    private val onRefreshState: State<() -> Unit>,
+//    private val refreshingOffset: Float,
+//    internal val threshold: Float,
+//) {
+//
+//    val progress get() = adjustedDistancePulled / threshold
+//
+//    internal val refreshing get() = _refreshing
+//    internal val position get() = _position
+//
+//    private val adjustedDistancePulled by derivedStateOf { distancePulled * DragMultiplier }
+//
+//    private var _refreshing by mutableStateOf(false)
+//    private var _position by mutableStateOf(0f)
+//    private var distancePulled by mutableStateOf(0f)
+//
+//    internal fun onPull(pullDelta: Float): Float {
+//        if (this._refreshing) return 0f // Already refreshing, do nothing.
+//
+//        val newOffset = (distancePulled + pullDelta).coerceAtLeast(0f)
+//        val dragConsumed = newOffset - distancePulled
+//        distancePulled = newOffset
+//        _position = calculateIndicatorPosition()
+//        return dragConsumed
+//    }
+//
+//    internal fun onRelease() {
+//        if (!this._refreshing) {
+//            if (adjustedDistancePulled > threshold) {
+//                onRefreshState.value()
+//            } else {
+//                animateIndicatorTo(0f)
+//            }
+//        }
+//        distancePulled = 0f
+//    }
+//
+//    internal fun setRefreshing(refreshing: Boolean) {
+//        if (this._refreshing != refreshing) {
+//            this._refreshing = refreshing
+//            this.distancePulled = 0f
+//            animateIndicatorTo(if (refreshing) refreshingOffset else 0f)
+//        }
+//    }
+//
+//    private fun animateIndicatorTo(offset: Float) = animationScope.launch {
+//        animate(initialValue = _position, targetValue = offset) { value, _ ->
+//            _position = value
+//        }
+//    }
+//
+//    private fun calculateIndicatorPosition(): Float = when {
+//        // If drag hasn't gone past the threshold, the position is the adjustedDistancePulled.
+//        adjustedDistancePulled <= threshold -> adjustedDistancePulled
+//        else -> {
+//            // How far beyond the threshold pull has gone, as a percentage of the threshold.
+//            val overshootPercent = abs(progress) - 1.0f
+//            // Limit the overshoot to 200%. Linear between 0 and 200.
+//            val linearTension = overshootPercent.coerceIn(0f, 2f)
+//            // Non-linear tension. Increases with linearTension, but at a decreasing rate.
+//            val tensionPercent = linearTension - linearTension.pow(2) / 4
+//            // The additional offset beyond the threshold.
+//            val extraOffset = threshold * tensionPercent
+//            threshold + extraOffset
+//        }
+//    }
+//}
+//
+//object PullRefreshDefaults {
+//
+//    val RefreshThreshold = 80.dp
+//
+//    val RefreshingOffset = 56.dp
+//}
+//
+//private const val DragMultiplier = 0.5f

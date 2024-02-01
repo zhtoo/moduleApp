@@ -2,9 +2,14 @@ package com.zht.modulehome.compose
 
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.Scaffold
@@ -22,6 +27,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.zht.common.R
+import com.zht.modulehome.compose.navigate.composableNormal
 import com.zht.modulehome.compose.page.HomePage
 import com.zht.modulehome.compose.page.LibraryPage
 import com.zht.modulehome.compose.page.PersonalPage
@@ -100,19 +106,27 @@ fun MainPage() {
 //            )
 //        }
     }
-    Scaffold(
-        bottomBar = { BottomNavigateBar(navController) }
-    ) { paddingValues ->
-        NavHost(
-            navController,
-            startDestination = BottomTabItem.Home.route,
-            Modifier.padding(paddingValues)
-        ) {
-            composable(BottomTabItem.Home.route) { HomePage() }
-            composable(BottomTabItem.Tools.route) { ToolsPage() }
-            composable(BottomTabItem.Lib.route) { LibraryPage() }
-            composable(BottomTabItem.View.route) { ViewPage() }
-            composable(BottomTabItem.Personal.route) { PersonalPage() }
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .windowInsetsPadding(WindowInsets.safeDrawing)
+    ) {
+        Scaffold(
+            bottomBar = {
+                BottomNavigateBar(navController)
+            }
+        ) { paddingValues ->
+            NavHost(
+                navController,
+                startDestination = BottomTabItem.Home.route,
+                Modifier.padding(paddingValues)
+            ) {
+                composableNormal(BottomTabItem.Home.route) { HomePage() }
+                composableNormal(BottomTabItem.Tools.route) { ToolsPage() }
+                composableNormal(BottomTabItem.Lib.route) { LibraryPage() }
+                composableNormal(BottomTabItem.View.route) { ViewPage() }
+                composableNormal(BottomTabItem.Personal.route) { PersonalPage() }
+            }
         }
     }
 }

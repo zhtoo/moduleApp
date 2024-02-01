@@ -9,10 +9,8 @@ import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.zht.modulehome.compose.navigate.AppNavigation
 import com.zht.modulehome.compose.navigate.RouterPath
 import com.zht.modulehome.compose.widget.CardItem
@@ -25,12 +23,11 @@ import com.zht.modulehome.compose.widget.CardItem
 @SuppressLint("RememberReturnType")
 @Composable
 fun HomePage() {
-    val systemUiController = rememberSystemUiController()
-    systemUiController.setStatusBarColor(Color.White)
-    systemUiController.systemBarsDarkContentEnabled = true
+//    val systemUiController = rememberSystemUiController()
+//    systemUiController.setStatusBarColor(Color.White)
+//    systemUiController.systemBarsDarkContentEnabled = true
 
     var text by rememberSaveable { mutableStateOf("HomePage") }
-
 
     Column( Modifier
         .fillMaxSize()) {
@@ -59,6 +56,10 @@ fun HomePage() {
             CardItem("动画") {
                 AppNavigation.getInstance().navigate(RouterPath.animationHome)
             }
+
+            CardItem("状态栏") {
+                AppNavigation.getInstance().navigate(RouterPath.STATUS_BAR_PAGE)
+            }
             for (i in 0 until 10) {
                 CardItem("demo${i}") {
 
@@ -67,9 +68,6 @@ fun HomePage() {
         }
 
     }
-
-
-
 
 }
 

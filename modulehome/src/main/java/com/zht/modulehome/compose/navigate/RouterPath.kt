@@ -1,7 +1,22 @@
 package com.zht.modulehome.compose.navigate
 
+import androidx.compose.animation.AnimatedContentScope
+import androidx.compose.animation.AnimatedContentTransitionScope
+import androidx.compose.animation.EnterTransition
+import androidx.compose.animation.ExitTransition
 import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.drawBehind
+import androidx.navigation.NamedNavArgument
+import androidx.navigation.NavBackStackEntry
+import androidx.navigation.NavDeepLink
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
@@ -15,6 +30,7 @@ import com.zht.modulehome.compose.page.UnknownPage
 import com.zht.modulehome.compose.page.ViewPage
 import com.zht.modulehome.compose.page.animation.AnimationPage
 import com.zht.modulehome.compose.page.navigator.NavigatorPage
+import com.zht.modulehome.compose.page.status_bar.StatusBarPage
 import com.zht.modulehome.compose.page.view.ModifierPage
 import com.zht.modulehome.compose.page.view.TextPage
 
@@ -32,6 +48,7 @@ object RouterPath {
 
 
     const val VIEW_PAGE = "viewPage"
+    const val STATUS_BAR_PAGE = "statusBarPage"
     const val TEXT_PAGE = "textPage"
     const val MODIFIER_PAGE = "modifierPage"
 
@@ -43,6 +60,7 @@ object RouterPath {
 
 }
 
+@OptIn(ExperimentalFoundationApi::class)
 @ExperimentalAnimationApi
 @ExperimentalMaterialApi
 fun NavGraphBuilder.routerBuilder() {
@@ -56,9 +74,11 @@ fun NavGraphBuilder.routerBuilder() {
     viewGraph()
 }
 
+@ExperimentalFoundationApi
 fun NavGraphBuilder.viewGraph() {
     navigation(startDestination = RouterPath.VIEW_PAGE, route = "view") {
         composable(RouterPath.VIEW_PAGE) { ViewPage() }
+        composable(RouterPath.STATUS_BAR_PAGE) { StatusBarPage() }
         composable(RouterPath.TEXT_PAGE) { TextPage() }
         composable(RouterPath.MODIFIER_PAGE) { ModifierPage() }
     }
@@ -82,4 +102,96 @@ fun NavGraphBuilder.navigatorGraph() {
     navigation(startDestination = RouterPath.navigatorStart, route = RouterPath.navigator) {
         composable(RouterPath.navigatorStart) { NavigatorPage() }
     }
+}
+
+
+fun NavGraphBuilder.composableNormal(
+    route: String,
+    arguments: List<NamedNavArgument> = emptyList(),
+    deepLinks: List<NavDeepLink> = emptyList(),
+    content: @Composable AnimatedContentScope.(NavBackStackEntry) -> Unit
+){
+    composable(
+        route = route,
+        arguments = arguments,
+        deepLinks = deepLinks,
+        content = content,
+        enterTransition = {
+            fadeIn()
+        },
+        exitTransition = {
+            fadeOut()
+        },
+        popEnterTransition = {
+            fadeIn()
+        },
+        popExitTransition = {
+            fadeOut()
+        }
+    )
+
+}
+
+fun NavGraphBuilder.composableRight(
+    route: String,
+    arguments: List<NamedNavArgument> = emptyList(),
+    deepLinks: List<NavDeepLink> = emptyList(),
+    content: @Composable AnimatedContentScope.(NavBackStackEntry) -> Unit
+){
+    composable(
+        route = route,
+        arguments = arguments,
+        deepLinks = deepLinks,
+        content = content,
+        enterTransition = {
+            slideIntoContainer(
+                AnimatedContentTransitionScope.SlideDirection.Left,
+                animationSpec = tween(250)
+            )
+        },
+        exitTransition = {
+            ExitTransition.None
+        },
+        popEnterTransition = {
+            EnterTransition.None
+        },
+        popExitTransition = {
+            slideOutOfContainer(
+                AnimatedContentTransitionScope.SlideDirection.Right,
+                animationSpec = tween(250)
+            )
+        }
+    )
+}
+
+fun NavGraphBuilder.composableBottom(
+    route: String,
+    arguments: List<NamedNavArgument> = emptyList(),
+    deepLinks: List<NavDeepLink> = emptyList(),
+    content: @Composable AnimatedContentScope.(NavBackStackEntry) -> Unit
+){
+    composable(
+        route = route,
+        arguments = arguments,
+        deepLinks = deepLinks,
+        content = content,
+        enterTransition = {
+            slideIntoContainer(
+                AnimatedContentTransitionScope.SlideDirection.Up,
+                animationSpec = tween(250)
+            )
+        },
+        exitTransition = {
+            ExitTransition.None
+        },
+        popEnterTransition = {
+            EnterTransition.None
+        },
+        popExitTransition = {
+            slideOutOfContainer(
+                AnimatedContentTransitionScope.SlideDirection.Down,
+                animationSpec = tween(250)
+            )
+        }
+    )
 }

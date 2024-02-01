@@ -127,7 +127,7 @@ public class ScreenUtils {
         Point point = new Point();
         activity.getWindowManager().getDefaultDisplay().getSize(point);
         //  Log.e("TAG", "the screen size is " + point.toString());
-        //获取正确尺寸 （此方法要求最低api为17，
+        // 获取正确尺寸 （此方法要求最低api为17，
         // 即安卓4.2，4.2之前获取请参看以下获取屏幕尺寸的方法）
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
             activity.getWindowManager().getDefaultDisplay().getRealSize(point);

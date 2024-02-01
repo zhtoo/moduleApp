@@ -32,6 +32,28 @@ public class VerifyCodeEditText extends View {
 
     private static final String TAG = "VerifyCode";
 
+    /**
+     * 根据验证码数量进行平分，不实用宽度
+     */
+    public final static int BOX_DRAW_EQUAL = 1;
+    /**
+     * 根据指定的宽度绘制，超出部分会被裁剪
+     */
+    public final static int BOX_DRAW_WIDTH = 2;
+
+    /**
+     * 文字显示模式，默认显示文字
+     */
+    public final static int TEXT_MODEL_DEFAULT = 1;
+    /**
+     * 文字显示模式：点-> ·
+     */
+    public final static int TEXT_MODEL_DOT = 2;
+    /**
+     * 文字显示模式：星号-> *
+     */
+    public final static int TEXT_MODEL_ASTERISK = 3;
+
     private StringBuffer mText = new StringBuffer();
 
     private boolean showCursor = true;

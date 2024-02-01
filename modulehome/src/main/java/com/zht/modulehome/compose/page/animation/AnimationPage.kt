@@ -5,6 +5,7 @@ import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.safeDrawingPadding
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -27,6 +28,7 @@ fun AnimationPage() {
         alphaAnimation.animateTo(1f, tween(5000))
     }
     Box(modifier = Modifier
+        .safeDrawingPadding()
         .alpha(alphaAnimation.value)
         .fillMaxSize()
         .background(Color.Red)) {

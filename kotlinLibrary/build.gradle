@@ -41,7 +41,6 @@ dependencies {
     implementation "androidx.appcompat:appcompat:$rootProject.ext.appcompat"
     implementation "com.google.android.material:material:$rootProject.ext.material"
 
-
     //jetpack所支持的功能：https://developer.android.google.cn/jetpack/androidx/explorer
 
     // 相关文件参考： https://zhuanlan.zhihu.com/p/334350927
@@ -84,7 +83,7 @@ dependencies {
     /**
      * activity -> https://developer.android.google.cn/jetpack/androidx/releases/activity
      */
-    def activity_version = "1.6.1"
+    def activity_version = "1.8.2"
     // Java language implementation
     implementation("androidx.activity:activity:$activity_version")
     // Kotlin

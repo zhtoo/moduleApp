@@ -119,5 +119,37 @@
         <item name="cardBackgroundColor">@color/cardview_light_background</item>
     </style>
 
+    <declare-styleable name="VerifyCodeEditText">
+        <attr name="vce_show_cursor" format="boolean" />
+        <attr name="vce_cursor_color" format="color" />
+        <attr name="vce_cursor_width" format="dimension" />
+        <attr name="vce_cursor_height" format="dimension" />
+
+        <attr name="vce_text_color" format="color" />
+        <attr name="vce_text_size" format="dimension" />
+
+        <attr name="vce_code_num" format="integer" />
+
+        <attr name="vce_text_model" format="integer" >
+            <enum name="default" value="1" />
+            <enum name="dot" value="2" />
+            <enum name="asterisk" value="3" />
+        </attr>
+
+        <attr name="vce_box_draw_model" format="integer" >
+            <enum name="equal" value="1" />
+            <enum name="use_width" value="2" />
+        </attr>
+        <attr name="vce_box_spacing" format="integer" />
+        <attr name="vce_box_width" format="integer" />
+        <attr name="vce_box_height" format="integer" />
+        <attr name="vce_box_corners_radius" format="dimension" />
+        <attr name="vce_box_corners_bottomLeftRadius" format="dimension" />
+        <attr name="vce_box_corners_bottomRightRadius" format="dimension" />
+        <attr name="vce_box_corners_topLeftRadius" format="dimension" />
+        <attr name="vce_box_corners_topRightRadius" format="dimension" />
+
+    </declare-styleable>
+
 
 </resources>

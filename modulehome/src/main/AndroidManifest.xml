@@ -13,7 +13,9 @@
         <activity android:name=".activity.JetpackActivity" />
         <activity android:name=".activity.HiltActivity" />
         <activity android:name=".activity.SecurityActivity" />
-        <activity android:name=".activity.ComposeActivity" />
+        <activity
+            android:name=".compose.ComposeActivity"
+            android:windowSoftInputMode="adjustResize" />
         <activity android:name=".activity.BottomTabActivity" />
 
     </application>

@@ -41,7 +41,6 @@ data class DataModel(
 )
 
 @Composable
-@ExperimentalMaterialApi
 fun PullRefreshPage() {
     Column(//最外层宽高设置设置无效，强制match_parent
         modifier = Modifier
@@ -82,13 +81,12 @@ fun PullRefreshPage() {
 
 @Preview
 @Composable
-@ExperimentalMaterialApi
 fun PreviewMessageCard() {
     PullRefreshPage()
 }
 
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
-@ExperimentalMaterialApi
 fun RefreshDemoList() {
     var itemList by remember { mutableStateOf(mutableListOf<String>()) }
     val refreshScope = rememberCoroutineScope()
@@ -130,7 +128,6 @@ var refreshing: Boolean by mutableStateOf(false)
 var loading: Boolean by mutableStateOf(false)
 
 @Composable
-@ExperimentalMaterialApi
 fun TestRefreshDemoList() {
 
 

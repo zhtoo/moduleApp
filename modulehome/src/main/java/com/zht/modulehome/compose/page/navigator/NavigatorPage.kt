@@ -1,6 +1,7 @@
 package com.zht.modulehome.compose.page.navigator
 
 import androidx.compose.animation.AnimatedContentScope
+import androidx.compose.animation.AnimatedContentTransitionScope
 import androidx.compose.animation.EnterTransition
 import androidx.compose.animation.ExitTransition
 import androidx.compose.animation.ExperimentalAnimationApi
@@ -8,15 +9,21 @@ import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.safeDrawingPadding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.navigation.NavHostController
-import com.google.accompanist.navigation.animation.AnimatedNavHost
-import com.google.accompanist.navigation.animation.composable
-import com.google.accompanist.navigation.animation.rememberAnimatedNavController
-import com.zht.modulehome.compose.navigate.RouterPath
+import androidx.navigation.compose.rememberNavController
+import androidx.navigation.compose.NavHost
 import com.zht.modulehome.compose.widget.CardItem
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.navigation
+import androidx.navigation.compose.ComposeNavigator
+import com.zht.modulehome.compose.navigate.RouterPath
+import com.zht.modulehome.compose.navigate.composableBottom
+import com.zht.modulehome.compose.navigate.composableNormal
+import com.zht.modulehome.compose.navigate.composableRight
 
 /**
  * @Date   2023/4/3 14:29
@@ -27,60 +34,22 @@ import com.zht.modulehome.compose.widget.CardItem
 @Composable
 @ExperimentalAnimationApi
 fun NavigatorPage() {
-    val navController = rememberAnimatedNavController()
-    AnimatedNavHost(
-        modifier = Modifier.fillMaxSize(),
+    val navController = rememberNavController()
+    NavHost(
+        modifier = Modifier
+            .fillMaxSize()
+            .safeDrawingPadding(),
         navController = navController,
-        startDestination = RouterPath.navigatorHome
+        startDestination = "navigatorHome"
     ) {
-        composable(
-            RouterPath.navigatorHome,
-            enterTransition = { EnterTransition.None },
-            exitTransition = { ExitTransition.None },
-        ) { NavigatorHomePage(navController) }
-        composable(
-            "EnterRightExitLeftPage",
-            enterTransition = {
-                slideIntoContainer(
-                    AnimatedContentScope.SlideDirection.Left,
-                    animationSpec = tween(250)
-                )
-            },
-            exitTransition = {
-                ExitTransition.None
-            },
-            popEnterTransition = {
-                EnterTransition.None
-            },
-            popExitTransition = {
-                slideOutOfContainer(
-                    AnimatedContentScope.SlideDirection.Right,
-                    animationSpec = tween(250)
-                )
-            }
-        ) { EnterRightExitLeftPage() }
-        composable(
-            "EnterBottomExitBottomPage",
-            enterTransition = {
-                slideIntoContainer(
-                    AnimatedContentScope.SlideDirection.Up,
-                    animationSpec = tween(250)
-                )
-            },
-            exitTransition = {
-                ExitTransition.None
-            },
-            popEnterTransition = {
-                EnterTransition.None
-            },
-            popExitTransition = {
-                slideOutOfContainer(
-                    AnimatedContentScope.SlideDirection.Down,
-                    animationSpec = tween(250)
-                )
-            }
-        )
-        { EnterBottomExitBottomPage()}
+        composableNormal(
+            "navigatorHome"
+        ) {
+            NavigatorHomePage(navController)
+        }
+        composableNormal("EnterPage",) { EnterPage() }
+        composableRight("EnterRightExitLeftPage",) { EnterRightExitLeftPage() }
+        composableBottom("EnterBottomExitBottomPage") { EnterBottomExitBottomPage() }
     }
 }
 
@@ -91,8 +60,9 @@ fun NavigatorHomePage(navController: NavHostController) {
             .fillMaxSize()
             .background(Color.White)
     ) {
-        //    Text("这里主要展示的是带动画的条状，不涉及普通界面导航。")
-
+        CardItem("淡入淡出") {
+            navController.navigate("EnterPage")
+        }
         CardItem("右进左出") {
             navController.navigate("EnterRightExitLeftPage")
         }
@@ -101,6 +71,19 @@ fun NavigatorHomePage(navController: NavHostController) {
         }
     }
 }
+
+
+@Composable
+fun EnterPage() {
+    Column(
+        Modifier
+            .fillMaxSize()
+            .background(Color.Red)
+    ) {
+        CardItem("淡入淡出")
+    }
+}
+
 
 @Composable
 fun EnterRightExitLeftPage() {

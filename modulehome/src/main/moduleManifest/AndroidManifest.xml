@@ -7,20 +7,32 @@
     <application
         android:name=".HomeApplication"
         android:allowBackup="true"
+        android:exported="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".MainActivity">
+        <activity
+            android:exported="true"
+            android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ShowFragmentActivity" />
 
+        <activity android:name=".activity.CameraXActivity" />
+        <activity android:name=".activity.camerax.PreviewActivity" />
+        <activity android:name=".activity.camerax.TakePictureActivity" />
+        <activity android:name=".activity.camerax.TakeVideoActivity" />
+        <activity android:name=".activity.DataStoreActivity" />
+        <activity android:name=".activity.JetpackActivity" />
+        <activity android:name=".activity.HiltActivity" />
+        <activity android:name=".activity.SecurityActivity" />
+        <activity android:name=".compose.ComposeActivity" />
+        <activity android:name=".activity.BottomTabActivity" />
 
     </application>
 

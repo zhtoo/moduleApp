@@ -3,9 +3,9 @@ ext {
     android = [
             applicationId    : 'com.zht.modlueapp',
             buildToolsVersion: '30.0.3',
-            compileSdkVersion: 33,
+            compileSdkVersion: 34,
             minSdkVersion    : 21,
-            targetSdkVersion : 33,
+            targetSdkVersion : 34,
             versionCode      : 1,
             versionName      : '1.0.0',
             jdk              : '1.11'
