@@ -119,7 +119,7 @@
         <item name="cardBackgroundColor">@color/cardview_light_background</item>
     </style>
 
-    <declare-styleable name="VerifyCodeEditText">
+    <!--<declare-styleable name="VerifyCodeEditText">
         <attr name="vce_show_cursor" format="boolean" />
         <attr name="vce_cursor_color" format="color" />
         <attr name="vce_cursor_width" format="dimension" />
@@ -149,7 +149,7 @@
         <attr name="vce_box_corners_topLeftRadius" format="dimension" />
         <attr name="vce_box_corners_topRightRadius" format="dimension" />
 
-    </declare-styleable>
+    </declare-styleable>-->
 
 
 </resources>
