@@ -72,7 +72,7 @@ class AppNavigation {
 
     fun popBackStack(): Boolean {
         val navController = checkNotNull(navController) {
-            "You must init navController before calling navigate()"
+            "You must init navController before calling popBackStack()"
         }
         return navController.popBackStack()
     }
@@ -84,7 +84,7 @@ class AppNavigation {
         saveState: Boolean = false,
     ): Boolean {
         val navController = checkNotNull(navController) {
-            "You must init navController before calling navigate()"
+            "You must init navController before calling popBackStack()"
         }
         return navController.popBackStack(route, inclusive, saveState)
     }

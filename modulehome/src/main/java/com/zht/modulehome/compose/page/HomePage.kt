@@ -30,7 +30,8 @@ fun HomePage() {
     var text by rememberSaveable { mutableStateOf("HomePage") }
 
     Column( Modifier
-        .fillMaxSize()) {
+        .fillMaxSize()
+        .safeDrawingPadding()) {
         Box(
             modifier = Modifier
                 .fillMaxWidth()

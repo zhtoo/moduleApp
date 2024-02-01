@@ -2,6 +2,7 @@ package com.zht.modulehome.compose.page
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.safeDrawingPadding
 import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
@@ -17,7 +18,7 @@ import com.zht.modulehome.compose.navigate.AppNavigation
 @Composable
 fun LibraryPage() {
     var text by rememberSaveable { mutableStateOf("LibraryPage") }
-    Column(){
+    Column(modifier = Modifier.safeDrawingPadding()) {
         Text(text, modifier = Modifier.clickable {
             text = "LibraryPage -> ok"
         })

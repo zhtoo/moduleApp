@@ -2,20 +2,31 @@ package com.zht.modulehome.compose
 
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawing
+import androidx.compose.foundation.layout.safeDrawingPadding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.Scaffold
+import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
@@ -27,7 +38,9 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.zht.common.R
+import com.zht.modulehome.compose.navigate.composableBottom
 import com.zht.modulehome.compose.navigate.composableNormal
+import com.zht.modulehome.compose.navigate.composableRight
 import com.zht.modulehome.compose.page.HomePage
 import com.zht.modulehome.compose.page.LibraryPage
 import com.zht.modulehome.compose.page.PersonalPage
@@ -97,35 +110,122 @@ val items = listOf(
 @Composable
 fun MainPage() {
     val navController = rememberNavController()
-    navController.addOnDestinationChangedListener { controller, destination, arguments ->
-//        Log.e("aaa", "============")
-//        controller.backQueue.forEach {
-//            Log.e(
-//                "aaa",
-//                "MainPage backQueue: route=${it.destination.route} id=${it.destination.id}"
-//            )
-//        }
+//    navController.addOnDestinationChangedListener { controller, destination, arguments ->
+////        Log.e("aaa", "============")
+////        controller.backQueue.forEach {
+////            Log.e(
+////                "aaa",
+////                "MainPage backQueue: route=${it.destination.route} id=${it.destination.id}"
+////            )
+////        }
+//    }
+    Scaffold(
+        bottomBar = {
+            BottomNavigateBar(navController)
+        }
+    ) { paddingValues ->
+        // 更新版本后，modifier需要使用 .fillMaxSize()来消除切换动画
+        // 猜想：没有指定NavHost的宽高会导致切换时控制器 并不知道界面大小，只有初始化该界面之后的才执行渲染
+        NavHost(
+            navController = navController,
+            startDestination = BottomTabItem.Home.route,
+            modifier = Modifier
+                .padding(paddingValues)
+//                .fillMaxWidth()//只使用这个，会产生上下切换效果
+//                .fillMaxHeight()//只使用这个，会产生左右切换效果
+                .fillMaxSize()// 使用这个会使用指定的动画
+        ) {
+            composable(BottomTabItem.Home.route) { HomePage() }
+            composable(BottomTabItem.Tools.route) { ToolsPage() }
+            composable(BottomTabItem.Lib.route) { LibraryPage() }
+            composable(BottomTabItem.View.route) { ViewPage() }
+            composable(BottomTabItem.Personal.route) { PersonalPage() }
+        }
     }
+
+}
+
+@Composable
+fun CustomBottomNavigateBar(navController: NavHostController) {
+    val navBackStackEntry by navController.currentBackStackEntryAsState()
+    val currentDestination = navBackStackEntry?.destination
     Box(
         modifier = Modifier
             .fillMaxSize()
             .windowInsetsPadding(WindowInsets.safeDrawing)
     ) {
-        Scaffold(
-            bottomBar = {
-                BottomNavigateBar(navController)
-            }
-        ) { paddingValues ->
-            NavHost(
-                navController,
-                startDestination = BottomTabItem.Home.route,
-                Modifier.padding(paddingValues)
+        Column {
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .weight(weight = 1.0f)
             ) {
-                composableNormal(BottomTabItem.Home.route) { HomePage() }
-                composableNormal(BottomTabItem.Tools.route) { ToolsPage() }
-                composableNormal(BottomTabItem.Lib.route) { LibraryPage() }
-                composableNormal(BottomTabItem.View.route) { ViewPage() }
-                composableNormal(BottomTabItem.Personal.route) { PersonalPage() }
+                NavHost(
+                    modifier = Modifier.fillMaxSize(),
+                    navController = navController,
+                    startDestination = BottomTabItem.Home.route,
+                ) {
+                    composableNormal(BottomTabItem.Home.route) { HomePage() }
+                    composableNormal(BottomTabItem.Tools.route) { ToolsPage() }
+                    composableNormal(BottomTabItem.Lib.route) { LibraryPage() }
+                    composableNormal(BottomTabItem.View.route) { ViewPage() }
+                    composableNormal(BottomTabItem.Personal.route) { PersonalPage() }
+                }
+            }
+            Surface(
+                color = Color.White,
+                elevation = 8.dp,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(56.dp)
+            ) {
+                Row(
+                    Modifier.fillMaxSize(),
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
+                    items.forEach { tab ->
+                        val selected =
+                            currentDestination?.hierarchy?.any { it.route == tab.route } == true
+                        Column(
+                            modifier = Modifier
+                                .fillMaxHeight()
+                                .weight(weight = 1f)
+                                .clickable(
+                                    indication = null,
+                                    interactionSource = remember { MutableInteractionSource() }) {
+                                    if (selected) {
+                                        return@clickable
+                                    }
+                                    // 推出BackStack中最后一界面，保证BackStack中始终只用一个Item
+                                    navController.popBackStack()
+                                    // 导航到目标目的地
+                                    navController.navigate(tab.route)
+                                },
+                            verticalArrangement = Arrangement.Center,
+                            horizontalAlignment = Alignment.CenterHorizontally,
+                        ) {
+                            Image(
+                                modifier = Modifier
+                                    .width(24.dp)
+                                    .height(24.dp),
+                                painter = painterResource(
+                                    id = if (selected) {
+                                        tab.selectedIcon
+                                    } else {
+                                        tab.unselectedIcon
+                                    }
+                                ), contentDescription = null
+                            )
+                            Text(
+                                tab.tabName, color = if (selected) {
+                                    Color(0xff1296DB)
+                                } else {
+                                    Color(0xff707070)
+                                }
+                            )
+                        }
+                    }
+                }
             }
         }
     }
@@ -133,11 +233,11 @@ fun MainPage() {
 
 @Composable
 fun BottomNavigateBar(navController: NavHostController) {
+    val navBackStackEntry by navController.currentBackStackEntryAsState()
+    val currentDestination = navBackStackEntry?.destination
     BottomNavigation(
         backgroundColor = Color.White
     ) {
-        val navBackStackEntry by navController.currentBackStackEntryAsState()
-        val currentDestination = navBackStackEntry?.destination
         items.forEach { tab ->
             val selected = currentDestination?.hierarchy?.any { it.route == tab.route } == true
             BottomNavigationItem(

@@ -2,6 +2,7 @@ package com.zht.modulehome.compose.page
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.safeDrawingPadding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
@@ -19,10 +20,10 @@ import com.zht.modulehome.compose.widget.CardItem
 @Composable
 fun ViewPage() {
     Column(
-        Modifier
+        modifier = Modifier
+            .safeDrawingPadding()
             .fillMaxSize()
     ) {
-
         Column(
             Modifier
                 .fillMaxSize()
