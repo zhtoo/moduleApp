@@ -76,6 +76,12 @@ public class VerifyCodeEditText extends View {
     private int mTextColor = Color.parseColor("#000000");
     private int mTextSize = 0;
 
+    private float radius = 0F;
+    private float radiusLeftTop = 0F;
+    private float radiusLeftBottom = 0F;
+    private float radiusRightTop = 0F;
+    private float radiusRightBottom = 0F;
+
     public VerifyCodeEditText(Context context) {
         this(context, null);
     }
