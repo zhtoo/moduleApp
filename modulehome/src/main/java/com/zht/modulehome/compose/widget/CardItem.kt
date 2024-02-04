@@ -3,6 +3,8 @@ package com.zht.modulehome.compose.widget
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxScope
+import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -50,6 +52,36 @@ fun CardItem(name: String, onClick: () -> Unit = {}) {
             ) {
                 Text(name, textAlign = TextAlign.Center)
             }
+        }
+    }
+}
+
+
+@Composable
+fun CardItem(
+    alignment: Alignment = Alignment.CenterStart,
+    content: @Composable BoxScope.() -> Unit,
+) {
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(15.dp, 7.5.dp, 15.dp, 7.5.dp),
+        contentAlignment = Alignment.Center
+    ) {
+        Card(
+            modifier = Modifier
+                .fillMaxSize()
+                .defaultMinSize(minHeight = 60.dp),
+            shape = RoundedCornerShape(10.dp),
+            elevation = 5.dp
+        ) {
+            Box(
+                modifier = Modifier
+                    .padding(12.dp)
+                    .fillMaxSize(),
+                contentAlignment = alignment,
+                content = content
+            )
         }
     }
 }
