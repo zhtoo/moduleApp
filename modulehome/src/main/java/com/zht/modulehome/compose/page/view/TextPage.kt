@@ -59,6 +59,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.util.fastFilter
 import com.zht.modulehome.R
+import com.zht.modulehome.compose.styles.itemTile
 import com.zht.modulehome.compose.widget.CardItem
 import kotlinx.coroutines.coroutineScope
 
@@ -199,7 +200,7 @@ fun TextPage() {
                     .show()
             })
         }
-        Text("富文本", modifier = Modifier.padding(15.dp, 7.5.dp, 15.dp, 7.5.dp))
+        Text("富文本", modifier = Modifier.itemTile())
         CardItem {
             val richString =
                 "富文本->粗体、斜体、下划线、删除线、字体颜色、字体大小、字体背景、字体Cursive"
@@ -302,7 +303,7 @@ fun TextPage() {
         }
 
         Text(
-            modifier = Modifier.padding(15.dp, 7.5.dp, 15.dp, 7.5.dp),
+            modifier = Modifier.itemTile(),
             text = "可点击的文字:\n" +
                     "ClickableText实现方式会导致整个text都是可点击的，不可点击的文字也会响应点击，只不过我们在onClick中没有处理\n" +
                     "pointerInput实现方式只有可点击部分的文字才会消费点击事件，处理过程更加灵活，但是对应的开发者需要做额外的逻辑处理\n" +

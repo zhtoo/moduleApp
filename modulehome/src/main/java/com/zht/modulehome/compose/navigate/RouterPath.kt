@@ -28,6 +28,25 @@ import com.zht.modulehome.compose.page.ViewPage
 import com.zht.modulehome.compose.page.animation.AnimationPage
 import com.zht.modulehome.compose.page.navigator.NavigatorPage
 import com.zht.modulehome.compose.page.status_bar.StatusBarPage
+import com.zht.modulehome.compose.page.modifier.ModifierOtherPage
+import com.zht.modulehome.compose.page.modifier.ModifierTransformationsPage
+import com.zht.modulehome.compose.page.modifier.ModifierActionsPage
+import com.zht.modulehome.compose.page.modifier.ModifierAlignmentPage
+import com.zht.modulehome.compose.page.modifier.ModifierAnimationPage
+import com.zht.modulehome.compose.page.modifier.ModifierBorderPage
+import com.zht.modulehome.compose.page.modifier.ModifierDrawingPage
+import com.zht.modulehome.compose.page.modifier.ModifierFocusPage
+import com.zht.modulehome.compose.page.modifier.ModifierGraphicsPage
+import com.zht.modulehome.compose.page.modifier.ModifierKeyboardPage
+import com.zht.modulehome.compose.page.modifier.ModifierLayoutPage
+import com.zht.modulehome.compose.page.modifier.ModifierPaddingPage
+import com.zht.modulehome.compose.page.modifier.ModifierPointerPage
+import com.zht.modulehome.compose.page.modifier.ModifierPositionPage
+import com.zht.modulehome.compose.page.modifier.ModifierScrollPage
+import com.zht.modulehome.compose.page.modifier.ModifierSemanticsPage
+import com.zht.modulehome.compose.page.modifier.ModifierSizePage
+import com.zht.modulehome.compose.page.modifier.ModifierTestingPage
+
 import com.zht.modulehome.compose.page.view.ModifierPage
 import com.zht.modulehome.compose.page.view.TextPage
 
@@ -47,6 +66,25 @@ object RouterPath {
     const val STATUS_BAR_PAGE = "statusBarPage"
     const val TEXT_PAGE = "textPage"
     const val MODIFIER_PAGE = "modifierPage"
+
+    const val MODIFIER_ACTIONS_PAGE = "modifierActionsPage"
+    const val MODIFIER_ALIGNMENT_PAGE = "modifierAlignmentPage"
+    const val MODIFIER_ANIMATION_PAGE = "modifierAnimationPage"
+    const val MODIFIER_BORDER_PAGE = "modifierBorderPage"
+    const val MODIFIER_DRAWING_PAGE = "modifierDrawingPage"
+    const val MODIFIER_FOCUS_PAGE = "modifierFocusPage"
+    const val MODIFIER_GRAPHICS_PAGE = "modifierGraphicsPage"
+    const val MODIFIER_KEYBOARD_PAGE = "modifierKeyboardPage"
+    const val MODIFIER_LAYOUT_PAGE = "modifierLayoutPage"
+    const val MODIFIER_PADDING_PAGE = "modifierPaddingPage"
+    const val MODIFIER_POINTER_PAGE = "modifierPointerPage"
+    const val MODIFIER_POSITION_PAGE = "modifierPositionPage"
+    const val MODIFIER_SEMANTICS_PAGE = "modifierSemanticsPage"
+    const val MODIFIER_SCROLL_PAGE = "modifierScrollPage"
+    const val MODIFIER_SIZE_PAGE = "modifierSizePage"
+    const val MODIFIER_TESTING_PAGE = "modifierTestingPage"
+    const val MODIFIER_TRANSFORMATIONS_PAGE = "modifierTransformationsPage"
+    const val MODIFIER_OTHER_PAGE = "modifierOtherPage"
 
     const val navigator = "navigator"
     const val navigatorStart = "navigatorStart"
@@ -73,6 +111,26 @@ fun NavGraphBuilder.viewGraph() {
         composable(RouterPath.STATUS_BAR_PAGE) { StatusBarPage() }
         composable(RouterPath.TEXT_PAGE) { TextPage() }
         composable(RouterPath.MODIFIER_PAGE) { ModifierPage() }
+
+        composableNormal(RouterPath.MODIFIER_ACTIONS_PAGE) { ModifierActionsPage() }
+        composableNormal(RouterPath.MODIFIER_ALIGNMENT_PAGE) { ModifierAlignmentPage() }
+        composableNormal(RouterPath.MODIFIER_ANIMATION_PAGE) { ModifierAnimationPage() }
+        composableNormal(RouterPath.MODIFIER_BORDER_PAGE) { ModifierBorderPage() }
+        composableNormal(RouterPath.MODIFIER_DRAWING_PAGE) { ModifierDrawingPage() }
+        composableNormal(RouterPath.MODIFIER_FOCUS_PAGE) { ModifierFocusPage() }
+        composableNormal(RouterPath.MODIFIER_GRAPHICS_PAGE) { ModifierGraphicsPage() }
+        composableNormal(RouterPath.MODIFIER_KEYBOARD_PAGE) { ModifierKeyboardPage() }
+        composableNormal(RouterPath.MODIFIER_LAYOUT_PAGE) { ModifierLayoutPage() }
+        composableNormal(RouterPath.MODIFIER_PADDING_PAGE) { ModifierPaddingPage() }
+        composableNormal(RouterPath.MODIFIER_POINTER_PAGE) { ModifierPointerPage() }
+        composableNormal(RouterPath.MODIFIER_POSITION_PAGE) { ModifierPositionPage() }
+        composableNormal(RouterPath.MODIFIER_SEMANTICS_PAGE) { ModifierSemanticsPage() }
+        composableNormal(RouterPath.MODIFIER_SCROLL_PAGE) { ModifierScrollPage() }
+        composableNormal(RouterPath.MODIFIER_SIZE_PAGE) { ModifierSizePage() }
+        composableNormal(RouterPath.MODIFIER_TESTING_PAGE) { ModifierTestingPage() }
+        composableNormal(RouterPath.MODIFIER_TRANSFORMATIONS_PAGE) { ModifierTransformationsPage() }
+        composableNormal(RouterPath.MODIFIER_OTHER_PAGE) { ModifierOtherPage() }
+
         composable(RouterPath.COLUMN_PAGE) { ColumnPage() }
         composable(RouterPath.PULL_REFRESH_PAGE) { PullRefreshPage() }
     }

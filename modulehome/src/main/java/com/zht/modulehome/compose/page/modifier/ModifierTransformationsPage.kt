@@ -1,4 +1,4 @@
-package com.zht.modulehome.compose.page
+package com.zht.modulehome.compose.page.modifier
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -7,31 +7,20 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.zht.modulehome.compose.navigate.AppNavigation
-import com.zht.modulehome.compose.navigate.RouterPath
-import com.zht.modulehome.compose.widget.CardItem
 
 /**
- * @Date   2023/3/31 17:51
+ * @Date   2024/2/5 11:16
  * @Author zhanghaitao
  * @Description
- * https://m3.material.io/components
  */
 @Composable
-fun ViewPage() {
-
+fun ModifierTransformationsPage() {
     Column(
         Modifier
             .fillMaxSize()
             .safeDrawingPadding()
             .verticalScroll(rememberScrollState())
     ) {
-        CardItem("modifier") {
-            AppNavigation.getInstance().navigate(RouterPath.MODIFIER_PAGE)
-        }
-        CardItem("Text") {
-            AppNavigation.getInstance().navigate(RouterPath.TEXT_PAGE)
-        }
-    }
 
+    }
 }
