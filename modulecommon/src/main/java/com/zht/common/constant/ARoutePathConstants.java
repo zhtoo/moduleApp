@@ -79,6 +79,7 @@ public class ARoutePathConstants {
         String PROGRESS_ACTIVITY = MODULE + "/ProgressActivity";
         String SCALENDAR_ACTIVITY = MODULE + "/SCalendarActivity";
         String VIEWPAGER_ACTIVITY = MODULE + "/ViewPagerActivity";
+        String VIEWPAGER2_ACTIVITY = MODULE + "/ViewPager2Activity";
 
 
     }

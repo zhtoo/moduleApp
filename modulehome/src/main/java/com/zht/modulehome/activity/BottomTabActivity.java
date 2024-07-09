@@ -14,6 +14,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.DefaultLifecycleObserver;
+import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.ReportFragment;
 import androidx.viewpager.widget.ViewPager;
 import androidx.viewpager2.widget.ViewPager2;
@@ -50,6 +52,7 @@ public class BottomTabActivity extends AppCompatActivity {
         fragmentNameList.add("tab2");
         fragmentNameList.add("tab3");
         fragmentNameList.add("tab4");
+
 //        if (savedInstanceState != null) {
 //            switchFragment(savedInstanceState.getString(KEY_LAST_FRAGMENT_TAG));
 //        } else {

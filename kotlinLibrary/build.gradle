@@ -89,6 +89,13 @@ dependencies {
     // Kotlin
     implementation("androidx.activity:activity-ktx:$activity_version")
 
+
+    def fragment_version = "1.6.2"
+    // Java language implementation
+    implementation "androidx.fragment:fragment:$fragment_version"
+    // Kotlin
+    implementation "androidx.fragment:fragment-ktx:$fragment_version"
+
     /**
      * cameraX -> https://developer.android.google.cn/jetpack/androidx/releases/camera
      */

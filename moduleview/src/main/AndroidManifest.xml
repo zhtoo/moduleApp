@@ -14,6 +14,7 @@
         <activity android:name=".activity.system.ProgressActivity" />
         <activity android:name=".activity.system.SCalendarActivity" />
         <activity android:name=".activity.system.ViewPagerActivity" />
+        <activity android:name=".activity.system.ViewPager2Activity" />
         <activity android:name=".activity.customise.VerifyCodeEditActivity" />
         <activity android:name=".qucikindex.QuickIndexActivity" />
         <activity android:name=".activity.customise.DragActivity" />

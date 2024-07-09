@@ -59,6 +59,7 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     //依赖库导入
     implementation project(':modulecommon')
+//    implementation files('libs/pinyin4j-2.5.1.jar')
     //ARouter路由
     kapt "com.alibaba:arouter-compiler:$rootProject.ext.arouterCompiler"
     //PickerView
@@ -66,8 +67,10 @@ dependencies {
     //ConstraintLayout的引用
     kapt 'androidx.constraintlayout:constraintlayout:1.1.3'
 
-    implementation files('libs/pinyin4j-2.5.0.jar')
+//    implementation files('libs/pinyin4j-2.5.0.jar')
 
     //图片查阅框架
     implementation 'com.github.chrisbanes:PhotoView:2.0.0'
+
+    implementation 'com.belerweb:pinyin4j:2.5.0'
 }

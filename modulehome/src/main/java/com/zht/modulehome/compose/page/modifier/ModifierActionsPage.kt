@@ -35,15 +35,12 @@ import kotlin.math.roundToInt
  */
 @Composable
 fun ModifierActionsPage() {
-    val density = LocalDensity.current
-
     Column(
         Modifier
             .fillMaxSize()
             .safeDrawingPadding()
             .verticalScroll(rememberScrollState())
     ) {
-        //
         AnchoredDraggableBox()
     }
 }

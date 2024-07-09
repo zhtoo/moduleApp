@@ -5,11 +5,25 @@ buildscript {
     ext.kotlin_version = '1.7.20'
 
     repositories {
+
+//        maven { url 'https://maven.aliyun.com/nexus/content/groups/public/' }
+//        maven { url 'https://maven.aliyun.com/nexus/content/repositories/google' }
+//        maven { url 'https://maven.aliyun.com/nexus/content/repositories/jcenter' }
+//        maven { url 'https://maven.aliyun.com/nexus/content/repositories/gradle-plugin' }
+//        maven { url "https://maven.aliyun.com/nexus/content/repositories/releases" }
+//
+//        maven { url "https://mirrors.cloud.tencent.com/nexus/repository/maven-public/" }
+//
+//        maven { url 'https://plugins.gradle.org/m2/' }
+//
+//        maven { url 'https://repo1.maven.org/maven2/' }
+        maven { url "https://www.jitpack.io" }
+
         google()
         jcenter()
         mavenCentral()
-        maven { url "https://jitpack.io" }
-        maven { url 'https://maven.google.com' }
+//        maven { url "https://jitpack.io" }
+//        maven { url 'https://maven.google.com' }
 
     }
 
@@ -23,11 +37,25 @@ buildscript {
 
 allprojects {
     repositories {
+
+//        maven { url 'https://maven.aliyun.com/nexus/content/groups/public/' }
+//        maven { url 'https://maven.aliyun.com/nexus/content/repositories/google' }
+//        maven { url 'https://maven.aliyun.com/nexus/content/repositories/jcenter' }
+//        maven { url 'https://maven.aliyun.com/nexus/content/repositories/gradle-plugin' }
+//        maven { url "https://maven.aliyun.com/nexus/content/repositories/releases" }
+//
+//        maven { url "https://mirrors.cloud.tencent.com/nexus/repository/maven-public/" }
+//
+//        maven { url 'https://plugins.gradle.org/m2/' }
+//
+//        maven { url 'https://repo1.maven.org/maven2/' }
+        maven { url "https://www.jitpack.io" }
+
         google()
         jcenter()
         mavenCentral()
-        maven { url "https://jitpack.io" }
-        maven { url 'https://maven.google.com' }
+//        maven { url "https://jitpack.io" }
+//        maven { url 'https://maven.google.com' }
 
         flatDir {
             // 由于Library module中引用的aar，在多module的情况下，
