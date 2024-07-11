@@ -11,15 +11,11 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.zht.common.base.BaseViewBindingActivity;
+import com.zht.common.view_binding.BaseViewBindingActivity;
 import com.zht.common.constant.ARoutePathConstants;
-import com.zht.common.impl.ObserverImpl;
 import com.zht.common.util.Logger;
 import com.zht.common.util.uri.UriUtils;
 import com.zht.modulelibrary.databinding.ActivityGifBinding;
-import com.zht.modulelibrary.jsoup.JsoupHelper;
-
-import org.jsoup.nodes.Document;
 
 /**
  * @Date 2023/7/6 14:52

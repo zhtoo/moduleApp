@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.zht.common.base.BaseViewBindingActivity;
+import com.zht.common.view_binding.BaseViewBindingActivity;
 import com.zht.common.constant.ARoutePathConstants;
 import com.zht.common.constant.ParamsConstants;
 import com.zht.modulelibrary.adapter.CartoonAdapter;

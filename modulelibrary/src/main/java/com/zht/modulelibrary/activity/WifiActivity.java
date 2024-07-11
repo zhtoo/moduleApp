@@ -3,14 +3,11 @@ package com.zht.modulelibrary.activity;
 import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
-import android.net.IpConfiguration;
 import android.net.ProxyInfo;
-import android.net.StaticIpConfiguration;
 import android.net.wifi.ScanResult;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
-import android.net.wifi.WifiNetworkSuggestion;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -21,13 +18,12 @@ import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.zht.common.base.BaseViewBindingActivity;
+import com.zht.common.view_binding.BaseViewBindingActivity;
 import com.zht.common.constant.ARoutePathConstants;
 import com.zht.common.listener.PermissionCallBack;
 import com.zht.modulelibrary.databinding.ActivityWifiBinding;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**

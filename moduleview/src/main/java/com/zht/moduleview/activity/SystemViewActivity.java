@@ -51,6 +51,7 @@ public class SystemViewActivity extends BaseActivity {
         list.add(new ItemBean("ViewPager2", ARoutePathConstants.View.VIEWPAGER2_ACTIVITY));
         list.add(new ItemBean("自定义CustomCardViewActivity", ARoutePathConstants.View.CUSTOM_CARD_VIEW_ACTIVITY));
         list.add(new ItemBean("ProgressView", ARoutePathConstants.View.PROGRESS_ACTIVITY));
+        list.add(new ItemBean("Coordinator", ARoutePathConstants.View.COORDINATOR_ACTIVITY));
 
         adapter.setNewData(list);
     }

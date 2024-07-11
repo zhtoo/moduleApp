@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.zht.common.base.BaseViewBindingActivity;
+import com.zht.common.view_binding.BaseViewBindingActivity;
 import com.zht.common.constant.ARoutePathConstants;
 import com.zht.common.storage.StorageUtil;
 import com.zht.moduletool.databinding.ActivityStorageBinding;

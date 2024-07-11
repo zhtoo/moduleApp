@@ -20,6 +20,8 @@
         <activity android:name=".activity.customise.DragActivity" />
         <activity android:name=".activity.customise.ImageActivity" />
         <activity android:name=".activity.system.CustomCardViewActivity" />
+        <activity android:name=".activity.system.CoordinatorActivity" />
+        <activity android:name=".activity.system.coordinator.CoordinatorBehaviorActivity" />
     </application>
 
 

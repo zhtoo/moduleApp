@@ -9,7 +9,7 @@ import androidx.annotation.NonNull;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
-import com.zht.common.base.BaseViewBindingActivity;
+import com.zht.common.view_binding.BaseViewBindingActivity;
 import com.zht.common.constant.ARoutePathConstants;
 import com.zht.common.constant.ParamsConstants;
 import com.zht.common.impl.ObserverImpl;

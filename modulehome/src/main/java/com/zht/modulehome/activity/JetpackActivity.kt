@@ -3,7 +3,7 @@ package com.zht.modulehome.activity
 import android.content.Intent
 import android.os.Bundle
 import com.alibaba.android.arouter.facade.annotation.Route
-import com.zht.common.base.BaseViewBindingActivity
+import com.zht.common.view_binding.BaseViewBindingActivity
 import com.zht.common.constant.ARoutePathConstants
 import com.zht.modulehome.compose.ComposeActivity
 import com.zht.modulehome.databinding.ActivityJetpackBinding

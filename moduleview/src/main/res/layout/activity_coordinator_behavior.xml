@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- 被动view，也叫child -->
+    <View
+        android:id="@+id/child"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:background="@android:color/darker_gray"
+        app:layout_behavior="com.zht.moduleview.activity.system.coordinator.CustomBehavior" />
+
+    <!-- 主动view，也叫dependency -->
+    <View
+        android:id="@+id/dependency"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="200dp"
+        android:background="@color/colorAccent" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

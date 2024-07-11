@@ -7,7 +7,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.zht.common.base.BaseViewBindingActivity;
+import com.zht.common.view_binding.BaseViewBindingActivity;
 import com.zht.common.constant.ARoutePathConstants;
 import com.zht.modulelibrary.R;
 import com.zht.modulelibrary.databinding.ActivityHeartRateBinding;

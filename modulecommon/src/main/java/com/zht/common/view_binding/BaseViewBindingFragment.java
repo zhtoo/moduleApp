@@ -1,4 +1,4 @@
-package com.zht.common.base;
+package com.zht.common.view_binding;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

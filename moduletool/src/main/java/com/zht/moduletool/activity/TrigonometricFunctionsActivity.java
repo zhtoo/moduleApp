@@ -3,7 +3,7 @@ package com.zht.moduletool.activity;
 import android.view.View;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.zht.common.base.BaseViewBindingActivity;
+import com.zht.common.view_binding.BaseViewBindingActivity;
 import com.zht.common.constant.ARoutePathConstants;
 import com.zht.moduletool.databinding.ActivityTrigonometricFunctionsBinding;
 

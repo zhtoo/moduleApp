@@ -1,4 +1,4 @@
-package com.zht.common.base;
+package com.zht.common.view_binding;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -7,6 +7,7 @@ import androidx.annotation.Nullable;
 import androidx.viewbinding.ViewBinding;
 
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.zht.common.base.PermissionActivity;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;

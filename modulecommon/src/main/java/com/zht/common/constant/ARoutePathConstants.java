@@ -80,6 +80,10 @@ public class ARoutePathConstants {
         String SCALENDAR_ACTIVITY = MODULE + "/SCalendarActivity";
         String VIEWPAGER_ACTIVITY = MODULE + "/ViewPagerActivity";
         String VIEWPAGER2_ACTIVITY = MODULE + "/ViewPager2Activity";
+        String COORDINATOR_ACTIVITY = MODULE + "/CoordinatorActivity";
+        String COORDINATOR_BEHAVIOR = MODULE + "/CoordinatorBehaviorActivity";
+        String COORDINATOR_ACTIVITY_2 = MODULE + "/CoordinatorActivity2";
+
 
 
     }

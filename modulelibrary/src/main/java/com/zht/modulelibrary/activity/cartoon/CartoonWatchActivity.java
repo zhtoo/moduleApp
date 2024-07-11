@@ -11,28 +11,20 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.alibaba.android.arouter.launcher.ARouter;
-import com.zht.common.base.BaseViewBindingActivity;
+import com.zht.common.view_binding.BaseViewBindingActivity;
 import com.zht.common.constant.ARoutePathConstants;
 import com.zht.common.constant.ParamsConstants;
 import com.zht.common.impl.ObserverImpl;
-import com.zht.modulelibrary.adapter.CartoonAdapter;
 import com.zht.modulelibrary.adapter.CartoonWatchAdapter;
 import com.zht.modulelibrary.bean.ChapterBean;
-import com.zht.modulelibrary.databinding.ActivityCartoonBinding;
 import com.zht.modulelibrary.databinding.ActivityCartoonWatchBinding;
 import com.zht.modulelibrary.jsoup.JsoupHelper;
 
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import org.jsoup.select.Evaluator;
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
-import java.util.List;
-
-import javax.security.auth.login.LoginException;
 
 /**
  * @Date 2022/12/16 16:09
