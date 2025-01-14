@@ -18,6 +18,12 @@ public class ARoutePathConstants {
         String CAMERAX_PICTURE_ACTIVITY = MODULE + "/activity/camera/CameraPictureActivity";
         String CAMERAX_VIDEO_ACTIVITY = MODULE + "/activity/camera/CameraVideoActivity";
 
+        String CAMERA2_ACTIVITY = MODULE + "/activity/Camera2Activity";
+
+        String CAMERA2_PREVIEW_ACTIVITY = MODULE + "/activity/camera/Camera2PreviewActivity";
+        String CAMERA2_PICTURE_ACTIVITY = MODULE + "/activity/camera/Camera2PictureActivity";
+        String CAMERA2_VIDEO_ACTIVITY = MODULE + "/activity/camera/Camera2VideoActivity";
+
         String DATA_STORE_ACTIVITY = MODULE + "/activity/DataStoreActivity";
 
         String JETPACK_ACTIVITY = MODULE + "/activity/JetpackActivity";
@@ -26,6 +32,8 @@ public class ARoutePathConstants {
         String HILT_ACTIVITY = MODULE + "/activity/HiltActivity";
         String SECURITY_ACTIVITY = MODULE + "/activity/SecurityActivity";
         String BOTTOM_TAB_ACTIVITY = MODULE + "/activity/BottomTabActivity";
+
+        String ACCOUNT_BOOK_ACTIVITY = MODULE + "/activity/AccountBookActivity";
     }
 
     public interface Tool {
@@ -82,7 +90,7 @@ public class ARoutePathConstants {
         String VIEWPAGER2_ACTIVITY = MODULE + "/ViewPager2Activity";
         String COORDINATOR_ACTIVITY = MODULE + "/CoordinatorActivity";
         String COORDINATOR_BEHAVIOR = MODULE + "/CoordinatorBehaviorActivity";
-        String COORDINATOR_ACTIVITY_2 = MODULE + "/CoordinatorActivity2";
+        String COORDINATOR_ACTIVITY_TAB = MODULE + "/CoordinatorTabActivity";
 
 
 

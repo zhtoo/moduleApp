@@ -38,15 +38,17 @@ public class HomeFragment extends BaseViewBindingFragment<FragmentHomeBinding> {
     @Override
     protected void initData() {
 
-        ComposeFragment fragment = new ComposeFragment();
+//        ComposeFragment fragment = new ComposeFragment();
         List<ItemBean> list = new ArrayList<>();
         list.add(new ItemBean(R.mipmap.ic_jetpack_logo, "Jetpack", ARoutePathConstants.Home.JETPACK_ACTIVITY));
         list.add(new ItemBean(R.mipmap.ic_camerax_logo, "CameraX", ARoutePathConstants.Home.CAMERAX_ACTIVITY));
+        list.add(new ItemBean(R.mipmap.ic_camerax_logo, "Camera2", ARoutePathConstants.Home.CAMERA2_ACTIVITY));
         list.add(new ItemBean(R.mipmap.ic_datastore_logo, "DataStore", ARoutePathConstants.Home.DATA_STORE_ACTIVITY));
         list.add(new ItemBean(R.mipmap.ic_compose_logo, "Compose", ARoutePathConstants.Home.COMPOSE_ACTIVITY));
         list.add(new ItemBean(R.mipmap.ic_hilt_logo, "Hilt", ARoutePathConstants.Home.HILT_ACTIVITY));
         list.add(new ItemBean(R.mipmap.ic_security_logo, "Security", ARoutePathConstants.Home.SECURITY_ACTIVITY));
         list.add(new ItemBean(R.mipmap.ic_bottom_tab_logo, "底部tab实现方案", ARoutePathConstants.Home.BOTTOM_TAB_ACTIVITY));
+        list.add(new ItemBean(R.mipmap.ic_account_book, "记账本", ARoutePathConstants.Home.ACCOUNT_BOOK_ACTIVITY));
 
         mAdapter.setNewData(list);
     }

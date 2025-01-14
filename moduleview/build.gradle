@@ -67,7 +67,7 @@ dependencies {
     //ARouter路由
     kapt "com.alibaba:arouter-compiler:$rootProject.ext.arouterCompiler"
     //PickerView
-    kapt 'com.contrarywind:Android-PickerView:4.1.6'
+//    kapt 'com.contrarywind:Android-PickerView:4.1.6'
     //ConstraintLayout的引用
     kapt 'androidx.constraintlayout:constraintlayout:1.1.3'
 

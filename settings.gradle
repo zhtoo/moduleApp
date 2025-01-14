@@ -8,3 +8,4 @@ include ':app',
         ':moduletool'
 include ':kotlinLibrary'
 include ':MeasureHeartRate'
+include ':pickerview'

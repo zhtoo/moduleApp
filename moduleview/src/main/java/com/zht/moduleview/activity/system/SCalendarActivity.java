@@ -28,7 +28,7 @@ public class SCalendarActivity extends BaseActivity {
 
         CalendarView  calendar= findViewById(R.id.CalendarView);
         //修改每周以星期几开始
-        calendar.setFirstDayOfWeek(Calendar.THURSDAY);
+        calendar.setFirstDayOfWeek(Calendar.MONDAY);
 
 
     }

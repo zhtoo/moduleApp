@@ -37,9 +37,8 @@ public class CoordinatorActivity extends BaseViewBindingActivity<ActivityCoordin
         list = new ArrayList<>();
 
         list.add(new ItemBean("Coordinator Behavior", ARoutePathConstants.View.COORDINATOR_BEHAVIOR));
-        list.add(new ItemBean("Coordinator", ARoutePathConstants.View.SCALENDAR_ACTIVITY));
-        list.add(new ItemBean("Coordinator", ARoutePathConstants.View.VIEWPAGER_ACTIVITY));
-        list.add(new ItemBean("Coordinator", ARoutePathConstants.View.VIEWPAGER2_ACTIVITY));
+        list.add(new ItemBean("Coordinator Tab", ARoutePathConstants.View.COORDINATOR_ACTIVITY_TAB));
+
 
 
         adapter.setNewData(list);

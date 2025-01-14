@@ -61,7 +61,7 @@ dependencies {
     api 'com.github.bumptech.glide:glide:4.7.1'
 
     //仿照IOS的PickerView
-    api 'com.contrarywind:Android-PickerView:4.1.6'
+    api project(':pickerview')
 
     api 'io.reactivex.rxjava2:rxjava:2.0.1'
     api 'io.reactivex.rxjava2:rxandroid:2.0.1'

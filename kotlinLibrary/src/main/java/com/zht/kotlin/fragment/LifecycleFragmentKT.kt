@@ -14,7 +14,7 @@ import androidx.fragment.app.Fragment
  * @Author zhanghaitao
  * @Description
  */
-class LifecycleFragment : Fragment() {
+class LifecycleFragmentKT : Fragment() {
 
 
     private val index by lazy {
@@ -27,8 +27,8 @@ class LifecycleFragment : Fragment() {
 
         fun newInstance(
             index: Int,
-        ): LifecycleFragment {
-            val fragment = LifecycleFragment()
+        ): LifecycleFragmentKT {
+            val fragment = LifecycleFragmentKT()
             val bundle = Bundle()
             bundle.putInt(INDEX, index)
             fragment.arguments = bundle

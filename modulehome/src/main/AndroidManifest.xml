@@ -18,6 +18,12 @@
             android:windowSoftInputMode="adjustResize" />
         <activity android:name=".activity.BottomTabActivity" />
 
+        <activity android:name=".activity.Camera2Activity" />
+        <activity android:name=".activity.camera2.PreviewActivity" />
+        <activity android:name=".activity.camera2.TakePictureActivity" />
+        <activity android:name=".activity.camera2.TakeVideoActivity" />
+        <activity android:name=".activity.AccountBookActivity" />
+
     </application>
 
 </manifest>
