@@ -51,6 +51,7 @@ public class ARoutePathConstants {
         String INTERACTIVE_VIDEO_ACTIVITY = MODULE + "/activity/InteractiveVideoActivity";
         String STORAGE_ACTIVITY = MODULE + "/activity/StorageActivity";
         String TRIGONOMETRIC_FUNCTIONS_ACTIVITY = MODULE + "/activity/TrigonometricFunctionsActivity";
+        String BLUETOOTH_ACTIVITY = MODULE + "/activity/BluetoothActivity";
 
     }
 

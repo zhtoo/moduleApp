@@ -44,6 +44,7 @@ public class ToolsFragment extends BaseFragment {
     protected void initData() {
         list = new ArrayList<>();
 
+        list.add(new ItemBean("蓝牙", ARoutePathConstants.Tool.BLUETOOTH_ACTIVITY));
         list.add(new ItemBean("Toast", ARoutePathConstants.Tool.TOAST_ACTIVITY));
         list.add(new ItemBean("StatusBar", ARoutePathConstants.Tool.STATUS_BAR_ACTIVITY));
         list.add(new ItemBean("BitmapCache", ARoutePathConstants.Tool.BITMAP_CACHE_ACTIVITY));

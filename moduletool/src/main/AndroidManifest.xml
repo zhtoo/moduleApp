@@ -9,6 +9,22 @@
 
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
+    <!--蓝牙权限-->
+    <uses-permission android:name="android.permission.BLUETOOTH"/>
+    <!--让应用启动设备发现或操纵蓝牙-->
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
+    <!-- LE Beacons位置相关权限-->
+    <!-- 如果设配Android9及更低版本可以申请 ACCESS_COARSE_LOCATION -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADVERTISE" />
+    <uses-permission android:name="android.permission.BLUETOOTH_SCAN" />
+    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
+    <!--ble模块 设置为true表示只有支持ble的手机才能安装-->
+    <uses-feature
+        android:name="android.hardware.bluetooth_le"
+        android:required="true" />
+
+
     <application
         android:theme="@style/AppTheme">
 
@@ -24,6 +40,7 @@
             android:configChanges="orientation|keyboardHidden|screenSize|layoutDirection"/>
         <activity android:name=".activity.StorageActivity"/>
         <activity android:name=".activity.TrigonometricFunctionsActivity" />
+        <activity android:name=".activity.BluetoothActivity" />
 
     </application>
 
