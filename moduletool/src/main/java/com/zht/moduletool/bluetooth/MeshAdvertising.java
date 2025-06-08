@@ -19,8 +19,6 @@ import android.util.Log;
 import android.bluetooth.BluetoothManager;
 import android.bluetooth.BluetoothAdapter;
 
-import androidx.core.app.ActivityCompat;
-
 import java.util.UUID;
 
 
@@ -87,7 +85,6 @@ public class MeshAdvertising {
                                                      String serviceUUID,
                                                      int timeOut) {
         try {
-
             //初始化广播设置
             AdvertiseSettings mAdvertiseSettings = new AdvertiseSettings.Builder()
                     //设置广播模式，以控制广播的功率和延迟。
